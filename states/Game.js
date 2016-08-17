@@ -32,6 +32,8 @@ Game.prototype = {
 
   create: function () {
 
+
+
      timer = game.time.events.loop(Phaser.Timer.SECOND, this.updateCounter, this);
 
      var display1="Fallaste!";
@@ -41,10 +43,14 @@ Game.prototype = {
      rangoDePresicion=40;
      counter=15;
      modo=1;
+     puntosComputer=0;
+     puntosUser=0;
+     enAlargue=false;
 
      self = this;
 
      buttons= game.add.group();
+
      clicked =0;
      game.add.sprite(0, 0, 'sky');
      tribunaAtras = game.add.sprite(0,0, 'tribunaAtras');
@@ -65,6 +71,8 @@ Game.prototype = {
      presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px TheMinion", fill: "black", align: "center" });
      presicionText.visible=false;
 
+     equipoUnoText = game.add.text(10, 160, 'Equipo 1', { font: " 20px TheMinion", fill: "black", align: "center" });
+     equipoDosText = game.add.text(10, 260, 'Equipo 2', { font: " 20px TheMinion", fill: "black", align: "center" });
 
      barra = game.add.sprite(450,600,'barra');
      barra.scale.setTo(0.30,0.20);
@@ -87,11 +95,8 @@ Game.prototype = {
      presB.visible=false;
      presA.visible=false;
 
-     //
+
      velocidad=2000;
-
-
-    // Arquero UNO
 
     arquero= game.add.sprite(500,250, 'arquero');
     arquero.frame = 0;
@@ -104,32 +109,14 @@ Game.prototype = {
 
     arquero.visible=false;
 
-    // Arquero DOS
-    arquero2= game.add.sprite(500,450, 'arquero2');
-    arquero2.frame = 0;
-    arquero2.animations.add('up-right', [6], 10, false);
-    arquero2.animations.add('up', [1], 10, false);
-    arquero2.animations.add('down', [2], 10, false);
-    arquero2.animations.add('up-left', [5], 10, false);
-    arquero2.animations.add('down-left', [3], 10, false);
-    arquero2.animations.add('down-right', [4], 10, false);
-    arquero2.visible=false;
-    // Arquero DOS
-
      pelota= game.add.sprite(535,500 ,'pelota');
 
-     //Jugador UNO
      player = game.add.sprite(240,450, 'dude');
      player.frame = 0;
      player.animations.add('right', [1,2], 20, true);
      player.visible=true;
 
-     //Jugador DOS
-     player2 = game.add.sprite(550,450, 'pateador2');
-     player2.frame = 0;
-     player2.animations.add('right', [1,2], 20, true);
-     player2.visible=false;
-     //Jugador DOS
+
 
      transparentObject = game.add.button(0,0);
 
@@ -137,11 +124,6 @@ Game.prototype = {
      transparentObject.alpha =0;
 
      transparentObject.visible=false;
-
-     //Variables para definir el modo arquero o modo pateador
-
-
-
 
      //Set numero de intentos. No debe superar 5.
 
@@ -160,7 +142,7 @@ Game.prototype = {
 
 
             auxButton.events.onInputDown.add(this.actionOnClick,auxButton);
-            //tengo que agregar el evento con phaser
+
             auxButton.scale.setTo(0.25,0.25);
 
             buttons.add(auxButton);
@@ -173,17 +155,22 @@ Game.prototype = {
 
       };
 
-        //Los textos que indican Si acerto o no.
+
         looser = game.add.text(350, 350, display1, { font: 'bold 60pt TheMinion',fill: 'red' });
         looser.visible=false;
         winner = game.add.text(350, 350, display2, {  font: 'bold 60pt TheMinion',fill: 'red' });
         winner.visible=false;
 
+        points= game.add.group();
+
+
+
+
+        self.setVariables(self);
+
       },
 
-
       updateCounter: function () {
-
 
         counter--;
 
@@ -197,7 +184,6 @@ Game.prototype = {
 
           if (counter==-1) {
             self.failScore(self);
-            // game.time.events.remove(timer);
             counter=0;
             presicionText.visible=false;
 
@@ -236,13 +222,6 @@ Game.prototype = {
   },
 
 
-
-
-  setFondo: function(target){
-
-
-  },
-
   setBarraPresicion: function(){
 
     barra.visible=true;
@@ -254,8 +233,6 @@ Game.prototype = {
 
 
   },
-
-
 
 
   setResult: function(auxValue){
@@ -301,10 +278,8 @@ Game.prototype = {
 
   setPlayersMode2: function(){
 
-
     player.visible=true;
     self.setArquero(self);
-    // transparentObject.visible=true;
     buttons.visible=false;
       setTimeout(function(){
         self.ListenerArquero(self);
@@ -319,24 +294,17 @@ Game.prototype = {
 
     clicked=1;
     self.setResult(target);
-    self.setFondo(self, target);
 
     if(Phaser.Math.isEven(modo)){
 
-
-
       self.setPlayersMode2(self);
 
-
     }else{
-
 
       self.setBarraPresicion(self);
       self.setPlayersMode1(self);
 
     };
-
-
 
   },
 
@@ -352,9 +320,6 @@ Game.prototype = {
     }else{
       triesP++;
     }
-
-
-
 
     setTimeout(function(){
       presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px TheMinion", fill: "black", align: "center" });
@@ -374,7 +339,7 @@ Game.prototype = {
       try{
         game.tweens.remove(tweenFocus);
         game.tweens.remove(tweenArquero);
-
+        //Manejo de errores
       }
       catch(e){}
 
@@ -382,9 +347,6 @@ Game.prototype = {
       arquero.animations.stop();
       arquero.frame=0;
       arquero.visible=false;
-      // self.actualizarModo(self);
-
-
 
       self.cambiarRopa(self);
       pelota.position.x=535;
@@ -392,11 +354,10 @@ Game.prototype = {
       clicked=0;
 
 
-
-
     },1000);
-
-
+    // console.log("PUNTOS COMPUTADORA: "+puntosComputer);
+    // console.log("PUNTOS USUARIO: "+puntosUser);
+    // console.log("INTENTOS PATEADOR: "+triesP+"INTENTOS ARQUERO: "+triesA);
 
   },
 
@@ -414,20 +375,23 @@ Game.prototype = {
   },
 
   NoAssertPoint: function(ubiPuntaje, tries){
-    var point= game.add.sprite(25+tries*40,ubiPuntaje, 'noassert');
+    var point= game.add.sprite(10+tries*40,ubiPuntaje, 'noassert');
     point.scale.setTo(0.10,0.10);
+    points.add(point);
+
   },
 
+
   AssertPoint: function(ubiPuntaje, tries){
-    var point= game.add.sprite(25+tries*40, ubiPuntaje, 'assert');
+    var point= game.add.sprite(10+tries*40, ubiPuntaje, 'assert');
     point.scale.setTo(0.10,0.10);
+    points.add(point);
   },
 
   seMueveArquero: function(self){
 
       tweenArquero = game.add.tween(arquero);
       tweenArquero.to(posArquero, 300, 'Linear', true, 0);
-
 
         switch(posArqueroI){
 
@@ -459,22 +423,70 @@ Game.prototype = {
 
     },
 
+    desempatar:function(){
+      enAlargue=true;
+      desempateText= game.add.text(600, 10, 'Alargue. Desempate', { font: " 20px TheMinion", fill: "black", align: "right" });
+      points.removeAll(true);
+      setTimeout(function(){self.restart(self);},200);
+      triesA=0;
+      triesP=0;
+
+    },
+
+    terminarJuego: function(){
+      this.game.state.states["GameOver"].puntosUser = puntosUser;
+      this.game.state.states["GameOver"].puntosComputer = puntosComputer;
+      this.game.state.start("GameOver")
+    },
+
     checkIntentos: function(){
 
-
-
       if( triesA  >= 5 &&  triesP  >= 5 ){
-        setTimeout(function(){ this.game.state.start("GameOver")},500);
+
+        if(self.esEmpate(self)){
+          setTimeout(function(){self.desempatar(self);},200);
+
+        }else{
+          setTimeout(function(){self.terminarJuego(self);},500);
+
+        };
+
       }else{
 
-        setTimeout(function(){self.restart(self);},200);
+
+        if(!enAlargue){
+
+                setTimeout(function(){self.restart(self);},200);
+        }else{
+
+
+              if(triesA >=1 && triesP>=1){
+
+                if(puntosUser!=puntosComputer){
+                  setTimeout(function(){self.terminarJuego(self);}
+                    ,500);
+
+                }else{
+                  setTimeout(function(){self.desempatar(self);},500);
+
+                }
+
+              }else{
+                setTimeout(function(){self.restart(self);},200);
+
+              }
+
+
+        }
+
+
       };
 
     },
 
+
+
   ListenerPateador: function(target){
-
-
 
     self.establecerParametros(self);
 
@@ -483,7 +495,6 @@ Game.prototype = {
         self.stopPlayer(self);
 
         self.ubicarArquero(self);
-
 
         win=false;
 
@@ -501,15 +512,12 @@ Game.prototype = {
 
          };
 
-
       },500);
-    //
+
   },
 
 
   ListenerArquero: function(target){
-
-
 
     self.establecerParametros(self);
 
@@ -530,12 +538,6 @@ Game.prototype = {
       };
 
       generatorFailTry= game.rnd.integerInRange(0,1);
-      //
-      // console.log("Number of luck:(0 pierde) "+ generatorFailTry);
-      // console.log("Id-Button: "+posArqueroI);
-      // console.log("Generator: "+ generator);
-
-
 
       if( generatorFailTry==1){
 
@@ -549,9 +551,8 @@ Game.prototype = {
 
 
     },500);
-  //
-},
 
+  },
 
 
     failScore: function(){
@@ -564,8 +565,6 @@ Game.prototype = {
       buttons.visible=false;
       self.setArquero(self);
 
-
-
       clicked=1;
 
       self.patear(self);
@@ -574,22 +573,65 @@ Game.prototype = {
 
         self.stopPlayer(self);
         self.ubicarArquero(self);
-        self.seMueveArquero(self);
-        tweenPelota = game.add.tween(pelota);
-        posAux = game.rnd.integerInRange(-800,800);
-        var auxTween= tweenPelota.to({x:posAux, y:-500},500, 'Linear', true, 0);
 
-            auxTween.onComplete.addOnce(function(){
+        if(Phaser.Math.isEven(modo)){
+          generatorFailTry= game.rnd.integerInRange(0,1);
 
-              if(Phaser.Math.isEven()){
-                self.NoAssertPoint(400,triesA);
+          if(generatorFailTry==1){
+            var movimientoPelota= self.moverPelota(posArquero);
+          }else{
+            posAux = game.rnd.integerInRange(-800,800);
+            var movimientoPelota= self.moverPelota({x:posAux, y:-500});
+          };
+
+        }else{
+
+          self.seMueveArquero(self);
+          posAux = game.rnd.integerInRange(-800,800);
+
+          var movimientoPelota= self.moverPelota({x:posAux, y:-500});
+        }
+
+
+         movimientoPelota.onComplete.addOnce(function(){
+
+              if(Phaser.Math.isEven(modo)){
+
+                if(generatorFailTry==0){
+
+                  self.NoAssertPoint(300,triesA);
+                  self.Win(self);
+
+                }else{
+
+                  self.AssertPoint(300,triesA);
+                  self.Looser(self);
+                  puntosComputer++;
+
+                  localStorage["TotalNoAtajados"] = (parseInt(localStorage["TotalNoAtajados"]) || 0) + 1;
+                  localStorage["TotalPartidaNoAtajados"] = (parseInt(localStorage["TotalPartidaNoAtajados"]) || 0) + 1;
+                  localStorage["RachaAtajados"] = 0;
+
+                  localStorage["RachaNoAtajados"] = (parseInt(localStorage["RachaNoAtajados"]) || 0) + 1;
+                  if(parseInt(localStorage["RachaNoAtajados"]) > parseInt(localStorage["PeorRachaNoAtajados"])){
+                    localStorage["PeorRachaNoAtajados"]=parseInt(localStorage["RachaNoAtajados"]);
+                  }
+
+                }
+
 
               }else{
                 self.NoAssertPoint(200,triesP);
+                self.Looser(self);
+                localStorage["TotalErrados"] = (parseInt(localStorage["TotalErrados"]) || 0) + 1;
+                localStorage["TotalPartidaErrados"] = (parseInt(localStorage["TotalPartidaErrados"]) || 0) + 1;
+                localStorage["RachaConvertidos"] = 0;
+                localStorage["RachaErrados"] = (parseInt(localStorage["RachaErrados"]) || 0) + 1;
+                if(parseInt(localStorage["RachaErrados"]) > parseInt(localStorage["PeorRachaErrados"])){
+                  localStorage["PeorRachaErrados"]=parseInt(localStorage["RachaErrados"]);
+                }
 
               }
-
-                self.Looser(self);
 
                 self.checkIntentos(self);
             });
@@ -619,15 +661,33 @@ Game.prototype = {
 
       movimientoPelota.onComplete.addOnce(function(){
 
-
           if(win){
+              puntosUser++;
               tweenTribuna1.resume();
               tweenTribuna2.resume();
               self.AssertPoint(200,triesP);
               self.Win(self);
+              localStorage["TotalConvertidos"] = (parseInt(localStorage["TotalConvertidos"]) || 0) + 1;
+              localStorage["TotalPartidaConvertidos"] = (parseInt(localStorage["TotalPartidaConvertidos"]) || 0) + 1;
+              localStorage["RachaConvertidos"] = (parseInt(localStorage["RachaConvertidos"]) || 0) + 1;
+              localStorage["RachaErrados"]=0
+              if( parseInt(localStorage["RachaConvertidos"]) > parseInt(localStorage["MejorRachaConvertida"]) ){
+                localStorage["MejorRachaConvertida"]= parseInt(localStorage["RachaConvertidos"]);
+              }
+
+
+
           }else{
               self.NoAssertPoint(200,triesP);
               self.Looser(self);
+              localStorage["TotalErrados"] = (parseInt(localStorage["TotalErrados"]) || 0) + 1;
+              localStorage["TotalPartidaErrados"] = (parseInt(localStorage["TotalPartidaErrados"]) || 0) + 1;
+              localStorage["RachaConvertidos"] = 0;
+              localStorage["RachaErrados"] = (parseInt(localStorage["RachaErrados"]) || 0) + 1;
+              if(parseInt(localStorage["RachaErrados"]) > parseInt(localStorage["PeorRachaErrados"])){
+                localStorage["PeorRachaErrados"]=parseInt(localStorage["RachaErrados"]);
+              }
+
          };
 
         self.checkIntentos(self);
@@ -636,30 +696,44 @@ Game.prototype = {
 
     atajar: function(self){
 
-
-
       coordinate= buttons.children[generator-1].position;
 
       self.seMueveArquero(self);
 
       var movimientoPelota=self.moverPelota(coordinate);
 
-
       movimientoPelota.onComplete.addOnce(function(){
-
 
           if(win){
 
               tweenTribuna1.resume();
               tweenTribuna2.resume();
-              self.AssertPoint(400,triesA);
+              self.NoAssertPoint(300,triesA);
               self.Win(self);
+              localStorage["TotalAtajados"] = (parseInt(localStorage["TotalAtajados"]) || 0) + 1;
+              localStorage["RachaAtajados"] = (parseInt(localStorage["RachaAtajados"]) || 0) + 1;
+              localStorage["TotalPartidaAtajados"] = (parseInt(localStorage["TotalPartidaAtajados"]) || 0) + 1;
+              localStorage["RachaNoAtajados"] = 0;
+              if( parseInt(localStorage["RachaAtajados"]) > parseInt(localStorage["MejorRachaAtajados"]) ){
+                 localStorage["MejorRachaAtajados"]= parseInt(localStorage["RachaAtajados"]);
+              }
+
+
 
           }else{
 
-              self.NoAssertPoint(400,triesA);
-              self.Looser(self);
 
+              self.AssertPoint(300,triesA);
+              self.Looser(self);
+              puntosComputer++;
+              localStorage["TotalNoAtajados"] = (parseInt(localStorage["TotalNoAtajados"]) || 0) + 1;
+              localStorage["TotalPartidaNoAtajados"] = (parseInt(localStorage["TotalPartidaNoAtajados"]) || 0) + 1;
+              localStorage["RachaAtajados"] = 0;
+
+              localStorage["RachaNoAtajados"] = (parseInt(localStorage["RachaNoAtajados"]) || 0) + 1;
+              if(parseInt(localStorage["RachaNoAtajados"]) > parseInt(localStorage["PeorRachaNoAtajados"])){
+                localStorage["PeorRachaNoAtajados"]=parseInt(localStorage["RachaNoAtajados"]);
+              }
 
          };
 
@@ -670,8 +744,6 @@ Game.prototype = {
 
 
   errarTiro: function(){
-
-
 
       if(presicion > 0){
         posAux = game.rnd.integerInRange(600,800);
@@ -685,6 +757,14 @@ Game.prototype = {
      movimientoPelota.onComplete.addOnce(function(){
        self.NoAssertPoint(200,triesP);
        self.Looser(self);
+       localStorage["TotalErrados"] = (parseInt(localStorage["TotalErrados"]) || 0) + 1;
+       localStorage["TotalPartidaErrados"] = (parseInt(localStorage["TotalPartidaErrados"]) || 0) + 1;
+       localStorage["RachaConvertidos"] = 0;
+       localStorage["RachaErrados"] = (parseInt(localStorage["RachaErrados"]) || 0) + 1;
+       if(parseInt(localStorage["RachaErrados"]) > parseInt(localStorage["PeorRachaErrados"])){
+         localStorage["PeorRachaErrados"]=parseInt(localStorage["RachaErrados"]);
+       }
+
 
        self.checkIntentos(200,triesP);
 
@@ -695,21 +775,18 @@ Game.prototype = {
 
   noAtajar: function(){
 
-      posAux = game.rnd.integerInRange(-800,800);
+     posAux = game.rnd.integerInRange(-800,800);
 
      self.seMueveArquero(self);
      var movimientoPelota=self.moverPelota({x:posAux, y:-500});
-
 
      movimientoPelota.onComplete.addOnce(function(){
 
        tweenTribuna1.resume();
        tweenTribuna2.resume();
-       self.AssertPoint(400,triesA);
+       self.NoAssertPoint(300,triesA);
        self.Win(self);
-
-       self.checkIntentos(400,triesA);
-
+       self.checkIntentos(300,triesA);
 
      });
 
@@ -717,7 +794,19 @@ Game.prototype = {
 
 
   ubicarArquero: function(){
-    generator = game.rnd.integerInRange(1,6);
+
+
+    if(Phaser.Math.isEven(modo)){
+      while(generator==5){
+          generator = game.rnd.integerInRange(1,6);
+
+          break;
+      }
+    }else{
+      generator = game.rnd.integerInRange(1,6);
+
+      }
+
 
     for(var i=0; i<6 ; i++ ){
 
@@ -756,6 +845,49 @@ establecerParametros: function(){
 
   winner.visible=false;
 },
+
+
+esEmpate: function(){
+  if(puntosUser==puntosComputer)return true;
+  return false;
+},
+
+setVariables: function(){
+    console.log("01");
+      localStorage["TotalPartidaAtajados"] = 0;
+      localStorage["TotalPartidaConvertidos"] = 0;
+      localStorage["TotalPartidaErrados"] = 0;
+      localStorage["TotalPartidaNoAtajados"] = 0;
+      localStorage["TotalPartidaUser"] = 0;
+      localStorage["TotalPartidaComputer"] = 0;
+
+
+    if(localStorage.getItem("PartidosGanados")===null){
+       localStorage["PartidosGanados"] = 0;
+       localStorage["PartidosPerdidos"] = 0;
+       localStorage["TotalAtajados"] = 0;
+       localStorage["TotalConvertidos"] = 0;
+       localStorage["TotalErrados"] = 0;
+       localStorage["TotalNoAtajados"] = 0;
+       localStorage["RachaGanados"] = 0;
+       localStorage["RachaPerdidos"] = 0;
+       localStorage["MejorRachaConvertida"] = 0;
+       localStorage["RachaConvertidos"] = 0;
+       localStorage["MejorRachaAtajados"] = 0;
+       localStorage["RachaAtajados"] = 0;
+       localStorage["PeorRachaErrados"] = 0;
+       localStorage["RachaErrados"] = 0;
+       localStorage["PeorRachaNoAtajados"] = 0;
+       localStorage["RachaNoAtajados"] = 0;
+
+
+
+
+    }
+},
+
+
+
 
 
 

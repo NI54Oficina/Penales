@@ -13,17 +13,16 @@ var Splash = function () {};
   },
 
   loadBgm: function () {
-    // thanks Kevin Macleod at http://incompetech.com/
-    // game.load.audio('dangerous', 'assets/bgm/Dangerous.mp3');
-    // game.load.audio('exit', 'assets/bgm/Exit the Premises.mp3');
+
+    game.load.audio('dangerous', 'assets/bgm/Dangerous.mp3');
+    game.load.audio('exit', 'assets/bgm/Exit the Premises.mp3');
   },
-  // varios freebies found from google image search
+
   loadImages: function () {
     game.load.image('menu-bg', 'assets/images/menu-bg.jpg');
     game.load.image('options-bg', 'assets/images/menu-bg.jpg');
     game.load.image('gameover-bg', 'assets/images/menu-bg.jpg');
-    // game.load.image('music-on', 'assets/images/music-on.png');
-    // game.load.image('music-off', 'assets/images/music-off.png');
+
   },
 
   loadFonts: function () {

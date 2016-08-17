@@ -25,19 +25,50 @@ Options.prototype = {
 
     game.add.sprite(0, 0, 'options-bg');
     game.add.existing(this.titleText);
-    // this.addMenuOption(playMusic ? game.add.sprite(0, 0, 'music-on'); : 'Play Music', function (target) {
-    //   playMusic = !playMusic;
-    //   target.text = playMusic ? 'Mute Music' : 'Play Music';
-    //   musicPlayer.volume = playMusic ? 1 : 0;
-    // });
-    this.addMenuOption(playSound ? 'Mute Sound' : 'Play Sound', function (target) {
-      playSound = !playSound;
-      target.text =  playSound ? 'Mute Sound' : 'Play Sound';
-    });
+
+
+    var text = game.add.text(game.world.centerX-100, game.world.centerY+100, "Play Music", { font: 'bold 30pt TheMinion', fill: "black", align: "center" });
+
+
+
+    text.inputEnabled = true;
+
+    text.input.enableDrag();
+
+    text.events.onInputDown.add(this.down,text);
+    text.events.onInputOver.add(this.over, text);
+    text.events.onInputOut.add(this.out, text);
+
+
+
     this.addMenuOption('Volver', function () {
       game.state.start("GameMenu");
     });
-  }
+  },
+    down: function(item) {
+
+        if(music.mute ==true){
+          item.text = "Play Music";
+          music.mute = false;
+        }else{
+          item.text = "Mute Music";
+          music.mute = true;
+        }
+
+      },
+
+    over: function(target){
+      target.fill = "#FEFFD5";
+      target.stroke = "rgba(200,200,200,0.5)";
+      text.useHandCursor = true;
+    } ,
+
+    out: function(target){
+      target.fill = "black";
+      target.stroke = "rgba(0,0,0,0)";
+      text.useHandCursor = false;
+    },
+
 };
 
 Phaser.Utils.mixinPrototype(Options.prototype, mixins);
