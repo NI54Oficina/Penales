@@ -10,6 +10,7 @@ var Splash = function () {};
     game.load.script('game', 'states/Game.js');
     game.load.script('gameover','states/GameOver.js');
     game.load.script('options', 'states/Options.js');
+    game.load.script('Stadistics', 'states/stadistics.js');
   },
 
   loadBgm: function () {
@@ -61,6 +62,7 @@ var Splash = function () {};
     game.state.add("Game",Game);
     game.state.add("GameOver",GameOver);
     game.state.add("Options",Options);
+    game.state.add("Stadistics",Stadistics);
   },
 
   addGameMusic: function () {

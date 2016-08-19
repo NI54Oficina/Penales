@@ -27,7 +27,7 @@ Options.prototype = {
     game.add.existing(this.titleText);
 
 
-    var text = game.add.text(game.world.centerX-100, game.world.centerY+100, "Play Music", { font: 'bold 30pt TheMinion', fill: "black", align: "center" });
+    var text = game.add.text(game.world.centerX-100, game.world.centerY+150, "Play Music", { font: 'bold 30pt TheMinion', fill: "black", align: "center" });
 
 
 
@@ -44,6 +44,11 @@ Options.prototype = {
     this.addMenuOption('Volver', function () {
       game.state.start("GameMenu");
     });
+
+    this.addMenuOption('Estadisticas', function () {
+      game.state.start("Stadistics");
+    });
+
   },
     down: function(item) {
 
@@ -60,15 +65,16 @@ Options.prototype = {
     over: function(target){
       target.fill = "#FEFFD5";
       target.stroke = "rgba(200,200,200,0.5)";
-      text.useHandCursor = true;
+      target.useHandCursor = true;
     } ,
 
     out: function(target){
       target.fill = "black";
       target.stroke = "rgba(0,0,0,0)";
-      text.useHandCursor = false;
+      target.useHandCursor = false;
     },
 
 };
 
 Phaser.Utils.mixinPrototype(Options.prototype, mixins);
+// Phaser.Utils.mixinPrototype(Stadistics.prototype, mixins);

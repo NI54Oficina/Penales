@@ -102,22 +102,7 @@ GameOver.prototype = {
     };
 
 
-    var a = game.add.text(10, 20, "Partidos Ganados: "+ localStorage["PartidosGanados"], puntajeStyle);
-    var b = game.add.text(10, 40, "Partidos Perdidos: "+ localStorage["PartidosPerdidos"], puntajeStyle);
-    var c = game.add.text(10, 60, "Total Atajados: "+ localStorage["TotalAtajados"], puntajeStyle);
-    var d = game.add.text(10, 80, "Total Convertidos: "+ localStorage["TotalConvertidos"], puntajeStyle);
-    var e = game.add.text(10, 100, "Total Errados: "+localStorage["TotalErrados"], puntajeStyle);
-    var f = game.add.text(10, 120, "Total No Atajados: "+localStorage["TotalNoAtajados"], puntajeStyle);
-    var g = game.add.text(10, 140, "Racha Ganados: "+localStorage["RachaGanados"], puntajeStyle);
-    var h = game.add.text(10, 160, "Racha Perdidos: "+ localStorage["RachaPerdidos"], puntajeStyle);
-    var i = game.add.text(10, 180, "Racha Atajados: "+localStorage["RachaAtajados"], puntajeStyle);
-    var j = game.add.text(10, 200, "Racha Convertidos: "+localStorage["RachaConvertidos"], puntajeStyle);
-    var k = game.add.text(10, 220, "Racha Errados: "+localStorage["RachaErrados"], puntajeStyle);
-    var l = game.add.text(10, 240, "Racha No Atajados: "+localStorage["RachaNoAtajados"] , puntajeStyle);
-    var m = game.add.text(10, 260, "Mejor Racha Atajados: "+localStorage["MejorRachaAtajados"], puntajeStyle);
-    var n = game.add.text(10, 280, "Mejor Racha Convertida: "+localStorage["MejorRachaConvertida"], puntajeStyle);
-    var o = game.add.text(10, 300, "Peor Racha Errados: "+localStorage["PeorRachaErrados"], puntajeStyle);
-    var p = game.add.text(10, 320, "Peor Racha No Atajados: "+localStorage["PeorRachaNoAtajados"], puntajeStyle);
+
 
     var q = game.add.text(500, 320, localStorage["TotalPartidaUser"], puntajeStyle);
     var r = game.add.text(520, 320, "- "+localStorage["TotalPartidaComputer"], puntajeStyle);
