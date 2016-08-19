@@ -45,9 +45,6 @@ Options.prototype = {
       game.state.start("GameMenu");
     });
 
-    this.addMenuOption('Estadisticas', function () {
-      game.state.start("Stadistics");
-    });
 
   },
     down: function(item) {

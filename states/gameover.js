@@ -82,7 +82,7 @@ GameOver.prototype = {
 
 
 
-    console.log("hola");
+
 
     if(puntosUser > puntosComputer){
 
@@ -102,7 +102,8 @@ GameOver.prototype = {
     };
 
 
-
+    var efiArq = Math.floor((100/((parseInt(localStorage["TotalPartidaAtajados"]) || 0) + (parseInt(localStorage["TotalPartidaNoAtajados"]) || 0)))*(parseInt(localStorage["TotalPartidaAtajados"]) || 0));
+    var efiPat = Math.floor((100/((parseInt(localStorage["TotalPartidaConvertidos"]) || 0) + (parseInt(localStorage["TotalPartidaErrados"]) || 0)))*(parseInt(localStorage["TotalPartidaConvertidos"]) || 0));
 
     var q = game.add.text(500, 320, localStorage["TotalPartidaUser"], puntajeStyle);
     var r = game.add.text(520, 320, "- "+localStorage["TotalPartidaComputer"], puntajeStyle);
@@ -110,6 +111,9 @@ GameOver.prototype = {
     var t = game.add.text(10, 490, "Total en partida Errados: "+ localStorage["TotalPartidaErrados"] , partidaStyle);
     var u = game.add.text(10, 510, "Total en partida convertidos "+localStorage["TotalPartidaConvertidos"], partidaStyle);
     var v = game.add.text(10, 530, "Total en partida atajados: "+localStorage["TotalPartidaAtajados"] , partidaStyle);
+    var a = game.add.text(10, 550, "Eficiencia como arquero: "+ efiArq +"%" , partidaStyle);
+    var b = game.add.text(10, 570, "Eficiencia como arquero: "+ efiPat +"%" , partidaStyle);
+  
 
 
 
