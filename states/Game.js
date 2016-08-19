@@ -355,9 +355,7 @@ Game.prototype = {
 
 
     },1000);
-    // console.log("PUNTOS COMPUTADORA: "+puntosComputer);
-    // console.log("PUNTOS USUARIO: "+puntosUser);
-    // console.log("INTENTOS PATEADOR: "+triesP+"INTENTOS ARQUERO: "+triesA);
+
 
   },
 
@@ -529,7 +527,8 @@ Game.prototype = {
 
       posArquero= self.getResult().position;
 
-      generator = game.rnd.integerInRange(1,6);
+      generator = self.generarNumero(self);
+    
 
       win=false;
 
@@ -852,6 +851,11 @@ esEmpate: function(){
   return false;
 },
 
+
+generarNumero: function(){
+  return game.rnd.integerInRange(1,6);
+
+}
 
 
 
