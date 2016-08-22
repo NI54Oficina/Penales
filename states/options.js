@@ -27,7 +27,7 @@ Options.prototype = {
     game.add.existing(this.titleText);
 
 
-    var text = game.add.text(game.world.centerX-100, game.world.centerY+150, "Play Music", { font: 'bold 30pt TheMinion', fill: "black", align: "center" });
+    var text = game.add.text(game.world.centerX-100, game.world.centerY+50, "Play Music", { font: 'bold 30pt TheMinion', fill: "black", align: "center" });
 
 
 

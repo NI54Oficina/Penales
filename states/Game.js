@@ -10,9 +10,11 @@ Game.prototype = {
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.load.image('sky', 'assets/images/tribuna_atras.png');
     game.load.image('frente', 'assets/images/tribuna_frente.png');
-    game.load.spritesheet('button', 'boton.png', 300, 300);
+    game.load.spritesheet('button', 'assets/images/boton.png', 300, 300);
     game.load.image('assert', 'assets/images/green-button.png', 150,150);
     game.load.image('noassert', 'assets/images/red-button.png', 150,150);
+    game.load.image('orange-button', 'assets/images/orange-button.png', 150,150);
+    game.load.image('yellow-button', 'assets/images/yellow-button.png', 150,150);
     game.load.image('triangle', 'assets/images/puntero.png', 150,150);
     game.load.image('barra', 'assets/images/barra-p.png', 150,150);
     game.load.spritesheet('dude', 'assets/images/pateador.png', 105, 130);
@@ -31,6 +33,7 @@ Game.prototype = {
 
 
   create: function () {
+
 
 
 
@@ -155,6 +158,15 @@ Game.prototype = {
 
       };
 
+      //creacion array
+
+
+      self.createArray(self);
+
+
+
+
+
 
         looser = game.add.text(350, 350, display1, { font: 'bold 60pt TheMinion',fill: 'red' });
         looser.visible=false;
@@ -246,6 +258,7 @@ Game.prototype = {
 
   setPlayersMode1: function(){
 
+
     player.visible=true;
     focus.position.x=440;
     focus.position.y=600;
@@ -277,6 +290,7 @@ Game.prototype = {
  },
 
   setPlayersMode2: function(){
+
 
     player.visible=true;
     self.setArquero(self);
@@ -317,8 +331,11 @@ Game.prototype = {
 
     if(Phaser.Math.isEven(modo)){
       triesA++;
+
+      self.modificarBotones(self);
     }else{
       triesP++;
+      self.botonesRojos(self);
     }
 
     setTimeout(function(){
@@ -527,8 +544,10 @@ Game.prototype = {
 
       posArquero= self.getResult().position;
 
-      generator = self.generarNumero(self);
-    
+      arrayMaso= self.getMaso(self);
+
+      generator = self.generarNumero(arrayMaso,self);
+
 
       win=false;
 
@@ -852,13 +871,73 @@ esEmpate: function(){
 },
 
 
-generarNumero: function(){
-  return game.rnd.integerInRange(1,6);
 
-}
+createArray: function(){
+  array= [ [0,0,1,1,2,0],
+           [1,0,1,1,2,1],
+           [0,0,2,1,2,0],
+           [0,2,1,1,2,1],
+           [2,0,1,1,2,1] ];
+
+},
+
+getMaso: function(){
+  console.log(array[triesA-1]);
+  return array[triesA-1];
 
 
+},
 
+generarNumero: function(arrai, target){
+
+
+  var arrayNuevo = [];
+
+      for(var i =1 ; i<7; i++){
+
+              if(arrai[i-1] == 1){
+                  for (var j=1; j < 3; j++) {
+                  arrayNuevo.push(i);
+                  }
+
+              }else if(arrai[i-1]==2){
+                  for (var j=1; j < 4; j++) {
+                    arrayNuevo.push(i);
+                    }
+              }else{
+
+                  arrayNuevo.push(i);
+
+              };
+      } //termina if
+
+      var longitud = arrayNuevo.length;
+      var pos = game.rnd.integerInRange(0,longitud-1);
+      return arrayNuevo[pos];
+
+},
+
+modificarBotones: function(){
+  var barray = self.getMaso(self);
+
+  for(var i=1; i<7; i++){
+    if(barray[i-1]==0){
+        buttons.children[i-1].loadTexture('orange-button', 0, false);
+
+    }else if(barray[i-1]==1){
+        buttons.children[i-1].loadTexture('yellow-button', 0, false);
+    } //Fin iff
+
+  }//Fin for}
+
+},
+
+botonesRojos:function(){
+  for(var i=0; i<6; i++){
+
+        buttons.children[i].loadTexture('button', 0, false);
+  }
+},
 
 
 };
