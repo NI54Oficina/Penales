@@ -17,16 +17,16 @@ Game.prototype = {
     game.load.image('yellow-button', 'assets/images/yellow-button.png', 150,150);
     game.load.image('triangle', 'assets/images/puntero.png', 150,150);
     game.load.image('barra', 'assets/images/barra-p.png', 150,150);
-    game.load.spritesheet('dude', 'assets/images/pateador.png', 105, 130);
+    game.load.spritesheet('pateador-local', 'assets/images/pateador.png', 105, 130);
     game.load.spritesheet('tribunaAtras', 'assets/images/gente1.png');
     game.load.spritesheet('tribunaAdelante', 'assets/images/gente2.png');
     game.load.image('pasto', 'assets/images/pasto.png');
     game.load.spritesheet('pelota', 'assets/images/pelota.png', 65, 65);
     game.load.image('arco', 'assets/images/arco.png');
-    game.load.spritesheet('arquero', 'assets/images/arquero.png', 116, 110);
+    game.load.spritesheet('arquero-local', 'assets/images/arquero.png', 116, 110);
     game.load.image('barraVertical', 'assets/images/barra_vertical.png');
-    game.load.spritesheet('arquero2', 'assets/images/arquero2.png', 116, 110);
-    game.load.spritesheet('pateador2', 'assets/images/pateador2.png', 105, 130);
+    game.load.spritesheet('arquero-visitante', 'assets/images/arquero2.png', 116, 110);
+    game.load.spritesheet('pateador-visitante', 'assets/images/pateador2.png', 105, 130);
 
   },
 
@@ -45,7 +45,7 @@ Game.prototype = {
      presicionText=0;
      rangoDePresicion=40;
      counter=15;
-     modo=1;
+     modo=0;
      puntosComputer=0;
      puntosUser=0;
      enAlargue=false;
@@ -101,7 +101,7 @@ Game.prototype = {
 
      velocidad=2000;
 
-    arquero= game.add.sprite(500,250, 'arquero');
+    arquero= game.add.sprite(500,250, 'arquero-local');
     arquero.frame = 0;
     arquero.animations.add('up-right', [6], 10, false);
     arquero.animations.add('up', [1], 10, false);
@@ -114,7 +114,7 @@ Game.prototype = {
 
      pelota= game.add.sprite(535,500 ,'pelota');
 
-     player = game.add.sprite(240,450, 'dude');
+     player = game.add.sprite(240,450, 'pateador-local');
      player.frame = 0;
      player.animations.add('right', [1,2], 20, true);
      player.visible=true;
@@ -128,10 +128,9 @@ Game.prototype = {
 
      transparentObject.visible=false;
 
-     //Set numero de intentos. No debe superar 5.
 
-     triesA=0;
-     triesP=1;
+
+
 
       //Se crean los botones distribuidos, iterativamente
       var auxID=1;
@@ -156,12 +155,29 @@ Game.prototype = {
           };
 
 
+
       };
 
       //creacion array
 
 
-      self.createArray(self);
+                self.createArray(self);
+
+                if(Phaser.Math.isEven(modo)){
+                  triesA=1;
+                  triesP=0;
+                  self.modificarBotones(self);
+
+                }else{
+                  triesA=0;
+                  triesP=1;
+
+                }
+
+                self.cambiarRopa(self);
+
+
+
 
 
 
@@ -281,11 +297,11 @@ Game.prototype = {
 
  cambiarRopa: function(){
      if(Phaser.Math.isEven(modo)){
-       player.loadTexture('pateador2', 0, false);
-       arquero.loadTexture('arquero2', 0, false);
+       player.loadTexture('pateador-visitante', 0, false);
+       arquero.loadTexture('arquero-visitante', 0, false);
      }else{
-       player.loadTexture('dude', 0, false);
-       arquero.loadTexture('arquero', 0, false);
+       player.loadTexture('pateador-local', 0, false);
+       arquero.loadTexture('arquero-local', 0, false);
      }
  },
 
@@ -882,8 +898,12 @@ createArray: function(){
 },
 
 getMaso: function(){
-  console.log(array[triesA-1]);
-  return array[triesA-1];
+  if(Phaser.Math.isEven(modo)){
+    return array[triesA-1];
+  }else{
+      return array[triesP-1];
+  }
+
 
 
 },
@@ -923,6 +943,7 @@ modificarBotones: function(){
   for(var i=1; i<7; i++){
     if(barray[i-1]==0){
         buttons.children[i-1].loadTexture('orange-button', 0, false);
+        console.log("PRUEBA");
 
     }else if(barray[i-1]==1){
         buttons.children[i-1].loadTexture('yellow-button', 0, false);
