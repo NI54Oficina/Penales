@@ -45,7 +45,11 @@ Game.prototype = {
      presicionText=0;
      rangoDePresicion=40;
      counter=15;
-     modo=0;
+
+
+     //Modo aleatorio de settear quien comienza la partida, arquero o pateador
+     modo=game.rnd.integerInRange(0,1);
+     //Modo aleatorio de settear quien comienza la partida, arquero o pateador
      puntosComputer=0;
      puntosUser=0;
      enAlargue=false;
@@ -53,6 +57,7 @@ Game.prototype = {
      self = this;
 
      buttons= game.add.group();
+
 
      clicked =0;
      game.add.sprite(0, 0, 'sky');
@@ -97,6 +102,54 @@ Game.prototype = {
      focus.visible=false;
      presB.visible=false;
      presA.visible=false;
+
+
+
+      perfil1 = {
+                id:1,
+                efectividad:2,
+                tiros:[ [0,0,1,2,2,0],
+                        [0,2,1,1,2,0],
+                        [0,2,1,1,2,0],
+                        [0,2,1,1,2,0],
+                        [0,1,1,1,2,2] ]
+                };
+
+    perfil2 = {
+                id:2,
+                efectividad:5,
+                tiros:[ [0,1,1,1,2,0],
+                        [0,1,1,1,2,0],
+                        [2,1,1,1,2,0],
+                        [0,0,1,1,2,0],
+                        [0,2,1,1,2,0] ]
+            };
+
+
+  perfil3 = {
+              id:3,
+              efectividad:10,
+              tiros:[ [0,0,1,2,2,0],
+                      [0,2,1,1,2,0],
+                      [0,0,1,1,2,0],
+                      [0,2,1,1,2,0],
+                      [0,0,1,1,2,2] ]
+                      };
+
+  perfil4 = {
+              id:4,
+              efectividad:20,
+              tiros:[ [0,1,1,1,2,0],
+                      [0,1,1,1,2,0],
+                      [0,1,1,1,2,0],
+                      [0,0,1,1,2,0],
+                      [0,0,1,1,2,0] ]
+            };
+
+
+    perfiles=[perfil1,perfil2, perfil3, perfil4];
+
+
 
 
      velocidad=2000;
@@ -190,6 +243,7 @@ Game.prototype = {
         winner.visible=false;
 
         points= game.add.group();
+        perfilElegido= self.setEnemy(self);
 
 
 
@@ -525,7 +579,9 @@ Game.prototype = {
 
         self.stopPlayer(self);
 
-        self.ubicarArquero(self);
+
+
+        self.ubicarArquero(perfilElegido.efectividad, self);
 
         win=false;
 
@@ -562,7 +618,7 @@ Game.prototype = {
 
       arrayMaso= self.getMaso(self);
 
-      generator = self.generarNumero(arrayMaso,self);
+      generator = self.generarRiesgo(arrayMaso,self);
 
 
       win=false;
@@ -606,7 +662,7 @@ Game.prototype = {
       setTimeout(function(){
 
         self.stopPlayer(self);
-        self.ubicarArquero(self);
+        self.ubicarArquero(perfilElegido.efectividad,self);
 
         if(Phaser.Math.isEven(modo)){
           generatorFailTry= game.rnd.integerInRange(0,1);
@@ -827,32 +883,7 @@ Game.prototype = {
   },
 
 
-  ubicarArquero: function(){
-
-
-    if(Phaser.Math.isEven(modo)){
-      while(generator==5){
-          generator = game.rnd.integerInRange(1,6);
-
-          break;
-      }
-    }else{
-      generator = game.rnd.integerInRange(1,6);
-
-      }
-
-
-    for(var i=0; i<6 ; i++ ){
-
-       if(buttons.children[i].id == generator){
-       posArqueroI= buttons.children[i].id;
-       break;
-        }
-
-    };
-
-    posArquero=buttons.children[i].position;
-  },
+  //ubicarArquero
 
 
 moverPelota: function(unaCoordenada){
@@ -890,9 +921,9 @@ esEmpate: function(){
 
 createArray: function(){
   array= [ [0,0,1,1,2,0],
-           [1,0,1,1,2,1],
+           [1,0,2,1,1,1],
            [0,0,2,1,2,0],
-           [0,2,1,1,2,1],
+           [0,2,1,1,1,1],
            [2,0,1,1,2,1] ];
 
 },
@@ -908,7 +939,7 @@ getMaso: function(){
 
 },
 
-generarNumero: function(arrai, target){
+generarRiesgo: function(arrai, target){
 
 
   var arrayNuevo = [];
@@ -943,7 +974,7 @@ modificarBotones: function(){
   for(var i=1; i<7; i++){
     if(barray[i-1]==0){
         buttons.children[i-1].loadTexture('orange-button', 0, false);
-        console.log("PRUEBA");
+
 
     }else if(barray[i-1]==1){
         buttons.children[i-1].loadTexture('yellow-button', 0, false);
@@ -958,6 +989,59 @@ botonesRojos:function(){
 
         buttons.children[i].loadTexture('button', 0, false);
   }
+},
+
+calculoChancesAtajar: function(efec, target){
+
+    var chanceAtajar = game.rnd.integerInRange(1,efec);
+
+    if(chanceAtajar==1){
+
+      var gen= self.getResult().id;
+
+
+    }else {
+
+      var gen = game.rnd.integerInRange(1,6);
+
+    }
+
+    return gen;
+},
+
+ubicarArquero: function(efec, target){
+
+
+  if(Phaser.Math.isEven(modo)){
+    while(generator==5){
+        generator = game.rnd.integerInRange(1,6);
+
+        break;
+    }
+  }else{
+    generator = self.calculoChancesAtajar(efec,self);
+
+    }
+
+
+  for(var i=0; i<6 ; i++ ){
+
+     if(buttons.children[i].id == generator){
+     posArqueroI= buttons.children[i].id;
+     break;
+      }
+
+  };
+
+  posArquero=buttons.children[i].position;
+},
+
+
+setEnemy: function(){
+  var id= game.rnd.integerInRange(1,4);
+  console.log("Numero id perfil elegido: "+ id);
+
+  return perfiles[id-1];
 },
 
 
