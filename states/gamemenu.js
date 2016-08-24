@@ -21,6 +21,8 @@ GameMenu.prototype = {
 
   create: function () {
 
+    self=this;
+
     if (music.name !== "dangerous" && playMusic) {
       music.stop();
       music = game.add.audio('dangerous');
@@ -30,13 +32,18 @@ GameMenu.prototype = {
     game.stage.disableVisibilityChange = true;
     game.add.sprite(0, 0, 'menu-bg');
     game.add.existing(this.titleText);
+    search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
+    search.visible=false;
+
+
 
     this.addMenuOption('Start', function () {
-      game.state.start("Game");
+      self.ListenerLogin(self);
     });
     this.addMenuOption('Options', function () {
       game.state.start("Options");
     });
+
     this.addMenuOption('Stadistics', function () {
       game.state.start("Stadistics");
     });
@@ -75,6 +82,17 @@ GameMenu.prototype = {
 
       //Fin Creacion ariables en localStorage
 
+  },
+
+
+  ListenerLogin: function (){
+    search.visible=true;
+    console.log("Esperando oponente");
+    setTimeout(function(){
+        game.state.start("Game");
+        console.log("Oponente Encontrado");},2000);
+
+        return;
   },
 
 };

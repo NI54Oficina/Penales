@@ -55,7 +55,7 @@ GameOver.prototype = {
     perdidos=0;
 
 
-    // self.setPuntajesTotales();
+
 
     game.add.sprite(0, 0, 'gameover-bg');
 
@@ -63,12 +63,15 @@ GameOver.prototype = {
 
     var text = game.add.text(game.world.centerX, 100, "Fin del Juego", titleStyle);
 
+    search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
+    search.visible=false;
+
     text.setShadow(3, 3, 'rgba(0,0,0,0.5)', 5);
 
     text.anchor.set(0.5);
 
     this.addMenuOption('Play Again', function (e) {
-      this.game.state.start("Game");
+    self.ListenerLogin(self);
     });
 
     this.addMenuOption('Main Menu', function (e) {
@@ -154,7 +157,17 @@ GameOver.prototype = {
 
   isFloat: function(n,self) {
     return n === +n && n !== (n|0);
-  }
+  },
+
+  ListenerLogin: function(){
+    search.visible=true;
+    console.log("Esperando oponente");
+    setTimeout(function(){
+        game.state.start("Game");
+        console.log("Oponente Encontrado");},2000);
+
+        return;
+  },
 
 
 };

@@ -71,13 +71,14 @@ var Splash = function () {};
     music.play();
   },
 
-  create: function() {
+  create: function () {
     this.status.setText('Cargando');
     this.addGameStates();
     this.addGameMusic();
-
-    setTimeout(function () {
-      game.state.start("GameMenu");
-    }, 2000);
+    // console.log("Recibiendo datos usuario");
+    // setTimeout(function () {
+    //   game.state.start("GameMenu");
+    //
+    // }, 1000);
   }
 };

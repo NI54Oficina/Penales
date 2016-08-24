@@ -34,7 +34,8 @@ Game.prototype = {
 
   create: function () {
 
-
+    self = this;
+    self.ListenerComienzo(self);
 
 
      timer = game.time.events.loop(Phaser.Timer.SECOND, this.updateCounter, this);
@@ -45,16 +46,18 @@ Game.prototype = {
      presicionText=0;
      rangoDePresicion=40;
      counter=15;
+     array=[];
 
 
      //Modo aleatorio de settear quien comienza la partida, arquero o pateador
      modo=game.rnd.integerInRange(0,1);
      //Modo aleatorio de settear quien comienza la partida, arquero o pateador
+
      puntosComputer=0;
      puntosUser=0;
      enAlargue=false;
 
-     self = this;
+
 
      buttons= game.add.group();
 
@@ -150,8 +153,6 @@ Game.prototype = {
     perfiles=[perfil1,perfil2, perfil3, perfil4];
 
 
-
-
      velocidad=2000;
 
     arquero= game.add.sprite(500,250, 'arquero-local');
@@ -183,9 +184,6 @@ Game.prototype = {
 
 
 
-
-
-      //Se crean los botones distribuidos, iterativamente
       var auxID=1;
 
       for (var i = 1; i < 3; i++)
@@ -211,30 +209,18 @@ Game.prototype = {
 
       };
 
-      //creacion array
+        if(Phaser.Math.isEven(modo)){
+        triesA=1;
+        triesP=0;
+        self.modificarBotones(self);
 
+        }else{
+        triesA=0;
+        triesP=1;
 
-                self.createArray(self);
+        }
 
-                if(Phaser.Math.isEven(modo)){
-                  triesA=1;
-                  triesP=0;
-                  self.modificarBotones(self);
-
-                }else{
-                  triesA=0;
-                  triesP=1;
-
-                }
-
-                self.cambiarRopa(self);
-
-
-
-
-
-
-
+        self.cambiarRopa(self);
 
 
         looser = game.add.text(350, 350, display1, { font: 'bold 60pt TheMinion',fill: 'red' });
@@ -426,7 +412,7 @@ Game.prototype = {
       try{
         game.tweens.remove(tweenFocus);
         game.tweens.remove(tweenArquero);
-        //Manejo de errores
+
       }
       catch(e){}
 
@@ -442,6 +428,8 @@ Game.prototype = {
 
 
     },1000);
+
+  self.ListenerGetJugada(self);
 
 
   },
@@ -521,6 +509,9 @@ Game.prototype = {
     terminarJuego: function(){
       this.game.state.states["GameOver"].puntosUser = puntosUser;
       this.game.state.states["GameOver"].puntosComputer = puntosComputer;
+
+      self.ListenerTerminarJuego(self);
+
       this.game.state.start("GameOver")
     },
 
@@ -532,6 +523,7 @@ Game.prototype = {
           setTimeout(function(){self.desempatar(self);},200);
 
         }else{
+          self.ListenerGetJugada(self);
           setTimeout(function(){self.terminarJuego(self);},500);
 
         };
@@ -548,6 +540,7 @@ Game.prototype = {
               if(triesA >=1 && triesP>=1){
 
                 if(puntosUser!=puntosComputer){
+                  self.ListenerGetJugada(self);
                   setTimeout(function(){self.terminarJuego(self);}
                     ,500);
 
@@ -883,7 +876,6 @@ Game.prototype = {
   },
 
 
-  //ubicarArquero
 
 
 moverPelota: function(unaCoordenada){
@@ -917,25 +909,12 @@ esEmpate: function(){
   return false;
 },
 
-
-
-createArray: function(){
-  array= [ [0,0,1,1,2,0],
-           [1,0,2,1,1,1],
-           [0,0,2,1,2,0],
-           [0,2,1,1,1,1],
-           [2,0,1,1,2,1] ];
-
-},
-
 getMaso: function(){
   if(Phaser.Math.isEven(modo)){
     return array[triesA-1];
   }else{
       return array[triesP-1];
   }
-
-
 
 },
 
@@ -960,7 +939,7 @@ generarRiesgo: function(arrai, target){
                   arrayNuevo.push(i);
 
               };
-      } //termina if
+      }
 
       var longitud = arrayNuevo.length;
       var pos = game.rnd.integerInRange(0,longitud-1);
@@ -978,11 +957,12 @@ modificarBotones: function(){
 
     }else if(barray[i-1]==1){
         buttons.children[i-1].loadTexture('yellow-button', 0, false);
-    } //Fin iff
+    }
 
-  }//Fin for}
+  }
 
 },
+
 
 botonesRojos:function(){
   for(var i=0; i<6; i++){
@@ -990,6 +970,7 @@ botonesRojos:function(){
         buttons.children[i].loadTexture('button', 0, false);
   }
 },
+
 
 calculoChancesAtajar: function(efec, target){
 
@@ -1008,6 +989,7 @@ calculoChancesAtajar: function(efec, target){
 
     return gen;
 },
+
 
 ubicarArquero: function(efec, target){
 
@@ -1039,10 +1021,38 @@ ubicarArquero: function(efec, target){
 
 setEnemy: function(){
   var id= game.rnd.integerInRange(1,4);
-  console.log("Numero id perfil elegido: "+ id);
+
+  array= perfiles[id-1].tiros;
 
   return perfiles[id-1];
+
 },
+
+ListenerComienzo: function(){
+  setTimeout(function(){
+
+      console.log("Comienzo Partida");},2000);
+
+    
+},
+
+ListenerGetJugada: function(){
+
+  setTimeout(function(){
+
+      console.log("Recibiendo Jugada");},2000);
+
+},
+
+ListenerTerminarJuego: function(){
+  setTimeout(function(){
+
+      console.log("Recibiendo Resultado Partida");},2000);
+
+
+}
+
+
 
 
 };
