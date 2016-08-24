@@ -75,10 +75,12 @@ var Splash = function () {};
     this.status.setText('Cargando');
     this.addGameStates();
     this.addGameMusic();
-    // console.log("Recibiendo datos usuario");
-    // setTimeout(function () {
-    //   game.state.start("GameMenu");
-    //
-    // }, 1000);
+    console.log("Recibiendo datos usuario");
+
+    setTimeout(function () {
+      game.state.start("GameMenu");
+
+    }, 1000);
+    
   }
 };
