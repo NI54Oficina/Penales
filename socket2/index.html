@@ -18,7 +18,7 @@
 	<button type="button" class="buttonSend" code="login" val="poyo">Login</button>
 	<button type="button" class="buttonSend" code="requestStats" val="poyo" style="display:none;">Request Stats</button>
 	<button type="button" class="buttonSend" code="buscarPartida" val="poyo" style="display:none;">Buscar partida</button>
-	<button type="button" class="buttonSend" code="enviarJugada" val="poyo" style="display:none;" onclick="$(this).hide();">Enviar Jugada</button>
+	<button type="button" class="buttonSend" code="enviarJugada" val="2" style="display:none;" onclick="$(this).hide();">Enviar Jugada</button>
 
 	</div>
     <ul id="messages"></ul>
@@ -59,10 +59,10 @@
       });
 
       ////////////// inicio y elijo modo ///
-      socket.on('Modo de jugada',function(msg){
+      socket.on('Jugada',function(msg){
           $('#messages').append($('<li>').text(msg));
         });
-        ///////////////
+      /////////////
 
 	   socket.on('inicioPartida', function(msg){
         $('#messages').append($('<li>').text(msg));
@@ -72,6 +72,12 @@
 	  socket.on('recibirJugada', function(msg){
         $('#messages').append($('<li>').text(msg));
       });
+
+    ////Recibe Jugada
+      socket.on('recibeJugada', function(msg){
+          $('#messages').append($('<li>').text(msg));
+        });
+    ////Recibe Jugada
 
 	  socket.on('inicioTurno', function(msg){
 		$('#messages').append($('<li>').text(msg));

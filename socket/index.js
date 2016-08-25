@@ -2,7 +2,18 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+
+		var oponente={};
+
+		var jugada={};
+
 var counterPartida=0;
+
+var counterLocal=0;
+
+mod=randomBetween(0,1);
+
+console.log(mod);
 
 app.get('/', function(req, res){
   //res.sendFile(__dirname + '/index.html');
@@ -33,20 +44,33 @@ io.on('connection', function(socket){
     SendStats();
   });
   socket.on('buscarPartida', function(msg){
-		mod=Math.floor((Math.random() * 0) + 1);
-
-		if(mod==1){
-				modo="Comienza como modo Pateador";
-		}else{
-				modo="Comienza como modo Arquero";
-		}
 
     io.emit('buscandoPartida', "buscando partida...");
-		io.emit('Modo de jugada', JSON.stringify(modo));
+
 
 
 	setTimeout(function(){
 		io.emit('partidaEncontrada', "oponente Encontrado!");
+
+		oponente["nombre"]="Pepita";
+
+		oponente["efectividad"]="20";
+
+		oponente["tendencia"]= [[0,0,1,2,2,0],[0,2,1,1,2,0],[0,2,1,1,2,0],[0,2,1,1,2,0],[0,1,1,1,2,2]];
+
+		jugada["oponente"]=oponente;
+
+		jugada["tiempomáximo"]= 3000;
+
+		if(mod==1){
+			jugada["camiseta"]= "local";
+			jugada["rol-inicial"]= "Pateador";
+		}else{
+			jugada["camiseta"]= "Visitante";
+			jugada["rol-inicial"]= "Arquero";
+		}
+
+		io.emit('Jugada', JSON.stringify(jugada));
 
 		setTimeout(function(){
 		io.emit('inicioPartida', "inicio partidaaa!");
@@ -59,6 +83,14 @@ io.on('connection', function(socket){
 
 	 setTimeout(function(){
 		io.emit('recibirJugada', "resolver turnooo");
+		 if(mod%2 == 0){
+			ubicacion =  CalculateTiro(msg);
+		 }else{
+			ubicacion = CalculateAtaje(msg);
+		 }
+
+
+		 io.emit('recibeJugada', ubicacion);
 
 		 setTimeout(function(){
 			 counterPartida++;
@@ -110,6 +142,97 @@ function GetResultado(){
 	io.emit('resultadoPartida', "terminó partidaaaa!");
 	SendStats();
 	counterPartida=0;
+}
+
+function CalculateTiro(msg){
+
+
+	  if(mod%2 ==0){
+	    while(generator==5){
+	        generator = randomBetween(1,6);
+
+	        break;
+	    }
+	  }else{
+	    generator = calculoChancesAtajar(msg);
+
+	    }
+
+		 return generator;
+
+}
+
+function calculoChancesAtajar(msg){
+
+
+    var chanceAtajar = randomBetween(1,jugador["efectividad"]);
+
+    if(chanceAtajar==1){
+
+      var gen= msg;
+
+
+    }else {
+
+      var gen = randomBetween(1,6);
+
+    }
+
+    return gen;
+}
+
+
+function CalculateAtaje(){
+	 var a = getMaso();
+	 var b= generarRiesgo(a);
+
+	 return b;
+
+}
+
+function getMaso(){
+
+  if(mod%2 ==0){
+    return oponente["tendencia"][counterVisitante];
+  }else{
+  	return oponente["tendencia"][counterLocal];
+  }
+
+}
+
+
+function generarRiesgo(arrai){
+
+
+  var arrayNuevo = [];
+
+      for(var i =1 ; i<7; i++){
+
+              if(arrai[i-1] == 1){
+                  for (var j=1; j < 3; j++) {
+                  arrayNuevo.push(i);
+                  }
+
+              }else if(arrai[i-1]==2){
+                  for (var j=1; j < 4; j++) {
+                    arrayNuevo.push(i);
+                    }
+              }else{
+
+                  arrayNuevo.push(i);
+
+              };
+      }
+
+      var longitud = arrayNuevo.length;
+			var lon= longitud-1;
+      var pos = randomBetween(0,lon);
+      return arrayNuevo[pos];
+
+}
+
+function randomBetween(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 http.listen(3000, function(){
