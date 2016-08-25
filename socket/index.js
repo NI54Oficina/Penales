@@ -52,7 +52,19 @@ io.on('connection', function(socket){
   });
   socket.on('requestStats', function(msg){
 
-    SendStats();
+		if(msg){
+			var fs = require('fs');
+			fs.writeFile("./stats.txt",  msg, function(err) {
+				if(err) {
+					return console.log(err);
+				}
+
+				console.log("The file was saved!");
+				SendStats();
+			}); 
+		}else{
+			SendStats();
+		}
   });
   socket.on('buscarPartida', function(msg){
 
@@ -61,7 +73,7 @@ io.on('connection', function(socket){
 
 
 	setTimeout(function(){
-		io.emit('partidaEncontrada', "oponente Encontrado!");
+		//io.emit('partidaEncontrada', "oponente Encontrado!");
 
 		oponente["nombre"]="Pepita";
 
@@ -81,7 +93,8 @@ io.on('connection', function(socket){
 			jugada["rol-inicial"]= "Arquero";
 		}
 
-		io.emit('Jugada', JSON.stringify(jugada));
+		//io.emit('Jugada', JSON.stringify(jugada));
+		io.emit('partidaEncontrada', JSON.stringify(jugada));
 
 		setTimeout(function(){
 		io.emit('inicioPartida', "inicio partidaaa!");
@@ -128,29 +141,18 @@ io.on('connection', function(socket){
 
 function SendStats(){
 	//setear variable resultados
-	var stats={};
-	stats["TotalConvertidos"]=10;
-	stats["PartidosGanados"]=5;
-	stats["PartidosPerdidos"]=3;
-	stats["TotalErrados"]=3;
-	stats["TotalAtajados"]=3;
-	stats["TotalNoAtajados"]=3;
-	stats["RachaGanados"]=3;
-	stats["RachaPerdidos"]=3;
-	stats["RachaConvertidos"]=3;
-	stats["RachaErrados"]=3;
-	stats["RachaAtajados"]=3;
-	stats["RachaNoAtajados"]=3;
-	stats["MejorRachaAtajados"]=3;
-	stats["MejorRachaConvertida"]=3;
-	stats["PeorRachaNoAtajados"]=3;
-	stats["PeorRachaErrados"]=3;
-	stats["TotalPartidaAtajados"]=3;
-	stats["TotalPartidaConvertidos"]=3;
-	stats["TotalPartidaNoAtajados"]=3;
-	stats["TotalPartidaErrados"]=3;
-
-	io.emit('statsRecived', JSON.stringify(stats));
+	var stats;
+	var fs = require('fs');
+	fs.readFile("./stats.txt",  "utf8", function(err,data) {
+		if(err) {
+			console.log("entra error");
+			return console.log(err);
+		}
+		//stats= JSON.parse(msg);
+		stats=data;
+		console.log("The file was read!");
+		io.emit('statsRecived', data);
+	}); 
 }
 
 function GetResultado(){
