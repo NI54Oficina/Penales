@@ -58,6 +58,12 @@
         $('#messages').append($('<li>').text(msg));
       });
 
+      ////////////// inicio y elijo modo ///
+      socket.on('Modo de jugada',function(msg){
+          $('#messages').append($('<li>').text(msg));
+        });
+        ///////////////
+
 	   socket.on('inicioPartida', function(msg){
         $('#messages').append($('<li>').text(msg));
 		$('[code=enviarJugada]').show();
