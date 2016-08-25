@@ -1,0 +1,116 @@
+var app = require('express')();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+var counterPartida=0;
+
+app.get('/', function(req, res){
+  //res.sendFile(__dirname + '/index.html');
+});
+
+io.on('connection', function(socket){
+	console.log("user conected");
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+		console.log(msg);
+  });
+
+  socket.on('login', function(msg){
+
+
+	var datos={};
+	datos["nombre"]="Pepe";
+	datos["id"]= "2";
+	datos["avatar"]= "imagen.jpg";
+	datos["puntos"]= 1000;
+
+    io.emit('loginConfirmed',  JSON.stringify(datos));
+		console.log("LoginConfirmed");
+    SendStats();
+  });
+  socket.on('requestStats', function(msg){
+		console.log("requestStats");
+    SendStats();
+  });
+  socket.on('buscarPartida', function(msg){
+		// mod=game.rnd.integerInRange(0,1);
+		//
+		// if(mod==1){
+		// 		modo="Comienza como modo Pateador";
+		// }else{
+		// 		modo="Comienza como modo Arquero";
+		// }
+
+    io.emit('buscandoPartida', "buscando partida...");
+		console.log("buscandoPartida");
+
+	setTimeout(function(){
+		io.emit('partidaEncontrada', "oponente Encontrado!");
+		console.log("Partida Encontrada");
+		setTimeout(function(){
+		io.emit('inicioPartida', "inicio partidaaa!");
+		console.log("Inicio Partida");
+		},2000);
+	},2000);
+  });
+
+  socket.on('enviarJugada', function(msg){
+		console.log("Jugada enviada");
+	 setTimeout(function(){
+		io.emit('recibirJugada', "resolver turnooo");
+		console.log("recibirJugada");
+		 setTimeout(function(){
+			 counterPartida++;
+			 if(counterPartida>=5){
+				 GetResultado();
+			 }else{
+				io.emit('inicioTurno', "iniciar nuevo turno!!");
+				console.log("Iniciar Turno");
+			 }
+		 },3000);
+	 },2000);
+  });
+
+
+   socket.on('disconnect', function(){
+    console.log('user disconnected');
+	});
+
+});
+
+function SendStats(){
+	//setear variable resultados
+	var stats={};
+	stats["TotalConvertidos"]=10;
+	stats["PartidosGanados"]=5;
+	stats["PartidosPerdidos"]=3;
+	stats["TotalErrados"]=3;
+	stats["TotalAtajados"]=3;
+	stats["TotalNoAtajados"]=3;
+	stats["RachaGanados"]=3;
+	stats["RachaPerdidos"]=3;
+	stats["RachaConvertidos"]=3;
+	stats["RachaErrados"]=3;
+	stats["RachaAtajados"]=3;
+	stats["RachaNoAtajados"]=3;
+	stats["MejorRachaAtajados"]=3;
+	stats["MejorRachaConvertida"]=3;
+	stats["PeorRachaNoAtajados"]=3;
+	stats["PeorRachaErrados"]=3;
+	stats["TotalPartidaAtajados"]=3;
+	stats["TotalPartidaConvertidos"]=3;
+	stats["TotalPartidaNoAtajados"]=3;
+	stats["TotalPartidaErrados"]=3;
+
+	io.emit('statsRecived', JSON.stringify(stats));
+}
+
+function GetResultado(){
+	io.emit('resultadoPartida', "terminó partidaaaa!");
+	SendStats();
+	counterPartida=0;
+}
+
+http.listen(3000, function(){
+  console.log('listening on *:3000');
+});

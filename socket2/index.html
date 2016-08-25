@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+    </style>
+  </head>
+  <body>
+	<div>
+	<button type="button" class="buttonSend" code="login" val="poyo">Login</button>
+	<button type="button" class="buttonSend" code="requestStats" val="poyo" style="display:none;">Request Stats</button>
+	<button type="button" class="buttonSend" code="buscarPartida" val="poyo" style="display:none;">Buscar partida</button>
+	<button type="button" class="buttonSend" code="enviarJugada" val="poyo" style="display:none;" onclick="$(this).hide();">Enviar Jugada</button>
+
+	</div>
+    <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+    <script src="socket.io-1.2.0.js"></script>
+    <script src="jquery-1.11.1.js"></script>
+    <script>
+      var socket = io('http://localhost:3000');
+	   //socket.emit('login', $('#m').val());
+      $('form').submit(function(){
+        socket.emit('chat message', $('#m').val());
+        $('#m').val('');
+        return false;
+      });
+
+      socket.on('loginConfirmed', function(msg){
+        $('#messages').append($('<li>').text(msg));
+
+      });
+
+	  socket.on('statsRecived', function(msg){
+        $('#messages').append($('<li>').text(msg));
+		$('[code=login]').hide();
+		$('[code=requestStats]').show();
+		$('[code=buscarPartida]').show();
+      });
+
+	  socket.on('buscandoPartida', function(msg){
+        $('#messages').append($('<li>').text(msg));
+		$('[code=requestStats]').hide();
+		$('[code=buscarPartida]').hide();
+      });
+
+	  socket.on('partidaEncontrada', function(msg){
+        $('#messages').append($('<li>').text(msg));
+      });
+
+	   socket.on('inicioPartida', function(msg){
+        $('#messages').append($('<li>').text(msg));
+		$('[code=enviarJugada]').show();
+      });
+
+	  socket.on('recibirJugada', function(msg){
+        $('#messages').append($('<li>').text(msg));
+      });
+
+	  socket.on('inicioTurno', function(msg){
+		$('#messages').append($('<li>').text(msg));
+		$('[code=enviarJugada]').show();
+	  });
+
+	  socket.on('resultadoPartida', function(msg){
+		$('#messages').append($('<li>').text(msg));
+		$('[code=requestStats]').show();
+		$('[code=buscarPartida]').show();
+	  });
+
+
+
+	  $("body").on("click",".buttonSend",function(){
+		socket.emit($(this).attr("code"), $(this).attr("val"));
+		//socket.emit("login", " ");
+
+	  });
+    </script>
+  </body>
+</html>
