@@ -90,9 +90,9 @@ GameMenu.prototype = {
     console.log("Esperando oponente");
     setTimeout(function(){
         game.state.start("Game");
-        console.log("Oponente Encontrado");},2000);
+        console.log("Oponente Encontrado");},500);
 
-        return;
+
   },
 
 };
