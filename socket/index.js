@@ -11,7 +11,18 @@ var counterPartida=0;
 
 var counterLocal=0;
 
+var counterVisitante=0;
+
 mod=randomBetween(0,1);
+
+if(mod%2==0){
+	var counterLocal=0;
+	var counterVisitante=1;
+
+}else{
+	var counterLocal=1;
+	var counterVisitante=0;
+}
 
 console.log(mod);
 
@@ -84,17 +95,21 @@ io.on('connection', function(socket){
 	 setTimeout(function(){
 		io.emit('recibirJugada', "resolver turnooo");
 		 if(mod%2 == 0){
-			ubicacion =  CalculateTiro(msg);
-		 }else{
-			ubicacion = CalculateAtaje(msg);
-		 }
 
+			ubicacion =  CalculateTiro(msg);
+			counterVisitante++;
+		 }else{
+
+			ubicacion = CalculateAtaje();
+			counterLocal++;
+		 }
+		  mod++;
 
 		 io.emit('recibeJugada', ubicacion);
 
 		 setTimeout(function(){
-			 counterPartida++;
-			 if(counterPartida>=5){
+
+			 if(counterVisitante >= 5 &&  counterLocal >= 5 ){
 				 GetResultado();
 			 }else{
 				io.emit('inicioTurno', "iniciar nuevo turno!!");
@@ -148,11 +163,10 @@ function CalculateTiro(msg){
 
 
 	  if(mod%2 ==0){
-	    while(generator==5){
-	        generator = randomBetween(1,6);
+				do {
+					generator = randomBetween(1,6);
+				}	while (generator==5);
 
-	        break;
-	    }
 	  }else{
 	    generator = calculoChancesAtajar(msg);
 
@@ -169,16 +183,17 @@ function calculoChancesAtajar(msg){
 
     if(chanceAtajar==1){
 
-      var gen= msg;
+      return msg;
 
 
     }else {
 
       var gen = randomBetween(1,6);
+			return gen;
 
     }
 
-    return gen;
+
 }
 
 
@@ -194,6 +209,7 @@ function getMaso(){
 
   if(mod%2 ==0){
     return oponente["tendencia"][counterVisitante];
+
   }else{
   	return oponente["tendencia"][counterLocal];
   }

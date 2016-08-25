@@ -566,31 +566,31 @@ Game.prototype = {
 
   ListenerPateador: function(target){
 
-      self.establecerParametros(self);
+    self.establecerParametros(self);
 
       setTimeout(function(){
 
-            self.stopPlayer(self);
+        self.stopPlayer(self);
 
 
 
-            self.ubicarArquero(perfilElegido.efectividad, self);
+        self.ubicarArquero(perfilElegido.efectividad, self);
 
-            win=false;
+        win=false;
 
-            if(self.getResult().id != generator){
-               win=true;
-            };
+        if(self.getResult().id != generator){
+           win=true;
+        };
 
 
-            if( rangoDePresicion > presicion && presicion > -rangoDePresicion){
+        if( rangoDePresicion > presicion && presicion > -rangoDePresicion){
 
-                self.acertarTiro(self);
-               }else{
+            self.acertarTiro(self);
+           }else{
 
-                self.errarTiro(self);
+            self.errarTiro(self);
 
-             };
+         };
 
       },500);
 
@@ -918,7 +918,6 @@ getMaso: function(){
 
 },
 
-
 generarRiesgo: function(arrai, target){
 
 
@@ -1017,7 +1016,6 @@ ubicarArquero: function(efec, target){
   };
 
   posArquero=buttons.children[i].position;
-
 },
 
 
