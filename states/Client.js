@@ -1,56 +1,62 @@
 var socket = io('http://localhost:3000');
-//socket.emit('login', $('#m').val());
-$('form').submit(function(){
-  socket.emit('chat message', $('#m').val());
-  $('#m').val('');
-  return false;
-});
+var usuario;
+console.log("entra client");
+
+
 
 socket.on('loginConfirmed', function(msg){
-  $('#messages').append($('<li>').text(msg));
-
+  console.log(msg);
+  ResponseCallBack(msg);
 });
 socket.on('statsRecived', function(msg){
-  $('#messages').append($('<li>').text(msg));
-$('[code=login]').hide();
-$('[code=requestStats]').show();
-$('[code=buscarPartida]').show();
+	console.log(msg);
+	var auxArray=JSON.parse(msg);
+	console.log(auxArray);
+	$.each(auxArray, function( index, value ) {
+		localStorage[index]=value;
+	});
+	console.log(msg);
 });
 
 socket.on('buscandoPartida', function(msg){
-  $('#messages').append($('<li>').text(msg));
-$('[code=requestStats]').hide();
-$('[code=buscarPartida]').hide();
+  console.log(msg);
+
 });
 
 socket.on('partidaEncontrada', function(msg){
-  $('#messages').append($('<li>').text(msg));
+  console.log(msg);
 });
 
 socket.on('inicioPartida', function(msg){
-  $('#messages').append($('<li>').text(msg));
-$('[code=enviarJugada]').show();
+	console.log(msg);
 });
 
 socket.on('recibirJugada', function(msg){
-  $('#messages').append($('<li>').text(msg));
+  console.log(msg);
 });
 
 socket.on('inicioTurno', function(msg){
-$('#messages').append($('<li>').text(msg));
-$('[code=enviarJugada]').show();
+console.log(msg);
 });
 
 socket.on('resultadoPartida', function(msg){
-$('#messages').append($('<li>').text(msg));
-$('[code=requestStats]').show();
-$('[code=buscarPartida]').show();
+console.log(msg);
 });
 
 
+var currentCallback;
+var currentContext;
 
-$("body").on("click",".buttonSend",function(){
-socket.emit($(this).attr("code"), $(this).attr("val"));
-//socket.emit("login", " ");
+function Emit(toEmit,params,callback,context){
+	currentCallback=callback;
+	currentContext=context;
+	socket.emit(toEmit, params);
+}
 
-});
+function ResponseCallBack(msg){
+	if(currentCallback){
+		currentContext[currentCallback](msg);
+		currentCallback=null;
+		currentContext=null;
+	}
+}
