@@ -2,10 +2,9 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+var oponente={};
 
-		var oponente={};
-
-		var jugada={};
+var jugada={};
 
 var counterPartida=0;
 
@@ -31,30 +30,31 @@ if(mod%2==0){
 console.log(mod);
 
 app.get('/', function(req, res){
-  //res.sendFile(__dirname + '/index.html');
+  
 });
 
 io.on('connection', function(socket){
 	console.log("user conected");
-  socket.on('chat message', function(msg){
+	socket.on('chat message', function(msg){
     io.emit('chat message', msg);
 		console.log(msg);
-  });
+	});
 
-  socket.on('login', function(msg){
+	socket.on('login', function(msg){
 
 
-	var datos={};
-	datos["nombre"]="Pepe";
-	datos["id"]= "2";
-	datos["avatar"]= "imagen.jpg";
-	datos["puntos"]= 1000;
+		var datos={};
+		datos["nombre"]="Pepe";
+		datos["id"]= "2";
+		datos["avatar"]= "imagen.jpg";
+		datos["puntos"]= 1000;
 
-    io.emit('loginConfirmed',  JSON.stringify(datos));
+		io.emit('loginConfirmed',  JSON.stringify(datos));
 
-    SendStats();
-  });
-  socket.on('requestStats', function(msg){
+		SendStats();
+	});
+	
+	socket.on('requestStats', function(msg){
 
 		if(msg){
 			var fs = require('fs');
@@ -69,50 +69,42 @@ io.on('connection', function(socket){
 		}else{
 			SendStats();
 		}
-  });
-  socket.on('buscarPartida', function(msg){
+	});
+	socket.on('buscarPartida', function(msg){
 
-    io.emit('buscandoPartida', "buscando partida...");
-
-
-
-	setTimeout(function(){
-		//io.emit('partidaEncontrada', "oponente Encontrado!");
-
-		oponente["nombre"]="Pepita";
-
-		oponente["efectividad"]="20";
-
-		oponente["tendencia"]= [[0,0,1,2,2,0],[0,2,1,1,2,0],[0,2,1,1,2,0],[0,2,1,1,2,0],[0,1,1,1,2,2]];
-
-		jugada["oponente"]=oponente;
-
-		jugada["tiempomáximo"]= 3000;
-
-		if(mod==1){
-			jugada["camiseta"]= "local";
-			jugada["rol-inicial"]= "Pateador";
-		}else{
-			jugada["camiseta"]= "Visitante";
-			jugada["rol-inicial"]= "Arquero";
-		}
-
-		//io.emit('Jugada', JSON.stringify(jugada));
-		io.emit('partidaEncontrada', JSON.stringify(jugada));
+		io.emit('buscandoPartida', "buscando partida...");
 
 		setTimeout(function(){
-		io.emit('inicioPartida', "inicio partidaaa!");
+			//io.emit('partidaEncontrada', "oponente Encontrado!");
 
+			oponente["nombre"]="Pepita";
+
+			oponente["efectividad"]="20";
+
+			oponente["tendencia"]= [[0,0,1,2,2,0],[0,2,1,1,2,0],[0,2,1,1,2,0],[0,2,1,1,2,0],[0,1,1,1,2,2]];
+
+			jugada["oponente"]=oponente;
+
+			jugada["tiempomáximo"]= 3000;
+
+			if(mod==1){
+				jugada["camiseta"]= "local";
+				jugada["rol-inicial"]= "Pateador";
+			}else{
+				jugada["camiseta"]= "Visitante";
+				jugada["rol-inicial"]= "Arquero";
+			}
+			
+			io.emit('partidaEncontrada', JSON.stringify(jugada));
+
+			setTimeout(function(){
+			io.emit('inicioPartida', "inicio partidaaa!");
+
+			},2000);
 		},2000);
-	},2000);
-  });
+	});
 
-  socket.on('enviarJugada', function(msg){
-
-	 setTimeout(function(){
-		io.emit('recibirJugada', "resolver turnooo");
-		 if(mod%2 == 0){
-
+<<<<<<< HEAD
 			ubicacion =  CalculateTiro(msg);
 			counterLocal++;
 
@@ -122,9 +114,23 @@ io.on('connection', function(socket){
 			counterVisitante++;
 		 }
 		  mod++;
+=======
+	socket.on('enviarJugada', function(msg){
+		setTimeout(function(){
+			io.emit('recibirJugada', "resolver turnooo");
+			if(mod%2 == 0){
 
-		 io.emit('recibeJugada', ubicacion);
+				ubicacion =  CalculateTiro(msg);
+				counterVisitante++;
+			}else{
+>>>>>>> origin/master
 
+				ubicacion = CalculateAtaje();
+				counterLocal++;
+			}
+			mod++;
+
+<<<<<<< HEAD
 
 		 console.log("Modo: "+mod);
 		 console.log("Goles Local: "+golesLocal);
@@ -152,10 +158,24 @@ io.on('connection', function(socket){
 		 },3000);
 	 },2000);
   });
+=======
+			io.emit('recibeJugada', ubicacion);
+
+			setTimeout(function(){
+
+				if(counterVisitante >= 5 &&  counterLocal >= 5 ){
+					GetResultado();
+				}else{
+					io.emit('inicioTurno', "iniciar nuevo turno!!");
+				}
+			},3000);
+		},2000);
+	});
+>>>>>>> origin/master
 
 
-   socket.on('disconnect', function(){
-     console.log('user disconnected');
+	socket.on('disconnect', function(){
+		console.log('user disconnected');
 	});
 
 });
@@ -183,91 +203,64 @@ function GetResultado(){
 }
 
 function CalculateTiro(msg){
-
-
-	  if(mod%2 ==0){
-				do {
-					generator = randomBetween(1,6);
-				}	while (generator==5);
-
-	  }else{
-	    generator = calculoChancesAtajar(msg);
-
-	    }
-
-		 return generator;
-
+	if(mod%2 ==0){
+		do {
+			generator = randomBetween(1,6);
+		}while (generator==5);
+	}else{
+		generator = calculoChancesAtajar(msg);
+	}
+	return generator;
 }
 
 function calculoChancesAtajar(msg){
-
-
     var chanceAtajar = randomBetween(1,jugador["efectividad"]);
-
+	
     if(chanceAtajar==1){
-
-      return msg;
-
-
+		return msg;
     }else {
-
-      var gen = randomBetween(1,6);
-			return gen;
-
+		var gen = randomBetween(1,6);
+		return gen;
     }
-
-
 }
 
-
 function CalculateAtaje(){
-	 var a = getMaso();
-	 var b= generarRiesgo(a);
-
-	 return b;
-
+	var a = getMaso();
+	var b= generarRiesgo(a);
+	return b;
 }
 
 function getMaso(){
-
-  if(mod%2 ==0){
-    return oponente["tendencia"][counterVisitante];
-
-  }else{
-  	return oponente["tendencia"][counterLocal];
-  }
-
+	if(mod%2 ==0){
+		return oponente["tendencia"][counterVisitante];
+	}else{
+		return oponente["tendencia"][counterLocal];
+	}
 }
 
-
 function generarRiesgo(arrai){
+	var arrayNuevo = [];
+	for(var i =1 ; i<7; i++){
+		if(arrai[i-1] == 1){
+		  for (var j=1; j < 3; j++) {
+		  arrayNuevo.push(i);
+		  }
 
+		}else if(arrai[i-1]==2){
+		  for (var j=1; j < 4; j++) {
+			arrayNuevo.push(i);
+			}
+		}else{
 
-  var arrayNuevo = [];
+		  arrayNuevo.push(i);
 
-      for(var i =1 ; i<7; i++){
+		};
+	}
 
-              if(arrai[i-1] == 1){
-                  for (var j=1; j < 3; j++) {
-                  arrayNuevo.push(i);
-                  }
-
-              }else if(arrai[i-1]==2){
-                  for (var j=1; j < 4; j++) {
-                    arrayNuevo.push(i);
-                    }
-              }else{
-
-                  arrayNuevo.push(i);
-
-              };
-      }
-
-      var longitud = arrayNuevo.length;
-			var lon= longitud-1;
-      var pos = randomBetween(0,lon);
-      return arrayNuevo[pos];
-
+	var longitud = arrayNuevo.length;
+	var lon= longitud-1;
+	var pos = randomBetween(0,lon);
+	return arrayNuevo[pos];
 }
 
 function randomBetween(min, max) {
