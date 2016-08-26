@@ -38,7 +38,9 @@ GameMenu.prototype = {
 
 
     this.addMenuOption('Start', function () {
-      self.ListenerLogin(self);
+      search.visible=true;
+      Emit("buscarPartida"," ","listenerSearch",self);
+      //self.ListenerLogin(self);
     });
     this.addMenuOption('Options', function () {
       game.state.start("Options");
@@ -80,20 +82,24 @@ GameMenu.prototype = {
 
           }
 
-      //Fin Creacion ariables en localStorage
+  //Fin Creacion ariables en localStorage
 
   },
 
+  test:function(){
+	  console.log("test entra");
+  },
 
-  ListenerLogin: function (){
-    search.visible=true;
-    console.log("Esperando oponente");
-    setTimeout(function(){
-        game.state.start("Game");
-        console.log("Oponente Encontrado");},500);
+  listenerSearch: function (msg){
 
+      search.visible=false;
+      this.test();
+      console.log(msg);
+      console.log("Oponente Encontrado");
+      game.state.start("Game");
 
   },
+
 
 };
 

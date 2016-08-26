@@ -19,20 +19,28 @@ socket.on('statsRecived', function(msg){
 });
 
 socket.on('buscandoPartida', function(msg){
+  console.log("buscando partida");
   console.log(msg);
+
 
 });
 
 socket.on('partidaEncontrada', function(msg){
   console.log(msg);
+    ResponseCallBack(msg);
+
+
 });
 
 socket.on('inicioPartida', function(msg){
 	console.log(msg);
+
 });
 
 socket.on('recibirJugada', function(msg){
   console.log(msg);
+  ResponseCallBack(msg);
+
 });
 
 socket.on('inicioTurno', function(msg){

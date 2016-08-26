@@ -83,9 +83,12 @@ var Splash = function () {};
   },
 
   logueado: function(msg){
+
 	  console.log("logueado");
 	  console.log(msg);
 	  this.test();
 	  game.state.start("GameMenu");
-  }
+    
+  },
+
 };

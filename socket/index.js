@@ -12,10 +12,6 @@ var counterLocal=0;
 
 var counterVisitante=0;
 
-
-var golesLocal=0;
-var golesVisitante=0;
-
 mod=randomBetween(0,1);
 
 if(mod%2==0){
@@ -30,7 +26,7 @@ if(mod%2==0){
 console.log(mod);
 
 app.get('/', function(req, res){
-  
+
 });
 
 io.on('connection', function(socket){
@@ -50,10 +46,10 @@ io.on('connection', function(socket){
 		datos["puntos"]= 1000;
 
 		io.emit('loginConfirmed',  JSON.stringify(datos));
-
+		console.log("log confirmed");
 		SendStats();
 	});
-	
+
 	socket.on('requestStats', function(msg){
 
 		if(msg){
@@ -94,8 +90,10 @@ io.on('connection', function(socket){
 				jugada["camiseta"]= "Visitante";
 				jugada["rol-inicial"]= "Arquero";
 			}
-			
+
 			io.emit('partidaEncontrada', JSON.stringify(jugada));
+
+			console.log("Partida encontrada");
 
 			setTimeout(function(){
 			io.emit('inicioPartida', "inicio partidaaa!");
@@ -104,61 +102,21 @@ io.on('connection', function(socket){
 		},2000);
 	});
 
-<<<<<<< HEAD
-			ubicacion =  CalculateTiro(msg);
-			counterLocal++;
-
-		 }else{
-
-			ubicacion = CalculateAtaje();
-			counterVisitante++;
-		 }
-		  mod++;
-=======
 	socket.on('enviarJugada', function(msg){
 		setTimeout(function(){
 			io.emit('recibirJugada', "resolver turnooo");
+			console.log("recibo Jugada");
 			if(mod%2 == 0){
 
 				ubicacion =  CalculateTiro(msg);
 				counterVisitante++;
 			}else{
->>>>>>> origin/master
 
 				ubicacion = CalculateAtaje();
 				counterLocal++;
 			}
 			mod++;
 
-<<<<<<< HEAD
-
-		 console.log("Modo: "+mod);
-		 console.log("Goles Local: "+golesLocal);
-		 console.log("Goles Visitante: "+golesVisitante);
-		 console.log("Contador Local: " + counterLocal);
-		 console.log("Contador Visitante: " + counterVisitante);
-
-		 setTimeout(function(){
-
-			 if(counterVisitante >=5 &&  counterLocal >= 5 ){
-				 				if( golesLocal==golesVisitante ){
-									console.log("desempate");
-										io.emit('inicioTurno', "iniciar nuevo turno!!");
-								}else{
-										console.log("fin");
-									GetResultado();
-								}
-
-			 }else{
-				 	console.log("sigue jugando");
-				io.emit('inicioTurno', "iniciar nuevo turno!!");
-
-			 }
-
-		 },3000);
-	 },2000);
-  });
-=======
 			io.emit('recibeJugada', ubicacion);
 
 			setTimeout(function(){
@@ -171,7 +129,6 @@ io.on('connection', function(socket){
 			},3000);
 		},2000);
 	});
->>>>>>> origin/master
 
 
 	socket.on('disconnect', function(){
@@ -215,7 +172,7 @@ function CalculateTiro(msg){
 
 function calculoChancesAtajar(msg){
     var chanceAtajar = randomBetween(1,jugador["efectividad"]);
-	
+
     if(chanceAtajar==1){
 		return msg;
     }else {

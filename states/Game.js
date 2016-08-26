@@ -35,7 +35,7 @@ Game.prototype = {
   create: function () {
 
     self = this;
-    self.ListenerComienzo(self);
+  //  self.ListenerComienzo(self);
 
 
      timer = game.time.events.loop(Phaser.Timer.SECOND, this.updateCounter, this);
@@ -209,6 +209,18 @@ Game.prototype = {
 
       };
 
+
+
+        self.cambiarRopa(self);
+
+
+        looser = game.add.text(350, 350, display1, { font: 'bold 60pt TheMinion',fill: 'red' });
+        looser.visible=false;
+        winner = game.add.text(350, 350, display2, {  font: 'bold 60pt TheMinion',fill: 'red' });
+        winner.visible=false;
+        points= game.add.group();
+        perfilElegido= self.setEnemy(self);
+
         if(Phaser.Math.isEven(modo)){
         triesA=1;
         triesP=0;
@@ -220,16 +232,7 @@ Game.prototype = {
 
         }
 
-        self.cambiarRopa(self);
 
-
-        looser = game.add.text(350, 350, display1, { font: 'bold 60pt TheMinion',fill: 'red' });
-        looser.visible=false;
-        winner = game.add.text(350, 350, display2, {  font: 'bold 60pt TheMinion',fill: 'red' });
-        winner.visible=false;
-
-        points= game.add.group();
-        perfilElegido= self.setEnemy(self);
 
 
 
@@ -322,9 +325,16 @@ Game.prototype = {
     tweenFocus.to( {x:endBarra, y:600}, velocidad, 'Linear', true, 0, false).yoyo(true);
     velocidad=velocidad-400;
     self.setArquero(self);
-    transparentObject.visible=true;
     buttons.visible=false;
-    transparentObject.events.onInputDown.addOnce(this.ListenerPateador,self);
+
+    // transparentObject.visible=true;
+    //
+    // transparentObject.events.onInputDown.addOnce(this.ListenerPateador,self);
+
+    transparentObject.visible=true;
+    transparentObject.events.onInputDown.addOnce(this.ProbandoServidor,self);
+
+  //  self.activeAnimation(self);
   },
 
 
@@ -351,9 +361,16 @@ Game.prototype = {
     player.visible=true;
     self.setArquero(self);
     buttons.visible=false;
-      setTimeout(function(){
-        self.ListenerArquero(self);
-      },500);
+
+    self.ProbandoServidor(self);
+
+
+
+
+
+        //self.activeAnimation(self);
+        //self.ListenerArquero(self);
+
   },
 
   actionOnClick: function(target) {
@@ -565,8 +582,8 @@ Game.prototype = {
 
 
   ListenerPateador: function(target){
+    self.patear(self);
 
-    self.establecerParametros(self);
 
       setTimeout(function(){
 
@@ -599,7 +616,8 @@ Game.prototype = {
 
   ListenerArquero: function(target){
 
-    self.establecerParametros(self);
+
+    self.patear(self);
 
     setTimeout(function(){
 
@@ -894,7 +912,7 @@ establecerParametros: function(){
   catch(i){
   }
 
-  self.patear(self);
+
 
   presicion =  centerBarra - focus.position.x ;
 
@@ -1050,7 +1068,29 @@ ListenerTerminarJuego: function(){
       console.log("Recibiendo Resultado Partida");},2000);
 
 
-}
+},
+
+
+activeAnimation: function(){
+  if(Phaser.Math.isEven(modo)){
+    setTimeout(function(){
+
+        self.ListenerArquero(self);
+
+    },500);
+
+  }else{
+
+    self.ListenerPateador(self);
+
+  }
+},
+
+ProbandoServidor: function(){
+  self.establecerParametros(self);
+    Emit("enviarJugada"," ","activeAnimation",self);
+},
+
 
 
 
