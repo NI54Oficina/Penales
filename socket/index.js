@@ -13,6 +13,10 @@ var counterLocal=0;
 
 var counterVisitante=0;
 
+
+var golesLocal=0;
+var golesVisitante=0;
+
 mod=randomBetween(0,1);
 
 if(mod%2==0){
@@ -61,7 +65,7 @@ io.on('connection', function(socket){
 
 				console.log("The file was saved!");
 				SendStats();
-			}); 
+			});
 		}else{
 			SendStats();
 		}
@@ -110,24 +114,41 @@ io.on('connection', function(socket){
 		 if(mod%2 == 0){
 
 			ubicacion =  CalculateTiro(msg);
-			counterVisitante++;
+			counterLocal++;
+
 		 }else{
 
 			ubicacion = CalculateAtaje();
-			counterLocal++;
+			counterVisitante++;
 		 }
 		  mod++;
 
 		 io.emit('recibeJugada', ubicacion);
 
+
+		 console.log("Modo: "+mod);
+		 console.log("Goles Local: "+golesLocal);
+		 console.log("Goles Visitante: "+golesVisitante);
+		 console.log("Contador Local: " + counterLocal);
+		 console.log("Contador Visitante: " + counterVisitante);
+
 		 setTimeout(function(){
 
-			 if(counterVisitante >= 5 &&  counterLocal >= 5 ){
-				 GetResultado();
+			 if(counterVisitante >=5 &&  counterLocal >= 5 ){
+				 				if( golesLocal==golesVisitante ){
+									console.log("desempate");
+										io.emit('inicioTurno', "iniciar nuevo turno!!");
+								}else{
+										console.log("fin");
+									GetResultado();
+								}
+
 			 }else{
+				 	console.log("sigue jugando");
 				io.emit('inicioTurno', "iniciar nuevo turno!!");
 
 			 }
+
 		 },3000);
 	 },2000);
   });
@@ -152,7 +173,7 @@ function SendStats(){
 		stats=data;
 		console.log("The file was read!");
 		io.emit('statsRecived', data);
-	}); 
+	});
 }
 
 function GetResultado(){

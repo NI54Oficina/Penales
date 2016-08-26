@@ -75,13 +75,13 @@ var Splash = function () {};
     this.status.setText('Cargando');
     this.addGameStates();
     this.addGameMusic();
-	Emit("login"," ","logueado",this);
+	  Emit("login"," ","logueado",this);
   },
-  
+
   test:function(){
 	  console.log("test entra");
   },
-  
+
   logueado: function(msg){
 	  console.log("logueado");
 	  console.log(msg);
