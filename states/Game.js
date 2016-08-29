@@ -251,14 +251,20 @@ Game.prototype = {
           if(counter< 6){
             presicionText.visible=true;
 
+
           }else{
             presicionText.visible=false;
+
           };
 
           if (counter==-1) {
-            self.failScore(self);
+            //self.failScore(self);
+            game.time.events.pause();
             counter=0;
             presicionText.visible=false;
+              // Emit("enviarJugada"," ","failScore",self);
+              Emit("enviarJugada","","failScore",self);
+
 
           };
 
@@ -334,7 +340,7 @@ Game.prototype = {
     // transparentObject.events.onInputDown.addOnce(this.ListenerPateador,self);
 
     transparentObject.visible=true;
-    transparentObject.events.onInputDown.addOnce(this.ProbandoServidor,self);
+    transparentObject.events.onInputDown.addOnce(this.EnviarJugadaServer,self);
 
   //  self.activeAnimation(self);
   },
@@ -364,7 +370,7 @@ Game.prototype = {
     self.setArquero(self);
     buttons.visible=false;
 
-    self.ProbandoServidor(self);
+    self.EnviarJugadaServer(self);
 
 
 
@@ -404,6 +410,7 @@ Game.prototype = {
     console.log(self);
 
     counter=15;
+    game.time.events.resume();
     modo++;
 
     if(Phaser.Math.isEven(modo)){
@@ -522,9 +529,6 @@ Game.prototype = {
       desempateText= game.add.text(600, 10, 'Alargue. Desempate', { font: " 20px TheMinion", fill: "black", align: "right" });
       points.removeAll(true);
       setTimeout(function(){
-        //self.restart(self);
-
-    //  Emit("en"," ","restart",this);
 
       },200);
       triesA=0;
@@ -559,7 +563,6 @@ Game.prototype = {
 
         if(!enAlargue){
 
-              //  setTimeout(function(){self.restart(self);},200);
         }else{
 
 
@@ -576,7 +579,7 @@ Game.prototype = {
                 }
 
               }else{
-              //  setTimeout(function(){self.restart(self);},200);
+
 
               }
 
@@ -743,10 +746,13 @@ Game.prototype = {
 
               }
 
-                self.checkIntentos(self);
+
+
             });
 
       },500);
+
+      self.checkIntentos(self);
 
     },
 
@@ -1022,11 +1028,10 @@ ubicarArquero: function(efec, target){
 
 
   if(Phaser.Math.isEven(modo)){
-    while(generator==5){
+    do{
         generator = game.rnd.integerInRange(1,6);
 
-        break;
-    }
+    }while(generator==5);
   }else{
     generator = self.calculoChancesAtajar(efec,self);
 
@@ -1095,10 +1100,11 @@ activeAnimation: function(){
   }
 },
 
-ProbandoServidor: function(){
+EnviarJugadaServer: function(){
   self.establecerParametros(self);
-    Emit("enviarJugada"," ","activeAnimation",self);
+    Emit("enviarJugada","","activeAnimation",self);
 },
+
 
 
 Clicked: function(){

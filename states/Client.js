@@ -63,6 +63,9 @@ var currentCallback;
 var currentContext;
 
 function Emit(toEmit,params,callback,context){
+  if(toEmit=='enviarJugada'){
+    console.log("envia jugada al servidor");
+  }
 	currentCallback=callback;
 	currentContext=context;
 	socket.emit(toEmit, params);

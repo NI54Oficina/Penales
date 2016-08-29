@@ -97,6 +97,7 @@ io.on('connection', function(socket){
 
 			setTimeout(function(){
 			io.emit('inicioPartida', "inicio partidaaa!");
+			console.log("Iniciar Partida");
 
 			},2000);
 		},2000);
