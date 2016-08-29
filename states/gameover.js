@@ -71,7 +71,8 @@ GameOver.prototype = {
     text.anchor.set(0.5);
 
     this.addMenuOption('Play Again', function (e) {
-    self.ListenerLogin(self);
+      search.visible=true;
+      Emit("buscarPartida"," ","listenerSearch",self);
     });
 
     this.addMenuOption('Main Menu', function (e) {
@@ -150,6 +151,8 @@ GameOver.prototype = {
     game.add.text(10, 560, "Eficiencia como arquero en partida: "+ efiParArq +"%" , partidaStyle);
     game.add.text(10, 580, "Eficiencia como pateador en partida: "+ efiParPat +"%" , partidaStyle);
 
+    search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
+    search.visible=false;
 
 
 
@@ -159,14 +162,9 @@ GameOver.prototype = {
     return n === +n && n !== (n|0);
   },
 
-  ListenerLogin: function(){
-    search.visible=true;
-    console.log("Esperando oponente");
-    setTimeout(function(){
+  listenerSearch: function(){
+      search.visible=false;
         game.state.start("Game");
-        console.log("Oponente Encontrado");},2000);
-
-        return;
   },
 
 

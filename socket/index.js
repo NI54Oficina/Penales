@@ -105,7 +105,7 @@ io.on('connection', function(socket){
 	socket.on('enviarJugada', function(msg){
 		setTimeout(function(){
 			io.emit('recibirJugada', "resolver turnooo");
-			console.log("recibo Jugada");
+
 			if(mod%2 == 0){
 
 				ubicacion =  CalculateTiro(msg);
@@ -125,6 +125,7 @@ io.on('connection', function(socket){
 					GetResultado();
 				}else{
 					io.emit('inicioTurno', "iniciar nuevo turno!!");
+					console.log("Iniciar Turno");
 				}
 			},3000);
 		},2000);

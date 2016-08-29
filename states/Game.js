@@ -34,8 +34,10 @@ Game.prototype = {
 
   create: function () {
 
+    console.log("Entra create game");
+
     self = this;
-  //  self.ListenerComienzo(self);
+    Emit("GuardarContexto"," ","null",self);
 
 
      timer = game.time.events.loop(Phaser.Timer.SECOND, this.updateCounter, this);
@@ -62,7 +64,7 @@ Game.prototype = {
      buttons= game.add.group();
 
 
-     clicked =0;
+     clicked =1;
      game.add.sprite(0, 0, 'sky');
      tribunaAtras = game.add.sprite(0,0, 'tribunaAtras');
      tweenTribuna1= game.add.tween(tribunaAtras);
@@ -398,6 +400,8 @@ Game.prototype = {
 
 
   restart: function(self){
+    console.log("entra restart");
+    console.log(self);
 
     counter=15;
     modo++;
@@ -446,7 +450,7 @@ Game.prototype = {
 
     },1000);
 
-  self.ListenerGetJugada(self);
+  // self.ListenerGetJugada(self);
 
 
   },
@@ -517,7 +521,12 @@ Game.prototype = {
       enAlargue=true;
       desempateText= game.add.text(600, 10, 'Alargue. Desempate', { font: " 20px TheMinion", fill: "black", align: "right" });
       points.removeAll(true);
-      setTimeout(function(){self.restart(self);},200);
+      setTimeout(function(){
+        //self.restart(self);
+
+    //  Emit("en"," ","restart",this);
+
+      },200);
       triesA=0;
       triesP=0;
 
@@ -527,7 +536,7 @@ Game.prototype = {
       this.game.state.states["GameOver"].puntosUser = puntosUser;
       this.game.state.states["GameOver"].puntosComputer = puntosComputer;
 
-      self.ListenerTerminarJuego(self);
+      // self.ListenerTerminarJuego(self);
 
       this.game.state.start("GameOver")
     },
@@ -540,7 +549,7 @@ Game.prototype = {
           setTimeout(function(){self.desempatar(self);},200);
 
         }else{
-          self.ListenerGetJugada(self);
+          //self.ListenerGetJugada(self);
           setTimeout(function(){self.terminarJuego(self);},500);
 
         };
@@ -550,14 +559,14 @@ Game.prototype = {
 
         if(!enAlargue){
 
-                setTimeout(function(){self.restart(self);},200);
+              //  setTimeout(function(){self.restart(self);},200);
         }else{
 
 
               if(triesA >=1 && triesP>=1){
 
                 if(puntosUser!=puntosComputer){
-                  self.ListenerGetJugada(self);
+                //  self.ListenerGetJugada(self);
                   setTimeout(function(){self.terminarJuego(self);}
                     ,500);
 
@@ -567,7 +576,7 @@ Game.prototype = {
                 }
 
               }else{
-                setTimeout(function(){self.restart(self);},200);
+              //  setTimeout(function(){self.restart(self);},200);
 
               }
 
@@ -1092,7 +1101,9 @@ ProbandoServidor: function(){
 },
 
 
-
+Clicked: function(){
+clicked=0;
+},
 
 
 };

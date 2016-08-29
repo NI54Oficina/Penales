@@ -88,7 +88,7 @@ var Splash = function () {};
 	  console.log(msg);
 	  this.test();
 	  game.state.start("GameMenu");
-    
+
   },
 
 };
