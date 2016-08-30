@@ -94,13 +94,22 @@ GameMenu.prototype = {
 
       search.visible=false;
       this.test();
-      console.log(msg);
-      var auxArray=JSON.parse(msg);
-      console.log(auxArray);
+    //  console.log(msg);
+       auxArray=JSON.parse(msg);
+      console.log(auxArray.rol);
+      console.log(auxArray.oponente);
+      console.log(auxArray.tiempomaximo);
+
       console.log("Oponente Encontrado");
-      // game.state.states['Game'].modo = auxArray.;
+
+      this.game.state.states["Game"].array = auxArray;
+      
       // game.state.states['Game'].triesA = auxArray.;
       // game.state.states['Game'].triesP = auxArray.;
+      // this.game.state.states['Game'].perfil = auxArray.oponente;
+      // this.game.state.states['Game'].tiempoMaximo = auxArray.tiempomaximo;
+
+
       game.state.start("Game");
 
   },

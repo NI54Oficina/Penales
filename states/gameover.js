@@ -36,7 +36,6 @@ GameOver.prototype = {
 
   create: function () {
 
-
    //self.syncVariables();
    self = this;
    localStorage["PartidosGanados"];
@@ -53,9 +52,6 @@ GameOver.prototype = {
     empate="Empate";
     ganados=0;
     perdidos=0;
-
-
-
 
     game.add.sprite(0, 0, 'gameover-bg');
 

@@ -81,7 +81,7 @@ io.on('connection', function(socket){
 
 			jugada["oponente"]=oponente;
 
-			jugada["tiempomáximo"]= 3000;
+			jugada["tiempomaximo"]= 3000;
 
 			if(mod==1){
 				jugada["camiseta"]= "local";

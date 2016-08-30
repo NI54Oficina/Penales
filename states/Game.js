@@ -1,5 +1,6 @@
 var Game = function(game) {};
 
+
 Game.prototype = {
 
 
@@ -32,15 +33,24 @@ Game.prototype = {
 
 
 
-  create: function () {
+  create: function (game) {
+    // array;
+    // modo;
+    // perfil;
+    // tiempoMaximo;
 
     console.log("Entra create game");
+    console.log(array);
+
     self = this;
-    //var auxArray=JSON.parse(msg);
-  	//console.log(msg);
+    // array;
+    //  modo;
+    //  perfil;
+    //  tiempoMaximo;
 
 
-    Emit("GuardarContexto"," ","null",self);
+
+    Emit("GuardarContexto","","null",self);
 
 
      timer = game.time.events.loop(Phaser.Timer.SECOND, this.updateCounter, this);
@@ -51,11 +61,18 @@ Game.prototype = {
      presicionText=0;
      rangoDePresicion=40;
      counter=15;
-     array=[];
 
 
      //Modo aleatorio de settear quien comienza la partida, arquero o pateador
+     //  modo;
+     //  perfil;
+     //  tiempoMaximo;
+     //  console.log("MODO: "+ modo);
+     //  console.log("PERFIL: "+perfil);
+     //  console.log("TIEMPO MAXIMO: "+tiempoMaximo);
+
      modo=game.rnd.integerInRange(0,1);
+
      //Modo aleatorio de settear quien comienza la partida, arquero o pateador
 
      puntosComputer=0;
@@ -116,7 +133,7 @@ Game.prototype = {
       perfil1 = {
                 id:1,
                 efectividad:2,
-                tiros:[ [0,0,1,2,2,0],
+                tendencia:[ [0,0,1,2,2,0],
                         [0,2,1,1,2,0],
                         [0,2,1,1,2,0],
                         [0,2,1,1,2,0],
@@ -126,7 +143,7 @@ Game.prototype = {
     perfil2 = {
                 id:2,
                 efectividad:5,
-                tiros:[ [0,1,1,1,2,0],
+                tendencia:[ [0,1,1,1,2,0],
                         [0,1,1,1,2,0],
                         [2,1,1,1,2,0],
                         [0,0,1,1,2,0],
@@ -137,7 +154,7 @@ Game.prototype = {
   perfil3 = {
               id:3,
               efectividad:10,
-              tiros:[ [0,0,1,2,2,0],
+              tendencia:[ [0,0,1,2,2,0],
                       [0,2,1,1,2,0],
                       [0,0,1,1,2,0],
                       [0,2,1,1,2,0],
@@ -147,7 +164,7 @@ Game.prototype = {
   perfil4 = {
               id:4,
               efectividad:20,
-              tiros:[ [0,1,1,1,2,0],
+              tendencia:[ [0,1,1,1,2,0],
                       [0,1,1,1,2,0],
                       [0,1,1,1,2,0],
                       [0,0,1,1,2,0],
@@ -1058,7 +1075,7 @@ ubicarArquero: function(efec, target){
 setEnemy: function(){
   var id= game.rnd.integerInRange(1,4);
 
-  array= perfiles[id-1].tiros;
+  array= perfiles[id-1].tendencia;
 
   return perfiles[id-1];
 
