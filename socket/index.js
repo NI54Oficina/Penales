@@ -12,21 +12,7 @@ var counterLocal=0;
 
 var counterVisitante=0;
 
-var counterLocal;
-var counterVisitante;
 
-mod=randomBetween(0,1);
-
-if(mod%2==0){
-	var counterLocal=0;
-	var counterVisitante=1;
-
-}else{
-	var counterLocal=1;
-	var counterVisitante=0;
-}
-
-console.log(mod);
 
 app.get('/', function(req, res){
 
@@ -75,6 +61,17 @@ io.on('connection', function(socket){
 
 		setTimeout(function(){
 			//io.emit('partidaEncontrada', "oponente Encontrado!");
+			mod=randomBetween(0,1);
+
+			if(mod%2==0){
+				var counterLocal=0;
+				var counterVisitante=1;
+
+			}else{
+				var counterLocal=1;
+				var counterVisitante=0;
+			};
+
 
 			oponente["nombre"]="Pepita";
 

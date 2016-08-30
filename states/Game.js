@@ -70,7 +70,8 @@ Game.prototype = {
       console.log("PERFIL: "+this.perfil);
       console.log("TIEMPO MAXIMO: "+this.tiempoMaximo);
 
-     modo=game.rnd.integerInRange(0,1);
+     modo=this.modo;
+     //game.rnd.integerInRange(0,1);
 
      //Modo aleatorio de settear quien comienza la partida, arquero o pateador
 
@@ -567,6 +568,8 @@ Game.prototype = {
     },
 
     checkIntentos: function(){
+      console.log(triesA);
+      console.log(triesP);
 
       if( triesA  >= 5 &&  triesP  >= 5 ){
 
