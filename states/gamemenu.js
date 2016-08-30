@@ -95,7 +95,12 @@ GameMenu.prototype = {
       search.visible=false;
       this.test();
       console.log(msg);
+      var auxArray=JSON.parse(msg);
+      console.log(auxArray);
       console.log("Oponente Encontrado");
+      // game.state.states['Game'].modo = auxArray.;
+      // game.state.states['Game'].triesA = auxArray.;
+      // game.state.states['Game'].triesP = auxArray.;
       game.state.start("Game");
 
   },

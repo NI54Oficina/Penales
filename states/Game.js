@@ -35,8 +35,11 @@ Game.prototype = {
   create: function () {
 
     console.log("Entra create game");
-
     self = this;
+    //var auxArray=JSON.parse(msg);
+  	//console.log(msg);
+
+
     Emit("GuardarContexto"," ","null",self);
 
 
@@ -258,11 +261,12 @@ Game.prototype = {
           };
 
           if (counter==-1) {
-            //self.failScore(self);
+
             game.time.events.pause();
             counter=0;
             presicionText.visible=false;
-              // Emit("enviarJugada"," ","failScore",self);
+            buttons.visible=false;
+
               Emit("enviarJugada","","failScore",self);
 
 
@@ -675,7 +679,7 @@ Game.prototype = {
         return;
       }
 
-      buttons.visible=false;
+
       self.setArquero(self);
 
       clicked=1;

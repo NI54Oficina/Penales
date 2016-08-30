@@ -91,6 +91,8 @@ io.on('connection', function(socket){
 				jugada["rol-inicial"]= "Arquero";
 			}
 
+			jugada["rol"]=mod;
+
 			io.emit('partidaEncontrada', JSON.stringify(jugada));
 
 			console.log("Partida encontrada");
@@ -104,6 +106,7 @@ io.on('connection', function(socket){
 	});
 
 	socket.on('enviarJugada', function(msg){
+
 		setTimeout(function(){
 			io.emit('recibirJugada', "resolver turnooo");
 

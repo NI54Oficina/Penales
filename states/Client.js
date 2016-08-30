@@ -10,7 +10,7 @@ socket.on('loginConfirmed', function(msg){
 });
 socket.on('statsRecived', function(msg){
 	console.log(msg);
-	var auxArray=JSON.parse(msg);
+	auxArray=JSON.parse(msg);
 	console.log(auxArray);
 	$.each(auxArray, function( index, value ) {
 		localStorage[index]=value;
@@ -27,6 +27,7 @@ socket.on('buscandoPartida', function(msg){
 
 socket.on('partidaEncontrada', function(msg){
   console.log(msg);
+    console.log("PARADA 1");
     ResponseCallBack(msg);
 
 
@@ -43,6 +44,7 @@ socket.on('inicioPartida', function(msg){
 
 socket.on('recibeJugada', function(msg){
   console.log(msg);
+
   ResponseCallBack(msg);
 
 });
