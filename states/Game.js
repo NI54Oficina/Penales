@@ -63,7 +63,6 @@ Game.prototype = {
      rangoDePresicion=40;
      counter=15;
 
-
      //Modo aleatorio de settear quien comienza la partida, arquero o pateador
 
       console.log("MODO: "+ this.modo);
@@ -78,6 +77,8 @@ Game.prototype = {
      puntosComputer=0;
      puntosUser=0;
      enAlargue=false;
+
+     var idElegido;
 
 
 
@@ -284,8 +285,9 @@ Game.prototype = {
             counter=0;
             presicionText.visible=false;
             buttons.visible=false;
+            idElegido=0;
 
-              Emit("enviarJugada","","failScore",self);
+              Emit("enviarJugada",idElegido,"failScore",self);
 
 
           };
@@ -411,6 +413,8 @@ Game.prototype = {
 
     clicked=1;
     self.setResult(target);
+
+    idElegido=self.getResult(self).id;
 
     if(Phaser.Math.isEven(modo)){
 
@@ -692,7 +696,11 @@ Game.prototype = {
   },
 
 
-    failScore: function(){
+    failScore: function(msg){
+      console.log(msg);v
+
+      var datosServer=JSON.parse(msg);
+
       presicionText.destroy();
 
       if(clicked==1){
@@ -709,9 +717,12 @@ Game.prototype = {
       setTimeout(function(){
 
         self.stopPlayer(self);
+
         self.ubicarArquero(perfilElegido.efectividad,self);
 
         if(Phaser.Math.isEven(modo)){
+
+
           generatorFailTry= game.rnd.integerInRange(0,1);
 
           if(generatorFailTry==1){
@@ -722,6 +733,8 @@ Game.prototype = {
           };
 
         }else{
+
+
 
           self.seMueveArquero(self);
           posAux = game.rnd.integerInRange(-800,800);
@@ -1111,7 +1124,15 @@ ListenerTerminarJuego: function(){
 },
 
 
-activeAnimation: function(){
+activeAnimation: function(msg){
+
+  console.log(msg);
+
+
+
+
+
+
   if(Phaser.Math.isEven(modo)){
     setTimeout(function(){
 
@@ -1128,7 +1149,7 @@ activeAnimation: function(){
 
 EnviarJugadaServer: function(){
   self.establecerParametros(self);
-    Emit("enviarJugada","","activeAnimation",self);
+    Emit("enviarJugada",idElegido,"activeAnimation",self);
 },
 
 

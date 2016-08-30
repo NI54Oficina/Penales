@@ -27,7 +27,7 @@ socket.on('buscandoPartida', function(msg){
 
 socket.on('partidaEncontrada', function(msg){
   console.log(msg);
-  
+
     ResponseCallBack(msg);
 
 

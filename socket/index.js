@@ -6,6 +6,8 @@ var oponente={};
 
 var jugada={};
 
+var jugadaActual={};
+
 var counterPartida=0;
 
 var counterLocal=0;
@@ -123,18 +125,25 @@ io.on('connection', function(socket){
 				ubicacion = CalculateAtaje();
 				counterLocal++;
 			}
+
+			jugadaActual["user"]=msg;
+			jugadaActual["computer"]=ubicacion;
 			mod++;
 
-			io.emit('recibeJugada', ubicacion);
+			io.emit('recibeJugada', JSON.stringify(jugadaActual));
 
 			setTimeout(function(){
 
 				if(counterVisitante >= 5 &&  counterLocal >= 5 ){
+
 					GetResultado();
+
 				}else{
+
 					io.emit('inicioTurno', "iniciar nuevo turno!!");
 					console.log("Iniciar Turno");
 				}
+
 			},3000);
 		},2000);
 	});

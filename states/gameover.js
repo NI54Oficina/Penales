@@ -158,8 +158,20 @@ GameOver.prototype = {
     return n === +n && n !== (n|0);
   },
 
-  listenerSearch: function(){
+  listenerSearch: function(msg){
       search.visible=false;
+      auxArray=JSON.parse(msg);
+
+     console.log("Oponente Encontrado");
+
+
+     this.game.state.states["Game"].partida=auxArray;
+     this.game.state.states['Game'].perfil = auxArray.oponente;
+     this.game.state.states['Game'].tiempoMaximo = auxArray.tiempomaximo;
+     this.game.state.states['Game'].triesA= auxArray.IntentosOponente;
+     this.game.state.states['Game'].triesP= auxArray.Intentoslocal;
+     this.game.state.states['Game'].modo=auxArray.rol;
+
         game.state.start("Game");
   },
 
