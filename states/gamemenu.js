@@ -96,19 +96,16 @@ GameMenu.prototype = {
       this.test();
     //  console.log(msg);
        auxArray=JSON.parse(msg);
-      console.log(auxArray.rol);
-      console.log(auxArray.oponente);
-      console.log(auxArray.tiempomaximo);
 
       console.log("Oponente Encontrado");
 
-      this.game.state.states["Game"].array = auxArray;
-      
-      // game.state.states['Game'].triesA = auxArray.;
-      // game.state.states['Game'].triesP = auxArray.;
-      // this.game.state.states['Game'].perfil = auxArray.oponente;
-      // this.game.state.states['Game'].tiempoMaximo = auxArray.tiempomaximo;
 
+      this.game.state.states["Game"].partida=auxArray;
+      this.game.state.states['Game'].perfil = auxArray.oponente;
+      this.game.state.states['Game'].tiempoMaximo = auxArray.tiempomaximo;
+      this.game.state.states['Game'].triesA= auxArray.IntentosOponente;
+      this.game.state.states['Game'].triesP= auxArray.Intentoslocal;
+      this.game.state.states['Game'].modo=auxArray.rol;
 
       game.state.start("Game");
 

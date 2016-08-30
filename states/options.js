@@ -12,13 +12,15 @@ Options.prototype = {
   init: function () {
     this.titleText = game.make.text(game.world.centerX, 100, "Penales !", {
       font: 'bold 60pt TheMinion',
-      fill: '#FDFFB5',
+      fill: 'white',
       align: 'center'
     });
-    this.titleText.setShadow(3, 3, 'rgba(0,0,0,0.5)', 5);
+
+    this.titleText.setShadow(3, 3, 'white', 5);
     this.titleText.anchor.set(0.5);
     this.optionCount = 1;
   },
+
   create: function () {
     var playSound = gameOptions.playSound,
         playMusic = gameOptions.playMusic;
@@ -27,7 +29,7 @@ Options.prototype = {
     game.add.existing(this.titleText);
 
 
-    var text = game.add.text(game.world.centerX-100, game.world.centerY+50, "Play Music", { font: 'bold 30pt TheMinion', fill: "black", align: "center" });
+    var text = game.add.text(game.world.centerX-100, game.world.centerY+50, "Play Music", { font: 'bold 30pt TheMinion', fill: "white", align: "center" });
 
 
 
@@ -60,13 +62,13 @@ Options.prototype = {
       },
 
     over: function(target){
-      target.fill = "#FEFFD5";
+      target.fill = "black";
       target.stroke = "rgba(200,200,200,0.5)";
       target.useHandCursor = true;
     } ,
 
     out: function(target){
-      target.fill = "black";
+      target.fill = "white";
       target.stroke = "rgba(0,0,0,0)";
       target.useHandCursor = false;
     },

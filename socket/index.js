@@ -12,6 +12,9 @@ var counterLocal=0;
 
 var counterVisitante=0;
 
+var counterLocal;
+var counterVisitante;
+
 mod=randomBetween(0,1);
 
 if(mod%2==0){
@@ -86,12 +89,16 @@ io.on('connection', function(socket){
 			if(mod==1){
 				jugada["camiseta"]= "local";
 				jugada["rol-inicial"]= "Pateador";
+
 			}else{
 				jugada["camiseta"]= "Visitante";
 				jugada["rol-inicial"]= "Arquero";
 			}
 
 			jugada["rol"]=mod;
+			jugada["IntentosOponente"]=counterVisitante;
+			jugada["Intentoslocal"]=counterLocal;
+
 
 			io.emit('partidaEncontrada', JSON.stringify(jugada));
 

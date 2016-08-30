@@ -27,7 +27,7 @@ socket.on('buscandoPartida', function(msg){
 
 socket.on('partidaEncontrada', function(msg){
   console.log(msg);
-    console.log("PARADA 1");
+  
     ResponseCallBack(msg);
 
 
@@ -35,7 +35,7 @@ socket.on('partidaEncontrada', function(msg){
 
 socket.on('inicioPartida', function(msg){
 	console.log(msg);
-  console.log(currentContext);
+//  console.log(currentContext);
   currentContext["Clicked"](currentContext);
   //Clicked();
 

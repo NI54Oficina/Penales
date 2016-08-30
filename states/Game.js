@@ -33,25 +33,26 @@ Game.prototype = {
 
 
 
-  create: function (game) {
-    // array;
-    // modo;
-    // perfil;
-    // tiempoMaximo;
+  create: function () {
+
 
     console.log("Entra create game");
-    console.log(array);
 
     self = this;
-    // array;
-    //  modo;
-    //  perfil;
-    //  tiempoMaximo;
+    this.datos;
+    this.triesA;
+    triesA=this.triesA;
+
+    this.triesP;
+    triesP=this.triesP;
+    this.perfil;
+    this.tiempoMaximo;
+    this.partida;
+    this.modo;
 
 
 
-    Emit("GuardarContexto","","null",self);
-
+   Emit("GuardarContexto","","null",self);
 
      timer = game.time.events.loop(Phaser.Timer.SECOND, this.updateCounter, this);
 
@@ -64,12 +65,10 @@ Game.prototype = {
 
 
      //Modo aleatorio de settear quien comienza la partida, arquero o pateador
-     //  modo;
-     //  perfil;
-     //  tiempoMaximo;
-     //  console.log("MODO: "+ modo);
-     //  console.log("PERFIL: "+perfil);
-     //  console.log("TIEMPO MAXIMO: "+tiempoMaximo);
+
+      console.log("MODO: "+ this.modo);
+      console.log("PERFIL: "+this.perfil);
+      console.log("TIEMPO MAXIMO: "+this.tiempoMaximo);
 
      modo=game.rnd.integerInRange(0,1);
 
@@ -78,6 +77,7 @@ Game.prototype = {
      puntosComputer=0;
      puntosUser=0;
      enAlargue=false;
+
 
 
 
@@ -241,7 +241,7 @@ Game.prototype = {
         winner = game.add.text(350, 350, display2, {  font: 'bold 60pt TheMinion',fill: 'red' });
         winner.visible=false;
         points= game.add.group();
-        perfilElegido= self.setEnemy(self);
+        perfilElegido= this.perfil;
 
         if(Phaser.Math.isEven(modo)){
         triesA=1;
@@ -965,9 +965,9 @@ esEmpate: function(){
 
 getMaso: function(){
   if(Phaser.Math.isEven(modo)){
-    return array[triesA-1];
+    return this.perfil.tendencia[triesA-1];
   }else{
-      return array[triesP-1];
+      return this.perfil.tendencia[triesP-1];
   }
 
 },
@@ -1071,7 +1071,7 @@ ubicarArquero: function(efec, target){
   posArquero=buttons.children[i].position;
 },
 
-
+//Funcion que quizas no se use
 setEnemy: function(){
   var id= game.rnd.integerInRange(1,4);
 
@@ -1080,6 +1080,8 @@ setEnemy: function(){
   return perfiles[id-1];
 
 },
+
+//Funcion que quizas no se utiliza
 
 ListenerComienzo: function(){
   setTimeout(function(){
