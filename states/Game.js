@@ -55,6 +55,7 @@ Game.prototype = {
    Emit("GuardarContexto","","null",self);
 
      timer = game.time.events.loop(Phaser.Timer.SECOND, this.updateCounter, this);
+       game.time.events.resume();
 
      var display1="Fallaste!";
      var display2="Ganaste!";
@@ -431,7 +432,7 @@ Game.prototype = {
 
   restart: function(self){
     console.log("entra restart");
-    console.log(self);
+
 
     counter=15;
     game.time.events.resume();
@@ -483,7 +484,7 @@ Game.prototype = {
 
   // self.ListenerGetJugada(self);
 
-
+ console.log(modo);
   },
 
   patear: function(){
@@ -518,7 +519,7 @@ Game.prototype = {
       tweenArquero = game.add.tween(arquero);
       tweenArquero.to(posArquero, 300, 'Linear', true, 0);
 
-        switch(posArqueroI){
+        switch(posArquero){
 
           case 1:
           arquero.animations.play('up-left');
@@ -697,6 +698,7 @@ Game.prototype = {
     failScore: function(msg){
       console.log(msg);
 
+
       var datosServer=JSON.parse(msg);
 
       presicionText.destroy();
@@ -716,19 +718,21 @@ Game.prototype = {
 
         self.stopPlayer(self);
 
-        self.ubicarArquero2(this.datosServer,self);
+
+
+        self.ubicarArquero2(datosServer,self);
 
         if(Phaser.Math.isEven(modo)){
 
 
           //generatorFailTry= game.rnd.integerInRange(0,1);
 
-          if(this.datosServer.computer==0){
+          if(datosServer.computer==0){
             posAux = game.rnd.integerInRange(-800,800);
             var movimientoPelota= self.moverPelota({x:posAux, y:-500});
           }else{
 
-            self.ubicarArquero2(this.datosServer,self);
+            self.ubicarArquero2(datosServer,self);
             var movimientoPelota= self.moverPelota(posArquero);
           };
 
@@ -737,7 +741,7 @@ Game.prototype = {
         }else{
 
 
-          if(this.datosServer.user==0){
+          if(datosServer.user==0){
             posAux = game.rnd.integerInRange(600,800);
             var movimientoPelota= self.moverPelota({x:posAux, y:-500});
           }else{
@@ -751,12 +755,15 @@ Game.prototype = {
           // var movimientoPelota= self.moverPelota({x:posAux, y:-500});
         }
 
+        console.log(modo);
 
          movimientoPelota.onComplete.addOnce(function(){
 
               if(Phaser.Math.isEven(modo)){
 
-                if(generatorFailTry==0){
+                console.log("Entra en modo Arquero");
+
+                if(datosServer.computer < 0){
 
                   self.NoAssertPoint(300,triesA);
                   self.Win(self);
@@ -780,6 +787,9 @@ Game.prototype = {
 
 
               }else{
+
+                console.log("Entra en modo Pateador");
+
                 self.NoAssertPoint(200,triesP);
                 self.Looser(self);
                 localStorage["TotalErrados"] = (parseInt(localStorage["TotalErrados"]) || 0) + 1;
@@ -1100,24 +1110,29 @@ ubicarArquero: function(efec, target){
 ubicarArquero2: function(resultadoServer, target){
 
 
-  if(Phaser.Math.isEven(modo)){
+  // if(Phaser.Math.isEven(this.modo)){
+  //
+  //       generator = resultadoServer.user;
+  //
+  // }else{
+  //       generator = resultadoServer.computer;
+  //
+  //   }
 
-        generator = resultadoServer.user;
-  }else{
-        generator = resultadoServer.computer;
+    generator = resultadoServer.computer;
 
-    }
+    console.log(generator);
 
-  for(var i=0; i<6 ; i++ ){
+  // for(var i=0; i<6 ; i++ ){
+  //
+  //    if(buttons.children[i].id == generator){
+  //    posArqueroI= buttons.children[i].id;
+  //    break;
+  //     }
+  //
+  // };
 
-     if(buttons.children[i].id == generator){
-     posArqueroI= buttons.children[i].id;
-     break;
-      }
-
-  };
-
-  posArquero=buttons.children[i].position;
+  posArquero=buttons.children[generator-1].position;
 },
 
 // VERSION SERVIDOR DE MISMA FUNCION

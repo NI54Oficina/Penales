@@ -74,6 +74,7 @@ io.on('connection', function(socket){
 				var counterVisitante=0;
 			};
 
+			
 
 			oponente["nombre"]="Pepita";
 
