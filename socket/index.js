@@ -178,14 +178,21 @@ function GetResultado(){
 }
 
 function CalculateTiro(msg){
+
 	if(mod%2 ==0){
-		do {
-			generator = randomBetween(1,6);
-		}while (generator==5);
+
+			do {
+				generator = randomBetween(1,6);
+			}while (generator==5);
+
 	}else{
-		generator = calculoChancesAtajar(msg);
+
+			generator = calculoChancesAtajar(msg);
+
 	}
+
 	return generator;
+
 }
 
 function calculoChancesAtajar(msg){
@@ -240,6 +247,13 @@ function generarRiesgo(arrai){
 
 function randomBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+function tiroUserElegido(id){
+		 if(id){
+
+		 }
 }
 
 http.listen(3000, function(){

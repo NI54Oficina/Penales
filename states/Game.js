@@ -697,7 +697,7 @@ Game.prototype = {
 
 
     failScore: function(msg){
-      console.log(msg);v
+      console.log(msg);
 
       var datosServer=JSON.parse(msg);
 
@@ -718,28 +718,39 @@ Game.prototype = {
 
         self.stopPlayer(self);
 
-        self.ubicarArquero(perfilElegido.efectividad,self);
+        self.ubicarArquero2(this.datosServer,self);
 
         if(Phaser.Math.isEven(modo)){
 
 
-          generatorFailTry= game.rnd.integerInRange(0,1);
+          //generatorFailTry= game.rnd.integerInRange(0,1);
 
-          if(generatorFailTry==1){
-            var movimientoPelota= self.moverPelota(posArquero);
-          }else{
+          if(this.datosServer.computer==0){
             posAux = game.rnd.integerInRange(-800,800);
             var movimientoPelota= self.moverPelota({x:posAux, y:-500});
+          }else{
+
+            self.ubicarArquero2(this.datosServer,self);
+            var movimientoPelota= self.moverPelota(posArquero);
           };
+
+
 
         }else{
 
 
+          if(this.datosServer.user==0){
+            posAux = game.rnd.integerInRange(600,800);
+            var movimientoPelota= self.moverPelota({x:posAux, y:-500});
+          }else{
+
+            posAux = game.rnd.integerInRange(-800,600);
+            var movimientoPelota= self.moverPelota({x:posAux, y:-500});
+
+          };
 
           self.seMueveArquero(self);
-          posAux = game.rnd.integerInRange(-800,800);
-
-          var movimientoPelota= self.moverPelota({x:posAux, y:-500});
+          // var movimientoPelota= self.moverPelota({x:posAux, y:-500});
         }
 
 
@@ -1087,6 +1098,33 @@ ubicarArquero: function(efec, target){
   posArquero=buttons.children[i].position;
 },
 
+// VERSION SERVIDOR DE MISMA FUNCION
+ubicarArquero2: function(resultadoServer, target){
+
+
+  if(Phaser.Math.isEven(modo)){
+
+        generator = resultadoServer.user;
+  }else{
+        generator = resultadoServer.computer;
+
+    }
+
+  for(var i=0; i<6 ; i++ ){
+
+     if(buttons.children[i].id == generator){
+     posArqueroI= buttons.children[i].id;
+     break;
+      }
+
+  };
+
+  posArquero=buttons.children[i].position;
+},
+
+// VERSION SERVIDOR DE MISMA FUNCION
+
+
 //Funcion que quizas no se use
 setEnemy: function(){
   var id= game.rnd.integerInRange(1,4);
@@ -1127,11 +1165,6 @@ ListenerTerminarJuego: function(){
 activeAnimation: function(msg){
 
   console.log(msg);
-
-
-
-
-
 
   if(Phaser.Math.isEven(modo)){
     setTimeout(function(){

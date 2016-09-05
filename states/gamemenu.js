@@ -94,7 +94,7 @@ GameMenu.prototype = {
 
       search.visible=false;
       this.test();
-    //  console.log(msg);
+    console.log(msg);
        auxArray=JSON.parse(msg);
 
       console.log("Oponente Encontrado");
