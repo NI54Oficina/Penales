@@ -14,6 +14,10 @@ var counterLocal=0;
 
 var counterVisitante=0;
 
+var golesUser;
+
+var golesComputer;
+
 
 
 app.get('/', function(req, res){
@@ -64,6 +68,8 @@ io.on('connection', function(socket){
 		setTimeout(function(){
 			//io.emit('partidaEncontrada', "oponente Encontrado!");
 			mod=randomBetween(0,1);
+			golesUser=0;
+			golesComputer=0;
 
 			if(mod%2==0){
 				var counterLocal=0;
@@ -74,7 +80,7 @@ io.on('connection', function(socket){
 				var counterVisitante=0;
 			};
 
-			
+
 
 			oponente["nombre"]="Pepita";
 
@@ -120,10 +126,12 @@ io.on('connection', function(socket){
 			if(mod%2 == 0){
 
 				ubicacion =  CalculateTiro(msg);
+				calculatePuntaje(msg, ubicacion);
 				counterVisitante++;
 			}else{
 
 				ubicacion = CalculateAtaje();
+				calculatePuntaje(msg, ubicacion);
 				counterLocal++;
 			}
 
@@ -137,12 +145,18 @@ io.on('connection', function(socket){
 
 				if(counterVisitante >= 5 &&  counterLocal >= 5 ){
 
-					GetResultado();
-
+										if(golesUser == golesComputer){
+											io.emit('inicioTurno', "iniciar nuevo turno!!, en desempate");
+											console.log("Iniciar Turno");
+										}else{
+											GetResultado();
+										}
 				}else{
 
-					io.emit('inicioTurno', "iniciar nuevo turno!!");
-					console.log("Iniciar Turno");
+
+
+						io.emit('inicioTurno', "iniciar nuevo turno!!");
+						console.log("Iniciar Turno");
 				}
 
 			},3000);
@@ -247,14 +261,34 @@ function generarRiesgo(arrai){
 }
 
 function randomBetween(min, max) {
+
     return Math.floor(Math.random() * (max - min + 1)) + min;
+
 }
 
 
 function tiroUserElegido(id){
+
 		 if(id){
 
 		 }
+
+}
+
+function calculatePuntaje(msg, generator){
+
+	if(generator!=0 && msg!=generator){
+
+			if(mod%2 == 0){
+				golesComputer++;
+			}else{
+				golesUser++;
+			};
+
+	};
+
+	return;
+
 }
 
 http.listen(3000, function(){
