@@ -431,7 +431,7 @@ Game.prototype = {
 
 
   restart: function(self){
-    console.log("entra restart");
+
 
 
     counter=15;
@@ -484,7 +484,7 @@ Game.prototype = {
 
   // self.ListenerGetJugada(self);
 
- console.log(modo);
+ console.log("MODO: " + modo);
   },
 
   patear: function(){
@@ -571,8 +571,8 @@ Game.prototype = {
     },
 
     checkIntentos: function(){
-      console.log(triesA);
-      console.log(triesP);
+      console.log("INTENTOS ARQUERO: "+triesA);
+      console.log("INTENTOS PATEADOR" +triesP);
 
       if( triesA  >= 5 &&  triesP  >= 5 ){
 
@@ -620,7 +620,13 @@ Game.prototype = {
 
 
 
-  ListenerPateador: function(target){
+  ListenerPateador: function(target, msg){
+
+    console.log("DATOS SERVER: "+ msg);
+
+
+    var datosServer=JSON.parse(msg);
+
     self.patear(self);
 
 
@@ -630,7 +636,7 @@ Game.prototype = {
 
 
 
-        self.ubicarArquero(perfilElegido.efectividad, self);
+        self.ubicarArquero2(datosServer, self);
 
         win=false;
 
@@ -653,8 +659,12 @@ Game.prototype = {
   },
 
 
-  ListenerArquero: function(target){
+  ListenerArquero: function(target, msg){
 
+    console.log("DATOS SERVER: "+msg);
+
+
+    var datosServer=JSON.parse(msg);
 
     self.patear(self);
 
@@ -663,12 +673,12 @@ Game.prototype = {
       self.stopPlayer(self);
 
       posArqueroI=self.getResult().id;
-
+      //
       posArquero= self.getResult().position;
-
-      arrayMaso= self.getMaso(self);
-
-      generator = self.generarRiesgo(arrayMaso,self);
+      //
+      // arrayMaso= self.getMaso(self);
+      //
+      generator = datosServer.computer;
 
 
       win=false;
@@ -677,9 +687,9 @@ Game.prototype = {
          win=true;
       };
 
-      generatorFailTry= game.rnd.integerInRange(0,1);
+      //generatorFailTry= game.rnd.integerInRange(0,1);
 
-      if( generatorFailTry==1){
+      if( posArqueroI == generator){
 
           self.atajar(self);
 
@@ -696,7 +706,7 @@ Game.prototype = {
 
 
     failScore: function(msg){
-      console.log(msg);
+      console.log("DATOS SERVER: "+msg);
 
 
       var datosServer=JSON.parse(msg);
@@ -755,13 +765,13 @@ Game.prototype = {
           // var movimientoPelota= self.moverPelota({x:posAux, y:-500});
         }
 
-        console.log(modo);
+
 
          movimientoPelota.onComplete.addOnce(function(){
 
               if(Phaser.Math.isEven(modo)){
 
-                console.log("Entra en modo Arquero");
+
 
                 if(datosServer.computer < 0){
 
@@ -788,7 +798,7 @@ Game.prototype = {
 
               }else{
 
-                console.log("Entra en modo Pateador");
+
 
                 self.NoAssertPoint(200,triesP);
                 self.Looser(self);
@@ -1121,7 +1131,7 @@ ubicarArquero2: function(resultadoServer, target){
 
     generator = resultadoServer.computer;
 
-    console.log(generator);
+    console.log("COMPUTER ID: " +generator);
 
   // for(var i=0; i<6 ; i++ ){
   //
@@ -1182,13 +1192,13 @@ activeAnimation: function(msg){
   if(Phaser.Math.isEven(modo)){
     setTimeout(function(){
 
-        self.ListenerArquero(self);
+        self.ListenerArquero(self, msg);
 
     },500);
 
   }else{
 
-    self.ListenerPateador(self);
+    self.ListenerPateador(self, msg);
 
   }
 },

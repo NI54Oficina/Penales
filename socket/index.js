@@ -109,6 +109,8 @@ io.on('connection', function(socket){
 			io.emit('partidaEncontrada', JSON.stringify(jugada));
 
 			console.log("Partida encontrada");
+			console.log(golesUser);
+			console.log(golesComputer);
 
 			setTimeout(function(){
 			io.emit('inicioPartida', "inicio partidaaa!");
@@ -126,18 +128,22 @@ io.on('connection', function(socket){
 			if(mod%2 == 0){
 
 				ubicacion =  CalculateTiro(msg);
-				calculatePuntaje(msg, ubicacion);
+
 				counterVisitante++;
 			}else{
 
 				ubicacion = CalculateAtaje();
-				calculatePuntaje(msg, ubicacion);
+
 				counterLocal++;
 			}
 
+			calculatePuntaje(msg, ubicacion);
 			jugadaActual["user"]=msg;
 			jugadaActual["computer"]=ubicacion;
 			mod++;
+			console.log("PUNTOS USER: "+ golesUser);
+			console.log("PUNTOS COMPUTER: "+ golesComputer);
+
 
 			io.emit('recibeJugada', JSON.stringify(jugadaActual));
 
@@ -146,14 +152,18 @@ io.on('connection', function(socket){
 				if(counterVisitante >= 5 &&  counterLocal >= 5 ){
 
 										if(golesUser == golesComputer){
+
+											console.log("ES EMPATE");
 											io.emit('inicioTurno', "iniciar nuevo turno!!, en desempate");
 											console.log("Iniciar Turno");
+
 										}else{
+											console.log("TERMINA JUEGO")
 											GetResultado();
 										}
 				}else{
 
-
+						console.log("SIGUE JUGANDO");
 
 						io.emit('inicioTurno', "iniciar nuevo turno!!");
 						console.log("Iniciar Turno");
