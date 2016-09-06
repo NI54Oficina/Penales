@@ -1006,6 +1006,8 @@ establecerParametros: function(){
    };
 
 
+ }else{
+   idElegido=self.getResult(self).id;
  };
 
   looser.visible=false;
@@ -1153,7 +1155,13 @@ ubicarArquero2: function(resultadoServer, target){
   //
   // };
 
-  posArquero=buttons.children[generator-1].position;
+  if(generator==0){
+    posArquero=game.rnd.integerInRange(0,5);
+  }else{
+    posArquero=buttons.children[generator-1].position;
+  }
+
+
 },
 
 // VERSION SERVIDOR DE MISMA FUNCION

@@ -300,7 +300,8 @@ function calculatePuntaje(msg, generator){
 			if(mod%2 == 0){
 				golesComputer++;
 			}else{
-				golesUser++;
+
+				if(msg!=0)golesUser++;
 			};
 
 	};
