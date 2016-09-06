@@ -413,7 +413,6 @@ Game.prototype = {
     clicked=1;
     self.setResult(target);
 
-    idElegido=self.getResult(self).id;
 
     if(Phaser.Math.isEven(modo)){
 
@@ -689,7 +688,7 @@ Game.prototype = {
 
       //generatorFailTry= game.rnd.integerInRange(0,1);
 
-      if( posArqueroI == generator){
+      if( generator!=0){
 
           self.atajar(self);
 
@@ -996,6 +995,18 @@ establecerParametros: function(){
 
 
   presicion =  centerBarra - focus.position.x ;
+ if(!Phaser.Math.isEven(modo)){
+  if( rangoDePresicion > presicion && presicion > -rangoDePresicion){
+
+      idElegido=self.getResult(self).id;
+     }else{
+
+      idElegido=0;
+
+   };
+
+
+ };
 
   looser.visible=false;
 

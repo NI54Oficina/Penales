@@ -216,7 +216,12 @@ function CalculateTiro(msg){
 
 	}
 
-	return generator;
+	randomChance=randomBetween(0,1);
+	if(randomChance==0){
+		return generator;
+	}else{
+		return 0;
+	};
 
 }
 
@@ -234,7 +239,10 @@ function calculoChancesAtajar(msg){
 function CalculateAtaje(){
 	var a = getMaso();
 	var b= generarRiesgo(a);
-	return b;
+
+		return b;
+
+
 }
 
 function getMaso(){
