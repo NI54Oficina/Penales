@@ -636,7 +636,7 @@ Game.prototype = {
 
 
 
-        self.ubicarArquero2(datosServer, self);
+        self.ubicarArquero(datosServer, self);
         posArqueroI= generator;
 
         win=false;
@@ -731,7 +731,7 @@ Game.prototype = {
 
 
 
-        self.ubicarArquero2(datosServer,self);
+        self.ubicarArquero(datosServer,self);
 
         if(Phaser.Math.isEven(modo)){
 
@@ -743,7 +743,7 @@ Game.prototype = {
             var movimientoPelota= self.moverPelota({x:posAux, y:-500});
           }else{
 
-            self.ubicarArquero2(datosServer,self);
+            self.ubicarArquero(datosServer,self);
             var movimientoPelota= self.moverPelota(posArquero);
           };
 
@@ -1109,34 +1109,34 @@ calculoChancesAtajar: function(efec, target){
 },
 
 
-ubicarArquero: function(efec, target){
-
-
-  if(Phaser.Math.isEven(modo)){
-    do{
-        generator = game.rnd.integerInRange(1,6);
-
-    }while(generator==5);
-  }else{
-    generator = self.calculoChancesAtajar(efec,self);
-
-    }
-
-
-  for(var i=0; i<6 ; i++ ){
-
-     if(buttons.children[i].id == generator){
-     posArqueroI= buttons.children[i].id;
-     break;
-      }
-
-  };
-
-  posArquero=buttons.children[i].position;
-},
+// ubicarArquero2: function(efec, target){
+// 
+//
+//   if(Phaser.Math.isEven(modo)){
+//     do{
+//         generator = game.rnd.integerInRange(1,6);
+//
+//     }while(generator==5);
+//   }else{
+//     generator = self.calculoChancesAtajar(efec,self);
+//
+//     }
+//
+//
+//   for(var i=0; i<6 ; i++ ){
+//
+//      if(buttons.children[i].id == generator){
+//      posArqueroI= buttons.children[i].id;
+//      break;
+//       }
+//
+//   };
+//
+//   posArquero=buttons.children[i].position;
+// },
 
 // VERSION SERVIDOR DE MISMA FUNCION
-ubicarArquero2: function(resultadoServer, target){
+ubicarArquero: function(resultadoServer, target){
 
 
   // if(Phaser.Math.isEven(this.modo)){
@@ -1163,7 +1163,7 @@ ubicarArquero2: function(resultadoServer, target){
 
   if(generator==0){
     posArqueroI =game.rnd.integerInRange(0,5);
-    posArquero= buttons.children[posArqueroI-1].position;
+    posArquero= buttons.children[posArqueroI].position;
 
   }else{
     posArquero=buttons.children[generator-1].position;

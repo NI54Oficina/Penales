@@ -18,6 +18,10 @@ var golesUser;
 
 var golesComputer;
 
+var auxCont=0;
+
+var enAlargue=false;
+
 
 
 app.get('/', function(req, res){
@@ -153,12 +157,27 @@ io.on('connection', function(socket){
 
 				if(counterVisitante >= 5 &&  counterLocal >= 5 ){
 
-										if(golesUser == golesComputer){
-
-											console.log("ES EMPATE");
+										if(golesUser == golesComputer && !enAlargue){
+											enAlargue=true;
+											auxCont++;
+											console.log("ES EMPATE 1 ");
 											io.emit('inicioTurno', "iniciar nuevo turno!!, en desempate");
 											console.log("Iniciar Turno");
 
+										}else if(enAlargue){
+															if(auxCont!=2){
+																auxCont++;
+																console.log("ES EMPATE 2");
+																io.emit('inicioTurno', "iniciar nuevo turno!!, en desempate");
+																console.log("Iniciar Turno");
+															}else{
+																 if(golesUser == golesComputer){
+																	 auxCont=0;
+																	 console.log("ES EMPATE 3");
+	 																io.emit('inicioTurno', "iniciar nuevo turno!!, en desempate");
+	 																console.log("Iniciar Turno");
+																 }
+															};
 										}else{
 											console.log("TERMINA JUEGO")
 											GetResultado();
@@ -314,6 +333,26 @@ function calculatePuntaje(msg, generator){
 	return;
 
 }
+
+// if(auxCont!=2){
+// 	if(golesUser == golesComputer ){
+// 		console.log("ES EMPATE");
+// 		auxCont++;
+// 		console.log("TIIROS DE EMPATE: "+ auxCont);
+//
+// 		io.emit('inicioTurno', "iniciar nuevo turno!!, en desempate");
+// 		console.log("Iniciar Turno");
+//
+// }else{
+// 	console.log("TERMINA DESEMPATE")
+// 	GetResultado();
+// };
+//
+//
+// 					}else{
+// 						console.log("TERMINA JUEGO")
+// 						GetResultado();
+// 					};
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
