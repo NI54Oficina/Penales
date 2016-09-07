@@ -158,8 +158,8 @@ io.on('connection', function(socket){
 				if(counterVisitante >= 5 &&  counterLocal >= 5 ){
 
 										if(golesUser == golesComputer && !enAlargue){
-											enAlargue=true;
 											auxCont++;
+											enAlargue=true;
 											console.log("ES EMPATE 1 ");
 											io.emit('inicioTurno', "iniciar nuevo turno!!, en desempate");
 											console.log("Iniciar Turno");
@@ -176,10 +176,10 @@ io.on('connection', function(socket){
 																	 console.log("ES EMPATE 3");
 	 																io.emit('inicioTurno', "iniciar nuevo turno!!, en desempate");
 	 																console.log("Iniciar Turno");
-																 }
+																}else{console.log("TERMINA JUEGO EN EMPATE"); GetResultado();}
 															};
 										}else{
-											console.log("TERMINA JUEGO")
+											console.log("TERMINA JUEGO");
 											GetResultado();
 										}
 				}else{
