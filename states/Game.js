@@ -517,8 +517,9 @@ Game.prototype = {
 
       tweenArquero = game.add.tween(arquero);
       tweenArquero.to(posArquero, 300, 'Linear', true, 0);
+      console.log("entra animacion arquero y posArquero: "+ posArqueroI);
 
-        switch(posArquero){
+        switch(posArqueroI){
 
           case 1:
           arquero.animations.play('up-left');
@@ -636,10 +637,11 @@ Game.prototype = {
 
 
         self.ubicarArquero2(datosServer, self);
+        posArqueroI= generator;
 
         win=false;
 
-        if(self.getResult().id != generator){
+        if(self.getResult().id!= generator){
            win=true;
         };
 
@@ -747,6 +749,7 @@ Game.prototype = {
 
 
 
+
         }else{
 
 
@@ -757,6 +760,7 @@ Game.prototype = {
 
             posAux = game.rnd.integerInRange(-800,600);
             var movimientoPelota= self.moverPelota({x:posAux, y:-500});
+
 
           };
 
@@ -772,7 +776,7 @@ Game.prototype = {
 
 
 
-                if(datosServer.computer < 0){
+                if(datosServer.computer <= 0){
 
                   self.NoAssertPoint(300,triesA);
                   self.Win(self);
@@ -817,7 +821,9 @@ Game.prototype = {
 
       },500);
 
-      self.checkIntentos(self);
+      setTimeout(function(){self.checkIntentos(self);},500);
+
+
 
     },
 
@@ -1156,9 +1162,13 @@ ubicarArquero2: function(resultadoServer, target){
   // };
 
   if(generator==0){
-    posArquero=game.rnd.integerInRange(0,5);
+    posArqueroI =game.rnd.integerInRange(0,5);
+    posArquero= buttons.children[posArqueroI-1].position;
+
   }else{
     posArquero=buttons.children[generator-1].position;
+    posArqueroI =generator;
+
   }
 
 

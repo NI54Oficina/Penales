@@ -70,6 +70,8 @@ io.on('connection', function(socket){
 			mod=randomBetween(0,1);
 			golesUser=0;
 			golesComputer=0;
+			counterLocal=0;
+			counterVisitante=0;
 
 			if(mod%2==0){
 				var counterLocal=0;
@@ -199,7 +201,10 @@ function SendStats(){
 function GetResultado(){
 	io.emit('resultadoPartida', "terminó partidaaaa!");
 	SendStats();
-	counterPartida=0;
+	golesUser=0;
+	golesComputer=0;
+	counterLocal=0;
+	counterVisitante=0;
 }
 
 function CalculateTiro(msg){
