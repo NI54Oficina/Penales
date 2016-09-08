@@ -171,6 +171,8 @@ io.on('connection', function(socket){
 																io.emit('inicioTurno', "iniciar nuevo turno!!, en desempate");
 																console.log("Iniciar Turno");
 															}else{
+
+																console.log("GOLES USER: "+ golesUser +", GOLES COMPUTER: "+ golesComputer);
 																 if(golesUser == golesComputer){
 																	 auxCont=0;
 																	 console.log("ES EMPATE 3");
@@ -178,12 +180,13 @@ io.on('connection', function(socket){
 	 																console.log("Iniciar Turno");
 																}else{
 
-																	console.log("TERMINA JUEGO EN EMPATE"); GetResultado();}
+																	console.log("TERMINA JUEGO EN EMPATE"); GetResultado();
+																}
 															};
 										}else{
 											console.log("TERMINA JUEGO");
 											GetResultado();
-										}
+										};
 				}else{
 
 						console.log("SIGUE JUGANDO");
