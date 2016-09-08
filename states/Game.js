@@ -481,7 +481,7 @@ Game.prototype = {
 
     },1000);
 
-  // self.ListenerGetJugada(self);
+
 
  console.log("MODO: " + modo);
   },
@@ -554,7 +554,7 @@ Game.prototype = {
       desempateText= game.add.text(600, 10, 'Alargue. Desempate', { font: " 20px TheMinion", fill: "black", align: "right" });
       points.removeAll(true);
       setTimeout(function(){
-
+         self.restart(self);
       },200);
       triesA=0;
       triesP=0;
@@ -565,23 +565,25 @@ Game.prototype = {
       this.game.state.states["GameOver"].puntosUser = puntosUser;
       this.game.state.states["GameOver"].puntosComputer = puntosComputer;
 
-      // self.ListenerTerminarJuego(self);
+
 
       this.game.state.start("GameOver")
     },
 
     checkIntentos: function(){
       console.log("INTENTOS ARQUERO: "+triesA);
-      console.log("INTENTOS PATEADOR" +triesP);
+      console.log("INTENTOS PATEADOR: " +triesP);
 
       if( triesA  >= 5 &&  triesP  >= 5 ){
+
+        puntosUser=5;puntosComputer=5;
 
         if(self.esEmpate(self)){
           setTimeout(function(){self.desempatar(self);},200);
 
         }else{
-          //self.ListenerGetJugada(self);
-          setTimeout(function(){self.terminarJuego(self);},500);
+
+          self.terminarJuego(self);
 
         };
 
@@ -589,16 +591,15 @@ Game.prototype = {
 
 
         if(!enAlargue){
-
+             self.restart(self);
         }else{
 
 
               if(triesA >=1 && triesP>=1){
 
                 if(puntosUser!=puntosComputer){
-                //  self.ListenerGetJugada(self);
-                  setTimeout(function(){self.terminarJuego(self);}
-                    ,500);
+
+                  self.terminarJuego(self);
 
                 }else{
                   setTimeout(function(){self.desempatar(self);},500);
@@ -607,7 +608,7 @@ Game.prototype = {
 
               }else{
 
-
+                 self.restart(self);
               }
 
 
@@ -821,7 +822,7 @@ Game.prototype = {
 
       },500);
 
-      setTimeout(function(){self.checkIntentos(self);},500);
+    //  self.checkIntentos(self);
 
 
 
@@ -877,7 +878,7 @@ Game.prototype = {
 
          };
 
-        self.checkIntentos(self);
+      //  self.checkIntentos(self);
        });
     },
 
@@ -924,7 +925,7 @@ Game.prototype = {
 
          };
 
-        self.checkIntentos(self);
+        //self.checkIntentos(self);
        });
     },
 
@@ -953,7 +954,7 @@ Game.prototype = {
        }
 
 
-       self.checkIntentos(200,triesP);
+    //   self.checkIntentos(200,triesP);
 
 
      });
@@ -973,7 +974,7 @@ Game.prototype = {
        tweenTribuna2.resume();
        self.NoAssertPoint(300,triesA);
        self.Win(self);
-       self.checkIntentos(300,triesA);
+      // self.checkIntentos(300,triesA);
 
      });
 
@@ -1110,7 +1111,7 @@ calculoChancesAtajar: function(efec, target){
 
 
 // ubicarArquero2: function(efec, target){
-// 
+//
 //
 //   if(Phaser.Math.isEven(modo)){
 //     do{
@@ -1188,30 +1189,6 @@ setEnemy: function(){
 },
 
 //Funcion que quizas no se utiliza
-
-ListenerComienzo: function(){
-  setTimeout(function(){
-
-      console.log("Comienzo Partida");},2000);
-
-
-},
-
-ListenerGetJugada: function(){
-
-  setTimeout(function(){
-
-      console.log("Recibiendo Jugada");},2000);
-
-},
-
-ListenerTerminarJuego: function(){
-  setTimeout(function(){
-
-      console.log("Recibiendo Resultado Partida");},2000);
-
-
-},
 
 
 activeAnimation: function(msg){

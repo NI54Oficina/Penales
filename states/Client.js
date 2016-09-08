@@ -51,7 +51,7 @@ socket.on('recibeJugada', function(msg){
 
 socket.on('inicioTurno', function(msg){
 console.log(msg);
-  currentContext["restart"](currentContext);
+  currentContext["checkIntentos"](currentContext);
   //restart();
 });
 
