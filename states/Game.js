@@ -576,8 +576,6 @@ Game.prototype = {
 
       if( triesA  >= 5 &&  triesP  >= 5 ){
 
-        puntosUser=5;puntosComputer=5;
-
         if(self.esEmpate(self)){
           setTimeout(function(){self.desempatar(self);},200);
 

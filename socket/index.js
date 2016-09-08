@@ -156,7 +156,7 @@ io.on('connection', function(socket){
 			setTimeout(function(){
 
 				if(counterVisitante >= 5 &&  counterLocal >= 5 ){
-										golesUser=5; golesComputer=5;
+
 										if(golesUser == golesComputer && !enAlargue){
 											auxCont++;
 											enAlargue=true;
@@ -176,7 +176,9 @@ io.on('connection', function(socket){
 																	 console.log("ES EMPATE 3");
 	 																io.emit('inicioTurno', "iniciar nuevo turno!!, en desempate");
 	 																console.log("Iniciar Turno");
-																}else{console.log("TERMINA JUEGO EN EMPATE"); GetResultado();}
+																}else{
+
+																	console.log("TERMINA JUEGO EN EMPATE"); GetResultado();}
 															};
 										}else{
 											console.log("TERMINA JUEGO");
@@ -261,14 +263,15 @@ function calculoChancesAtajar(msg){
 }
 
 function CalculateAtaje(){
-	var a = getMaso();
-	var b= generarRiesgo(a);
- if(!enAlargue){
-	 	return b;
- }else{
-	 	return 1;
- }
 
+	if(!enAlargue){
+		var a = getMaso();
+		var b= generarRiesgo(a);
+
+		return b;
+	}else{
+		return 1;
+	}
 
 
 }
@@ -283,11 +286,7 @@ function getMaso(){
 
 function generarRiesgo(arrai){
 	var arrayNuevo = [];
-	// if( !esEmpate){
-	//
-	// }else{
-	//
-	// };
+
 
 	for(var i =1 ; i<7; i++){
 		if(arrai[i-1] == 1){
