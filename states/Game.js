@@ -576,10 +576,11 @@ Game.prototype = {
 		console.log("entra resultado "+msg);
 		puntosUser = resultadoArray["golesUser"];
 		puntosComputer = resultadoArray["golesComputer"];
+		this.checkIntentos();
     },
 
     checkIntentos: function(){
-
+		console.log("entra check intentos");
       if( triesA  >= 5 &&  triesP  >= 5 ){
 
         if(self.esEmpate(self)){
