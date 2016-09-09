@@ -24,6 +24,7 @@ var enAlargue=false;
 
 
 
+
 app.get('/', function(req, res){
 
 });
@@ -220,7 +221,11 @@ function SendStats(){
 }
 
 function GetResultado(){
-	io.emit('resultadoPartida', "terminó partidaaaa!");
+	//tendria que emitir el resultado, cliente lo recibe, setea y va a pantalla correspondiente segun comprobación.
+	var auxArray={};
+	auxArray["golesUser"]= golesUser;
+	auxArray["golesComputer"]= golesComputer;
+	io.emit('resultadoPartida', JSON.stringify(auxArray));
 	SendStats();
 	golesUser=0;
 	golesComputer=0;

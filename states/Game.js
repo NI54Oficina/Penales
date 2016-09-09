@@ -52,7 +52,10 @@ Game.prototype = {
 
 
 
-   Emit("GuardarContexto","","null",self);
+   //Emit("GuardarContexto","","null",self);
+   SuscribeServerEvent("inicioPartida","Clicked",this,false);
+   SuscribeServerEvent("inicioTurno","checkIntentos",this,false);
+   SuscribeServerEvent("resultadoPartida","setearResultado",this,true);
 
      timer = game.time.events.loop(Phaser.Timer.SECOND, this.updateCounter, this);
        game.time.events.resume();
@@ -281,12 +284,12 @@ Game.prototype = {
           if (counter==-1) {
 
             game.time.events.pause();
-            counter=0;
+            counter=150000;
             presicionText.visible=false;
             buttons.visible=false;
             idElegido=0;
 
-              Emit("enviarJugada",idElegido,"failScore",self);
+              Emit("enviarJugada",idElegido,"recibeJugada","failScore",self);
 
 
           };
@@ -565,7 +568,14 @@ Game.prototype = {
       this.game.state.states["GameOver"].puntosUser = puntosUser;
       this.game.state.states["GameOver"].puntosComputer = puntosComputer;
 
-
+      this.game.state.start("GameOver")
+    },
+	
+	setearResultado: function(msg){
+		var resultadoArray=JSON.parse(msg);
+		console.log("entra resultado "+msg);
+      puntosUser = resultadoArray["golesUser"];
+      puntosComputer = resultadoArray["golesComputer"];
 
       this.game.state.start("GameOver")
     },
@@ -1209,7 +1219,8 @@ activeAnimation: function(msg){
 
 EnviarJugadaServer: function(){
   self.establecerParametros(self);
-    Emit("enviarJugada",idElegido,"activeAnimation",self);
+  counter=150000;
+    Emit("enviarJugada",idElegido,"recibeJugada","activeAnimation",self);
 },
 
 
