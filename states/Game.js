@@ -567,7 +567,6 @@ Game.prototype = {
       console.log("terminarJuego");
       this.game.state.states["GameOver"].puntosUser = puntosUser;
       this.game.state.states["GameOver"].puntosComputer = puntosComputer;
-<<<<<<< HEAD
 
       this.game.state.start("GameOver")
     },
@@ -575,13 +574,8 @@ Game.prototype = {
 	setearResultado: function(msg){
 		var resultadoArray=JSON.parse(msg);
 		console.log("entra resultado "+msg);
-      puntosUser = resultadoArray["golesUser"];
-      puntosComputer = resultadoArray["golesComputer"];
-
-      this.game.state.start("GameOver")
-=======
-      this.game.state.start("GameOver");
->>>>>>> origin/master
+		puntosUser = resultadoArray["golesUser"];
+		puntosComputer = resultadoArray["golesComputer"];
     },
 
     checkIntentos: function(){
