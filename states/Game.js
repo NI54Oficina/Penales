@@ -485,8 +485,6 @@ Game.prototype = {
     },1000);
 
 
-
- console.log("MODO: " + modo);
   },
 
   patear: function(){
@@ -565,8 +563,11 @@ Game.prototype = {
     },
 
     terminarJuego: function(){
+
+      console.log("terminarJuego");
       this.game.state.states["GameOver"].puntosUser = puntosUser;
       this.game.state.states["GameOver"].puntosComputer = puntosComputer;
+<<<<<<< HEAD
 
       this.game.state.start("GameOver")
     },
@@ -578,11 +579,12 @@ Game.prototype = {
       puntosComputer = resultadoArray["golesComputer"];
 
       this.game.state.start("GameOver")
+=======
+      this.game.state.start("GameOver");
+>>>>>>> origin/master
     },
 
     checkIntentos: function(){
-      console.log("INTENTOS ARQUERO: "+triesA);
-      console.log("INTENTOS PATEADOR: " +triesP);
 
       if( triesA  >= 5 &&  triesP  >= 5 ){
 
