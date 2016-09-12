@@ -35,7 +35,6 @@ Game.prototype = {
 
   create: function () {
 
-
     console.log("Entra create game");
 
     self = this;
@@ -50,22 +49,21 @@ Game.prototype = {
     this.partida;
     this.modo;
 
-
-
-   //Emit("GuardarContexto","","null",self);
-   SuscribeServerEvent("inicioPartida","Clicked",this,false);
-   SuscribeServerEvent("inicioTurno","checkIntentos",this,false);
-   SuscribeServerEvent("resultadoPartida","setearResultado",this,true);
-
-     timer = game.time.events.loop(Phaser.Timer.SECOND, this.updateCounter, this);
-       game.time.events.resume();
+	//Emit("GuardarContexto","","null",self);
+	SuscribeServerEvent("inicioPartida","Clicked",this,false);
+	SuscribeServerEvent("inicioTurno","checkIntentos",this,false);
+	SuscribeServerEvent("resultadoPartida","setearResultado",this,true);
+	
+	this.pause=true;
+	timer = game.time.events.loop(Phaser.Timer.SECOND, this.updateCounter, this);
+	game.time.events.resume();
 
      var display1="Fallaste!";
      var display2="Ganaste!";
      presicion= 0;
      presicionText=0;
      rangoDePresicion=40;
-     counter=15;
+     counter=this.tiempoMaximo;
 
      //Modo aleatorio de settear quien comienza la partida, arquero o pateador
 
@@ -268,7 +266,9 @@ Game.prototype = {
       },
 
       updateCounter: function () {
-
+		if(this.pause){
+			return;
+		}
         counter--;
 
         presicionText.setText('Tiempo: 00:0' + counter);
@@ -283,7 +283,7 @@ Game.prototype = {
 
           if (counter==-1) {
 
-            game.time.events.pause();
+           this.pause=true;
             counter=150000;
             presicionText.visible=false;
 			
@@ -291,7 +291,8 @@ Game.prototype = {
 			//buttons.alpha=1;
             idElegido=0;
 			
-              Emit("enviarJugada",idElegido,"recibeJugada","failScore",self);
+			//Emit("enviarJugada",idElegido,"recibeJugada","failScore",self);
+              this.EnviarJugadaServer();
 
 
           };
@@ -439,8 +440,8 @@ Game.prototype = {
 
 
 
-    counter=15;
-    game.time.events.resume();
+    counter=self.tiempoMaximo;
+    self.pause=false;
     modo++;
 
     if(Phaser.Math.isEven(modo)){
@@ -1226,6 +1227,7 @@ mouseUpPateador:function(){
 },
 
 EnviarJugadaServer: function(){
+	self.pause=true;
   self.establecerParametros(self);
   counter=150000;
   buttons.visible=false;
@@ -1235,7 +1237,8 @@ EnviarJugadaServer: function(){
 
 
 Clicked: function(){
-clicked=0;
+	clicked=0;
+	this.pause=false;
 },
 
 

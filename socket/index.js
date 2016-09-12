@@ -23,13 +23,7 @@ var auxCont=0;
 var enAlargue=false;
 
 
-
-
-app.get('/', function(req, res){
-
-});
-
-io.on('connection', function(socket){
+	io.on('connection', function(socket){
 	console.log("user conected");
 	socket.on('chat message', function(msg){
     io.emit('chat message', msg);
@@ -37,21 +31,17 @@ io.on('connection', function(socket){
 	});
 
 	socket.on('login', function(msg){
-
-
 		var datos={};
 		datos["nombre"]="Pepe";
 		datos["id"]= "2";
 		datos["avatar"]= "imagen.jpg";
 		datos["puntos"]= 1000;
-
 		io.emit('loginConfirmed',  JSON.stringify(datos));
 		console.log("log confirmed");
 		SendStats();
 	});
 
 	socket.on('requestStats', function(msg){
-
 		if(msg){
 			var fs = require('fs');
 			fs.writeFile("./stats.txt",  msg, function(err) {
@@ -59,37 +49,32 @@ io.on('connection', function(socket){
 					return console.log(err);
 				}
 
-				console.log("The file was saved!");
+				console.log("Stats Guardados");
 				SendStats();
 			});
 		}else{
 			SendStats();
 		}
 	});
+	
 	socket.on('buscarPartida', function(msg){
-
 		io.emit('buscandoPartida', "buscando partida...");
-
 		setTimeout(function(){
-			//io.emit('partidaEncontrada', "oponente Encontrado!");
 			mod=randomBetween(0,1);
 			golesUser=0;
 			golesComputer=0;
 			counterLocal=0;
 			counterVisitante=0;
-
 			if(mod%2==0){
 				var counterLocal=0;
 				var counterVisitante=1;
-
 			}else{
 				var counterLocal=1;
 				var counterVisitante=0;
 			};
 
-
-
 			oponente["nombre"]="Pepita";
+			oponente["session"]="token";
 
 			oponente["efectividad"]="20";
 
@@ -97,7 +82,7 @@ io.on('connection', function(socket){
 
 			jugada["oponente"]=oponente;
 
-			jugada["tiempomaximo"]= 3000;
+			jugada["tiempomaximo"]= 5;
 
 			if(mod==1){
 				jugada["camiseta"]= "local";
@@ -112,7 +97,6 @@ io.on('connection', function(socket){
 			jugada["IntentosOponente"]=counterVisitante;
 			jugada["Intentoslocal"]=counterLocal;
 
-
 			io.emit('partidaEncontrada', JSON.stringify(jugada));
 
 			console.log("Partida encontrada");
@@ -120,7 +104,7 @@ io.on('connection', function(socket){
 			console.log(golesComputer);
 
 			setTimeout(function(){
-			io.emit('inicioPartida', "inicio partidaaa!");
+			io.emit('inicioPartida', "start");
 			console.log("Iniciar Partida");
 
 			},2000);
@@ -130,7 +114,6 @@ io.on('connection', function(socket){
 	socket.on('enviarJugada', function(msg){
 
 		setTimeout(function(){
-			io.emit('recibirJugada', "resolver turnooo");
 
 			if(mod%2 == 0){
 
@@ -161,37 +144,36 @@ io.on('connection', function(socket){
 										if(golesUser == golesComputer && !enAlargue){
 											auxCont++;
 											enAlargue=true;
-											console.log("ES EMPATE 1 ");
-											io.emit('inicioTurno', "iniciar nuevo turno!!, en desempate");
+											console.log("EMPATE");
+											io.emit('inicioTurno', "empate");
 											console.log("Iniciar Turno");
 
 										}else if(enAlargue){
-															if(auxCont!=2){
-																auxCont++;
-																console.log("ES EMPATE 2");
-																io.emit('inicioTurno', "iniciar nuevo turno!!, en desempate");
-																console.log("Iniciar Turno");
-															}else{
+											if(auxCont!=2){
+												auxCont++;
+												console.log("EMPATE");
+												io.emit('inicioTurno', "empate");
+												console.log("Iniciar Turno");
+											}else{
 
-																console.log("GOLES USER: "+ golesUser +", GOLES COMPUTER: "+ golesComputer);
-																 if(golesUser == golesComputer){
-																	 auxCont=0;
-																	 console.log("ES EMPATE 3");
-	 																io.emit('inicioTurno', "iniciar nuevo turno!!, en desempate");
-	 																console.log("Iniciar Turno");
-																}else{
+												console.log("GOLES USER: "+ golesUser +", GOLES COMPUTER: "+ golesComputer);
+												 if(golesUser == golesComputer){
+													auxCont=0;
+													console.log("EMPATE");
+													io.emit('inicioTurno', "empate");
+													console.log("Iniciar Turno");
+												}else{
 
-																	console.log("TERMINA JUEGO EN EMPATE"); GetResultado();
-																}
-															};
+													console.log("TERMINA JUEGO EN EMPATE"); GetResultado();
+												}
+											};
 										}else{
 											console.log("TERMINA JUEGO");
 											GetResultado();
 										};
 				}else{
 
-						console.log("SIGUE JUGANDO");
-
+						console.log("NUEVO TURNO");
 						io.emit('inicioTurno', "iniciar nuevo turno!!");
 						console.log("Iniciar Turno");
 				}
@@ -216,9 +198,8 @@ function SendStats(){
 			console.log("entra error");
 			return console.log(err);
 		}
-		//stats= JSON.parse(msg);
 		stats=data;
-		console.log("The file was read!");
+		console.log("Stats enviados");
 		io.emit('statsRecived', data);
 	});
 }
@@ -226,6 +207,7 @@ function SendStats(){
 function GetResultado(){
 	//tendria que emitir el resultado, cliente lo recibe, setea y va a pantalla correspondiente segun comprobación.
 	var auxArray={};
+	//cambiar por local y visitante segun corresponda
 	auxArray["golesUser"]= golesUser;
 	auxArray["golesComputer"]= golesComputer;
 	io.emit('resultadoPartida', JSON.stringify(auxArray));
@@ -239,17 +221,13 @@ function GetResultado(){
 function CalculateTiro(msg){
 
 	if(mod%2 ==0){
-
-			do {
-				generator = randomBetween(1,6);
-			}while (generator==5);
+		do {
+			generator = randomBetween(1,6);
+		}while (generator==5);
 
 	}else{
-
-			generator = calculoChancesAtajar(msg);
-
+		generator = calculoChancesAtajar(msg);
 	}
-
 	randomChance=randomBetween(0,1);
 	if(randomChance==0){
 		return generator;
@@ -320,22 +298,11 @@ function generarRiesgo(arrai){
 }
 
 function randomBetween(min, max) {
-
     return Math.floor(Math.random() * (max - min + 1)) + min;
-
 }
 
-
-function tiroUserElegido(id){
-
-		 if(id){
-
-		 }
-
-}
 
 function calculatePuntaje(msg, generator){
-
 	if(generator!=0 && msg!=generator){
 
 			if(mod%2 == 0){
@@ -346,9 +313,7 @@ function calculatePuntaje(msg, generator){
 			};
 
 	};
-
 	return;
-
 }
 
 
