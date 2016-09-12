@@ -39,7 +39,7 @@ GameMenu.prototype = {
 
     this.addMenuOption('Start', function () {
       search.visible=true;
-      Emit("buscarPartida"," ","listenerSearch",self);
+      Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
       //self.ListenerLogin(self);
     });
     this.addMenuOption('Options', function () {

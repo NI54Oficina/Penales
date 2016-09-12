@@ -75,7 +75,7 @@ var Splash = function () {};
     this.status.setText('Cargando');
     this.addGameStates();
     this.addGameMusic();
-	  Emit("login"," ","logueado",this);
+	  Emit("login"," ","loginConfirmed","logueado",this);
   },
 
   test:function(){

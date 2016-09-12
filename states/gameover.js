@@ -68,7 +68,7 @@ GameOver.prototype = {
 
     this.addMenuOption('Play Again', function (e) {
       search.visible=true;
-      Emit("buscarPartida"," ","listenerSearch",self);
+      Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
     });
 
     this.addMenuOption('Main Menu', function (e) {

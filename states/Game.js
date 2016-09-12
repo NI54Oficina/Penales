@@ -52,7 +52,10 @@ Game.prototype = {
 
 
 
-   Emit("GuardarContexto","","null",self);
+   //Emit("GuardarContexto","","null",self);
+   SuscribeServerEvent("inicioPartida","Clicked",this,false);
+   SuscribeServerEvent("inicioTurno","checkIntentos",this,false);
+   SuscribeServerEvent("resultadoPartida","setearResultado",this,true);
 
      timer = game.time.events.loop(Phaser.Timer.SECOND, this.updateCounter, this);
        game.time.events.resume();
@@ -281,12 +284,14 @@ Game.prototype = {
           if (counter==-1) {
 
             game.time.events.pause();
-            counter=0;
+            counter=150000;
             presicionText.visible=false;
-            buttons.visible=false;
+			
+            //buttons.visible=true;
+			//buttons.alpha=1;
             idElegido=0;
-
-              Emit("enviarJugada",idElegido,"failScore",self);
+			
+              Emit("enviarJugada",idElegido,"recibeJugada","failScore",self);
 
 
           };
@@ -356,14 +361,15 @@ Game.prototype = {
     tweenFocus.to( {x:endBarra, y:600}, velocidad, 'Linear', true, 0, false).yoyo(true);
     velocidad=velocidad-400;
     self.setArquero(self);
-    buttons.visible=false;
+    //buttons.visible=false;
+	buttons.alpha=0;
 
     // transparentObject.visible=true;
     //
     // transparentObject.events.onInputDown.addOnce(this.ListenerPateador,self);
 
-    transparentObject.visible=true;
-    transparentObject.events.onInputDown.addOnce(this.EnviarJugadaServer,self);
+    //transparentObject.visible=true;
+    //transparentObject.events.onInputDown.addOnce(this.EnviarJugadaServer,self);
 
   //  self.activeAnimation(self);
   },
@@ -392,7 +398,7 @@ Game.prototype = {
     player.visible=true;
     self.setArquero(self);
     buttons.visible=false;
-
+	console.log("entra aquiiii???????");
     self.EnviarJugadaServer(self);
 
 
@@ -419,7 +425,7 @@ Game.prototype = {
       self.setPlayersMode2(self);
 
     }else{
-
+		target.events.onInputUp.addOnce(self.mouseUpPateador,self);
       self.setBarraPresicion(self);
       self.setPlayersMode1(self);
 
@@ -456,6 +462,7 @@ Game.prototype = {
       presB.visible=false;
       focus.visible=false;
       buttons.visible=true;
+	  buttons.alpha=1;
       player.position.x=240;
       player.position.y=450;
       player.frame=0;
@@ -564,11 +571,20 @@ Game.prototype = {
       console.log("terminarJuego");
       this.game.state.states["GameOver"].puntosUser = puntosUser;
       this.game.state.states["GameOver"].puntosComputer = puntosComputer;
-      this.game.state.start("GameOver");
+
+      this.game.state.start("GameOver")
+    },
+	
+	setearResultado: function(msg){
+		var resultadoArray=JSON.parse(msg);
+		console.log("entra resultado "+msg);
+		puntosUser = resultadoArray["golesUser"];
+		puntosComputer = resultadoArray["golesComputer"];
+		this.checkIntentos();
     },
 
     checkIntentos: function(){
-
+		console.log("entra check intentos");
       if( triesA  >= 5 &&  triesP  >= 5 ){
 
         if(self.esEmpate(self)){
@@ -1202,9 +1218,18 @@ activeAnimation: function(msg){
   }
 },
 
+mouseUpPateador:function(){
+	console.log("entra uppppp");
+	 if(!Phaser.Math.isEven(modo)){
+		this.EnviarJugadaServer();
+	 }
+},
+
 EnviarJugadaServer: function(){
   self.establecerParametros(self);
-    Emit("enviarJugada",idElegido,"activeAnimation",self);
+  counter=150000;
+  buttons.visible=false;
+    Emit("enviarJugada",idElegido,"recibeJugada","activeAnimation",self);
 },
 
 
