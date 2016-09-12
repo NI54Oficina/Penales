@@ -4,7 +4,7 @@ var Game = function(game) {};
 Game.prototype = {
 
 
-
+//test
   preload: function () {
 
     this.optionCount = 1;
@@ -570,7 +570,7 @@ Game.prototype = {
 
       this.game.state.start("GameOver")
     },
-	
+
 	setearResultado: function(msg){
 		var resultadoArray=JSON.parse(msg);
 		console.log("entra resultado "+msg);
