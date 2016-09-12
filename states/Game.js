@@ -286,9 +286,11 @@ Game.prototype = {
             game.time.events.pause();
             counter=150000;
             presicionText.visible=false;
-            buttons.visible=false;
+			
+            //buttons.visible=true;
+			//buttons.alpha=1;
             idElegido=0;
-
+			
               Emit("enviarJugada",idElegido,"recibeJugada","failScore",self);
 
 
@@ -359,14 +361,15 @@ Game.prototype = {
     tweenFocus.to( {x:endBarra, y:600}, velocidad, 'Linear', true, 0, false).yoyo(true);
     velocidad=velocidad-400;
     self.setArquero(self);
-    buttons.visible=false;
+    //buttons.visible=false;
+	buttons.alpha=0;
 
     // transparentObject.visible=true;
     //
     // transparentObject.events.onInputDown.addOnce(this.ListenerPateador,self);
 
-    transparentObject.visible=true;
-    transparentObject.events.onInputDown.addOnce(this.EnviarJugadaServer,self);
+    //transparentObject.visible=true;
+    //transparentObject.events.onInputDown.addOnce(this.EnviarJugadaServer,self);
 
   //  self.activeAnimation(self);
   },
@@ -395,7 +398,7 @@ Game.prototype = {
     player.visible=true;
     self.setArquero(self);
     buttons.visible=false;
-
+	console.log("entra aquiiii???????");
     self.EnviarJugadaServer(self);
 
 
@@ -422,7 +425,7 @@ Game.prototype = {
       self.setPlayersMode2(self);
 
     }else{
-
+		target.events.onInputUp.addOnce(self.mouseUpPateador,self);
       self.setBarraPresicion(self);
       self.setPlayersMode1(self);
 
@@ -459,6 +462,7 @@ Game.prototype = {
       presB.visible=false;
       focus.visible=false;
       buttons.visible=true;
+	  buttons.alpha=1;
       player.position.x=240;
       player.position.y=450;
       player.frame=0;
@@ -1214,9 +1218,17 @@ activeAnimation: function(msg){
   }
 },
 
+mouseUpPateador:function(){
+	console.log("entra uppppp");
+	 if(!Phaser.Math.isEven(modo)){
+		this.EnviarJugadaServer();
+	 }
+},
+
 EnviarJugadaServer: function(){
   self.establecerParametros(self);
   counter=150000;
+  buttons.visible=false;
     Emit("enviarJugada",idElegido,"recibeJugada","activeAnimation",self);
 },
 
