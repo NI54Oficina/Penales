@@ -605,7 +605,18 @@ Game.prototype = {
 		this.checkIntentos();
     },
 
-    checkIntentos: function(){
+    checkIntentos: function(data){
+		var auxArray=JSON.parse(data);
+		if(modo==1){
+			golesUser= data["localGol"];
+			golesComputer= data["visitanteGol"];
+		}else{
+			golesUser= data["visitanteGol"];
+			golesComputer= data["localGol"];
+		}
+		triesP = data["localTurno"];
+		triesA = data["visitanteTurno"];
+		
 		console.log("entra check intentos");
       if( triesA  >= 5 &&  triesP  >= 5 ){
 

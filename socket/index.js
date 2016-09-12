@@ -141,41 +141,40 @@ var enAlargue=false;
 
 				if(counterVisitante >= 5 &&  counterLocal >= 5 ){
 
-										if(golesUser == golesComputer && !enAlargue){
-											auxCont++;
-											enAlargue=true;
-											console.log("EMPATE");
-											io.emit('inicioTurno', "empate");
-											console.log("Iniciar Turno");
+						if(golesUser == golesComputer && !enAlargue){
+							auxCont++;
+							enAlargue=true;
+							console.log("EMPATE");
+							InicioTurno();
+							console.log("Iniciar Turno");
 
-										}else if(enAlargue){
-											if(auxCont!=2){
-												auxCont++;
-												console.log("EMPATE");
-												io.emit('inicioTurno', "empate");
-												console.log("Iniciar Turno");
-											}else{
+						}else if(enAlargue){
+							if(auxCont!=2){
+								auxCont++;
+								console.log("EMPATE");
+								InicioTurno();
+								console.log("Iniciar Turno");
+							}else{
 
-												console.log("GOLES USER: "+ golesUser +", GOLES COMPUTER: "+ golesComputer);
-												 if(golesUser == golesComputer){
-													auxCont=0;
-													console.log("EMPATE");
-													io.emit('inicioTurno', "empate");
-													console.log("Iniciar Turno");
-												}else{
+								console.log("GOLES USER: "+ golesUser +", GOLES COMPUTER: "+ golesComputer);
+								 if(golesUser == golesComputer){
+									auxCont=0;
+									console.log("EMPATE");
+									InicioTurno();
+									console.log("Iniciar Turno");
+								}else{
 
-													console.log("TERMINA JUEGO EN EMPATE"); GetResultado();
-												}
-											};
-										}else{
-											console.log("TERMINA JUEGO");
-											GetResultado();
-										};
+									console.log("TERMINA JUEGO EN EMPATE"); GetResultado();
+								}
+							};
+						}else{
+							console.log("TERMINA JUEGO");
+							GetResultado();
+						};
 				}else{
-
-						console.log("NUEVO TURNO");
-						io.emit('inicioTurno', "iniciar nuevo turno!!");
-						console.log("Iniciar Turno");
+					console.log("NUEVO TURNO");
+					InicioTurno();
+					console.log("Iniciar Turno");
 				}
 
 			},3000);
@@ -188,6 +187,15 @@ var enAlargue=false;
 	});
 
 });
+
+function InicioTurno(){
+	var turnoArray={};
+	/*turnoArray["localGol"];
+	turnoArray["localTurno"];
+	turnoArray["visitanteGol"];
+	turnoArray["visitanteTurno"];*/
+	io.emit('inicioTurno', "empate");
+}
 
 function SendStats(){
 	//setear variable resultados
