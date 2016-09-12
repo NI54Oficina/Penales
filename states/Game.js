@@ -49,11 +49,13 @@ Game.prototype = {
     this.partida;
     this.modo;
 
+  counterBarra=0;
+
 	//Emit("GuardarContexto","","null",self);
 	SuscribeServerEvent("inicioPartida","Clicked",this,false);
 	SuscribeServerEvent("inicioTurno","checkIntentos",this,false);
 	SuscribeServerEvent("resultadoPartida","setearResultado",this,true);
-	
+
 	this.pause=true;
 	timer = game.time.events.loop(Phaser.Timer.SECOND, this.updateCounter, this);
 	game.time.events.resume();
@@ -111,11 +113,14 @@ Game.prototype = {
      equipoUnoText = game.add.text(10, 160, 'Equipo 1', { font: " 20px TheMinion", fill: "black", align: "center" });
      equipoDosText = game.add.text(10, 260, 'Equipo 2', { font: " 20px TheMinion", fill: "black", align: "center" });
 
+
+
+    // MODIFICAMOS NUEVA BARRA DE COLORES
+
     //  barra = game.add.sprite(450,600,'barra');
     //  barra.scale.setTo(0.30,0.20);
 
 
-    // MODIFICAMOS NUEVA BARRA DE COLORES
     var 	myBitmap = this.game.add.bitmapData(500, 20);
     var  grd=myBitmap.context.createLinearGradient(500,0,0,0);
 
@@ -137,17 +142,17 @@ Game.prototype = {
                     ];
 
 
-   barra = this.game.add.sprite(400,600, myBitmap);
+   barra = this.game.add.sprite(this.game.width/2 - 250,600, myBitmap);
 
-    // MODIFICACION NUEVA BARRA
 
-     focus = game.add.sprite(440,600, 'triangle');
+
+     focus = game.add.sprite(barra.position.x,600, 'triangle');
      focus.scale.setTo(0.05,0.05);
-
 
      beginBarra = barra.position.x;
      centerBarra = barra.position.x + barra.width/2 -focus.width/2 ;
      endBarra = barra.position.x + barra.width - focus.width/2;
+
 
 
      barra.visible=false;
@@ -312,11 +317,11 @@ Game.prototype = {
 			//buttons.alpha=1;
             idElegido=0;
 
-			
+
 			//Emit("enviarJugada",idElegido,"recibeJugada","failScore",self);
               this.EnviarJugadaServer();
 
-     
+
 
           };
 
@@ -473,9 +478,11 @@ Game.prototype = {
     }else{
       triesP++;
       self.botonesRojos(self);
+      self.updateBarra(self);
     }
 
     setTimeout(function(){
+
       presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px TheMinion", fill: "black", align: "center" });
       presicionText.visible=false;
       winner.visible=false;
@@ -1271,6 +1278,31 @@ EnviarJugadaServer: function(){
 Clicked: function(){
 	clicked=0;
 	this.pause=false;
+},
+
+updateBarra: function(){
+
+      if(counterBarra<(arrayGradient.length)){
+        barra.destroy();
+          var	myBitmap = this.game.add.bitmapData(500, 20);
+
+          var  mov=myBitmap.context.createLinearGradient(500,0,0,0);
+
+          for(var j=0; j<=(arrayGradient[counterBarra].length-1); j++){
+
+            mov.addColorStop(arrayGradient[counterBarra][j][0],arrayGradient[counterBarra][j][1]);
+            }
+
+            myBitmap.context.fillStyle=mov;
+            myBitmap.context.fillRect(0,0,this.game.height,this.game.width);
+
+            barra = this.game.add.sprite(this.game.width/2 - 250,600, myBitmap);
+
+
+      }else{ console.log("Termino iteracion")}
+
+  counterBarra++;
+
 },
 
 
