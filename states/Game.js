@@ -111,8 +111,35 @@ Game.prototype = {
      equipoUnoText = game.add.text(10, 160, 'Equipo 1', { font: " 20px TheMinion", fill: "black", align: "center" });
      equipoDosText = game.add.text(10, 260, 'Equipo 2', { font: " 20px TheMinion", fill: "black", align: "center" });
 
-     barra = game.add.sprite(450,600,'barra');
-     barra.scale.setTo(0.30,0.20);
+    //  barra = game.add.sprite(450,600,'barra');
+    //  barra.scale.setTo(0.30,0.20);
+
+
+    // MODIFICAMOS NUEVA BARRA DE COLORES
+    var 	myBitmap = this.game.add.bitmapData(500, 20);
+    var  grd=myBitmap.context.createLinearGradient(500,0,0,0);
+
+
+      grd.addColorStop(0,"red");
+     grd.addColorStop(.10,"orange");
+     grd.addColorStop(.50,"green");
+     grd.addColorStop(.90,"orange");
+      grd.addColorStop(1,"red");
+
+    myBitmap.context.fillStyle=grd;
+    myBitmap.context.fillRect(0,0,this.game.height,this.game.width);
+
+
+      arrayGradient =[[[0, "red"],[0.15,"orange"],[0.50,"green"],[0.85,"orange"],[1,"red"]],
+                      [[0, "red"],[0.25,"orange"],[0.50,"green"],[0.75,"orange"],[1,"red"]],
+                      [[0, "red"],[0.35,"orange"],[0.50,"green"],[0.65,"orange"],[1,"red"]],
+                      [[0, "red"],[0.40,"orange"],[0.50,"green"],[0.60,"orange"],[1,"red"]]
+                    ];
+
+
+   barra = this.game.add.sprite(450,600, myBitmap);
+
+    // MODIFICACION NUEVA BARRA
 
      focus = game.add.sprite(440,600, 'triangle');
      focus.scale.setTo(0.05,0.05);
@@ -286,13 +313,18 @@ Game.prototype = {
            this.pause=true;
             counter=150000;
             presicionText.visible=false;
-			
+
             //buttons.visible=true;
 			//buttons.alpha=1;
             idElegido=0;
+<<<<<<< HEAD
 			
 			//Emit("enviarJugada",idElegido,"recibeJugada","failScore",self);
               this.EnviarJugadaServer();
+=======
+
+              Emit("enviarJugada",idElegido,"recibeJugada","failScore",self);
+>>>>>>> origin/master
 
 
           };
@@ -575,7 +607,7 @@ Game.prototype = {
 
       this.game.state.start("GameOver")
     },
-	
+
 	setearResultado: function(msg){
 		var resultadoArray=JSON.parse(msg);
 		console.log("entra resultado "+msg);
