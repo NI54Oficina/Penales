@@ -317,15 +317,12 @@ Game.prototype = {
             //buttons.visible=true;
 			//buttons.alpha=1;
             idElegido=0;
-<<<<<<< HEAD
+
 			
 			//Emit("enviarJugada",idElegido,"recibeJugada","failScore",self);
               this.EnviarJugadaServer();
-=======
 
-              Emit("enviarJugada",idElegido,"recibeJugada","failScore",self);
->>>>>>> origin/master
-
+     
 
           };
 
