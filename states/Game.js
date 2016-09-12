@@ -137,7 +137,7 @@ Game.prototype = {
                     ];
 
 
-   barra = this.game.add.sprite(450,600, myBitmap);
+   barra = this.game.add.sprite(400,600, myBitmap);
 
     // MODIFICACION NUEVA BARRA
 
@@ -149,15 +149,9 @@ Game.prototype = {
      centerBarra = barra.position.x + barra.width/2 -focus.width/2 ;
      endBarra = barra.position.x + barra.width - focus.width/2;
 
-     presA = game.add.sprite(centerBarra-rangoDePresicion,590, 'barraVertical');
-     presA.scale.setTo(0.10,0.05);
-     presB = game.add.sprite(centerBarra+rangoDePresicion,590, 'barraVertical');
-     presB.scale.setTo(0.10,0.05);
 
      barra.visible=false;
      focus.visible=false;
-     presB.visible=false;
-     presA.visible=false;
 
       perfil1 = {
                 id:1,
@@ -363,8 +357,7 @@ Game.prototype = {
 
     barra.visible=true;
     focus.visible=true;
-    presA.visible=true;
-    presB.visible=true;
+
     tweenTribuna1.pause();
     tweenTribuna2.pause();
 
@@ -488,8 +481,7 @@ Game.prototype = {
       winner.visible=false;
       looser.visible=false;
       barra.visible=false;
-      presA.visible=false;
-      presB.visible=false;
+
       focus.visible=false;
       buttons.visible=true;
 	  buttons.alpha=1;
