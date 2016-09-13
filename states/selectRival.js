@@ -39,11 +39,45 @@ Selectplayer.prototype = {
 
       game.add.sprite(0, 0, 'rival-bg');
 
+
+      search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
+      search.visible=false;
+
+
+
+      this.addMenuOption('Start', function () {
+        search.visible=true;
+        Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
+
+      });
+
+
       this.addMenuOption('Volver', function () {
         game.state.start("GameMenu");
       });
 
 
+
+  },
+
+  listenerSearch: function (msg){
+
+      search.visible=false;
+    
+    console.log(msg);
+       auxArray=JSON.parse(msg);
+
+      console.log("Oponente Encontrado");
+
+
+      this.game.state.states["Game"].partida=auxArray;
+      this.game.state.states['Game'].perfil = auxArray.oponente;
+      this.game.state.states['Game'].tiempoMaximo = auxArray.tiempomaximo;
+      this.game.state.states['Game'].triesA= auxArray.IntentosOponente;
+      this.game.state.states['Game'].triesP= auxArray.Intentoslocal;
+      this.game.state.states['Game'].modo=auxArray.rol;
+
+      game.state.start("Game");
 
   },
 
