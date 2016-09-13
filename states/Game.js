@@ -62,9 +62,9 @@ Game.prototype = {
 
      var display1="Fallaste!";
      var display2="Ganaste!";
-     presicion= 0;
+    //  presicion= 0;
      presicionText=0;
-     rangoDePresicion=40;
+    //  rangoDePresicion=40;
      counter=this.tiempoMaximo;
 
      //Modo aleatorio de settear quien comienza la partida, arquero o pateador
@@ -117,8 +117,6 @@ Game.prototype = {
 
     // MODIFICAMOS NUEVA BARRA DE COLORES
 
-    //  barra = game.add.sprite(450,600,'barra');
-    //  barra.scale.setTo(0.30,0.20);
 
 
     var 	myBitmap = this.game.add.bitmapData(500, 20);
@@ -135,7 +133,8 @@ Game.prototype = {
     myBitmap.context.fillRect(0,0,this.game.height,this.game.width);
 
 
-      arrayGradient =[[[0, "red"],[0.15,"orange"],[0.50,"green"],[0.85,"orange"],[1,"red"]],
+      arrayGradient =[[[0, "red"],[0.10,"orange"],[0.50,"green"],[0.90,"orange"],[1,"red"]],
+                      [[0, "red"],[0.15,"orange"],[0.50,"green"],[0.85,"orange"],[1,"red"]],
                       [[0, "red"],[0.25,"orange"],[0.50,"green"],[0.75,"orange"],[1,"red"]],
                       [[0, "red"],[0.35,"orange"],[0.50,"green"],[0.65,"orange"],[1,"red"]],
                       [[0, "red"],[0.40,"orange"],[0.50,"green"],[0.60,"orange"],[1,"red"]]
@@ -143,6 +142,9 @@ Game.prototype = {
 
 
    barra = this.game.add.sprite(this.game.width/2 - 250,600, myBitmap);
+
+   presicion= 0;
+   //rangoDePresicion=40;
 
 
 
@@ -313,12 +315,8 @@ Game.prototype = {
             counter=150000;
             presicionText.visible=false;
 
-            //buttons.visible=true;
-			//buttons.alpha=1;
             idElegido=0;
 
-
-			//Emit("enviarJugada",idElegido,"recibeJugada","failScore",self);
               this.EnviarJugadaServer();
 
 
@@ -362,6 +360,7 @@ Game.prototype = {
 
     barra.visible=true;
     focus.visible=true;
+    game.world.bringToTop(focus);
 
     tweenTribuna1.pause();
     tweenTribuna2.pause();
@@ -383,23 +382,15 @@ Game.prototype = {
 
 
     player.visible=true;
-    focus.position.x=440;
+    focus.position.x=barra.position.x;
     focus.position.y=600;
     tweenFocus = game.add.tween(focus);
     tweenFocus.to( {x:endBarra, y:600}, velocidad, 'Linear', true, 0, false).yoyo(true);
-    velocidad=velocidad-400;
+
     self.setArquero(self);
-    //buttons.visible=false;
+
 	buttons.alpha=0;
 
-    // transparentObject.visible=true;
-    //
-    // transparentObject.events.onInputDown.addOnce(this.ListenerPateador,self);
-
-    //transparentObject.visible=true;
-    //transparentObject.events.onInputDown.addOnce(this.EnviarJugadaServer,self);
-
-  //  self.activeAnimation(self);
   },
 
 
@@ -430,12 +421,6 @@ Game.prototype = {
     self.EnviarJugadaServer(self);
 
 
-
-
-
-        //self.activeAnimation(self);
-        //self.ListenerArquero(self);
-
   },
 
   actionOnClick: function(target) {
@@ -454,14 +439,13 @@ Game.prototype = {
 
     }else{
 		target.events.onInputUp.addOnce(self.mouseUpPateador,self);
+      self.updateBarra(self);
       self.setBarraPresicion(self);
       self.setPlayersMode1(self);
 
     };
 
   },
-
-
 
   restart: function(self){
 
@@ -478,7 +462,7 @@ Game.prototype = {
     }else{
       triesP++;
       self.botonesRojos(self);
-      self.updateBarra(self);
+
     }
 
     setTimeout(function(){
@@ -491,7 +475,7 @@ Game.prototype = {
 
       focus.visible=false;
       buttons.visible=true;
-	  buttons.alpha=1;
+	     buttons.alpha=1;
       player.position.x=240;
       player.position.y=450;
       player.frame=0;
@@ -703,7 +687,7 @@ Game.prototype = {
         if( rangoDePresicion > presicion && presicion > -rangoDePresicion){
 
             self.acertarTiro(self);
-           }else{
+          }else{
 
             self.errarTiro(self);
 
@@ -728,11 +712,9 @@ Game.prototype = {
       self.stopPlayer(self);
 
       posArqueroI=self.getResult().id;
-      //
+
       posArquero= self.getResult().position;
-      //
-      // arrayMaso= self.getMaso(self);
-      //
+
       generator = datosServer.computer;
 
 
@@ -986,14 +968,41 @@ Game.prototype = {
 
   errarTiro: function(){
 
-      if(presicion > 0){
-        posAux = game.rnd.integerInRange(600,800);
-      }else{
-        posAux = game.rnd.integerInRange(-800,200);
-      }
+    if( presicion < rangoDePresicion+30 ||  presicion < -(rangoDePresicion+30) ){
+            switch (self.getResult().id) {
+              case 1 || 4:
+                  posAux= arco.position.x-10;
+                  posAuxY=  game.rnd.integerInRange(arco.position.y,arco.position.y+ arco.height);
+                break;
 
+              case 3 || 6:
+                  posAux= arco.position.x+10 + arco.width;
+                  posAuxY=  game.rnd.integerInRange(arco.position.y,arco.position.y + arco.height);
+                break;
+
+              case 2 || 5:
+                  posAux= game.rnd.integerInRange(arco.position.x,arco.position.x + arco.width);
+                  posAuxY=  arco.position.y;
+                break;
+
+            };
+    }else if(presicion > rangoDePresicion+30){
+      posAux = game.rnd.integerInRange(600,800);
+      posAuxY=-500;
+    }else{
+      posAux = game.rnd.integerInRange(-800,200);
+      posAuxY=-500;
+    }
+
+      // if(presicion > 0){
+      //   posAux = game.rnd.integerInRange(600,800);
+    //  posAuxY=-500;
+      // }else{
+      //
+      // }
+      console.log(" POS AUX: "+posAux+"  POS AUX Y: "+posAuxY);
      self.seMueveArquero(self);
-     var movimientoPelota=self.moverPelota({x:posAux, y:-500});
+     var movimientoPelota=self.moverPelota({x:posAux, y:posAuxY});
 
      movimientoPelota.onComplete.addOnce(function(){
        self.NoAssertPoint(200,triesP);
@@ -1305,9 +1314,18 @@ updateBarra: function(){
 
       }else{ console.log("Termino iteracion")}
 
+      self.setDifficult(self);
   counterBarra++;
 
 },
 
+
+
+setDifficult(){
+      var a = barra.width*arrayGradient[counterBarra][1][0] +15;
+       rangoDePresicion= barra.width/2 - a;
+      return;
+
+},
 
 };
