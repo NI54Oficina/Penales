@@ -43,7 +43,7 @@ socket.on('buscandoPartida', function(msg){
 socket.on('partidaEncontrada', function(msg){
   console.log(msg);
 
-    ResponseCallBack(msg);
+    //ResponseCallBack(msg);
 
 
 });
@@ -94,11 +94,11 @@ function Emit(toEmit,params,eventListen="",callback="",context="",oneshot=true){
 }
 
 function ResponseCallBack(msg){
-	if(currentCallback){
-		currentContext[currentCallback](msg);
-		currentCallback=null;
+	//if(currentCallback){
+	//	currentContext[currentCallback](msg);
+	//	currentCallback=null;
 		//currentContext=null;
-	}
+	//}
 }
 
 var events={};

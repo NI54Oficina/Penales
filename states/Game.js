@@ -605,24 +605,28 @@ Game.prototype = {
     },
 
 	setearResultado: function(msg){
-		// var resultadoArray=JSON.parse(msg);
-		// console.log("entra resultado "+msg);
-		// puntosUser = resultadoArray["golesUser"];
-		// puntosComputer = resultadoArray["golesComputer"];
-		this.checkIntentos();
+		 var resultadoArray=JSON.parse(msg);
+		 console.log("entra resultado "+msg);
+		 puntosUser = resultadoArray["golesUser"];
+		 puntosComputer = resultadoArray["golesComputer"];
+		this.checkIntentos(msg);
     },
 
     checkIntentos: function(data){
-		// var auxArray=JSON.parse(data);
-		// if(modo==1){
-		// 	golesUser= data["localGol"];
-		// 	golesComputer= data["visitanteGol"];
-		// }else{
-		// 	golesUser= data["visitanteGol"];
-		// 	golesComputer= data["localGol"];
-		// }
-		// triesP = data["localTurno"];
-		// triesA = data["visitanteTurno"];
+		console.log(data);
+		var auxArray=JSON.parse(data);
+		if(modo==1){
+		 	golesUser= data["localGol"];
+		 	golesComputer= data["visitanteGol"];
+			//triesP = data["localTurno"];
+			//triesA = data["visitanteTurno"];
+		}else{
+		 	golesUser= data["visitanteGol"];
+			golesComputer= data["localGol"];
+			//triesP = data["visitanteTurno"];
+			//triesA = data["localTurno"];
+		}
+		
 
 		console.log("entra check intentos");
       if( triesA  >= 5 &&  triesP  >= 5 ){
@@ -1115,7 +1119,7 @@ generarRiesgo: function(arrai, target){
 
 },
 
-modificarBotones: function(){
+modificarBotones: function(self){
   var barray = self.getMaso(self);
 
   for(var i=1; i<7; i++){

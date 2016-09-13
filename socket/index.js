@@ -190,11 +190,18 @@ var enAlargue=false;
 
 function InicioTurno(){
 	var turnoArray={};
-	/*turnoArray["localGol"];
-	turnoArray["localTurno"];
-	turnoArray["visitanteGol"];
-	turnoArray["visitanteTurno"];*/
-	io.emit('inicioTurno', "empate");
+	if(mod==1){
+		turnoArray["localGol"]=golesUser;
+		turnoArray["visitanteGol"]=golesComputer;
+		//turnoArray["localTurno"]=counterLocal;
+		//turnoArray["visitanteTurno"]=counterVisitante;
+	}else{
+		turnoArray["localGol"]=golesUser;
+		turnoArray["visitanteGol"]=golesComputer;
+		//turnoArray["localTurno"]=counterVisitante;
+		//	turnoArray["visitanteTurno"]=counterLocal;
+	}
+	io.emit('inicioTurno', JSON.stringify(turnoArray));
 }
 
 function SendStats(){
