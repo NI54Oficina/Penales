@@ -50,6 +50,11 @@ GameMenu.prototype = {
       game.state.start("Stadistics");
     });
 
+    this.addMenuOption('Seleccionar Rival', function () {
+      game.state.start("Selectplayer");
+    });
+
+
     //Creacion ariables en localStorage
 
 

@@ -11,6 +11,9 @@ var Splash = function () {};
     game.load.script('gameover','states/GameOver.js');
   //  game.load.script('options', 'states/Options.js');
     game.load.script('Stadistics', 'states/stadistics.js');
+    game.load.script('Multiplayer','states/multiPlayer.js' );
+    game.load.script('Singleplayer','states/singlePlayer.js' );
+    game.load.script('Selectplayer','states/selectRival.js' );
   },
 
   loadBgm: function () {
@@ -26,6 +29,8 @@ var Splash = function () {};
     game.load.image('gameover-bg', 'assets/images/menu-bg.jpg');
     game.load.image('stats-bg', 'assets/images/bg-stats.jpg');
     game.load.image('rival-bg', 'assets/images/bg-rival.jpg');
+    game.load.image('multi-bg', 'assets/images/bg-multi.jpg');
+    game.load.image('single-bg', 'assets/images/bg-single.jpg');
 
   },
 
@@ -66,6 +71,9 @@ var Splash = function () {};
     game.state.add("GameOver",GameOver);
   //  game.state.add("Options",Options);
     game.state.add("Stadistics",Stadistics);
+    game.state.add("Selectplayer",Selectplayer);
+    game.state.add("Singleplayer",Singleplayer);
+    game.state.add("Multiplayer",Multplayer);
   },
 
   addGameMusic: function () {
