@@ -610,7 +610,7 @@ Game.prototype = {
 			//triesP = data["visitanteTurno"];
 			//triesA = data["localTurno"];
 		}
-		
+
 
 		console.log("entra check intentos");
       if( triesA  >= 5 &&  triesP  >= 5 ){
@@ -968,21 +968,24 @@ Game.prototype = {
 
   errarTiro: function(){
 
-    if( presicion < rangoDePresicion+30 ||  presicion < -(rangoDePresicion+30) ){
+    if( presicion < rangoDePresicion+25 ||  presicion < -(rangoDePresicion+25) ){
             switch (self.getResult().id) {
-              case 1 || 4:
+              case 1:
+              case 4:
                   posAux= arco.position.x-10;
                   posAuxY=  game.rnd.integerInRange(arco.position.y,arco.position.y+ arco.height);
                 break;
 
-              case 3 || 6:
+              case 3:
+              case 6:
                   posAux= arco.position.x+10 + arco.width;
                   posAuxY=  game.rnd.integerInRange(arco.position.y,arco.position.y + arco.height);
                 break;
 
-              case 2 || 5:
+              case 2:
+              case 5:
                   posAux= game.rnd.integerInRange(arco.position.x,arco.position.x + arco.width);
-                  posAuxY=  arco.position.y;
+                  posAuxY=  arco.position.y-10;
                 break;
 
             };
