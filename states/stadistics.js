@@ -37,7 +37,7 @@ Stadistics.prototype = {
   create: function(){
       self = this;
 
-      game.add.sprite(0, 0, 'gameover-bg');
+      game.add.sprite(0, 0, 'stats-bg');
       var titleStyle = { font: 'bold 60pt TheMinion', fill: '#FDFFB5', align: 'center'};
       var textTitle = game.add.text(game.world.centerX-250, 100, "Estadisticas", titleStyle);
       var puntajeStyle = { font: 'bold 15pt TheMinion', fill: 'white'};

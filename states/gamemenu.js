@@ -23,12 +23,12 @@ GameMenu.prototype = {
 
     self=this;
 
-    if (music.name !== "dangerous" && playMusic) {
-      music.stop();
-      music = game.add.audio('dangerous');
-      music.loop = true;
-      music.play();
-    }
+    // if (music.name !== "dangerous" && playMusic) {
+    //   music.stop();
+    //   music = game.add.audio('dangerous');
+    //   music.loop = true;
+    //   music.play();
+    // }
     game.stage.disableVisibilityChange = true;
     game.add.sprite(0, 0, 'menu-bg');
     game.add.existing(this.titleText);
@@ -42,9 +42,9 @@ GameMenu.prototype = {
       Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
       //self.ListenerLogin(self);
     });
-    this.addMenuOption('Options', function () {
-      game.state.start("Options");
-    });
+    // this.addMenuOption('Options', function () {
+    //   game.state.start("Options");
+    // });
 
     this.addMenuOption('Stadistics', function () {
       game.state.start("Stadistics");

@@ -9,7 +9,7 @@ var Splash = function () {};
     game.load.script('gamemenu','states/GameMenu.js');
     game.load.script('game', 'states/Game.js');
     game.load.script('gameover','states/GameOver.js');
-    game.load.script('options', 'states/Options.js');
+  //  game.load.script('options', 'states/Options.js');
     game.load.script('Stadistics', 'states/stadistics.js');
   },
 
@@ -20,9 +20,12 @@ var Splash = function () {};
   },
 
   loadImages: function () {
-    game.load.image('menu-bg', 'assets/images/menu-bg.jpg');
+
+    game.load.image('menu-bg', 'assets/images/bg-menu.jpg');
     game.load.image('options-bg', 'assets/images/menu-bg.jpg');
     game.load.image('gameover-bg', 'assets/images/menu-bg.jpg');
+    game.load.image('stats-bg', 'assets/images/bg-stats.jpg');
+    game.load.image('rival-bg', 'assets/images/bg-rival.jpg');
 
   },
 
@@ -52,7 +55,7 @@ var Splash = function () {};
     this.loadScripts();
     this.loadImages();
     this.loadFonts();
-    this.loadBgm();
+  //  this.loadBgm();
 
   },
 
@@ -61,7 +64,7 @@ var Splash = function () {};
     game.state.add("GameMenu",GameMenu);
     game.state.add("Game",Game);
     game.state.add("GameOver",GameOver);
-    game.state.add("Options",Options);
+  //  game.state.add("Options",Options);
     game.state.add("Stadistics",Stadistics);
   },
 
@@ -74,7 +77,7 @@ var Splash = function () {};
   create: function () {
     this.status.setText('Cargando');
     this.addGameStates();
-    this.addGameMusic();
+  //  this.addGameMusic();
 	  Emit("login"," ","loginConfirmed","logueado",this);
   },
 
