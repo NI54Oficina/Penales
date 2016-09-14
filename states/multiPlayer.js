@@ -40,7 +40,7 @@ Multiplayer.prototype = {
       game.add.sprite(0, 0, 'rival-bg');
 
       this.addMenuOption('Volver', function () {
-        game.state.start("GameMenu");
+        game.state.start("Singleplayer");
       });
 
 

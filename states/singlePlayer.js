@@ -46,7 +46,7 @@ Singleplayer.prototype = {
 
 
 
-        this.addMenuOption('Start', function () {
+        this.addMenuOption('COMENZAR', function () {
           search.visible=true;
           Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
 
@@ -60,7 +60,7 @@ Singleplayer.prototype = {
 
 
         this.addMenuOption('Volver', function () {
-          //game.state.start("GameMenu");
+          game.state.start("GameMenu");
         });
 
 

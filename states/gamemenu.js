@@ -37,9 +37,11 @@ GameMenu.prototype = {
 
 
 
-    this.addMenuOption('Start', function () {
-      search.visible=true;
-      Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
+    this.addMenuOption('CLÁSICO', function () {
+
+      game.state.start("Selectplayer");
+      // search.visible=true;
+      // Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
       //self.ListenerLogin(self);
     });
     // this.addMenuOption('Options', function () {
@@ -50,8 +52,8 @@ GameMenu.prototype = {
       game.state.start("Stadistics");
     });
 
-    this.addMenuOption('Seleccionar Rival', function () {
-      game.state.start("Selectplayer");
+    this.addMenuOption('DESAFIO', function () {
+      game.state.start("Singleplayer");
     });
 
 

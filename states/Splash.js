@@ -72,8 +72,8 @@ var Splash = function () {};
   //  game.state.add("Options",Options);
     game.state.add("Stadistics",Stadistics);
     game.state.add("Selectplayer",Selectplayer);
-    // game.state.add("Singleplayer",Singleplayer);
-    // game.state.add("Multiplayer",Multplayer);
+    game.state.add("Singleplayer",Singleplayer);
+    game.state.add("Multiplayer",Multiplayer);
   },
 
   addGameMusic: function () {

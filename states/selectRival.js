@@ -45,7 +45,7 @@ Selectplayer.prototype = {
 
 
 
-      this.addMenuOption('Start', function () {
+      this.addMenuOption('JUGAR', function () {
         search.visible=true;
         Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
 
@@ -63,7 +63,7 @@ Selectplayer.prototype = {
   listenerSearch: function (msg){
 
       search.visible=false;
-    
+
     console.log(msg);
        auxArray=JSON.parse(msg);
 
