@@ -33,72 +33,23 @@ socket.on('statsRecived', function(msg){
 	console.log(msg);
 });
 
-socket.on('buscandoPartida', function(msg){
-  console.log("buscando partida");
-  console.log(msg);
-
-
-});
-
-socket.on('partidaEncontrada', function(msg){
-  console.log(msg);
-
-    //ResponseCallBack(msg);
-
-
-});
-
-socket.on('inicioPartida', function(msg){
-	console.log(msg);
-//  console.log(currentContext);
-  //currentContext["Clicked"](currentContext);
-  //Clicked();
-
-
-});
-
-socket.on('recibeJugada', function(msg){
-  //console.log(msg);
-
-  //ResponseCallBack(msg);
-
-});
-
-socket.on('inicioTurno', function(msg){
-//console.log(msg);
-  //currentContext["checkIntentos"](currentContext);
-  //restart();
-});
-
-
 socket.on('resultadoPartida', function(msg){
 console.log(msg);
 });
-
 
 var currentCallback;
 var currentContext;
 
 function Emit(toEmit,params,eventListen="",callback="",context="",oneshot=true){
-  if(toEmit=='enviarJugada'){
-    console.log("envia jugada al servidor");
-  }
-  console.log("params "+params);
-  console.log("event listen "+eventListen);
-  if(eventListen!=""){
-	SuscribeServerEvent(eventListen,callback,context,oneshot);
-  }
-	//currentCallback=callback;
-	//currentContext=context;
+	if(toEmit=='enviarJugada'){
+		console.log("envia jugada al servidor");
+	}
+	console.log("params "+params);
+	console.log("event listen "+eventListen);
+	if(eventListen!=""){
+		SuscribeServerEvent(eventListen,callback,context,oneshot);
+	}
 	socket.emit(toEmit, params);
-}
-
-function ResponseCallBack(msg){
-	//if(currentCallback){
-	//	currentContext[currentCallback](msg);
-	//	currentCallback=null;
-		//currentContext=null;
-	//}
 }
 
 var events={};
@@ -126,4 +77,14 @@ function ServerEvent(callback,context,oneshot=true){
 	this.trigger= function(params=""){
 		context[callback](params);
 	};
+}
+
+var prefijo="pasos";
+
+function SaveStorage(code,value){
+	localStorage[prefijo+code]=value;
+}
+
+function GetStorage(code){
+	return localStorage[prefijo+code];
 }

@@ -92,22 +92,21 @@ GameMenu.prototype = {
 
   listenerSearch: function (msg){
 
-      search.visible=false;
-      this.test();
+	search.visible=false;
+	this.test();
     console.log(msg);
-       auxArray=JSON.parse(msg);
+	auxArray=JSON.parse(msg);
 
-      console.log("Oponente Encontrado");
+	console.log("Oponente Encontrado");
+	
+	this.game.state.states["Game"].partida=auxArray;
+	this.game.state.states['Game'].perfil = auxArray.oponente;
+	this.game.state.states['Game'].tiempoMaximo = auxArray.tiempomaximo;
+	this.game.state.states['Game'].triesA= auxArray.IntentosOponente;
+	this.game.state.states['Game'].triesP= auxArray.Intentoslocal;
+	this.game.state.states['Game'].modo=auxArray.rol;
 
-
-      this.game.state.states["Game"].partida=auxArray;
-      this.game.state.states['Game'].perfil = auxArray.oponente;
-      this.game.state.states['Game'].tiempoMaximo = auxArray.tiempomaximo;
-      this.game.state.states['Game'].triesA= auxArray.IntentosOponente;
-      this.game.state.states['Game'].triesP= auxArray.Intentoslocal;
-      this.game.state.states['Game'].modo=auxArray.rol;
-
-      game.state.start("Game");
+	game.state.start("Game");
 
   },
 

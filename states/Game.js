@@ -480,6 +480,8 @@ Game.prototype = {
       self.botonesRojos(self);
       self.updateBarra(self);
     }
+	
+	console.log("arquero:"+triesA+" pateador:"+triesP);
 
     setTimeout(function(){
 
@@ -616,16 +618,17 @@ Game.prototype = {
 		console.log(data);
 		var auxArray=JSON.parse(data);
 		if(modo==1){
-		 	golesUser= data["localGol"];
-		 	golesComputer= data["visitanteGol"];
-			//triesP = data["localTurno"];
-			//triesA = data["visitanteTurno"];
+		 	golesUser= auxArray["localGol"];
+		 	golesComputer= auxArray["visitanteGol"];
+			//triesP = auxArray["localTurno"];
+			//triesA = auxArray["visitanteTurno"];
 		}else{
-		 	golesUser= data["visitanteGol"];
-			golesComputer= data["localGol"];
-			//triesP = data["visitanteTurno"];
-			//triesA = data["localTurno"];
+		 	golesUser= auxArray["visitanteGol"];
+			golesComputer= auxArray["localGol"];
+			//triesP = auxArray["visitanteTurno"];
+			//triesA = auxArray["localTurno"];
 		}
+		console.log(triesA);
 		
 
 		console.log("entra check intentos");
@@ -1274,6 +1277,7 @@ EnviarJugadaServer: function(){
   self.establecerParametros(self);
   counter=150000;
   buttons.visible=false;
+  console.log("idElegido: "+idElegido);
     Emit("enviarJugada",idElegido,"recibeJugada","activeAnimation",self);
 },
 

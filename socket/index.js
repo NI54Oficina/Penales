@@ -20,17 +20,22 @@ var golesComputer;
 
 var auxCont=0;
 
+var modStart=0;
+
 var enAlargue=false;
+
+var finished=false;
 
 
 	io.on('connection', function(socket){
-	console.log("user conected");
-	socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
+		console.log("user conected");
+		socket.on('chat message', function(msg){
+		io.emit('chat message', msg);
 		console.log(msg);
 	});
 
 	socket.on('login', function(msg){
+		//consigue datos de la db
 		var datos={};
 		datos["nombre"]="Pepe";
 		datos["id"]= "2";
@@ -42,14 +47,13 @@ var enAlargue=false;
 	});
 
 	socket.on('requestStats', function(msg){
+		//debería solicitar datos a la db sobre las estadisticas, de momento se simulan localmente
 		if(msg){
 			var fs = require('fs');
 			fs.writeFile("./stats.txt",  msg, function(err) {
 				if(err) {
 					return console.log(err);
 				}
-
-				console.log("Stats Guardados");
 				SendStats();
 			});
 		}else{
@@ -60,17 +64,19 @@ var enAlargue=false;
 	socket.on('buscarPartida', function(msg){
 		io.emit('buscandoPartida', "buscando partida...");
 		setTimeout(function(){
+			finished=false;
 			mod=randomBetween(0,1);
+			modStart=mod;
 			golesUser=0;
 			golesComputer=0;
 			counterLocal=0;
 			counterVisitante=0;
 			if(mod%2==0){
-				var counterLocal=0;
+				counterLocal=0;
 				var counterVisitante=1;
 			}else{
-				var counterLocal=1;
-				var counterVisitante=0;
+				counterLocal=1;
+				counterVisitante=0;
 			};
 
 			oponente["nombre"]="Pepita";
@@ -112,7 +118,9 @@ var enAlargue=false;
 	});
 
 	socket.on('enviarJugada', function(msg){
-
+		if(finished){
+			return;
+		}
 		setTimeout(function(){
 
 			if(mod%2 == 0){
@@ -169,6 +177,7 @@ var enAlargue=false;
 							};
 						}else{
 							console.log("TERMINA JUEGO");
+							finished=true;
 							GetResultado();
 						};
 				}else{
@@ -190,16 +199,16 @@ var enAlargue=false;
 
 function InicioTurno(){
 	var turnoArray={};
-	if(mod==1){
+	if(modStart==1){
 		turnoArray["localGol"]=golesUser;
 		turnoArray["visitanteGol"]=golesComputer;
-		//turnoArray["localTurno"]=counterLocal;
-		//turnoArray["visitanteTurno"]=counterVisitante;
+		turnoArray["localTurno"]=counterLocal;
+		turnoArray["visitanteTurno"]=counterVisitante;
 	}else{
 		turnoArray["localGol"]=golesUser;
 		turnoArray["visitanteGol"]=golesComputer;
-		//turnoArray["localTurno"]=counterVisitante;
-		//	turnoArray["visitanteTurno"]=counterLocal;
+		turnoArray["localTurno"]=counterVisitante;
+		turnoArray["visitanteTurno"]=counterLocal;
 	}
 	io.emit('inicioTurno', JSON.stringify(turnoArray));
 }
