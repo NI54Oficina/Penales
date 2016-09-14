@@ -64,7 +64,7 @@ Game.prototype = {
      var display2="Ganaste!";
     //  presicion= 0;
      presicionText=0;
-    //  rangoDePresicion=40;
+	rangoDePresicion=40;
      counter=this.tiempoMaximo;
 
      //Modo aleatorio de settear quien comienza la partida, arquero o pateador
@@ -315,9 +315,10 @@ Game.prototype = {
             counter=150000;
             presicionText.visible=false;
 
-            idElegido=0;
+            this.idElegido=0;
+			this.setResult(this.idElegido);
 
-              this.EnviarJugadaServer();
+              this.EnviarJugadaServer(this);
 
 
 
@@ -411,7 +412,7 @@ Game.prototype = {
      }
  },
 
-  setPlayersMode2: function(){
+  setPlayersMode2: function(self){
 
 
     player.visible=true;
@@ -430,7 +431,7 @@ Game.prototype = {
     }
 
     clicked=1;
-    self.setResult(target);
+    self.setResult(target.id);
 
 
     if(Phaser.Math.isEven(modo)){
@@ -534,12 +535,20 @@ Game.prototype = {
   },
 
   seMueveArquero: function(self){
-
+	  
+		console.log(self);
+		console.log(buttons);
+		console.log(self.buttons);
+		console.log(self.posArquero);
+		//console.log(self.posArquero.position);
+		console.log(self.posArqueroI);
       tweenArquero = game.add.tween(arquero);
-      tweenArquero.to(posArquero, 300, 'Linear', true, 0);
-      console.log("entra animacion arquero y posArquero: "+ posArqueroI);
+	  console.log(arquero);
+	  var auxVar=self.posArquero;
+      tweenArquero.to(auxVar, 300, 'Linear', true, 0);
+      console.log("entra animacion arquero y posArquero: "+ self.posArqueroI);
 
-        switch(posArqueroI){
+        switch(self.posArqueroI){
 
           case 1:
           arquero.animations.play('up-left');
@@ -661,12 +670,17 @@ Game.prototype = {
 
 
 
-  ListenerPateador: function(target, msg){
+  ListenerPateador: function(self, msg){
 
     console.log("DATOS SERVER: "+ msg);
 
 
     var datosServer=JSON.parse(msg);
+	
+	if(datosServer["user"]==0){
+		self.failScore(self,msg);
+		return;
+	}
 
     self.patear(self);
 
@@ -678,11 +692,11 @@ Game.prototype = {
 
 
         self.ubicarArquero(datosServer, self);
-        posArqueroI= generator;
+        self.posArqueroI= generator;
 
         win=false;
 
-        if(self.getResult().id!= generator){
+        if(self.getResult()!= generator){
            win=true;
         };
 
@@ -701,7 +715,7 @@ Game.prototype = {
   },
 
 
-  ListenerArquero: function(target, msg){
+  ListenerArquero: function(self, msg){
 
     console.log("DATOS SERVER: "+msg);
 
@@ -709,21 +723,29 @@ Game.prototype = {
     var datosServer=JSON.parse(msg);
 
     self.patear(self);
+	console.log("test?");
+	self.setResult(datosServer["user"]);
+
 
     setTimeout(function(){
 
       self.stopPlayer(self);
 
-      posArqueroI=self.getResult().id;
-
-      posArquero= self.getResult().position;
+      self.posArqueroI=self.getResult();
+	
+		if(self.getResult()==0){
+			self.posArquero= arquero.position;
+		}else{
+			self.posArquero= buttons.children[self.getResult()-1].position;
+		}
+      
 
       generator = datosServer.computer;
 
 
       win=false;
 
-      if(posArqueroI == generator){
+      if(self.posArqueroI == generator){
          win=true;
       };
 
@@ -745,7 +767,7 @@ Game.prototype = {
   },
 
 
-    failScore: function(msg){
+    failScore: function(self,msg){
       console.log("DATOS SERVER: "+msg);
 
 
@@ -753,9 +775,7 @@ Game.prototype = {
 
       presicionText.destroy();
 
-      if(clicked==1){
-        return;
-      }
+
 
 
       self.setArquero(self);
@@ -783,7 +803,7 @@ Game.prototype = {
           }else{
 
             self.ubicarArquero(datosServer,self);
-            var movimientoPelota= self.moverPelota(posArquero);
+            var movimientoPelota= self.moverPelota(self.posArquero);
           };
 
 
@@ -802,7 +822,7 @@ Game.prototype = {
 
 
           };
-
+			
           self.seMueveArquero(self);
           // var movimientoPelota= self.moverPelota({x:posAux, y:-500});
         }
@@ -878,8 +898,9 @@ Game.prototype = {
     },
 
     acertarTiro: function(self){
-
-      coordinate=self.getResult().position;
+		console.log("intenta obtener el boton "+self.getResult());
+		console.log(buttons);
+      coordinate= buttons.children[self.getResult()-1].position;
 
       self.seMueveArquero(self);
 
@@ -969,10 +990,10 @@ Game.prototype = {
 
 
 
-  errarTiro: function(){
+  errarTiro: function(self){
 
     if( presicion < rangoDePresicion+25 ||  presicion < -(rangoDePresicion+25) ){
-            switch (self.getResult().id) {
+            switch (self.getResult()) {
               case 1:
               case 4:
                   posAux= arco.position.x-10;
@@ -1029,7 +1050,7 @@ Game.prototype = {
 
   },
 
-  noAtajar: function(){
+  noAtajar: function(self){
 
      posAux = game.rnd.integerInRange(-800,800);
 
@@ -1057,7 +1078,7 @@ moverPelota: function(unaCoordenada){
    return auxTween;
 },
 
-establecerParametros: function(){
+establecerParametros: function(self){
   presicionText.destroy();
 
   transparentObject.visible=false;
@@ -1073,16 +1094,16 @@ establecerParametros: function(){
  if(!Phaser.Math.isEven(modo)){
   if( rangoDePresicion > presicion && presicion > -rangoDePresicion){
 
-      idElegido=self.getResult(self).id;
+      self.idElegido=self.getResult();
      }else{
 
-      idElegido=0;
+      self.idElegido=0;
 
    };
 
 
  }else{
-   idElegido=self.getResult(self).id;
+   self.idElegido=self.getResult();
  };
 
   looser.visible=false;
@@ -1165,7 +1186,7 @@ calculoChancesAtajar: function(efec, target){
 
     if(chanceAtajar==1){
 
-      var gen= self.getResult().id;
+      var gen= self.getResult();
 
 
     }else {
@@ -1205,7 +1226,7 @@ calculoChancesAtajar: function(efec, target){
 // },
 
 // VERSION SERVIDOR DE MISMA FUNCION
-ubicarArquero: function(resultadoServer, target){
+ubicarArquero: function(resultadoServer, self){
 
 
   // if(Phaser.Math.isEven(this.modo)){
@@ -1231,12 +1252,12 @@ ubicarArquero: function(resultadoServer, target){
   // };
 
   if(generator==0){
-    posArqueroI =game.rnd.integerInRange(0,5);
-    posArquero= buttons.children[posArqueroI].position;
+    self.posArqueroI =game.rnd.integerInRange(0,5);
+    self.posArquero= arquero.position;
 
   }else{
-    posArquero=buttons.children[generator-1].position;
-    posArqueroI =generator;
+    self.posArquero=buttons.children[generator-1].position;
+    self.posArqueroI =generator;
 
   }
 
@@ -1278,19 +1299,21 @@ activeAnimation: function(msg){
 },
 
 mouseUpPateador:function(){
-	console.log("entra uppppp");
-	 if(!Phaser.Math.isEven(modo)){
-		this.EnviarJugadaServer();
+	console.log("entra uppppp "+this.pause);
+	 if(!Phaser.Math.isEven(modo)&&!this.pause){
+		this.EnviarJugadaServer(this);
 	 }
 },
 
-EnviarJugadaServer: function(){
+EnviarJugadaServer: function(self){
+	
 	self.pause=true;
+	self.setArquero();
   self.establecerParametros(self);
   counter=150000;
   buttons.visible=false;
-  console.log("idElegido: "+idElegido);
-    Emit("enviarJugada",idElegido,"recibeJugada","activeAnimation",self);
+  console.log("idElegido: "+self.idElegido);
+    Emit("enviarJugada",self.idElegido,"recibeJugada","activeAnimation",self);
 },
 
 
@@ -1323,7 +1346,9 @@ updateBarra: function(){
 
       self.setDifficult(self);
   counterBarra++;
-
+	 if(counterBarra>=(arrayGradient.length)){
+		 counterBarra= arrayGradient.length-1;
+	 }
 },
 
 

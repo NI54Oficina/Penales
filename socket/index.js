@@ -4,7 +4,7 @@ var io = require('socket.io')(http);
 
 var oponente={};
 
-var jugada={};
+var partida={};
 
 var jugadaActual={};
 
@@ -20,11 +20,11 @@ var golesComputer;
 
 var auxCont=0;
 
-var modStart=0;
+var modStart=-1;
 
 var enAlargue=false;
 
-var finished=false;
+var finished=true;
 
 
 	io.on('connection', function(socket){
@@ -45,6 +45,13 @@ var finished=false;
 		console.log("log confirmed");
 		SendStats();
 	});
+	
+	
+	socket.on('disconnect', function(){
+		console.log('user disconnected');
+		Reset();
+	});
+
 
 	socket.on('requestStats', function(msg){
 		//debería solicitar datos a la db sobre las estadisticas, de momento se simulan localmente
@@ -64,46 +71,38 @@ var finished=false;
 	socket.on('buscarPartida', function(msg){
 		io.emit('buscandoPartida', "buscando partida...");
 		setTimeout(function(){
+			Reset();
 			finished=false;
 			mod=randomBetween(0,1);
 			modStart=mod;
-			golesUser=0;
-			golesComputer=0;
-			counterLocal=0;
-			counterVisitante=0;
 			if(mod%2==0){
 				counterLocal=0;
-				var counterVisitante=1;
+				counterVisitante=1;
 			}else{
 				counterLocal=1;
 				counterVisitante=0;
 			};
 
-			oponente["nombre"]="Pepita";
-			oponente["session"]="token";
+			oponente= GetOponente();
 
-			oponente["efectividad"]="20";
+			partida["oponente"]=oponente;
 
-			oponente["tendencia"]= [[0,0,1,2,2,0],[0,2,1,1,2,0],[0,2,1,1,2,0],[0,2,1,1,2,0],[0,1,1,1,2,2]];
-
-			jugada["oponente"]=oponente;
-
-			jugada["tiempomaximo"]= 5;
+			partida["tiempomaximo"]= 5;
 
 			if(mod==1){
-				jugada["camiseta"]= "local";
-				jugada["rol-inicial"]= "Pateador";
+				partida["camiseta"]= "local";
+				partida["rol-inicial"]= "Pateador";
 
 			}else{
-				jugada["camiseta"]= "Visitante";
-				jugada["rol-inicial"]= "Arquero";
+				partida["camiseta"]= "Visitante";
+				partida["rol-inicial"]= "Arquero";
 			}
 
-			jugada["rol"]=mod;
-			jugada["IntentosOponente"]=counterVisitante;
-			jugada["Intentoslocal"]=counterLocal;
+			partida["rol"]=mod;
+			partida["IntentosOponente"]=counterVisitante;
+			partida["Intentoslocal"]=counterLocal;
 
-			io.emit('partidaEncontrada', JSON.stringify(jugada));
+			io.emit('partidaEncontrada', JSON.stringify(partida));
 
 			console.log("Partida encontrada");
 			console.log(golesUser);
@@ -124,13 +123,15 @@ var finished=false;
 		setTimeout(function(){
 
 			if(mod%2 == 0){
-
+				//entra con jugador en modo arquero
+				console.log("jugador es arquero");
 				ubicacion =  CalculateTiro(msg);
 
 				counterVisitante++;
 			}else{
-
-				ubicacion = CalculateAtaje();
+				//entra con jugador en modo pateador	
+				console.log("jugador es pateador");
+				ubicacion = CalculateAtaje(msg);
 
 				counterLocal++;
 			}
@@ -190,26 +191,21 @@ var finished=false;
 		},2000);
 	});
 
-
-	socket.on('disconnect', function(){
-		console.log('user disconnected');
-	});
-
 });
 
 function InicioTurno(){
 	var turnoArray={};
-	if(modStart==1){
+	//if(modStart==1){
 		turnoArray["localGol"]=golesUser;
 		turnoArray["visitanteGol"]=golesComputer;
 		turnoArray["localTurno"]=counterLocal;
 		turnoArray["visitanteTurno"]=counterVisitante;
-	}else{
+	/*}else{
 		turnoArray["localGol"]=golesUser;
 		turnoArray["visitanteGol"]=golesComputer;
 		turnoArray["localTurno"]=counterVisitante;
 		turnoArray["visitanteTurno"]=counterLocal;
-	}
+	}*/
 	io.emit('inicioTurno', JSON.stringify(turnoArray));
 }
 
@@ -242,27 +238,15 @@ function GetResultado(){
 	counterVisitante=0;
 }
 
-function CalculateTiro(msg){
+function CalculateAtaje(msg){
 
-	if(mod%2 ==0){
-		do {
-			generator = randomBetween(1,6);
-		}while (generator==5);
-
-	}else{
-		generator = calculoChancesAtajar(msg);
-	}
-	randomChance=randomBetween(0,1);
-	if(randomChance==0){
-		return generator;
-	}else{
-		return 0;
-	};
+	generator = calculoChancesAtajar(msg);
+	return generator;
 
 }
 
 function calculoChancesAtajar(msg){
-    var chanceAtajar = randomBetween(1,jugador["efectividad"]);
+    var chanceAtajar = randomBetween(1,oponente["efectividad"]);
 
     if(chanceAtajar==1){
 		return msg;
@@ -272,29 +256,33 @@ function calculoChancesAtajar(msg){
     }
 }
 
-function CalculateAtaje(){
-
+function CalculateTiro(){
+	
 	if(!enAlargue){
 		var a = getMaso();
 		var b= generarRiesgo(a);
 
 		return b;
 	}else{
-		return 1;
+		return randomBetween(1,6);
 	}
 
 
 }
 
 function getMaso(){
-	if(mod%2 ==0){
+	//if(mod%2 ==0){
 		return oponente["tendencia"][counterVisitante];
-	}else{
-		return oponente["tendencia"][counterLocal];
-	}
+	//}else{
+	//	return oponente["tendencia"][counterLocal];
+	//}
 }
 
 function generarRiesgo(arrai){
+	//a veces llega array vacio
+	if(!arrai){
+		return randomBetween(1,6);
+	}
 	var arrayNuevo = [];
 
 
@@ -340,7 +328,32 @@ function calculatePuntaje(msg, generator){
 	return;
 }
 
+function Reset(){
+	finished=true;
+	enAlargue=false;
+	modStart=-1;
+	auxCont=0;
+	golesComputer=0;
+	golesUser=0;
+	counterVisitante=0;
+	counterLocal=0;
+	oponente={};
+	jugada={};
+	jugadaActual={};
+}
+
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
 });
+
+function GetOponente(){
+	var oponente= {};
+	oponente["nombre"]="Pepita";
+	oponente["session"]="token";
+
+	oponente["efectividad"]="20";
+
+	oponente["tendencia"]= [[0,0,1,2,2,0],[0,2,1,1,2,0],[0,2,1,1,2,0],[0,2,1,1,2,0],[0,1,1,1,2,2]];
+	return oponente;
+}
