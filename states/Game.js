@@ -612,12 +612,8 @@ Game.prototype = {
 			//triesP = auxArray["visitanteTurno"];
 			//triesA = auxArray["localTurno"];
 		}
-<<<<<<< HEAD
 		console.log(triesA);
 		
-=======
-
->>>>>>> origin/master
 
 		console.log("entra check intentos");
       if( triesA  >= 5 &&  triesP  >= 5 ){
