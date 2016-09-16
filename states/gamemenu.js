@@ -105,7 +105,7 @@ GameMenu.prototype = {
 	auxArray=JSON.parse(msg);
 
 	console.log("Oponente Encontrado");
-	
+
 	this.game.state.states["Game"].partida=auxArray;
 	this.game.state.states['Game'].perfil = auxArray.oponente;
 	this.game.state.states['Game'].tiempoMaximo = auxArray.tiempomaximo;

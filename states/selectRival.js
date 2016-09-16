@@ -14,6 +14,7 @@ Selectplayer.prototype = {
     game.load.image('img-8', 'assets/images/test8.png');
     game.load.image('img-9', 'assets/images/test9.png');
     game.load.image('img-10', 'assets/images/test10.png');
+    game.load.image('test', 'assets/images/test10.png');
   },
 
   addMenuOption: function(text, callback) {
@@ -60,24 +61,44 @@ Selectplayer.prototype = {
       arrayimg=['img-1', 'img-2', 'img-3', 'img-4', 'img-5', 'img-6', 'img-7', 'img-8', 'img-9', 'img-10'];
 
       // imagen mas baja a la izquierda
-      img5= game.add.sprite(0, 0, 'img-5');
+      img5= game.add.sprite(350, 400, 'img-5');
+
       // imagen mas baja aa la derecha
-      img4= game.add.sprite(0, 0, 'img-4');
+      img4= game.add.sprite(350, 400, 'img-4');
       //imagen menos baja a la izquierda
-      img3= game.add.sprite(0, 0, 'img-3');
+      img3= game.add.sprite(350, 400, 'img-3');
       //imagen menos baja a la derecha
-      img2= game.add.sprite(0, 0, 'img-2');
+      img2= game.add.sprite(350, 400, 'img-2');
       //imagen central
-      img1=game.add.sprite(0, 0, 'img-1');
-      img6=game.add.sprite(0, 0, 'img-6');
-      img7=game.add.sprite(0, 0, 'img-7');
-      img8=game.add.sprite(0, 0,'img-8');
-      img9=game.add.sprite(0, 0, 'img-9');
-      img10=game.add.sprite(0, 0, 'img-10');
+      img1=game.add.sprite(350, 400, 'img-1');
+      img6=game.add.sprite(750, 400, 'img-6');
+      img7=game.add.sprite(750, 400, 'img-7');
+      img8=game.add.sprite(750, 400,'img-8');
+      img9=game.add.sprite(750, 400, 'img-9');
+      img10=game.add.sprite(750, 400, 'img-10');
+      img1.visible=false;
+      img2.visible=false;
+      img3.visible=false;
+      img4.visible=false;
+      img5.visible=false;
+      img6.visible=false;
+      img7.visible=false;
+      img8.visible=false;
+      img9.visible=false;
+      img10.visible=false;
+      img1.scale.setTo(.5,.5);
+      img2.scale.setTo(.5,.5);
+      img3.scale.setTo(.5,.5);
+      img4.scale.setTo(.5,.5);
+      img5.scale.setTo(.5,.5);
+      img6.scale.setTo(.5,.5);
+      img7.scale.setTo(.5,.5);
+      img8.scale.setTo(.5,.5);
+      img9.scale.setTo(.5,.5);
+      img10.scale.setTo(.5,.5);
 
 
       arrayCr=[img1, img2, img3,img4 , img5, img6, img7, img8, img9, img10];
-      //arrayCr.visible=false;
 
 
       self.setTo5(img10);
@@ -85,10 +106,6 @@ Selectplayer.prototype = {
       self.setTo3(img9);
       self.setTo2(img2);
       self.setTo1(img1);
-
-
-      //end carrousel
-
 
 
       this.addMenuOption('JUGAR', function () {
@@ -130,6 +147,7 @@ Selectplayer.prototype = {
 
 moveToRight: function(s){
 
+
   console.log("MOVE TO RIGHT");
 
   self.getID(s);
@@ -158,7 +176,7 @@ moveToRight: function(s){
 
 },
   moveToLeft: function(s){
-    console.log("MOVE TO LEFT");
+
 
     self.getID(s);
 
@@ -196,7 +214,7 @@ moveToRight: function(s){
     d= carrousel[2];
     e= carrousel[4];
 
-    console.log(carrousel);
+
 
 
 
@@ -207,95 +225,108 @@ moveToRight: function(s){
       self.setTo1(arrayCr[a]);
 
 
-      //  var tweenA= game.add.tween(target).to( s1.position, 2000, 'Linear');
-      //  var tweenB =game.add.tween(target.scale).to( {x:1, y:1}, 2000, 'Linear');
-
-       //tweenA.start();
-     //tweenB.start();
-
 
 },
 
 
 setTo5: function(target){
+  target.visible=true;
 
   s5= target;
 
+  this.world.bringToTop(s5);
+
   //s5.position={x:350, y:400};
-  s5.alpha=.5;
+  //s5.alpha=.5;
   //s5.scale.setTo(.50,.50);
   s5.inputEnabled = true;
   s5.events.onInputDown.add(this.moveToLeft,s5);
 
   var tweenA= game.add.tween(target).to({x:350, y:400}, 500, 'Linear');
   var tweenB =game.add.tween(target.scale).to( {x:.50, y:.50}, 500, 'Linear');
+  var tweenC =game.add.tween(target).to( {alpha:.5}, 500, 'Linear');
 
-  tweenA.start();
-  tweenB.start();
+    tweenA.start();
+    tweenB.start();
+    tweenC.start();
 
 },
 
 setTo4: function(target){
+  target.visible=true;
 
   s4= target;
+  this.world.bringToTop(s4);
   //s4.position={x:750, y:400};
-  s4.alpha=.5;
+  //s4.alpha=.5;
   //s4.scale.setTo(.50,.50);
    s4.inputEnabled = true;
    s4.events.onInputDown.add(this.moveToLeft, s4);
 
    var tweenA= game.add.tween(target).to({x:750, y:400}, 500, 'Linear');
    var tweenB =game.add.tween(target.scale).to( {x:.50, y:.50}, 500, 'Linear');
+   var tweenC =game.add.tween(target).to( {alpha:.5}, 500, 'Linear');
 
    tweenA.start();
    tweenB.start();
+   tweenC.start();
 
 },
 
 setTo3: function(target){
+  target.visible=true;
 
   s3=target;
+  this.world.bringToTop(s3);
   //s3.position={x:400, y:350};
-  s3.alpha=.7;
+  //s3.alpha=.7;
   //s3.scale.setTo(.75,.75);
   s3.inputEnabled = true;
   s3.events.onInputDown.add(this.moveToLeft, s3);
 
   var tweenA= game.add.tween(target).to({x:400, y:350}, 500, 'Linear');
   var tweenB =game.add.tween(target.scale).to( {x:.75, y:.75}, 500, 'Linear');
+  var tweenC =game.add.tween(target).to( {alpha:.7}, 500, 'Linear');
 
   tweenA.start();
   tweenB.start();
+  tweenC.start();
 },
 
 setTo2: function(target){
-
+target.visible=true;
   s2= target;
+  this.world.bringToTop(s2);
   //s2.position={x:650, y:350};
-  s2.alpha=.7;
+//  s2.alpha=.7;
 //  s2.scale.setTo(.75,.75);
   s2.inputEnabled = true;
   s2.events.onInputDown.add(this.moveToLeft,s2);
 
   var tweenA= game.add.tween(target).to({x:650, y:350}, 500, 'Linear');
   var tweenB =game.add.tween(target.scale).to( {x:.75, y:.75}, 500, 'Linear');
+  var tweenC =game.add.tween(target).to( {alpha:.7}, 500, 'Linear');
 
   tweenA.start();
   tweenB.start();
+  tweenC.start();
 },
 
 setTo1: function(target){
+  target.visible=true;
 
   s1= target;
   //s1.position={x:500, y:300};
   this.world.bringToTop(s1);
   //s1.scale.setTo(1,1);
-  s2.alpha=1;
+  //s2.alpha=1;
    var tweenA= game.add.tween(target).to({x:500, y:300}, 500, 'Linear');
    var tweenB =game.add.tween(target.scale).to( {x:1, y:1}, 500, 'Linear');
+  var tweenC =game.add.tween(target).to( {alpha:1}, 500, 'Linear');
 
    tweenA.start();
- tweenB.start();
+   tweenB.start();
+   tweenC.start();
 
 
 
