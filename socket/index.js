@@ -74,6 +74,7 @@ var finished=true;
 			Reset();
 			finished=false;
 			mod=randomBetween(0,1);
+			mod=1;
 			modStart=mod;
 			if(mod%2==0){
 				counterLocal=0;
@@ -194,6 +195,7 @@ var finished=true;
 });
 
 function InicioTurno(){
+	return;
 	var turnoArray={};
 	//if(modStart==1){
 		turnoArray["localGol"]=golesUser;
