@@ -29,8 +29,20 @@ GameMenu.prototype = {
     //   music.loop = true;
     //   music.play();
     // }
+
+
+    var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
+    var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
+    grd.addColorStop(0,"#1a1750");
+    grd.addColorStop(0.3,"#1a1750");
+    grd.addColorStop(1,"#009ee1");
+    gameBack.context.fillStyle=grd;
+    gameBack.context.fillRect(0,0,this.game.width,this.game.height);
+    this.game.add.sprite(0,0,gameBack);
+
     game.stage.disableVisibilityChange = true;
-    game.add.sprite(0, 0, 'menu-bg');
+    curva=game.add.sprite(0,0, 'curva');
+    curva.position={x:this.game.width/2-curva.width/2, y:this.game.height/2}
     game.add.existing(this.titleText);
     search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
     search.visible=false;
@@ -48,12 +60,14 @@ GameMenu.prototype = {
     //   game.state.start("Options");
     // });
 
-    this.addMenuOption('Stadistics', function () {
-      game.state.start("Stadistics");
+
+
+    this.addMenuOption('DESAFÍO', function () {
+      game.state.start("Singleplayer");
     });
 
-    this.addMenuOption('DESAFIO', function () {
-      game.state.start("Singleplayer");
+    this.addMenuOption('ESTADÍSTICAS', function () {
+      game.state.start("Stadistics");
     });
 
 

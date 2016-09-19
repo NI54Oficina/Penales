@@ -2,3 +2,14 @@
     font-family: 'TheMinion';
     src: url('../fonts/theminion.otf');
 }
+
+
+@font-face {
+    font-family: 'RobotoRegular';
+    src: url('../fonts/RobotoSlab-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'RobotoBold';
+    src: url('../fonts/RobotoSlab-Bold.ttf');
+}
