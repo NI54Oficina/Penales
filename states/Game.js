@@ -18,7 +18,7 @@ Game.prototype = {
     game.load.image('yellow-button', 'assets/images/yellow-button.png', 150,150);
     game.load.image('triangle', 'assets/images/puntero.png', 150,150);
     game.load.image('barra', 'assets/images/barra-p.png', 150,150);
-    game.load.spritesheet('pateador-local', 'assets/images/pateador.png', 105, 130);
+    game.load.spritesheet('pateador-local', 'assets/images/pateador.png', 318, 210);
     game.load.spritesheet('tribunaAtras', 'assets/images/gente1.png');
     game.load.spritesheet('tribunaAdelante', 'assets/images/gente2.png');
     game.load.image('pasto', 'assets/images/pasto.png');
@@ -28,6 +28,10 @@ Game.prototype = {
     game.load.image('barraVertical', 'assets/images/barra_vertical.png');
     game.load.spritesheet('arquero-visitante', 'assets/images/arquero2.png', 116, 110);
     game.load.spritesheet('pateador-visitante', 'assets/images/pateador2.png', 105, 130);
+    
+	game.load.image('fondo1', 'assets/images/fondo-game1.png', 759, 150);
+	game.load.image('fondo2', 'assets/images/fondo-game2.png', 378, 150);
+	game.load.image('fondo3', 'assets/images/fondo-game3.png', 1136, 491);
 
   },
 
@@ -104,8 +108,13 @@ Game.prototype = {
      game.add.sprite(0,130, 'frente');
      game.add.sprite(0,350, 'pasto');
 
-     arco= game.add.sprite(320,130, 'arco');
-
+   
+		
+	fondo1 = game.add.sprite(0,0, 'fondo1');
+	fondo1 = game.add.sprite(759,0, 'fondo2');
+	fondo1 = game.add.sprite(0,150, 'fondo3');
+	
+	  arco= game.add.sprite(0,80, 'arco');
 
      presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px TheMinion", fill: "black", align: "center" });
      presicionText.visible=false;
@@ -220,9 +229,12 @@ Game.prototype = {
 
      pelota= game.add.sprite(535,500 ,'pelota');
 
-     player = game.add.sprite(240,450, 'pateador-local');
+     player = game.add.sprite(318,210, 'pateador-local');
+	 player.x=0;
+	 player.y=380;
      player.frame = 0;
-     player.animations.add('right', [1,2], 20, true);
+	 //animacion player
+     player.animations.add('right', [1,2,3,4,5,6,6,7,7,8,8,9,9,10], 15, false);
      player.visible=true;
 
 
@@ -260,6 +272,7 @@ Game.prototype = {
 
 
       };
+	  buttons.y=200;
 
 
 
@@ -510,14 +523,14 @@ Game.prototype = {
   patear: function(){
     tweenPlayer = game.add.tween(player);
 
-    tweenPlayer.to({x:460, y:440},500, 'Linear', true, 0);
+    tweenPlayer.to({x:260, y:380},300, 'Linear', true, 0);
 
     player.animations.play('right');
   },
 
   stopPlayer: function(){
-    player.animations.stop();
-    player.frame=2;
+    //player.animations.stop();
+    //player.frame=9;
   },
 
   NoAssertPoint: function(ubiPuntaje, tries){
@@ -710,7 +723,7 @@ Game.prototype = {
 
          };
 
-      },500);
+      },300);
 
   },
 
