@@ -8,21 +8,43 @@ Selectplayer.prototype = {
     game.load.image('img-2', 'assets/images/test2.png');
     game.load.image('img-3', 'assets/images/test3.png');
     game.load.image('img-4', 'assets/images/test4.png');
-    game.load.image('img-5', 'assets/images/test5.png');
+    game.load.image('img-5', 'assets/images/test11.png');
     game.load.image('img-6', 'assets/images/test6.png');
     game.load.image('img-7', 'assets/images/test7.png');
     game.load.image('img-8', 'assets/images/test8.png');
     game.load.image('img-9', 'assets/images/test9.png');
     game.load.image('img-10', 'assets/images/test10.png');
     game.load.image('test', 'assets/images/test10.png');
+    game.load.image('left-corner', 'assets/images/left-corner.png');
+    game.load.image('right-corner', 'assets/images/left-corner.png');
+    game.load.image('volver', 'assets/images/arrow-back.png');
   },
 
   addMenuOption: function(text, callback) {
-    var optionStyle = { font: '30pt TheMinion', fill: '#FEFFD5', align: 'left', stroke: 'rgba(0,0,0,0)', srokeThickness: 4};
-    var txt = game.add.text(100, (this.optionCount * 80) , text, optionStyle);
-    txt.anchor.setTo(0.5);
-    txt.stroke = "rgba(0,0,0,0";
-    txt.strokeThickness = 4;
+    var optionStyle = { font: '30pt TheMinion', align: 'center', stroke: 'rgba(0,0,0,0)'};
+
+
+
+    // aplicando el background de cada texto
+
+      var 	myBitmap = this.game.add.bitmapData(300, 60);
+      var  grd=myBitmap.context.createLinearGradient(0,0,0,30);
+      grd.addColorStop(0,"#fbe43e");
+      grd.addColorStop(0.9,"#fbe43e");
+      grd.addColorStop(1,"#cea428");
+      myBitmap.context.fillStyle=grd;
+      myBitmap.context.fillRect(0,0,this.game.height,this.game.width);
+      var background = this.game.add.sprite(100,this.optionCount*550-10, myBitmap);
+
+    // aplicando el background de cada texto
+
+    var txt = game.add.text(100, (this.optionCount * 550) , text, optionStyle);
+    //txt.anchor.setTo(0.5);
+    txt.stroke = "black";
+    //txt.strokeThickness = 4;
+
+    txt.position.x=this.game.width/2 - txt.width/2;
+    background.position.x=this.game.width/2 - background.width/2;
 
     var onOver = function (target) {
       target.fill = "black";
@@ -51,6 +73,17 @@ Selectplayer.prototype = {
       i=0;
 
       game.add.sprite(0, 0, 'rival-bg');
+      game.add.sprite(300, 300, 'left-corner');
+      a=  game.add.sprite(0, 0, 'right-corner');
+    //  a.position.x= this.game.width
+      a.scale.x = -1;
+      a.position.x = this.game.width- a.width;
+
+      volver= game.add.sprite(50, 50, 'volver');
+      volver.inputEnabled = true;
+
+      volver.events.onInputDown.add(this.GoBack,volver);
+
 
 
       search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
@@ -115,9 +148,9 @@ Selectplayer.prototype = {
       });
 
 
-      this.addMenuOption('Volver', function () {
-        game.state.start("GameMenu");
-      });
+      // this.addMenuOption('Volver', function () {
+      //   game.state.start("GameMenu");
+      // });
 
 
 
@@ -355,6 +388,10 @@ getID: function(s){
   console.log(i);
 
   return i;
+},
+
+GoBack: function(target){
+  game.state.start("GameMenu");
 },
 
 

@@ -57,7 +57,7 @@ GameMenu.prototype = {
     });
 
 
-    //Creacion ariables en localStorage
+    //Creacion variables en localStorage
 
 
             localStorage["TotalPartidaAtajados"] = 0;
