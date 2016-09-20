@@ -4,6 +4,11 @@ Stadistics.prototype = {
 
   preload: function () {
     this.optionCount = 1;
+    game.load.image('left-corner', 'assets/images/left-corner.png');
+    game.load.image('right-corner', 'assets/images/left-corner.png');
+    game.load.image('volver', 'assets/images/arrow-back.png');
+    game.load.image('menu', 'assets/images/menu.png');
+    game.load.image('puntitos', 'assets/images/fondo_trama.png');
   },
 
   addMenuOption: function(text, callback) {
@@ -37,7 +42,39 @@ Stadistics.prototype = {
   create: function(){
       self = this;
 
-      game.add.sprite(0, 0, 'stats-bg');
+      //fondo
+      var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
+      var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
+      grd.addColorStop(0,"black");
+      grd.addColorStop(0.15,"#1a1750");
+      grd.addColorStop(0.3,"#1a1750");
+      grd.addColorStop(1,"#009ee1");
+      gameBack.context.fillStyle=grd;
+      gameBack.context.fillRect(0,0,this.game.width,this.game.height);
+      this.game.add.sprite(0,0,gameBack);
+      dots = game.add.tileSprite(0, 0, this.game.width,this.game.height,'puntitos');
+      dots.alpha=0.3;
+      game.stage.disableVisibilityChange = true;
+
+      //fondo
+
+      //esquinas
+
+      game.add.sprite(0, 0, 'left-corner');
+      a= game.add.sprite(this.game.width, 0, 'right-corner');
+      a.scale.x = -1;
+
+
+      volver= game.add.sprite(50, 50, 'volver');
+      volver.inputEnabled = true;
+      volver.events.onInputDown.add(this.GoBack,volver);
+
+      menu= game.add.sprite(this.game.width-100, 50, 'menu');
+      menu.inputEnabled = true;
+      menu.events.onInputDown.add(this.GoBack,menu);
+
+      //esquina
+
       var titleStyle = { font: 'bold 60pt TheMinion', fill: '#FDFFB5', align: 'center'};
       var textTitle = game.add.text(game.world.centerX-250, 100, "Estadisticas", titleStyle);
       var puntajeStyle = { font: 'bold 15pt TheMinion', fill: 'white'};
@@ -75,15 +112,16 @@ Stadistics.prototype = {
 
 
 
-      this.addMenuOption('Volver', function () {
-        game.state.start("GameMenu");
-      });
-
-
 
   },
 
   isFloat: function(n,target) {
     return n === +n && n !== (n|0);
   },
+
+  GoBack: function(target){
+    game.state.start("GameMenu");
+  },
+
+
 }

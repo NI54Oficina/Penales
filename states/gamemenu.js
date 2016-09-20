@@ -31,6 +31,8 @@ GameMenu.prototype = {
     // }
 
 
+
+    //fondo
     var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
     var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
     grd.addColorStop(0,"#1a1750");
@@ -42,7 +44,9 @@ GameMenu.prototype = {
 
     game.stage.disableVisibilityChange = true;
     curva=game.add.sprite(0,0, 'curva');
-    curva.position={x:this.game.width/2-curva.width/2, y:this.game.height/2}
+    curva.position={x:this.game.width/2-curva.width/2, y:this.game.height/2};
+    //fondo
+
     game.add.existing(this.titleText);
     search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
     search.visible=false;

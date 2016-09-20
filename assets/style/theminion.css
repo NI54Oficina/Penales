@@ -13,3 +13,8 @@
     font-family: 'RobotoBold';
     src: url('../fonts/RobotoSlab-Bold.ttf');
 }
+
+@font-face {
+    font-family: 'BitterBold';
+    src: url('../fonts/Bitter-Bold.ttf');
+}

@@ -36,6 +36,7 @@ var Splash = function () {};
     game.load.image('volver', 'assets/images/arrow-back.png');
     game.load.image('menu', 'assets/images/menu.png');
     game.load.image('curva', 'assets/images/fondo_curva.png');
+    game.load.image('puntitos', 'assets/images/fondo_trama.png');
 
   },
 

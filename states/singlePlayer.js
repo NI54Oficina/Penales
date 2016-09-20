@@ -8,6 +8,7 @@ Singleplayer.prototype = {
     game.load.image('right-corner', 'assets/images/left-corner.png');
     game.load.image('volver', 'assets/images/arrow-back.png');
     game.load.image('menu', 'assets/images/menu.png');
+    game.load.image('puntitos', 'assets/images/fondo_trama.png');
   },
 
   addMenuOption: function(text, callback) {
@@ -62,7 +63,24 @@ Singleplayer.prototype = {
     create: function(){
         self = this;
 
-        game.add.sprite(0, 0, 'single-bg');
+        //fondo
+        var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
+        var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
+        grd.addColorStop(0,"black");
+        grd.addColorStop(0.15,"#1a1750");
+        grd.addColorStop(0.3,"#1a1750");
+        grd.addColorStop(1,"#009ee1");
+        gameBack.context.fillStyle=grd;
+        gameBack.context.fillRect(0,0,this.game.width,this.game.height);
+        this.game.add.sprite(0,0,gameBack);
+
+        game.stage.disableVisibilityChange = true;
+        curva=game.add.sprite(0,0, 'curva');
+        curva.position={x:this.game.width/2-curva.width/2, y:this.game.height/2};
+        dots = game.add.tileSprite(0, 0, this.game.width,this.game.height,'puntitos');
+        dots.alpha=0.3;
+        //fondo
+        //esquinas
         game.add.sprite(0, 0, 'left-corner');
         a= game.add.sprite(this.game.width, 0, 'right-corner');
         a.scale.x = -1;
@@ -76,7 +94,7 @@ Singleplayer.prototype = {
         menu.inputEnabled = true;
         menu.events.onInputDown.add(this.GoBack,menu);
 
-
+        //esquina
 
         search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
         search.visible=false;
