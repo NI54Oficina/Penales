@@ -121,7 +121,7 @@ Selectplayer.prototype = {
 
       //creating the carrousel
 
-      arrayimg=['img-1', 'img-2', 'img-3', 'img-4', 'img-5', 'img-6', 'img-7', 'img-8', 'img-9', 'img-10'];
+      //arrayimg=['img-1', 'img-2', 'img-3', 'img-4', 'img-5', 'img-6', 'img-7', 'img-8', 'img-9', 'img-10'];
 
       // imagen mas baja a la izquierda
       img5= game.add.sprite(145, 225, 'img-5');
