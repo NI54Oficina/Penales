@@ -9,7 +9,7 @@ GameMenu.prototype = {
   },
 
   init: function () {
-    this.titleText = game.make.text(game.world.centerX, 100, "Penales !", {
+    this.titleText = game.make.text(game.world.centerX-300, 100, "Penales !", {
       font: 'bold 60pt TheMinion',
       fill: 'white',
       align: 'center'
@@ -51,19 +51,16 @@ GameMenu.prototype = {
     search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
     search.visible=false;
 
+    this.addMenuOption('Multiplayer', function () {
+      game.state.start("Multiplayer");
+    });
 
 
     this.addMenuOption('CLÁSICO', function () {
 
       game.state.start("Selectplayer");
-      // search.visible=true;
-      // Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
-      //self.ListenerLogin(self);
-    });
-    // this.addMenuOption('Options', function () {
-    //   game.state.start("Options");
-    // });
 
+    });
 
 
     this.addMenuOption('DESAFÍO', function () {

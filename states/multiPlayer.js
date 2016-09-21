@@ -9,6 +9,7 @@ Multiplayer.prototype = {
     game.load.image('volver', 'assets/images/arrow-back.png');
     game.load.image('menu', 'assets/images/menu.png');
     game.load.image('puntitos', 'assets/images/fondo_trama.png');
+    game.load.image('line', 'assets/images/titulo_linea.png');
   },
 
   addMenuOption: function(text, callback) {
@@ -75,11 +76,11 @@ Multiplayer.prototype = {
 
       //esquina
 
-      this.addMenuOption('Volver', function () {
-        game.state.start("Singleplayer");
-      });
+      var titleStyle = { font: '40px BitterBold', fill: 'white', align: 'center'};
+      var line = this.game.make.sprite(-160,45, 'line');
 
-
+      var textTitle = game.add.text(game.world.centerX-200, 50, "SELECCIONAR RIVAL", titleStyle);
+      textTitle.addChild(line);
 
   },
 

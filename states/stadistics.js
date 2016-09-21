@@ -2,6 +2,11 @@ var Stadistics = function(game) {};
 
 Stadistics.prototype = {
 
+  menuConfig: {
+    startY: 260,
+    startX: 500
+  },
+
   preload: function () {
     this.optionCount = 1;
     game.load.image('left-corner', 'assets/images/left-corner.png');
@@ -9,6 +14,7 @@ Stadistics.prototype = {
     game.load.image('volver', 'assets/images/arrow-back.png');
     game.load.image('menu', 'assets/images/menu.png');
     game.load.image('puntitos', 'assets/images/fondo_trama.png');
+    game.load.image('line', 'assets/images/titulo_linea.png');
   },
 
   addMenuOption: function(text, callback) {
@@ -75,8 +81,11 @@ Stadistics.prototype = {
 
       //esquina
 
-      var titleStyle = { font: 'bold 60pt TheMinion', fill: '#FDFFB5', align: 'center'};
-      var textTitle = game.add.text(game.world.centerX-250, 100, "Estadisticas", titleStyle);
+      var titleStyle = { font: '40px BitterBold', fill: 'white', align: 'center'};
+      var line = this.game.make.sprite(-200,45, 'line');
+      //line.scale.setTo(0.8,0.8);
+      var textTitle = game.add.text(game.world.centerX-150, 50, "ESTADÍSTICAS", titleStyle);
+      textTitle.addChild(line);
       var puntajeStyle = { font: 'bold 15pt TheMinion', fill: 'white'};
 
       var efiArq =(100/((parseInt(localStorage["TotalAtajados"]) || 0) + (parseInt(localStorage["TotalNoAtajados"]) || 0)))* (parseInt(localStorage["TotalAtajados"]) || 0);
