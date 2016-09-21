@@ -81,12 +81,26 @@ Stadistics.prototype = {
 
       //esquina
 
+      // fondo de los puntaje
+
+      var statsBack= this.game.add.bitmapData(700,300);
+
+      var  grd=statsBack.context.createLinearGradient(0,0,0,this.game.height);
+      grd.addColorStop(0,"black");
+      statsBack.context.fillStyle=grd;
+      statsBack.context.fillRect(0,0,this.game.width,this.game.height);
+      statsBackground=this.game.add.sprite(300,300,statsBack);
+      statsBackground.alpha=.3;
+      statsBackground.position={x: this.game.width/2- statsBackground.width/2,y:200}
+
+      //fondo de los puintajes
+
       var titleStyle = { font: '40px BitterBold', fill: 'white', align: 'center'};
       var line = this.game.make.sprite(-200,45, 'line');
       //line.scale.setTo(0.8,0.8);
       var textTitle = game.add.text(game.world.centerX-150, 50, "ESTADÍSTICAS", titleStyle);
       textTitle.addChild(line);
-      var puntajeStyle = { font: 'bold 15pt TheMinion', fill: 'white'};
+      var puntajeStyle = { font: '15pt CondensedLight', fill: 'yellow'};
 
       var efiArq =(100/((parseInt(localStorage["TotalAtajados"]) || 0) + (parseInt(localStorage["TotalNoAtajados"]) || 0)))* (parseInt(localStorage["TotalAtajados"]) || 0);
       var efiPat = (100/((parseInt(localStorage["TotalConvertidos"]) || 0) + (parseInt(localStorage["TotalErrados"]) || 0)))*(parseInt(localStorage["TotalConvertidos"]) || 0);
@@ -99,11 +113,11 @@ Stadistics.prototype = {
       if (self.isFloat(efiPat,self))efiPat= Number(efiPat).toFixed(1);
       if (self.isFloat(efectividad,self))efectividad= efectividad.toFixed(1);
 
-      game.add.text(50, 200, "Partidos Ganados: "+ localStorage["PartidosGanados"], puntajeStyle);
-      game.add.text(50, 220, "Partidos Perdidos: "+ localStorage["PartidosPerdidos"], puntajeStyle);
-      game.add.text(50, 240, "Total Atajados: "+ localStorage["TotalAtajados"], puntajeStyle);
-      game.add.text(50, 260, "Total Convertidos: "+ localStorage["TotalConvertidos"], puntajeStyle);
-      game.add.text(50, 280, "Total Errados: "+localStorage["TotalErrados"], puntajeStyle);
+      a=game.add.text(50, 200, "PARTIDOS GANADOS:"+ localStorage["PartidosGanados"], puntajeStyle);
+      b=game.add.text(50, 220, "PARTIDOS PERDIDOS: "+ localStorage["PartidosPerdidos"], puntajeStyle);
+      c=game.add.text(50, 240, "PENALES ATAJADOS: "+ localStorage["TotalAtajados"], puntajeStyle);
+      d=game.add.text(50, 260, "PENALES CONVERTIDOS: "+ localStorage["TotalConvertidos"], puntajeStyle);
+      e=game.add.text(50, 280, "PENALES ERRADOS: "+localStorage["TotalErrados"], puntajeStyle);
       game.add.text(50, 300, "Total No Atajados: "+localStorage["TotalNoAtajados"], puntajeStyle);
       game.add.text(50, 320, "Racha Ganados: "+localStorage["RachaGanados"], puntajeStyle);
       game.add.text(50, 340, "Racha Perdidos: "+ localStorage["RachaPerdidos"], puntajeStyle);

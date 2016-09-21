@@ -18,3 +18,8 @@
     font-family: 'BitterBold';
     src: url('../fonts/Bitter-Bold.ttf');
 }
+
+@font-face {
+    font-family: 'CondensedLight';
+    src: url('../fonts/RobotoCondensed-Light.ttf');
+}
