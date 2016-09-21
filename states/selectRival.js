@@ -43,9 +43,9 @@ Selectplayer.prototype = {
     // aplicando el background de cada texto
 
     var txt = game.add.text(100, (this.optionCount * 550) , text, optionStyle);
-    //txt.anchor.setTo(0.5);
+
     txt.stroke = "black";
-    //txt.strokeThickness = 4;
+
 
     txt.position.x=this.game.width/2 - txt.width/2;
     background.position.x=this.game.width/2 - background.width/2;
