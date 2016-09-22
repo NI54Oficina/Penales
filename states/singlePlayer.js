@@ -92,9 +92,19 @@ Singleplayer.prototype = {
 
         menu= game.add.sprite(this.game.width-100, 50, 'menu');
         menu.inputEnabled = true;
-        menu.events.onInputDown.add(this.GoBack,menu);
+        menu.events.onInputDown.add(this.Menu,menu);
 
         //esquina
+
+        //titulo
+        var titleStyle = { font: '40px BitterBold', fill: 'white', align: 'center'};
+        var line = this.game.make.sprite(-160,45, 'line');
+
+        var textTitle = game.add.text(game.world.centerX-200, 50, "SELECCIONAR RIVAL", titleStyle);
+        textTitle.addChild(line);
+        //titulo
+
+
 
         search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
         search.visible=false;
@@ -106,19 +116,6 @@ Singleplayer.prototype = {
           Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
 
         });
-
-        //
-        // this.addMenuOption('Menu', function () {
-        //   game.state.start("GameMenu");
-        //
-        // });
-        //
-        //
-        //
-        // this.addMenuOption('Volver', function () {
-        //   game.state.start("GameMenu");
-        // });
-
 
 
     },
@@ -145,6 +142,10 @@ Singleplayer.prototype = {
     },
 
     GoBack: function(target){
+      game.state.start("Multiplayer");
+    },
+
+    Menu: function(target){
       game.state.start("GameMenu");
     },
 

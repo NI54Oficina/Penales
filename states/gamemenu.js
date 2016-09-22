@@ -4,7 +4,7 @@ var GameMenu = function() {};
 GameMenu.prototype = {
 
   menuConfig: {
-    startY: 260,
+    startY: 40,
     startX: 500
   },
 
@@ -51,20 +51,20 @@ GameMenu.prototype = {
     search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
     search.visible=false;
 
-    this.addMenuOption('Multiplayer', function () {
-      game.state.start("Multiplayer");
-    });
+    // this.addMenuOption('Multiplayer', function () {
+    //   game.state.start("Multiplayer");
+    // });
 
 
-    this.addMenuOption('CLÁSICO', function () {
+    this.addMenuOption("CLÁSICO\n(1 Jugador)", function () {
 
       game.state.start("Selectplayer");
 
     });
 
 
-    this.addMenuOption('DESAFÍO', function () {
-      game.state.start("Singleplayer");
+    this.addMenuOption('DESAFÍO\n(2 Jugadores)', function () {
+      game.state.start("Multiplayer");
     });
 
     this.addMenuOption('ESTADÍSTICAS', function () {

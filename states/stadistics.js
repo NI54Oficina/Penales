@@ -112,26 +112,35 @@ Stadistics.prototype = {
       if (self.isFloat(efiArq,self))efiArq= Number(efiArq).toFixed(1);
       if (self.isFloat(efiPat,self))efiPat= Number(efiPat).toFixed(1);
       if (self.isFloat(efectividad,self))efectividad= efectividad.toFixed(1);
+      var x=statsBackground.position.x+50;
+      var xx= statsBackground.position.x + statsBackground.width-80;
+      var y=220;
 
-      a=game.add.text(50, 200, "PARTIDOS GANADOS:"+ localStorage["PartidosGanados"], puntajeStyle);
-      b=game.add.text(50, 220, "PARTIDOS PERDIDOS: "+ localStorage["PartidosPerdidos"], puntajeStyle);
-      c=game.add.text(50, 240, "PENALES ATAJADOS: "+ localStorage["TotalAtajados"], puntajeStyle);
-      d=game.add.text(50, 260, "PENALES CONVERTIDOS: "+ localStorage["TotalConvertidos"], puntajeStyle);
-      e=game.add.text(50, 280, "PENALES ERRADOS: "+localStorage["TotalErrados"], puntajeStyle);
-      game.add.text(50, 300, "Total No Atajados: "+localStorage["TotalNoAtajados"], puntajeStyle);
-      game.add.text(50, 320, "Racha Ganados: "+localStorage["RachaGanados"], puntajeStyle);
-      game.add.text(50, 340, "Racha Perdidos: "+ localStorage["RachaPerdidos"], puntajeStyle);
-      game.add.text(50, 360, "Racha Atajados: "+localStorage["RachaAtajados"], puntajeStyle);
-      game.add.text(50, 380, "Racha Convertidos: "+localStorage["RachaConvertidos"], puntajeStyle);
-      game.add.text(600, 200, "Racha Errados: "+localStorage["RachaErrados"], puntajeStyle);
-      game.add.text(600, 220, "Racha No Atajados: "+localStorage["RachaNoAtajados"] , puntajeStyle);
-      game.add.text(600, 240, "Mejor Racha Atajados: "+localStorage["MejorRachaAtajados"], puntajeStyle);
-      game.add.text(600, 260, "Mejor Racha Convertida: "+localStorage["MejorRachaConvertida"], puntajeStyle);
-      game.add.text(600, 280, "Peor Racha Errados: "+localStorage["PeorRachaErrados"], puntajeStyle);
-      game.add.text(600, 300, "Peor Racha No Atajados: "+localStorage["PeorRachaNoAtajados"], puntajeStyle);
-      game.add.text(600, 320, "Efectividad: "+ efectividad , puntajeStyle);
-      game.add.text(600, 340, "Eficiencia como arquero: "+ efiArq +"%" , puntajeStyle);
-      game.add.text(600, 360, "Eficiencia como pateador: "+ efiPat +"%" , puntajeStyle);
+      a=game.add.text(x, y, "PARTIDOS GANADOS", puntajeStyle);
+      abis=game.add.text(xx, y,localStorage["PartidosGanados"], puntajeStyle);
+      b=game.add.text(x, y+50, "PARTIDOS PERDIDOS", puntajeStyle);
+      bbis=game.add.text(xx, y+50,localStorage["PartidosPerdidos"], puntajeStyle);
+      c=game.add.text(x,y+100, "PENALES ATAJADOS", puntajeStyle);
+      cbis=game.add.text(xx, y+100, localStorage["TotalAtajados"], puntajeStyle);
+      d=game.add.text(x, y+150, "PENALES CONVERTIDOS", puntajeStyle);
+      dbis=game.add.text(xx, y+150, localStorage["TotalConvertidos"], puntajeStyle);
+      e=game.add.text(x, y+200, "PENALES ERRADOS", puntajeStyle);
+      ebis=game.add.text(xx, y+200, localStorage["TotalErrados"], puntajeStyle);
+
+      game.add.text(x, y+250, "Total No Atajados: "+localStorage["TotalNoAtajados"], puntajeStyle);
+      game.add.text(x, y+300, "Racha Ganados: "+localStorage["RachaGanados"], puntajeStyle);
+      game.add.text(x, y+350, "Racha Perdidos: "+ localStorage["RachaPerdidos"], puntajeStyle);
+      game.add.text(x, y+400, "Racha Atajados: "+localStorage["RachaAtajados"], puntajeStyle);
+      game.add.text(x, y+450, "Racha Convertidos: "+localStorage["RachaConvertidos"], puntajeStyle);
+      game.add.text(x, y+500, "Racha Errados: "+localStorage["RachaErrados"], puntajeStyle);
+      // game.add.text(x,y+30, "Racha No Atajados: "+localStorage["RachaNoAtajados"] , puntajeStyle);
+      // game.add.text(x, y+30, "Mejor Racha Atajados: "+localStorage["MejorRachaAtajados"], puntajeStyle);
+      // game.add.text(x, y+30, "Mejor Racha Convertida: "+localStorage["MejorRachaConvertida"], puntajeStyle);
+      // game.add.text(x, y+30, "Peor Racha Errados: "+localStorage["PeorRachaErrados"], puntajeStyle);
+      // game.add.text(x, y+30, "Peor Racha No Atajados: "+localStorage["PeorRachaNoAtajados"], puntajeStyle);
+      // game.add.text(x, y+30, "Efectividad: "+ efectividad , puntajeStyle);
+      // game.add.text(x, y+30, "Eficiencia como arquero: "+ efiArq +"%" , puntajeStyle);
+      // game.add.text(x,y+30, "Eficiencia como pateador: "+ efiPat +"%" , puntajeStyle);
 
 
 
