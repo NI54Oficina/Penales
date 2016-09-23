@@ -14,6 +14,7 @@ var Splash = function () {};
     game.load.script('Multiplayer','states/multiPlayer.js' );
     game.load.script('Singleplayer','states/singlePlayer.js' );
     game.load.script('Selectplayer','states/selectRival.js' );
+    game.load.script('Anims','states/AnimTests.js' );
   },
 
   loadBgm: function () {
@@ -74,6 +75,7 @@ var Splash = function () {};
     game.state.add("Selectplayer",Selectplayer);
     game.state.add("Singleplayer",Singleplayer);
     game.state.add("Multiplayer",Multiplayer);
+    game.state.add("Anims",Anims);
   },
 
   addGameMusic: function () {

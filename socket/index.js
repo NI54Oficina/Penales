@@ -26,6 +26,8 @@ var enAlargue=false;
 
 var finished=true;
 
+var perfiles;
+
 
 	io.on('connection', function(socket){
 		console.log("user conected");
@@ -74,7 +76,7 @@ var finished=true;
 			Reset();
 			finished=false;
 			mod=randomBetween(0,1);
-			mod=1;
+			
 			modStart=mod;
 			if(mod%2==0){
 				counterLocal=0;
@@ -195,7 +197,7 @@ var finished=true;
 });
 
 function InicioTurno(){
-	return;
+	
 	var turnoArray={};
 	//if(modStart==1){
 		turnoArray["localGol"]=golesUser;
@@ -248,7 +250,7 @@ function CalculateAtaje(msg){
 }
 
 function calculoChancesAtajar(msg){
-    var chanceAtajar = randomBetween(1,oponente["efectividad"]);
+    var chanceAtajar = randomBetween(1,oponente["efectividadA"]);
 
     if(chanceAtajar==1){
 		return msg;
@@ -259,7 +261,11 @@ function calculoChancesAtajar(msg){
 }
 
 function CalculateTiro(){
+	var errar=randomBetween(1,oponente['efectividadP']);
 	
+	if(errar==1){
+		return -1;
+	}
 	if(!enAlargue){
 		var a = getMaso();
 		var b= generarRiesgo(a);
@@ -353,9 +359,72 @@ function GetOponente(){
 	var oponente= {};
 	oponente["nombre"]="Pepita";
 	oponente["session"]="token";
+	setPerfiles();
+	var auxP= randomBetween(0,3);
+	auxP= perfiles[auxP];
+	oponente["efectividadA"]=auxP["efectividadA"];
+	oponente["efectividadP"]=auxP["efectividadP"];
 
-	oponente["efectividad"]="20";
-
-	oponente["tendencia"]= [[0,0,1,2,2,0],[0,2,1,1,2,0],[0,2,1,1,2,0],[0,2,1,1,2,0],[0,1,1,1,2,2]];
+	oponente["tendencia"]= auxP["tendencia"];
 	return oponente;
+}
+
+function SetEnemy(){
+  var id= game.rnd.integerInRange(1,4);
+
+  array= perfiles[id-1].tendencia;
+
+  return perfiles[id-1];
+
+}
+
+function setPerfiles(){
+	
+	perfil1 = {
+	id:1,
+	efectividadA:2,
+	efectividadP:2,
+	tendencia:[ [0,0,1,2,2,0],
+				[0,2,1,1,2,0],
+				[0,2,1,1,2,0],
+				[0,2,1,1,2,0],
+				[0,1,1,1,2,2] ]
+	};
+
+	perfil2 = {
+		id:2,
+		efectividadA:5,
+		efectividadP:5,
+		tendencia:[ [0,1,1,1,2,0],
+					[0,1,1,1,2,0],
+					[2,1,1,1,2,0],
+					[0,0,1,1,2,0],
+					[0,2,1,1,2,0] ]
+	};
+
+
+  perfil3 = {
+  id:3,
+  efectividadA:10,
+efectividadP:10,
+  tendencia:[ [0,0,1,2,2,0],
+			  [0,2,1,1,2,0],
+			  [0,0,1,1,2,0],
+			  [0,2,1,1,2,0],
+			  [0,0,1,1,2,2] ]
+  };
+
+  perfil4 = {
+	  id:4,
+	  efectividadA:20,
+	  efectividadP:20,
+	  tendencia:[ [0,1,1,1,2,0],
+				  [0,1,1,1,2,0],
+				  [0,1,1,1,2,0],
+				  [0,0,1,1,2,0],
+				  [0,0,1,1,2,0] ]
+	};
+
+
+	perfiles=[perfil1,perfil2, perfil3, perfil4];
 }

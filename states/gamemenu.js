@@ -39,7 +39,10 @@ GameMenu.prototype = {
 
     this.addMenuOption('CLÁSICO', function () {
 
-      game.state.start("Selectplayer");
+      game.state.start("Anims");
+      //game.state.start("Selectplayer");
+	  
+	  
       // search.visible=true;
       // Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
       //self.ListenerLogin(self);
