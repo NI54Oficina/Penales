@@ -32,6 +32,12 @@ var Splash = function () {};
     game.load.image('rival-bg', 'assets/images/bg-rival.jpg');
     game.load.image('multi-bg', 'assets/images/bg-multi.jpg');
     game.load.image('single-bg', 'assets/images/bg-single.jpg');
+    game.load.image('left-corner', 'assets/images/left-corner.png');
+    game.load.image('right-corner', 'assets/images/left-corner.png');
+    game.load.image('volver', 'assets/images/arrow-back.png');
+    game.load.image('menu', 'assets/images/menu.png');
+    game.load.image('curva', 'assets/images/fondo_curva.png');
+    game.load.image('puntitos', 'assets/images/fondo_trama.png');
 
   },
 
