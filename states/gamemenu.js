@@ -4,12 +4,12 @@ var GameMenu = function() {};
 GameMenu.prototype = {
 
   menuConfig: {
-    startY: 40,
-    startX: 500
+    startY: -30,
+    startX: 600
   },
 
   init: function () {
-    this.titleText = game.make.text(game.world.centerX-300, 100, "Penales !", {
+    this.titleText = game.make.text(game.world.centerX+300, 100, "Penales !", {
       font: 'bold 60pt TheMinion',
       fill: 'white',
       align: 'center'

@@ -96,6 +96,10 @@ Singleplayer.prototype = {
 
         //esquina
 
+
+        //test
+        var rectangle = drawRoundedRect(500, 0, 50,100, 5);        //test
+
         //titulo
         var titleStyle = { font: '40px BitterBold', fill: 'white', align: 'center'};
         var line = this.game.make.sprite(-160,45, 'line');

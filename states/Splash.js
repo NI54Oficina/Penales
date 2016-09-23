@@ -26,8 +26,8 @@ var Splash = function () {};
   loadImages: function () {
 
     game.load.image('menu-bg', 'assets/images/bg-menu.jpg');
-    game.load.image('options-bg', 'assets/images/menu-bg.jpg');
-    game.load.image('gameover-bg', 'assets/images/menu-bg.jpg');
+    game.load.image('options-bg', 'assets/images/menu-bg.png');
+    game.load.image('gameover-bg', 'assets/images/menu-bg.png');
     game.load.image('stats-bg', 'assets/images/bg-stats.jpg');
     game.load.image('rival-bg', 'assets/images/bg-rival.jpg');
     game.load.image('multi-bg', 'assets/images/bg-multi.jpg');
