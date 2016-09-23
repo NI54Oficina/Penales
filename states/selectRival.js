@@ -126,7 +126,7 @@ Selectplayer.prototype = {
       // imagen mas baja a la izquierda
       img5= game.add.sprite(145, 225, 'img-5');
 	  var shadowX=20;
-	  var shadowY=400;
+	  var shadowY=365;
       h5=img5.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
 
       // imagen mas baja aa la derecha
