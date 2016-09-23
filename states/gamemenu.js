@@ -4,12 +4,12 @@ var GameMenu = function() {};
 GameMenu.prototype = {
 
   menuConfig: {
-    startY: 260,
+    startY: 40,
     startX: 500
   },
 
   init: function () {
-    this.titleText = game.make.text(game.world.centerX, 100, "Penales !", {
+    this.titleText = game.make.text(game.world.centerX-300, 100, "Penales !", {
       font: 'bold 60pt TheMinion',
       fill: 'white',
       align: 'center'
@@ -29,38 +29,51 @@ GameMenu.prototype = {
     //   music.loop = true;
     //   music.play();
     // }
+
+
+
+    //fondo
+    var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
+    var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
+    grd.addColorStop(0,"#1a1750");
+    grd.addColorStop(0.3,"#1a1750");
+    grd.addColorStop(1,"#009ee1");
+    gameBack.context.fillStyle=grd;
+    gameBack.context.fillRect(0,0,this.game.width,this.game.height);
+    this.game.add.sprite(0,0,gameBack);
+
     game.stage.disableVisibilityChange = true;
-    game.add.sprite(0, 0, 'menu-bg');
+    curva=game.add.sprite(0,0, 'curva');
+    curva.position={x:this.game.width/2-curva.width/2, y:this.game.height/2};
+    //fondo
+
     game.add.existing(this.titleText);
     search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
     search.visible=false;
 
-
-
-    this.addMenuOption('CLÁSICO', function () {
-
-      game.state.start("Anims");
-      //game.state.start("Selectplayer");
-	  
-	  
-      // search.visible=true;
-      // Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
-      //self.ListenerLogin(self);
-    });
-    // this.addMenuOption('Options', function () {
-    //   game.state.start("Options");
+    // this.addMenuOption('Multiplayer', function () {
+    //   game.state.start("Multiplayer");
     // });
 
-    this.addMenuOption('Stadistics', function () {
+
+    this.addMenuOption("CLÁSICO\n(1 Jugador)", function () {
+
+      game.state.start("Selectplayer");
+
+
+    });
+
+
+    this.addMenuOption('DESAFÍO\n(2 Jugadores)', function () {
+      game.state.start("Multiplayer");
+    });
+
+    this.addMenuOption('ESTADÍSTICAS', function () {
       game.state.start("Stadistics");
     });
 
-    this.addMenuOption('DESAFIO', function () {
-      game.state.start("Singleplayer");
-    });
 
-
-    //Creacion ariables en localStorage
+    //Creacion variables en localStorage
 
 
             localStorage["TotalPartidaAtajados"] = 0;

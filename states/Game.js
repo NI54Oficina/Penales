@@ -13,8 +13,8 @@ Game.prototype = {
     game.load.image('orange-button', 'assets/images/orange-button.png', 150,150);
     game.load.image('yellow-button', 'assets/images/yellow-button.png', 150,150);
     game.load.image('triangle', 'assets/images/puntero.png', 150,150);
-    game.load.image('barra', 'assets/images/barra-p.png', 150,150);
-   
+    //game.load.image('barra', 'assets/images/barra-p.png', 150,150);
+
     game.load.spritesheet('tribunaAtras', 'assets/images/gente1.png');
     game.load.spritesheet('tribunaAdelante', 'assets/images/gente2.png');
    
@@ -24,12 +24,14 @@ Game.prototype = {
 	 game.load.atlas('pateador-local', 'assets/images/pateador-test.png', 'assets/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
     game.load.atlas('arquero-visitante', 'assets/images/out2.png', 'assets/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
 	 game.load.atlas('pateador-visitante', 'assets/images/pateador-test2.png', 'assets/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-    game.load.image('barraVertical', 'assets/images/barra_vertical.png');
+    //game.load.image('barraVertical', 'assets/images/barra_vertical.png');
+
   
     
 	game.load.image('fondo1', 'assets/images/fondo-game1.png', 759, 150);
 	game.load.image('fondo2', 'assets/images/fondo-game2.png', 378, 150);
 	game.load.image('fondo3', 'assets/images/fondo-game3.png', 1136, 491);
+
 
   },
 
@@ -50,11 +52,13 @@ Game.prototype = {
 	timer = game.time.events.loop(Phaser.Timer.SECOND, this.updateCounter, this);
 	game.time.events.resume();
 
+
     
     presicionText=0;
 	rangoDePresicion=40;
     counter=this.tiempoMaximo;
 	perfilElegido= this.perfil;
+
 
     console.log("MODO: "+ this.modo);
     console.log("PERFIL: "+this.perfil);
@@ -107,6 +111,7 @@ drawBackground: function(){
     tweenTribuna1= game.add.tween(tribunaAtras);
     tweenTribuna1.to( {x:0, y:20}, 500, 'Linear', true, 0, false).yoyo(true);
 
+
     tribunaAdelante = game.add.sprite(0,0, 'tribunaAdelante');
     tweenTribuna2= game.add.tween(tribunaAdelante);
     tweenTribuna2.to( {x:0, y:-10}, 300, 'Linear', true, 0, false).yoyo(true);
@@ -116,6 +121,7 @@ drawBackground: function(){
 	fondo1 = game.add.sprite(0,150, 'fondo3');
 	
 	arco= game.add.sprite(0,80, 'arco');
+
 
     presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px TheMinion", fill: "black", align: "center" });
 	presicionText.visible=false;
@@ -140,12 +146,14 @@ drawArquero:function(){
     arquero.visible=false;
 },
 
+
 drawPelota:function(){
 	pelota= game.add.sprite(555,470 ,'pelota');
 	pelota.scale.setTo(0.9,0.9);
 	 
 	pelota.animations.add("girar",[0,1,2],30,true);
 },
+
 
 drawPlayer:function(){
 	player = game.add.sprite(318,210, 'pateador-local');
@@ -368,6 +376,7 @@ updateCounter: function () {
       self.setBotonesRojos(self);
 
     }
+
 	
 	self.resetGui();
 	self.resetPlayers();
@@ -382,6 +391,7 @@ updateCounter: function () {
 	pelota.position.x=555;
 	pelota.position.y=470;
 	clicked=0;
+
 
   },
   
@@ -419,8 +429,8 @@ updateCounter: function () {
   },
 
   stopPlayer: function(){
-    //player.animations.stop();
-    //player.frame=9;
+    player.animations.stop();
+    player.frame=2;
   },
 
   NoAssertPoint: function(ubiPuntaje, tries){
@@ -437,7 +447,7 @@ updateCounter: function () {
   },
 
   seMueveArquero: function(self){
-	  
+
       tweenArquero = game.add.tween(arquero);
 	  var auxVar=self.posArquero;
 	  
@@ -524,7 +534,6 @@ updateCounter: function () {
 			//triesA = auxArray["localTurno"];
 		}
 		console.log(triesA);
-		
 		console.log("entra check intentos");
       if( triesA  >= 5 &&  triesP  >= 5 ){
 
@@ -695,7 +704,7 @@ ListenerPateador: function(self, msg){
     console.log("DATOS SERVER: "+ msg);
 
     var datosServer=JSON.parse(msg);
-	
+
 	if(datosServer["user"]==0){
 		self.failScore(self,msg);
 		return;
@@ -745,13 +754,12 @@ ListenerArquero: function(self, msg){
       self.stopPlayer(self);
 
       self.posArqueroI=self.getResult();
-	
+
 		if(self.getResult()==0){
 			self.posArquero= arquero.position;
 		}else{
 			self.posArquero= buttons.children[self.getResult()-1].position;
 		}
-      
       generator = datosServer.computer;
 
       win=false;
@@ -815,7 +823,7 @@ failScore: function(self,msg){
             var movimientoPelota= self.moverPelota({x:posAux, y:-500});
 
           };
-			
+
           self.seMueveArquero(self);
         
         }
@@ -1109,6 +1117,7 @@ mouseUpPateador:function(){
 		this.EnviarJugadaServer(this);
 	 }
 },
+
 
 
 };
