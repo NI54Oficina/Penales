@@ -8,6 +8,7 @@ GameMenu.prototype = {
     startX: 600
   },
 
+
   init: function () {
     this.titleText = game.make.text(game.world.centerX+300, 100, "Penales !", {
       font: 'bold 60pt TheMinion',
@@ -17,6 +18,7 @@ GameMenu.prototype = {
     this.titleText.setShadow(3, 3, 'rgba(0,0,0,0.5)', 5);
     this.titleText.anchor.set(0.5);
     this.optionCount = 1;
+
   },
 
   create: function () {
@@ -33,18 +35,24 @@ GameMenu.prototype = {
 
 
     //fondo
-    var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
-    var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
-    grd.addColorStop(0,"#1a1750");
-    grd.addColorStop(0.3,"#1a1750");
-    grd.addColorStop(1,"#009ee1");
-    gameBack.context.fillStyle=grd;
-    gameBack.context.fillRect(0,0,this.game.width,this.game.height);
-    this.game.add.sprite(0,0,gameBack);
+  //  game.stage.disableVisibilityChange = true;
+    game.add.sprite(0, 0, 'menu-bg');
+    // //test
+    // var rectangle = drawRoundedRect(500, 0, 50,100, 5);        //test
+    
 
-    game.stage.disableVisibilityChange = true;
-    curva=game.add.sprite(0,0, 'curva');
-    curva.position={x:this.game.width/2-curva.width/2, y:this.game.height/2};
+    // var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
+    // var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
+    // grd.addColorStop(0,"#1a1750");
+    // grd.addColorStop(0.3,"#1a1750");
+    // grd.addColorStop(1,"#009ee1");
+    // gameBack.context.fillStyle=grd;
+    // gameBack.context.fillRect(0,0,this.game.width,this.game.height);
+    // this.game.add.sprite(0,0,gameBack);
+    //
+    // game.stage.disableVisibilityChange = true;
+    // curva=game.add.sprite(0,0, 'curva');
+    // curva.position={x:this.game.width/2-curva.width/2, y:this.game.height/2};
     //fondo
 
     game.add.existing(this.titleText);

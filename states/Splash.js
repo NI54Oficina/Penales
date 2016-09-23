@@ -25,19 +25,41 @@ var Splash = function () {};
 
   loadImages: function () {
 
-    game.load.image('menu-bg', 'assets/images/bg-menu.jpg');
-    game.load.image('options-bg', 'assets/images/menu-bg.png');
-    game.load.image('gameover-bg', 'assets/images/menu-bg.png');
+    game.load.image('menu-bg', 'assets/images/bg-menu.png');
+    game.load.image('options-bg', 'assets/images/menu-bg.jpg');
+    game.load.image('gameover-bg', 'assets/images/menu-bg.jpg');
     game.load.image('stats-bg', 'assets/images/bg-stats.jpg');
     game.load.image('rival-bg', 'assets/images/bg-rival.jpg');
     game.load.image('multi-bg', 'assets/images/bg-multi.jpg');
     game.load.image('single-bg', 'assets/images/bg-single.jpg');
+
+    game.load.image('img-1', 'assets/images/bt_escudo.png');
+    game.load.image('img-2', 'assets/images/bt_escudo.png');
+    game.load.image('img-3', 'assets/images/bt_escudo.png');
+    game.load.image('img-4', 'assets/images/bt_escudo.png');
+    game.load.image('img-5', 'assets/images/bt_escudo.png');
+    game.load.image('img-6', 'assets/images/bt_escudo.png');
+    game.load.image('img-7', 'assets/images/bt_escudo.png');
+    game.load.image('img-8', 'assets/images/bt_escudo.png');
+    game.load.image('img-9', 'assets/images/bt_escudo.png');
+    game.load.image('img-10', 'assets/images/bt_escudo.png');
+    game.load.image('test', 'assets/images/test10.png');
     game.load.image('left-corner', 'assets/images/left-corner.png');
     game.load.image('right-corner', 'assets/images/left-corner.png');
     game.load.image('volver', 'assets/images/arrow-back.png');
     game.load.image('menu', 'assets/images/menu.png');
-    game.load.image('curva', 'assets/images/fondo_curva.png');
     game.load.image('puntitos', 'assets/images/fondo_trama.png');
+    game.load.image('golden', 'assets/images/bt_golden.png');
+    game.load.image('shadow', 'assets/images/bt_reflex.png');
+    game.load.image('curva', 'assets/images/fondo_curva.png');
+
+    game.load.image('brillodown', 'assets/images/brillodown.png');
+    game.load.image('brilloup', 'assets/images/brilloup.png');
+
+    game.load.image('line', 'assets/images/titulo_linea.png');
+    game.load.image('player', 'assets/images/bt_anon.png');
+
+
 
   },
 
@@ -93,7 +115,7 @@ var Splash = function () {};
   create: function () {
     this.status.setText('Cargando');
     this.addGameStates();
-  //  this.addGameMusic();
+  //this.addGameMusic();
 	  Emit("login"," ","loginConfirmed","logueado",this);
   },
 

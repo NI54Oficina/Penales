@@ -4,47 +4,35 @@ Selectplayer.prototype = {
 
   preload: function () {
     this.optionCount = 1;
-    game.load.image('img-1', 'assets/images/bt_escudo.png');
-    game.load.image('img-2', 'assets/images/bt_escudo.png');
-    game.load.image('img-3', 'assets/images/bt_escudo.png');
-    game.load.image('img-4', 'assets/images/bt_escudo.png');
-    game.load.image('img-5', 'assets/images/bt_escudo.png');
-    game.load.image('img-6', 'assets/images/bt_escudo.png');
-    game.load.image('img-7', 'assets/images/bt_escudo.png');
-    game.load.image('img-8', 'assets/images/bt_escudo.png');
-    game.load.image('img-9', 'assets/images/bt_escudo.png');
-    game.load.image('img-10', 'assets/images/bt_escudo.png');
-    game.load.image('test', 'assets/images/test10.png');
-    game.load.image('left-corner', 'assets/images/left-corner.png');
-    game.load.image('right-corner', 'assets/images/left-corner.png');
-    game.load.image('volver', 'assets/images/arrow-back.png');
-    game.load.image('menu', 'assets/images/menu.png');
-    game.load.image('puntitos', 'assets/images/fondo_trama.png');
-    game.load.image('golden', 'assets/images/bt_golden.png');
-    game.load.image('shadow', 'assets/images/bt_reflex.png');
   },
 
   addMenuOption: function(text, callback) {
-    var optionStyle = { font: '30pt RobotoBold', align: 'center', stroke: '#1b1464'};
 
-
+      var optionStyle = { font: '40pt RobotoBold', align: 'center',fill:'#1b1464' ,stroke: '#1b1464'};
 
     // aplicando el background de cada texto
 
-      var 	myBitmap = this.game.add.bitmapData(300, 60);
-      var  grd=myBitmap.context.createLinearGradient(0,0,0,30);
+      var 	myBitmap = this.game.add.bitmapData(540, 80);
+      var  grd=myBitmap.context.createLinearGradient(0,0,0,40);
       grd.addColorStop(0,"#fbe43e");
       grd.addColorStop(0.9,"#fbe43e");
       grd.addColorStop(1,"#cea428");
       myBitmap.context.fillStyle=grd;
       myBitmap.context.fillRect(0,0,this.game.height,this.game.width);
-      var background = this.game.add.sprite(100,this.optionCount*550-10, myBitmap);
+      var background = this.game.add.sprite(100,this.optionCount*530-10, myBitmap);
 
     // aplicando el background de cada texto
 
-    var txt = game.add.text(100, (this.optionCount * 550) , text, optionStyle);
+    var txt = game.add.text(100, 0 , text, optionStyle);
+    txt.position.y= background.position.y+ background.height/2 - txt.height/2;
 
-    txt.stroke = "black";
+    down= this.game.make.sprite(-20,55, 'brillodown');
+    up= this.game.make.sprite(200,-15, 'brilloup');
+    down.scale.setTo(0.5,0.5);
+    up.scale.setTo(0.5,0.5);
+    background.addChild(down);
+    background.addChild(up);
+
 
 
     txt.position.x=this.game.width/2 - txt.width/2;
