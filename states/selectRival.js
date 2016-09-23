@@ -125,36 +125,38 @@ Selectplayer.prototype = {
 
       // imagen mas baja a la izquierda
       img5= game.add.sprite(145, 225, 'img-5');
-      h5=img5.addChild(game.make.sprite(img5.position.x-125,img5.height-35, 'shadow'));
+	  var shadowX=20;
+	  var shadowY=400;
+      h5=img5.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
 
       // imagen mas baja aa la derecha
       img4= game.add.sprite(145, 225, 'img-4');
-      h4=img4.addChild(game.make.sprite(img4.position.x-125,img4.height-35, 'shadow'));
+      h4=img4.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
       //imagen menos baja a la izquierda
       img3= game.add.sprite(145, 225, 'img-3');
-      h3=img3.addChild(game.make.sprite(img3.position.x-125, img3.height-35, 'shadow'));
+      h3=img3.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
       //imagen menos baja a la derecha
       img2= game.add.sprite(145, 225, 'img-2');
-      h2=img2.addChild(game.make.sprite(img2.position.x-125,img2.height-35, 'shadow'));
+      h2=img2.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
       //imagen central
       img1=game.add.sprite(145, 225, 'img-1');
-      h1=img1.addChild(game.make.sprite(img1.position.x-125,img1.height-35, 'shadow'));
+      h1=img1.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
 
 
       img6=game.add.sprite(800, 225, 'img-6');
-      h6=img6.addChild(game.make.sprite(img6.position.x-125, img6.height-35, 'shadow'));
+      h6=img6.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
 
       img7=game.add.sprite(800, 225, 'img-7');
-      h7=img7.addChild(game.make.sprite(img7.position.x-125, img7.height-35, 'shadow'));
+      h7=img7.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
 
       img8=game.add.sprite(800, 225,'img-8');
-      h8=img8.addChild(game.make.sprite(img8.position.x-125, img8.height-35, 'shadow'));
+      h8=img8.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
 
       img9=game.add.sprite(800, 225, 'img-9');
-      h9=img9.addChild(game.make.sprite(img9.position.x-125, img9.height-35, 'shadow'));
+      h9=img9.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
 
       img10=game.add.sprite(800, 225, 'img-10');
-      h10=img10.addChild(game.make.sprite(img10.position.x-125, img10.height-35, 'shadow'));
+      h10=img10.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
 
 
       img1.scale.setTo(.9, .9);
