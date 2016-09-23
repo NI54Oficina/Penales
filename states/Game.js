@@ -323,7 +323,7 @@ updateCounter: function () {
   setArquero: function(){
     arquero.visible=true;
     arquero.frame=0;
-	arqueroPiso=100;
+	arqueroPiso=75;
     arquero.position.x =320;
     arquero.position.y =arqueroPiso;
   },

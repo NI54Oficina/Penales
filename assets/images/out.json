@@ -2,314 +2,314 @@
 
 "Arquero_00.png":
 {
-	"frame": {"x":296,"y":337,"w":218,"h":138},
+	"frame": {"x":222,"y":494,"w":218,"h":138},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":50,"y":35,"w":218,"h":138},
+	"spriteSourceSize": {"x":50,"y":65,"w":218,"h":138},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_01.png":
 {
-	"frame": {"x":497,"y":610,"w":217,"h":138},
+	"frame": {"x":219,"y":634,"w":217,"h":138},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":50,"y":35,"w":217,"h":138},
+	"spriteSourceSize": {"x":50,"y":65,"w":217,"h":138},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_02.png":
 {
-	"frame": {"x":1,"y":590,"w":220,"h":133},
+	"frame": {"x":737,"y":611,"w":220,"h":133},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":57,"y":40,"w":220,"h":133},
+	"spriteSourceSize": {"x":57,"y":70,"w":220,"h":133},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_03.png":
 {
-	"frame": {"x":737,"y":573,"w":253,"h":127},
+	"frame": {"x":493,"y":445,"w":253,"h":127},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":41,"y":47,"w":253,"h":127},
+	"spriteSourceSize": {"x":41,"y":77,"w":253,"h":127},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_04.png":
 {
-	"frame": {"x":1,"y":459,"w":276,"h":129},
+	"frame": {"x":505,"y":315,"w":276,"h":128},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":21,"y":54,"w":276,"h":129},
+	"spriteSourceSize": {"x":21,"y":82,"w":276,"h":128},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_05.png":
 {
-	"frame": {"x":433,"y":750,"w":229,"h":126},
+	"frame": {"x":422,"y":816,"w":229,"h":125},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":46,"y":57,"w":229,"h":126},
+	"spriteSourceSize": {"x":46,"y":85,"w":229,"h":125},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_06.png":
 {
-	"frame": {"x":422,"y":878,"w":218,"h":119},
+	"frame": {"x":653,"y":886,"w":218,"h":118},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":46,"y":64,"w":218,"h":119},
+	"spriteSourceSize": {"x":46,"y":92,"w":218,"h":118},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_07.png":
 {
-	"frame": {"x":194,"y":1031,"w":185,"h":92},
+	"frame": {"x":410,"y":1074,"w":185,"h":91},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":72,"y":91,"w":185,"h":92},
+	"spriteSourceSize": {"x":72,"y":119,"w":185,"h":91},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_08.png":
 {
-	"frame": {"x":183,"y":1137,"w":125,"h":71},
+	"frame": {"x":597,"y":1122,"w":125,"h":70},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":150,"y":112,"w":125,"h":71},
+	"spriteSourceSize": {"x":150,"y":140,"w":125,"h":70},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_09.png":
 {
-	"frame": {"x":642,"y":945,"w":148,"h":52},
+	"frame": {"x":724,"y":1167,"w":148,"h":51},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":150,"y":131,"w":148,"h":52},
+	"spriteSourceSize": {"x":150,"y":159,"w":148,"h":51},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_10.png":
 {
-	"frame": {"x":815,"y":945,"w":165,"h":107},
+	"frame": {"x":824,"y":1,"w":165,"h":106},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":120,"y":80,"w":165,"h":107},
+	"spriteSourceSize": {"x":120,"y":104,"w":165,"h":106},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_11.png":
 {
-	"frame": {"x":516,"y":168,"w":262,"h":150},
+	"frame": {"x":1,"y":197,"w":262,"h":149},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":13,"y":32,"w":262,"h":150},
+	"spriteSourceSize": {"x":13,"y":61,"w":262,"h":149},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_12.png":
 {
-	"frame": {"x":516,"y":1,"w":270,"h":165},
+	"frame": {"x":517,"y":149,"w":270,"h":164},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":4,"y":17,"w":270,"h":165},
+	"spriteSourceSize": {"x":4,"y":46,"w":270,"h":164},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_13.png":
 {
-	"frame": {"x":1,"y":1,"w":259,"h":194},
+	"frame": {"x":1,"y":1,"w":260,"h":194},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":0,"w":259,"h":194},
+	"spriteSourceSize": {"x":0,"y":16,"w":260,"h":194},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_14.png":
 {
-	"frame": {"x":262,"y":1,"w":252,"h":194},
+	"frame": {"x":263,"y":1,"w":252,"h":194},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":0,"w":252,"h":194},
+	"spriteSourceSize": {"x":0,"y":16,"w":252,"h":194},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_15.png":
 {
-	"frame": {"x":207,"y":899,"w":193,"h":130},
+	"frame": {"x":1,"y":1054,"w":193,"h":129},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":70,"y":53,"w":193,"h":130},
+	"spriteSourceSize": {"x":70,"y":81,"w":193,"h":129},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_16.png":
 {
-	"frame": {"x":616,"y":999,"w":197,"h":115},
+	"frame": {"x":613,"y":1006,"w":197,"h":114},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":114,"y":68,"w":197,"h":115},
+	"spriteSourceSize": {"x":114,"y":96,"w":197,"h":114},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_17.png":
 {
-	"frame": {"x":664,"y":818,"w":226,"h":125},
+	"frame": {"x":265,"y":346,"w":226,"h":146},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":92,"y":48,"w":226,"h":125},
+	"spriteSourceSize": {"x":92,"y":57,"w":226,"h":146},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_18.png":
 {
-	"frame": {"x":1,"y":1005,"w":191,"h":130},
+	"frame": {"x":420,"y":943,"w":191,"h":129},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":79,"y":51,"w":191,"h":130},
+	"spriteSourceSize": {"x":79,"y":81,"w":191,"h":129},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_19.png":
 {
-	"frame": {"x":402,"y":999,"w":212,"h":117},
+	"frame": {"x":196,"y":1055,"w":212,"h":116},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":82,"y":64,"w":212,"h":117},
+	"spriteSourceSize": {"x":82,"y":94,"w":212,"h":116},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_20.png":
 {
-	"frame": {"x":716,"y":702,"w":264,"h":114},
+	"frame": {"x":438,"y":701,"w":264,"h":113},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":41,"y":67,"w":264,"h":114},
+	"spriteSourceSize": {"x":41,"y":97,"w":264,"h":113},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_21.png":
 {
-	"frame": {"x":1,"y":332,"w":293,"h":125},
+	"frame": {"x":442,"y":574,"w":293,"h":125},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":46,"w":293,"h":125},
+	"spriteSourceSize": {"x":0,"y":76,"w":293,"h":125},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_22.png":
 {
-	"frame": {"x":1,"y":197,"w":305,"h":133},
+	"frame": {"x":517,"y":1,"w":305,"h":146},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":37,"w":305,"h":133},
+	"spriteSourceSize": {"x":0,"y":54,"w":305,"h":146},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_23.png":
 {
-	"frame": {"x":1,"y":1137,"w":180,"h":64},
+	"frame": {"x":812,"y":1102,"w":180,"h":63},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":129,"y":117,"w":180,"h":64},
+	"spriteSourceSize": {"x":129,"y":147,"w":180,"h":63},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_24.png":
 {
-	"frame": {"x":471,"y":1118,"w":152,"h":51},
+	"frame": {"x":410,"y":1167,"w":152,"h":50},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":139,"y":130,"w":152,"h":51},
+	"spriteSourceSize": {"x":139,"y":160,"w":152,"h":50},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_25.png":
 {
-	"frame": {"x":815,"y":1054,"w":176,"h":95},
+	"frame": {"x":812,"y":1006,"w":176,"h":94},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":110,"y":86,"w":176,"h":95},
+	"spriteSourceSize": {"x":110,"y":116,"w":176,"h":94},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_26.png":
 {
-	"frame": {"x":310,"y":1125,"w":159,"h":73},
+	"frame": {"x":824,"y":109,"w":159,"h":72},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":126,"y":111,"w":159,"h":73},
+	"spriteSourceSize": {"x":126,"y":138,"w":159,"h":72},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_27.png":
 {
-	"frame": {"x":780,"y":289,"w":217,"h":141},
+	"frame": {"x":1,"y":348,"w":217,"h":141},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":44,"y":37,"w":217,"h":141},
+	"spriteSourceSize": {"x":44,"y":67,"w":217,"h":141},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_28.png":
 {
-	"frame": {"x":279,"y":477,"w":216,"h":139},
+	"frame": {"x":1,"y":632,"w":216,"h":139},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":44,"y":39,"w":216,"h":139},
+	"spriteSourceSize": {"x":44,"y":69,"w":216,"h":139},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_29.png":
 {
-	"frame": {"x":516,"y":469,"w":219,"h":139},
+	"frame": {"x":1,"y":491,"w":219,"h":139},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":43,"y":39,"w":219,"h":139},
+	"spriteSourceSize": {"x":43,"y":69,"w":219,"h":139},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_30.png":
 {
-	"frame": {"x":788,"y":148,"w":209,"h":139},
+	"frame": {"x":1,"y":773,"w":209,"h":139},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":47,"y":39,"w":209,"h":139},
+	"spriteSourceSize": {"x":47,"y":69,"w":209,"h":139},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_31.png":
 {
-	"frame": {"x":788,"y":1,"w":207,"h":145},
+	"frame": {"x":783,"y":323,"w":207,"h":145},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":49,"y":33,"w":207,"h":145},
+	"spriteSourceSize": {"x":49,"y":63,"w":207,"h":145},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_32.png":
 {
-	"frame": {"x":1,"y":725,"w":209,"h":138},
+	"frame": {"x":1,"y":914,"w":209,"h":138},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":54,"y":37,"w":209,"h":138},
+	"spriteSourceSize": {"x":54,"y":67,"w":209,"h":138},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_33.png":
 {
-	"frame": {"x":212,"y":759,"w":208,"h":138},
+	"frame": {"x":704,"y":746,"w":208,"h":138},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":52,"y":37,"w":208,"h":138},
+	"spriteSourceSize": {"x":52,"y":67,"w":208,"h":138},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_34.png":
 {
-	"frame": {"x":308,"y":197,"w":206,"h":138},
+	"frame": {"x":212,"y":915,"w":206,"h":138},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":52,"y":37,"w":206,"h":138},
+	"spriteSourceSize": {"x":52,"y":67,"w":206,"h":138},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_35.png":
 {
-	"frame": {"x":1,"y":865,"w":204,"h":138},
+	"frame": {"x":789,"y":183,"w":204,"h":138},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":51,"y":37,"w":204,"h":138},
+	"spriteSourceSize": {"x":51,"y":67,"w":204,"h":138},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_36.png":
 {
-	"frame": {"x":223,"y":618,"w":208,"h":139},
+	"frame": {"x":212,"y":774,"w":208,"h":139},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":53,"y":36,"w":208,"h":139},
+	"spriteSourceSize": {"x":53,"y":66,"w":208,"h":139},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_37.png":
 {
-	"frame": {"x":756,"y":432,"w":228,"h":139},
+	"frame": {"x":748,"y":470,"w":228,"h":139},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":32,"y":36,"w":228,"h":139},
+	"spriteSourceSize": {"x":32,"y":66,"w":228,"h":139},
 	"sourceSize": {"w":318,"h":210}
 },
 "Arquero_38.png":
 {
-	"frame": {"x":516,"y":320,"w":238,"h":147},
+	"frame": {"x":265,"y":197,"w":238,"h":147},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":23,"y":29,"w":238,"h":147},
+	"spriteSourceSize": {"x":23,"y":59,"w":238,"h":147},
 	"sourceSize": {"w":318,"h":210}
 }},
 "meta": {
@@ -317,8 +317,8 @@
 	"version": "1.0",
 	"image": "out.png",
 	"format": "RGBA8888",
-	"size": {"w":998,"h":1209},
+	"size": {"w":994,"h":1219},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:73e602574093e0564bd640b86d768c68:d346f9680279708713a7d8de691aabf8:70c576c1e9fc266db7dfba4d429488ea$"
+	"smartupdate": "$TexturePacker:SmartUpdate:9a69e69808d0ca6f87b50029b8508058:4c2c4314e6243060e38662cc6a31d861:70c576c1e9fc266db7dfba4d429488ea$"
 }
 }

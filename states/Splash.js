@@ -44,7 +44,7 @@ var Splash = function () {};
   loadFonts: function () {
     WebFontConfig = {
       custom: {
-        families: ['TheMinion'],
+        families: ['TheMinion',"BitterBold","CondensedLight","RobotoRegular","RobotoBold"],
         urls: ['assets/style/theminion.css']
       }
     }
