@@ -114,12 +114,13 @@ Singleplayer.prototype = {
 
         //esquina
 
-
         //fondo de participantes
 
         y=200;
+
 		var oponentes= game.add.group();
         puntajeStyle = { font: '15pt CondensedLight', fill: 'yellow'};
+
         usuario={
           nombre:'pepe',
           racha:  51,
@@ -136,6 +137,7 @@ Singleplayer.prototype = {
         //fondo de participantes
 
 
+
         //titulo
         var titleStyle = { font: '40px BitterBold', fill: 'white', align: 'center'};
         var line = this.game.make.sprite(-160,45, 'line');
@@ -146,13 +148,11 @@ Singleplayer.prototype = {
 
 
 
-
-
         search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
         search.visible=false;
 
 
-
+        //
         // this.addMenuOption('COMENZAR', function () {
         //   search.visible=true;
         //   Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
@@ -192,27 +192,35 @@ Singleplayer.prototype = {
     },
 
     createDataForPlayer: function(target, user){
-		var cuadradoUser= this.game.add.group();
-      var statsBack= this.game.add.bitmapData(700,300);
-      var  grd=statsBack.context.createLinearGradient(0,0,0,this.game.height);
-      grd.addColorStop(0,"black");
-      statsBack.context.fillStyle=grd;
-      statsBack.context.fillRect(0,0,this.game.width,this.game.height);
-      statsBackground=this.game.add.sprite(y,y,statsBack);
-      statsBackground.alpha=.3;
-      statsBackground.position={x: this.game.width/2- statsBackground.width/2,y:y};
-	  cuadradoUser.add(statsBackground);
-      var player=this.game.add.sprite(0,0,'img-1');
-      player.scale.setTo(.7,.7);
-      player.position={x:statsBackground.position.x+20,y:statsBackground.position.y+statsBackground.height/2-player.height/2}
-	 cuadradoUser.add(player);
-      // var txt1 = game.add.text(statsBackground.position.x+statsBackground.width/2,statsBackground.position.y+20, "asdasdasdasdasd", puntajeStyle)
-      console.log(user);
 
-      y+=350;
+	var cuadradoUser= this.game.add.group();
+     var statsBack= this.game.add.bitmapData(700,300);
+     var  grd=statsBack.context.createLinearGradient(0,0,0,this.game.height);
+     grd.addColorStop(0,"black");
+     statsBack.context.fillStyle=grd;
+     statsBack.context.fillRect(0,0,this.game.width,this.game.height);
+     statsBackground=this.game.add.sprite(y,y,statsBack);
+     statsBackground.alpha=.3;
+     statsBackground.position={x: this.game.width/2- statsBackground.width/2,y:y};
+	 cuadradoUser.add(statsBackground);
+     var player=this.game.add.sprite(0,0,'img-1');
+     player.scale.setTo(.7,.7);
+     player.position={x:statsBackground.position.x+20,y:statsBackground.position.y+statsBackground.height/2-player.height/2}
+	cuadradoUser.add(player);
+     var txt1 = game.add.text(statsBackground.position.x+statsBackground.width/2,y+20,user.nombre, puntajeStyle);
+     var txt2 = game.add.text(statsBackground.position.x+statsBackground.width/2,y+50,'RACHA ACTUAL DE PARTIDOS:        ' +user.racha, puntajeStyle);
+     var txt4 = game.add.text(statsBackground.position.x+statsBackground.width/2,y+80,'TOTAL PARTIDOS GANADOS:        ' +user.ganados, puntajeStyle);
+     var txt5 = game.add.text(statsBackground.position.x+statsBackground.width/2,y+110,'TOTAL PARTIDOS PERDIDOS:        ' +user.perdidos, puntajeStyle);
+	cuadradoUser.add(txt1);
+	cuadradoUser.add(txt2);
+	cuadradoUser.add(txt4);
+	cuadradoUser.add(txt5);
 
-      console.log(y);
-	  return cuadradoUser;
-    }
+     y+=350;
+
+     console.log(y);
+	 return cuadradoUser;
+   }
+
 
   }
