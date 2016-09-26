@@ -36,36 +36,11 @@ GameMenu.prototype = {
 
     //fondo
   //  game.stage.disableVisibilityChange = true;
+
     game.add.sprite(0, 0, 'menu-bg');
-//     var graphics = game.add.graphics(100, 100);
-//
-//     graphics.drawRoundedRect(600, 250, 100, 100,15);
-//
-//
-// // set a fill and line style
-// //graphics.beginFill(0x9966FF);
-//   var  grd=graphics.context.createLinearGradient(0,0,0,60);
-//   grd.addColorStop(0,"black");
-//   grd.addColorStop(0.15,"#1a1750");
-//   grd.addColorStop(0.3,"#1a1750");
-//   grd.addColorStop(1,"#009ee1");
-//
-//
-// // draw a shape
-//
-//
-// // set a fill and line style again
-//
-//
-// // draw a rectangle
-// graphics.fillStyle=grd;
-//
-//
-//
-// graphics.endFill();
-//
-//
-// window.graphics = graphics;
+
+    var graphics = game.add.graphics(100, 100);
+
 
     // var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
     // var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
