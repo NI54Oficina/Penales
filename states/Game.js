@@ -767,21 +767,29 @@ ListenerPateador: function(self, datosServer){
 		self.pelotaEntra=true;		
 	}
 		//cambiar
-    self.animarJugada(self);
+    self.animarJugada(self,datosServer);
 
            
-
       
 
 },
 
-animarJugada:function(self){
+animarJugada:function(self,datosServer){
 	 self.patear(self);
 	 setTimeout(function(){
 		 //deprecada
 		self.stopPlayer(self);
 		self.ubicarArquero(datosServer, self);
-		self.UpdateStats(self);
+		
+		
+    self.seMueveArquero(self);
+	
+    var movimientoPelota=self.moverPelota(self.getResult());
+
+      movimientoPelota.onComplete.addOnce(function(){
+		  self.UpdateStats(self);
+	  });
+
 	 },delayPelota);
 },
 
@@ -951,12 +959,6 @@ acertarTiro: function(self){
 	console.log(buttons);
     //coordinate= buttons.children[self.getResult()-1].position;
 
-    self.seMueveArquero(self);
-	
-    var movimientoPelota=self.moverPelota(self.getResult());
-
-      movimientoPelota.onComplete.addOnce(function(){
-
           if(win){
               puntosUser++;
               tweenTribuna1.resume();
@@ -984,7 +986,7 @@ acertarTiro: function(self){
 
          };
 
-       });
+       
 },
 
 atajar: function(self){
