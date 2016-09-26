@@ -18,6 +18,7 @@ Main.prototype = {
     game.load.image('loading',  'assets/images/loading.png');
     game.load.image('brand',    'assets/images/logo.png');
     game.load.script('polyfill',   'lib/polyfill.js');
+    game.load.script('scrolls',   'lib/scroll.js');
     game.load.script('utils',   'lib/utils.js');
     game.load.script('splash',  'states/Splash.js');
   },

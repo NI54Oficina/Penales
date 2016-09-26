@@ -78,7 +78,7 @@ GameMenu.prototype = {
     });
 
     this.addMenuOption('ESTADÍSTICAS', function () {
-      game.state.start("Anims");
+      game.state.start("Stadistics");
     });
 
 
