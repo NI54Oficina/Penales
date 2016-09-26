@@ -20,7 +20,8 @@ Anims.prototype = {
     game.load.spritesheet('tribunaAdelante', 'assets/images/gente2.png');
     game.load.image('pasto', 'assets/images/pasto.png');
     game.load.spritesheet('pelota', 'assets/images/pelota.png', 40, 40);
-    game.load.image('arco', 'assets/images/arco.png');
+    game.load.image('arco-0', 'assets/images/arco-0.png');
+	game.load.atlas('arco', 'assets/images/arcos-sprite.png', 'assets/images/arcos-sprite.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
     //game.load.spritesheet('arquero-local', 'assets/images/arquero-test-1.png', 318, 210);
     //game.load.spritesheet('arquero-local', 'assets/images/arquero-test-1.png', 318, 210);
 	 game.load.atlas('arquero-local', 'assets/images/out.png', 'assets/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
@@ -195,7 +196,10 @@ drawBackground: function(){
 	fondo1 = game.add.sprite(759,0, 'fondo2');
 	fondo1 = game.add.sprite(0,150, 'fondo3');
 	
-	arco= game.add.sprite(0,80, 'arco');
+	arco= game.add.sprite(0,80, 'arco-0');
+	arco= game.add.sprite(270,80, 'arco',"i00.png");
+	arco= game.add.sprite(456,80, 'arco',"c00.png");
+	arco= game.add.sprite(642,80, 'arco',"d00.png");
 
     presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px TheMinion", fill: "black", align: "center" });
 	presicionText.visible=false;

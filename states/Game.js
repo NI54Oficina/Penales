@@ -1,4 +1,5 @@
 var Game = function(game) {};
+var delayPelota=500;
 
 Game.prototype = {
 
@@ -19,7 +20,8 @@ Game.prototype = {
     game.load.spritesheet('tribunaAdelante', 'assets/images/gente2.png');
    
     game.load.spritesheet('pelota', 'assets/images/pelota.png', 40, 40);
-    game.load.image('arco', 'assets/images/arco.png');
+	game.load.image('arco-0', 'assets/images/arco-0.png');
+	game.load.atlas('arco', 'assets/images/arcos-sprite.png', 'assets/images/arcos-sprite.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
     game.load.atlas('arquero-local', 'assets/images/out.png', 'assets/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
 	 game.load.atlas('pateador-local', 'assets/images/pateador-test.png', 'assets/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
     game.load.atlas('arquero-visitante', 'assets/images/out2.png', 'assets/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
@@ -36,6 +38,7 @@ Game.prototype = {
   },
 
   create: function () {
+	console.log(game.stage);
     console.log("Entra create game");
     self = this;
     triesA=this.triesA;
@@ -103,8 +106,12 @@ Game.prototype = {
 	}
 
 	this.drawGui();
-	
+	console.log("camera	");
+	console.log(this.camera);
+	this.camera.x=1000;
 },
+
+
 
 drawBackground: function(){
 	tribunaAtras = game.add.sprite(0,0, 'tribunaAtras');
@@ -120,7 +127,34 @@ drawBackground: function(){
 	fondo1 = game.add.sprite(759,0, 'fondo2');
 	fondo1 = game.add.sprite(0,150, 'fondo3');
 	
-	arco= game.add.sprite(0,80, 'arco');
+	arco= game.add.sprite(0,80, 'arco-0');
+	arco1= game.add.sprite(270,80, 'arco',"i00.png");
+	arco1.animations.add("up-left",["i01.png","i02.png"],2,false);
+	arco1.animations.add("down-left",["i03.png","i04.png"],2,false);
+	arco1.animations.add("up-right",["i00.png"],2,false);
+	arco1.animations.add("down-right",["i00.png"],2,false);
+	arco1.animations.add("up",["i00.png"],2,false);
+	arco1.animations.add("down",["i00.png"],2,false);
+	arco1.animations.add("idle",["i00.png"],2,false);
+	
+	
+	arco2= game.add.sprite(456,80, 'arco',"c00.png");
+	arco2.animations.add("up",["c01.png","c02.png"],2,false);
+	arco2.animations.add("down",["c03.png","c04.png"],2,false);
+	arco2.animations.add("up-right",["c00.png"],2,false);
+	arco2.animations.add("down-right",["c00.png"],2,false);
+	arco2.animations.add("up-left",["c00.png"],2,false);
+	arco2.animations.add("down-left",["c00.png"],2,false);
+	arco2.animations.add("idle",["c00.png"],2,false);
+	
+	arco3= game.add.sprite(642,80, 'arco',"d00.png");
+	arco3.animations.add("up-right",["d01.png","d02.png"],2,false);
+	arco3.animations.add("down-right",["d03.png","d04.png"],2,false);
+	arco3.animations.add("up-left",["d00.png"],2,false);
+	arco3.animations.add("down-left",["d00.png"],2,false);
+	arco3.animations.add("up",["d00.png"],2,false);
+	arco3.animations.add("down",["d00.png"],2,false);
+	arco3.animations.add("idle",["d00.png"],2,false);
 
 
     presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px TheMinion", fill: "black", align: "center" });
@@ -291,6 +325,18 @@ updateCounter: function () {
 
      result=auxValue;
   },
+  
+  setArco:function(posicion){
+	arco1.play(posicion) ;
+	arco2.play(posicion);
+	arco3.play(posicion);
+  },
+  
+  resetArco:function(){
+	  arco1.play("idle") ;
+	arco2.play("idle");
+	arco3.play("idle");
+  },
 
   getResult: function(){
     return result;
@@ -422,15 +468,15 @@ updateCounter: function () {
 
   patear: function(){
     tweenPlayer = game.add.tween(player);
-
-    setTimeout(function(){tweenPlayer.to({x:260, y:300},500, 'Linear', true, 0);},200); 
+	
+    setTimeout(function(){tweenPlayer.to({x:200, y:300},500, 'Linear', true, 0);},0); 
 
     player.animations.play('right');
   },
 
   stopPlayer: function(){
-    player.animations.stop();
-    player.frame=2;
+    //player.animations.stop();
+    //player.frame=2;
   },
 
   NoAssertPoint: function(ubiPuntaje, tries){
@@ -441,6 +487,7 @@ updateCounter: function () {
   },
 
   AssertPoint: function(ubiPuntaje, tries){
+	  
     var point= game.add.sprite(10+tries*40, ubiPuntaje, 'assert');
     point.scale.setTo(0.10,0.10);
     points.add(point);
@@ -462,7 +509,7 @@ updateCounter: function () {
           break;
 
           case 2:
-		  tweenArquero.to({x:0,y:arqueroPiso}, 500, 'Linear', true, 0);
+		  tweenArquero.to({x:320,y:arqueroPiso}, 500, 'Linear', true, 0);
           arquero.animations.play('up');
           break;
 
@@ -724,7 +771,7 @@ ListenerPateador: function(self, msg){
         if(self.getResult()!= generator){
            win=true;
         };
-
+		//cambiar
         if( rangoDePresicion > presicion && presicion > -rangoDePresicion){
 
             self.acertarTiro(self);
@@ -734,7 +781,7 @@ ListenerPateador: function(self, msg){
 
          };
 
-      },900);
+      },delayPelota);
 
 },
 
@@ -777,7 +824,7 @@ ListenerArquero: function(self, msg){
 
        };
 
-    },500);
+    },delayPelota);
 
 },
 
@@ -804,23 +851,23 @@ failScore: function(self,msg){
         if(Phaser.Math.isEven(modo)){
 
           if(datosServer.computer==0){
-            posAux = game.rnd.integerInRange(-800,800);
-			movimientoPelota= self.moverPelota({x:posAux, y:-500});
+            
+			movimientoPelota= self.moverPelota("failComputer0");
           }else{
 
             self.ubicarArquero(datosServer,self);
-			movimientoPelota= self.moverPelota(self.posArquero);
+			movimientoPelota= self.moverPelota(datosServer);
           };
 
         }else{
 
           if(datosServer.user==0){
-            posAux = game.rnd.integerInRange(600,800);
-            var movimientoPelota= self.moverPelota({x:posAux, y:-500});
+            
+            movimientoPelota= self.moverPelota("failUser0");
           }else{
 
-            posAux = game.rnd.integerInRange(-800,600);
-            var movimientoPelota= self.moverPelota({x:posAux, y:-500});
+            
+            movimientoPelota= self.moverPelota("failUser1");
 
           };
 
@@ -870,7 +917,7 @@ failScore: function(self,msg){
 
             });
 
-      },500);
+      },delayPelota);
 
 },
 
@@ -887,11 +934,11 @@ Looser: function(){
 acertarTiro: function(self){
 	console.log("intenta obtener el boton "+self.getResult());
 	console.log(buttons);
-    coordinate= buttons.children[self.getResult()-1].position;
+    //coordinate= buttons.children[self.getResult()-1].position;
 
     self.seMueveArquero(self);
-
-    var movimientoPelota=self.moverPelota(coordinate);
+	
+    var movimientoPelota=self.moverPelota(self.getResult());
 
       movimientoPelota.onComplete.addOnce(function(){
 
@@ -928,11 +975,13 @@ acertarTiro: function(self){
 atajar: function(self){
 		
 		if(generator>0){
-      coordinate= buttons.children[generator-1].position;
+			//coordinate= buttons.children[generator-1].position;
+			coordinate=generator;
 		}else{
-			var posAux = game.rnd.integerInRange(600,800);
+			/*var posAux = game.rnd.integerInRange(600,800);
 			var posAuxY=-500;
-			coordinate= {x:posAux,y:posAuxY};
+			coordinate= {x:posAux,y:posAuxY};*/
+			coordinate="failComputer1";
 		}
 
       self.seMueveArquero(self);
@@ -1007,7 +1056,8 @@ errarTiro: function(self){
 
 		console.log(" POS AUX: "+posAux+"  POS AUX Y: "+posAuxY);
 		self.seMueveArquero(self);
-		var movimientoPelota=self.moverPelota({x:posAux, y:posAuxY});
+		//arrgelar aca
+		var movimientoPelota=self.moverPelota("failUser1");
 		
 		movimientoPelota.onComplete.addOnce(function(){
 		   self.NoAssertPoint(200,triesP);
@@ -1029,7 +1079,7 @@ noAtajar: function(self){
      posAux = game.rnd.integerInRange(-800,800);
 
      self.seMueveArquero(self);
-     var movimientoPelota=self.moverPelota({x:posAux, y:-500});
+     var movimientoPelota=self.moverPelota("failComputer0");
 
      movimientoPelota.onComplete.addOnce(function(){
 
@@ -1042,21 +1092,68 @@ noAtajar: function(self){
 
 },
 
-moverPelota: function(unaCoordenada){
-  tweenPelota = game.add.tween(pelota);
+moverPelota: function(coor){
+	var unaCoordenada={x:0,y:0};
+	 var auxTween;
+	 tweenPelota = game.add.tween(pelota);
+	if(coor=="failComputer0"||coor=="failComputer1"){
+		var posAux = game.rnd.integerInRange(-800,800);
+		unaCoordenada={x:posAux, y:-500};
+		 auxTween= tweenPelota.to(unaCoordenada,500, 'Linear', true, 0);
+	}else
+	if(coor=="failUser0"){
+		var posAux = game.rnd.integerInRange(600,800);
+       unaCoordenada={x:posAux, y:-500};
+	   auxTween= tweenPelota.to(unaCoordenada,500, 'Linear', true, 0);
+	}else
+	if(coor=="failUser1"){
+		var posAux = game.rnd.integerInRange(-800,600);
+        unaCoordenada={x:posAux, y:-500};
+		 auxTween= tweenPelota.to(unaCoordenada,500, 'Linear', true, 0);
+	} else{
+		switch(coor){
+			case 1: case "1":
+			unaCoordenada=[{x:555,y:470},{x:437,y:291},{x:392,y:226},{x:345,y:153}];
+			break;
+			case 2: case "2":
+			unaCoordenada=[ {x:555,y:470},{x:552,y:251},{x:551,y:193},{x:549,y:141}];
+			break;
+			case 3: case "3":
+			unaCoordenada=[{x:555,y:470},{x:756,y:265},{x:755,y:207},{x:752,y:158}];
+			break;
+			case 4: case "4":
+			unaCoordenada=[{x:555,y:470},{x:471,y:370},{x:416,y:297},{x:347,y:212}];
+			break;
+			case 5: case "5":
+			unaCoordenada=[{x:555,y:470},{x:554,y:387},{x:553,y:311},{x:545,y:208}];
+			break;
+			case 6: case "6":
+			unaCoordenada=[{x:555,y:470},{x:555,y:470},{x:741,y:316},{x:767,y:207}];
+			break;
+		}
+		auxTween= tweenPelota.to({
+			  x: [unaCoordenada[0].x, unaCoordenada[1].x, unaCoordenada[2].x, unaCoordenada[3].x],
+			  y: [unaCoordenada[0].y, unaCoordenada[1].y, unaCoordenada[2].y, unaCoordenada[3].y],
+		 }, 400,Phaser.Easing.LINEAR, true, 0).interpolation(function(v, k){
+			  return Phaser.Math.bezierInterpolation(v, k);
+		 }); 
+   
+	}
+	
+	console.log("coordenada");
+	console.log(unaCoordenada);
   
-   var auxTween;
    console.log("id elegido en mover pelota es "+this.idElegido);
-   if(this.idElegido<4){
+   /*if(this.idElegido<4){
 		auxTween= tweenPelota.to({x:[pelota.x,unaCoordenada.x+50,unaCoordenada.x],y:[pelota.y,unaCoordenada.y]},400, "Linear", true, 0).interpolation(function(v, k){
 			return Phaser.Math.bezierInterpolation(v, k);
 		});
    }else{
 	   auxTween= tweenPelota.to(unaCoordenada,500, 'Linear', true, 0);
-   }
+   }*/
    
    pelota.play("girar");
-   setTimeout(function(){pelota.animations.stop();},600);
+   setTimeout(function(){pelota.animations.stop();},1100);
    return auxTween;
 },
 

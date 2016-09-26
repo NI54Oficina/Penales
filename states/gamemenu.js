@@ -103,7 +103,7 @@ GameMenu.prototype = {
     });
 
     this.addMenuOption('ESTADÍSTICAS', function () {
-      game.state.start("Stadistics");
+      game.state.start("Anims");
     });
 
 
@@ -140,8 +140,23 @@ GameMenu.prototype = {
           }
 
   //Fin Creacion ariables en localStorage
-
+	//game.world.setBounds(0, 0, 10000, 10000);
+	//this.game.camera.x=0;
+	//this.game.camera.y=0;
   },
+  
+  update:function(){
+	//console.log("entra update")  ;
+	
+	//this.game.camera.x+=100;
+	//this.game.camera.y=0;
+  },
+  
+  render:function(){
+	 
+	 
+	 //game.debug.cameraInfo(game.camera, 32, 32);
+  }, 
 
   test:function(){
 	  console.log("test entra");
