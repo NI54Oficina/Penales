@@ -47,7 +47,21 @@ Stadistics.prototype = {
 
   create: function(){
       self = this;
-
+	game.kineticScrolling=game.plugins.add(Phaser.Plugin.KineticScrolling);
+		
+	game.kineticScrolling.configure({
+		kineticMovement: true,
+		timeConstantScroll: 325, //really mimic iOS
+		horizontalScroll: false,
+		verticalScroll: true,
+		horizontalWheel: false,
+		verticalWheel: true,
+		deltaWheel: 40
+	});
+	
+		 game.kineticScrolling.start();
+		 
+		 
       //fondo
       var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
       var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
@@ -57,25 +71,31 @@ Stadistics.prototype = {
       grd.addColorStop(1,"#009ee1");
       gameBack.context.fillStyle=grd;
       gameBack.context.fillRect(0,0,this.game.width,this.game.height);
-      this.game.add.sprite(0,0,gameBack);
+	  
+      this.game.add.sprite(0,0,gameBack).fixedToCamera=true;
       dots = game.add.tileSprite(0, 0, this.game.width,this.game.height,'puntitos');
       dots.alpha=0.3;
+	  
       game.stage.disableVisibilityChange = true;
 
       //fondo
 
       //esquinas
 
-      game.add.sprite(0, 0, 'left-corner');
+      var leftCorner=game.add.sprite(0, 0, 'left-corner');
+	  leftCorner.fixedToCamera=true;
       a= game.add.sprite(this.game.width, 0, 'right-corner');
+	  a.fixedToCamera=true;
       a.scale.x = -1;
 
 
       volver= game.add.sprite(50, 50, 'volver');
       volver.inputEnabled = true;
+	  volver.fixedToCamera=true;
       volver.events.onInputDown.add(this.GoBack,volver);
 
       menu= game.add.sprite(this.game.width-100, 50, 'menu');
+	  menu.fixedToCamera=true;
       menu.inputEnabled = true;
       menu.events.onInputDown.add(this.GoBack,menu);
 
@@ -100,7 +120,7 @@ Stadistics.prototype = {
       statsBack.context.fillRect(0,0,this.game.width,this.game.height);
       statsBackground=this.game.add.sprite(300,300,statsBack);
       statsBackground.alpha=.3;
-      statsBackground.position={x: this.game.width/2- statsBackground.width/2,y:200}
+      statsBackground.position={x: this.game.width/2- statsBackground.width/2,y:200};
 
       //fondo de los puintajes y prueba scrolling
 
@@ -135,13 +155,25 @@ Stadistics.prototype = {
       dbis=game.add.text(xx, y+150, localStorage["TotalConvertidos"], puntajeStyle);
       e=game.add.text(x, y+200, "PENALES ERRADOS", puntajeStyle);
       ebis=game.add.text(xx, y+200, localStorage["TotalErrados"], puntajeStyle);
-
-      game.add.text(x, y+250, "Total No Atajados: "+localStorage["TotalNoAtajados"], puntajeStyle);
-      game.add.text(x, y+300, "Racha Ganados: "+localStorage["RachaGanados"], puntajeStyle);
-      game.add.text(x, y+350, "Racha Perdidos: "+ localStorage["RachaPerdidos"], puntajeStyle);
-      game.add.text(x, y+400, "Racha Atajados: "+localStorage["RachaAtajados"], puntajeStyle);
-      game.add.text(x, y+450, "Racha Convertidos: "+localStorage["RachaConvertidos"], puntajeStyle);
-      game.add.text(x, y+500, "Racha Errados: "+localStorage["RachaErrados"], puntajeStyle);
+		
+	var group= game.add.group();
+	group.add(a)
+	group.add(abis)
+	group.add(b)
+	group.add(bbis)
+	group.add(c)
+	group.add(cbis)
+	group.add(d)
+	group.add(dbis)
+	group.add(e)
+	group.add(ebis)
+	
+      group.add(game.add.text(x, y+250, "Total No Atajados: "+localStorage["TotalNoAtajados"], puntajeStyle));
+       group.add(game.add.text(x, y+300, "Racha Ganados: "+localStorage["RachaGanados"], puntajeStyle));
+       group.add(game.add.text(x, y+350, "Racha Perdidos: "+ localStorage["RachaPerdidos"], puntajeStyle));
+      group.add( game.add.text(x, y+400, "Racha Atajados: "+localStorage["RachaAtajados"], puntajeStyle));
+       group.add(game.add.text(x, y+450, "Racha Convertidos: "+localStorage["RachaConvertidos"], puntajeStyle));
+       group.add(game.add.text(x, y+500, "Racha Errados: "+localStorage["RachaErrados"], puntajeStyle));
       // game.add.text(x,y+30, "Racha No Atajados: "+localStorage["RachaNoAtajados"] , puntajeStyle);
       // game.add.text(x, y+30, "Mejor Racha Atajados: "+localStorage["MejorRachaAtajados"], puntajeStyle);
       // game.add.text(x, y+30, "Mejor Racha Convertida: "+localStorage["MejorRachaConvertida"], puntajeStyle);
@@ -151,9 +183,17 @@ Stadistics.prototype = {
       // game.add.text(x, y+30, "Eficiencia como arquero: "+ efiArq +"%" , puntajeStyle);
       // game.add.text(x,y+30, "Eficiencia como pateador: "+ efiPat +"%" , puntajeStyle);
 
-
-
-
+	/*var stats=[
+	{key:"TotalNoAtajados",title:"Total No Atajados:"},
+	{key:"RachaGanados",title:"Racha Ganados:"}
+	];
+	
+	for(var a=3;a<7;a++){
+		
+		 group.add(game.add.text(x, y, stats[a].title+stats[a].key, puntajeStyle));
+	}*/
+	console.log(group.height);
+	game.world.setBounds(0, 0, this.game.width,a.height+group.height+100+leftCorner.height);
   },
 
   isFloat: function(n,target) {
