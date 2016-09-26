@@ -47,18 +47,18 @@ Stadistics.prototype = {
 
   create: function(){
       self = this;
-	game.kineticScrolling=game.plugins.add(Phaser.Plugin.KineticScrolling);
-		
-	game.kineticScrolling.configure({
-		kineticMovement: true,
-		timeConstantScroll: 325, //really mimic iOS
-		horizontalScroll: false,
-		verticalScroll: true,
-		horizontalWheel: false,
-		verticalWheel: true,
-		deltaWheel: 40
-	});
-	
+		game.kineticScrolling=game.plugins.add(Phaser.Plugin.KineticScrolling);
+			
+		game.kineticScrolling.configure({
+			kineticMovement: true,
+			timeConstantScroll: 325, //really mimic iOS
+			horizontalScroll: false,
+			verticalScroll: true,
+			horizontalWheel: false,
+			verticalWheel: true,
+			deltaWheel: 40
+		});
+
 		 game.kineticScrolling.start();
 		 
 		 

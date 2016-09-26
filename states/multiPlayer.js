@@ -62,6 +62,8 @@ Multiplayer.prototype = {
 
   create: function(){
       self = this;
+	  
+	 
 
       //fondo
       var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);

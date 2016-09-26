@@ -63,7 +63,19 @@ Singleplayer.prototype = {
 
     create: function(){
         self = this;
+		game.kineticScrolling=game.plugins.add(Phaser.Plugin.KineticScrolling);
+			
+		game.kineticScrolling.configure({
+			kineticMovement: true,
+			timeConstantScroll: 325, //really mimic iOS
+			horizontalScroll: false,
+			verticalScroll: true,
+			horizontalWheel: false,
+			verticalWheel: true,
+			deltaWheel: 40
+		});
 
+		 game.kineticScrolling.start();
         //fondo
         var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
         var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
@@ -73,27 +85,32 @@ Singleplayer.prototype = {
         grd.addColorStop(1,"#009ee1");
         gameBack.context.fillStyle=grd;
         gameBack.context.fillRect(0,0,this.game.width,this.game.height);
-        this.game.add.sprite(0,0,gameBack);
+        this.game.add.sprite(0,0,gameBack).fixedToCamera=true;;
 
         game.stage.disableVisibilityChange = true;
         curva=game.add.sprite(0,0, 'curva');
         curva.position={x:this.game.width/2-curva.width/2, y:this.game.height/2};
+		curva.fixedToCamera=true;
         dots = game.add.tileSprite(0, 0, this.game.width,this.game.height,'puntitos');
         dots.alpha=0.3;
         //fondo
         //esquinas
-        game.add.sprite(0, 0, 'left-corner');
+        var leftCorner= game.add.sprite(0, 0, 'left-corner');
+		leftCorner.fixedToCamera=true;
         a= game.add.sprite(this.game.width, 0, 'right-corner');
         a.scale.x = -1;
+		a.fixedToCamera=true;
 
 
         volver= game.add.sprite(50, 50, 'volver');
         volver.inputEnabled = true;
         volver.events.onInputDown.add(this.GoBack,volver);
+		volver.fixedToCamera=true;
 
         menu= game.add.sprite(this.game.width-100, 50, 'menu');
         menu.inputEnabled = true;
         menu.events.onInputDown.add(this.Menu,menu);
+		menu.fixedToCamera=true;
 
         //esquina
 
@@ -101,16 +118,19 @@ Singleplayer.prototype = {
         //fondo de participantes
 
         y=200;
+		var oponentes= game.add.group();
         puntajeStyle = { font: '15pt CondensedLight', fill: 'yellow'};
         usuario={
           nombre:'pepe',
-          racha: ['racha actual', 51],
-          ganados:['Total ganados',5],
-          perdidos: ['Total Perdidos',10]
-        }
-        self.createDataForPlayer(self, usuario);
-        self.createDataForPlayer(self, usuario);
-        self.createDataForPlayer(self, usuario);
+          racha:  51,
+          ganados:5,
+          perdidos: 10
+        };
+		for(var a=0;a<4;a++){
+			oponentes.add( self.createDataForPlayer(self, usuario));
+		}
+       
+        
 
 
         //fondo de participantes
@@ -139,7 +159,7 @@ Singleplayer.prototype = {
         //
         // });
 
-
+		game.world.setBounds(0, 0, this.game.width,oponentes.height+100+leftCorner.height);
     },
 
     listenerSearch: function (msg){
@@ -172,7 +192,7 @@ Singleplayer.prototype = {
     },
 
     createDataForPlayer: function(target, user){
-
+		var cuadradoUser= this.game.add.group();
       var statsBack= this.game.add.bitmapData(700,300);
       var  grd=statsBack.context.createLinearGradient(0,0,0,this.game.height);
       grd.addColorStop(0,"black");
@@ -181,16 +201,18 @@ Singleplayer.prototype = {
       statsBackground=this.game.add.sprite(y,y,statsBack);
       statsBackground.alpha=.3;
       statsBackground.position={x: this.game.width/2- statsBackground.width/2,y:y};
+	  cuadradoUser.add(statsBackground);
       var player=this.game.add.sprite(0,0,'img-1');
       player.scale.setTo(.7,.7);
       player.position={x:statsBackground.position.x+20,y:statsBackground.position.y+statsBackground.height/2-player.height/2}
-
+	 cuadradoUser.add(player);
       // var txt1 = game.add.text(statsBackground.position.x+statsBackground.width/2,statsBackground.position.y+20, "asdasdasdasdasd", puntajeStyle)
       console.log(user);
 
       y+=350;
 
       console.log(y);
+	  return cuadradoUser;
     }
 
   }
