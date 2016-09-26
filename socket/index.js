@@ -76,7 +76,7 @@ var perfiles;
 			Reset();
 			finished=false;
 			mod=randomBetween(0,1);
-			
+			mod=1;
 			modStart=mod;
 			if(mod%2==0){
 				counterLocal=0;

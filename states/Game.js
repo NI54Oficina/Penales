@@ -199,9 +199,7 @@ drawPlayer:function(){
 	player.y=playerIPos.y;
 	player.frame = 0;
 	//animacion player
-	//player.animations.add('right', [20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39], 12, true);
 	player.animations.add('right', [04,05,06,07,08,09,10,11,12,13,14,15,00,01,02], 12, false);
-	//player.animations.add('idle', [1,9,16,19,16,9,1], 3, true);
 	player.animations.add('idle', [00,01,02,01], 12 , true);
 	player.animations.add('derrota', [15,16,17,18,19,20,21,22], 12 , false);
 	player.animations.add('festejo', [23,24,25,26,27,28,29,30,31,32], 12 , false);
@@ -734,63 +732,80 @@ EnviarJugadaServer: function(self){
 resolverJugada: function(msg){
 
   console.log(msg);
-
+	var datosServer=JSON.parse(msg)
   if(Phaser.Math.isEven(modo)){
     
-	self.ListenerArquero(self, msg);
+	self.ListenerArquero(self, datosServer);
 
   }else{
 	  
-    self.ListenerPateador(self, msg);
+    self.ListenerPateador(self, datosServer);
 	
   }
 },
 
-ListenerPateador: function(self, msg){
+ListenerPateador: function(self, datosServer){
 
-    console.log("DATOS SERVER: "+ msg);
-
-    var datosServer=JSON.parse(msg);
+    console.log("DATOS SERVER: "+ datosServer);
+	self.pateadorID=datosServer["user"];
+	self.arqueroID=datosServer["computer"];
 
 	if(datosServer["user"]==0){
-		self.failScore(self,msg);
+		self.failScore(self,datosServer);
 		return;
 	}
+	
+	self.posArqueroI= self.arqueroID;
 
-    self.patear(self);
+	win=false;
+	self.pelotaEntra=false;
 
-      setTimeout(function(){
-
-        self.stopPlayer(self);
-
-        self.ubicarArquero(datosServer, self);
-        self.posArqueroI= generator;
-
-        win=false;
-
-        if(self.getResult()!= generator){
-           win=true;
-        };
+	if(self.getResult()!= self.arqueroID){
+	   win=true;
+	};
+	if(datosServer["user"]!=0&&datosServer["user"]!=datosServer["computer"]){
+		self.pelotaEntra=true;		
+	}
 		//cambiar
-        if( rangoDePresicion > presicion && presicion > -rangoDePresicion){
+    self.animarJugada(self);
 
-            self.acertarTiro(self);
-          }else{
+           
 
-            self.errarTiro(self);
-
-         };
-
-      },delayPelota);
+      
 
 },
 
+animarJugada:function(self){
+	 self.patear(self);
+	 setTimeout(function(){
+		 //deprecada
+		self.stopPlayer(self);
+		self.ubicarArquero(datosServer, self);
+		self.UpdateStats(self);
+	 },delayPelota);
+},
 
-ListenerArquero: function(self, msg){
 
-    console.log("DATOS SERVER: "+msg);
+UpdateStats:function(self){
+	//entra en pateador, y actualiza stats y muestra tmb gui???
+	 /*if( rangoDePresicion > presicion && presicion > -rangoDePresicion){
+		self.acertarTiro(self);
+	  
+	  }else{
 
-    var datosServer=JSON.parse(msg);
+            self.errarTiro(self);
+
+	 };*/	
+	 if(self.pelotaEntra){
+		 self.acertarTiro(self);
+	 }else{
+		 self.errarTiro(self);
+	 }
+},
+
+ListenerArquero: function(self, datosServer){
+
+    console.log("DATOS SERVER: "+datosServer);
 
     self.patear(self);
 	console.log("test?");
@@ -829,10 +844,10 @@ ListenerArquero: function(self, msg){
 },
 
 
-failScore: function(self,msg){
-      console.log("DATOS SERVER: "+msg);
+failScore: function(self,datosServer){
+      console.log("DATOS SERVER: "+datosServer);
 
-      var datosServer=JSON.parse(msg);
+    
 
       presicionText.destroy();
 
