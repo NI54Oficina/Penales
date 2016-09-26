@@ -100,7 +100,7 @@ Singleplayer.prototype = {
         //fondo de participantes
 
         y=200;
-        puntajeStyle = { font: '15pt CondensedLight', fill: 'yellow'};
+        puntajeStyle = { font: '15pt CondensedLight', fill: 'white'};
         usuario={
           nombre:'pepe',
           racha: ['racha actual', 51],
@@ -183,8 +183,11 @@ Singleplayer.prototype = {
      player.scale.setTo(.7,.7);
      player.position={x:statsBackground.position.x+20,y:statsBackground.position.y+statsBackground.height/2-player.height/2}
 
-     // var txt1 = game.add.text(statsBackground.position.x+statsBackground.width/2,statsBackground.position.y+20, "asdasdasdasdasd", puntajeStyle)
-     console.log(user);
+     var txt1 = game.add.text(statsBackground.position.x+statsBackground.width/2,y+20,user.nombre, puntajeStyle);
+     var txt2 = game.add.text(statsBackground.position.x+statsBackground.width/2,y+50,'RACHA ACTUAL DE PARTIDOS:        ' +user.racha, puntajeStyle);
+     var txt4 = game.add.text(statsBackground.position.x+statsBackground.width/2,y+80,'TOTAL PARTIDOS GANADOS:        ' +user.ganados, puntajeStyle);
+     var txt5 = game.add.text(statsBackground.position.x+statsBackground.width/2,y+110,'TOTAL PARTIDOS PERDIDOS:        ' +user.perdidos, puntajeStyle);
+
 
      y+=350;
 
