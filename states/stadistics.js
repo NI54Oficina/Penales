@@ -81,7 +81,16 @@ Stadistics.prototype = {
 
       //esquina
 
-      // fondo de los puntaje
+      // fondo de los puntaje y prueba scrolling
+
+
+//create a sprite and put it in the center of the screen
+// this.scrollBG = this.game.add.sprite(devWidth / 2, devHeight / 2, 'bgs', 'scrollBG.png');
+// this.scrollBG.width = yourWidth;
+// this.scrollBG.height = yourHeight;
+// this.scrollBG.anchor.setTo(0.5, 0.5); //optional, but some math later assumes this
+//
+//
 
       var statsBack= this.game.add.bitmapData(700,300);
 
@@ -93,7 +102,7 @@ Stadistics.prototype = {
       statsBackground.alpha=.3;
       statsBackground.position={x: this.game.width/2- statsBackground.width/2,y:200}
 
-      //fondo de los puintajes
+      //fondo de los puintajes y prueba scrolling
 
       var titleStyle = { font: '40px BitterBold', fill: 'white', align: 'center'};
       var line = this.game.make.sprite(-200,45, 'line');

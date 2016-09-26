@@ -130,21 +130,21 @@ Selectplayer.prototype = {
       img1=game.add.sprite(145, 225, 'img-1');
       h1=img1.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
 
-
-      img6=game.add.sprite(800, 225, 'img-6');
-      h6=img6.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
-
-      img7=game.add.sprite(800, 225, 'img-7');
-      h7=img7.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
-
-      img8=game.add.sprite(800, 225,'img-8');
-      h8=img8.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
-
-      img9=game.add.sprite(800, 225, 'img-9');
-      h9=img9.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
-
-      img10=game.add.sprite(800, 225, 'img-10');
-      h10=img10.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
+      //
+      // img6=game.add.sprite(800, 225, 'img-6');
+      // h6=img6.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
+      //
+      // img7=game.add.sprite(800, 225, 'img-7');
+      // h7=img7.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
+      //
+      // img8=game.add.sprite(800, 225,'img-8');
+      // h8=img8.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
+      //
+      // img9=game.add.sprite(800, 225, 'img-9');
+      // h9=img9.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
+      //
+      // img10=game.add.sprite(800, 225, 'img-10');
+      // h10=img10.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
 
 
       img1.scale.setTo(.9, .9);
@@ -154,22 +154,22 @@ Selectplayer.prototype = {
       img3.visible=false;
       img4.visible=false;
       img5.visible=false;
-      img6.visible=false;
-      img7.visible=false;
-      img8.visible=false;
-      img9.visible=false;
-      img10.visible=false;
+      // img6.visible=false;
+      // img7.visible=false;
+      // img8.visible=false;
+      // img9.visible=false;
+      // img10.visible=false;
 
       img1.scale.setTo(.5,.5);
       img2.scale.setTo(.5,.5);
       img3.scale.setTo(.5,.5);
       img4.scale.setTo(.5,.5);
       img5.scale.setTo(.5,.5);
-      img6.scale.setTo(.5,.5);
-      img7.scale.setTo(.5,.5);
-      img8.scale.setTo(.5,.5);
-      img9.scale.setTo(.5,.5);
-      img10.scale.setTo(.5,.5);
+      // img6.scale.setTo(.5,.5);
+      // img7.scale.setTo(.5,.5);
+      // img8.scale.setTo(.5,.5);
+      // img9.scale.setTo(.5,.5);
+      // img10.scale.setTo(.5,.5);
 
 
         golden=game.add.sprite(this.game.width/2- wd/2, 150, 'golden');
@@ -177,12 +177,12 @@ Selectplayer.prototype = {
         golden.alpha=0;
 
 
-      arrayCr=[img1, img2, img3,img4 , img5, img6, img7, img8, img9, img10];
+      arrayCr=[img1, img2, img3,img4 , img5];
 
 
-      self.setTo5(img10);
+      self.setTo5(img5);
       self.setTo4(img3);
-      self.setTo3(img9);
+      self.setTo3(img4);
       self.setTo2(img2);
       self.setTo1(img1);
 

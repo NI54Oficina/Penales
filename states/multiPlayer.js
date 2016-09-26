@@ -81,6 +81,9 @@ Multiplayer.prototype = {
       dots.alpha=0.3;
       //fondo
 
+
+
+
       //esquinas
       game.add.sprite(0, 0, 'left-corner');
       a= game.add.sprite(this.game.width, 0, 'right-corner');
