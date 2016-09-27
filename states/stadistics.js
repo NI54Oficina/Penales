@@ -236,8 +236,8 @@ Stadistics.prototype = {
 
        var word=game.add.text(x, y, stats[n].title+'                                                                                  '+ localStorage[stats[n].key], puntajeStyle);
        group.add(word);
-       self.createLine(x, y+word.height, word.width+x );
-
+       var line =self.createLine(0,word.height,word.width);
+       word.addChild(line);
 
          y+=50;
          n++;
@@ -257,7 +257,7 @@ createLine: function(a, b,c){
     graphics.moveTo(a,b);
     graphics.lineTo(c, b);
     graphics.endFill();
-
+    return graphics;
 }
 
 

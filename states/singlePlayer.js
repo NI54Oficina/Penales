@@ -208,7 +208,7 @@ Singleplayer.prototype = {
      player.position={x:statsBackground.position.x+20,y:statsBackground.position.y+statsBackground.height/2-player.height/2}
 	cuadradoUser.add(player);
      var txt1 = game.add.text(statsBackground.position.x+statsBackground.width/2.5,y+20,user.nombre, nombreStyle);
-     var line=self.createLine(0,txt1.height,500 );
+     var line=self.createLine(0,txt1.height,400 );
      txt1.addChild(line);
      var txt2 = game.add.text(statsBackground.position.x+statsBackground.width/2.5,y+80,'RACHA ACTUAL DE PARTIDOS        ' +user.racha, puntajeStyle);
      var txt4 = game.add.text(statsBackground.position.x+statsBackground.width/2.5,y+120,'TOTAL PARTIDOS GANADOS          ' +user.ganados, puntajeStyle);

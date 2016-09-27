@@ -23,3 +23,13 @@
     font-family: 'CondensedLight';
     src: url('../fonts/RobotoCondensed-Light.ttf');
 }
+
+@font-face {
+    font-family: 'CondensedBold';
+    src: url('../fonts/RobotoCondensed-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'CondensedRegular';
+    src: url('../fonts/RobotoCondensed-Regular.ttf');
+}
