@@ -1,9 +1,9 @@
-var serverEnabled=true;
+var serverEnabled=false;
 var socket;
 if(serverEnabled){
 socket = io('http://localhost:3000');
 }else{
-	
+
 }
 var usuario;
 console.log("entra client");
@@ -66,7 +66,7 @@ function Emit(toEmit,params,eventListen="",callback="",context="",oneshot=true){
 	}else{
 		CheckEvent(eventListen,GetDummy(eventListen));
 	}
-	
+
 }
 
 var events={};

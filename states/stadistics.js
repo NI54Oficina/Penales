@@ -48,7 +48,7 @@ Stadistics.prototype = {
   create: function(){
       self = this;
 		game.kineticScrolling=game.plugins.add(Phaser.Plugin.KineticScrolling);
-			
+
 		game.kineticScrolling.configure({
 			kineticMovement: true,
 			timeConstantScroll: 325, //really mimic iOS
@@ -60,8 +60,8 @@ Stadistics.prototype = {
 		});
 
 		 game.kineticScrolling.start();
-		 
-		 
+
+
       //fondo
       var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
       var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
@@ -71,11 +71,11 @@ Stadistics.prototype = {
       grd.addColorStop(1,"#009ee1");
       gameBack.context.fillStyle=grd;
       gameBack.context.fillRect(0,0,this.game.width,this.game.height);
-	  
+
       this.game.add.sprite(0,0,gameBack).fixedToCamera=true;
       dots = game.add.tileSprite(0, 0, this.game.width,this.game.height,'puntitos');
       dots.alpha=0.3;
-	  
+
       game.stage.disableVisibilityChange = true;
 
       //fondo
@@ -103,24 +103,15 @@ Stadistics.prototype = {
 
       // fondo de los puntaje y prueba scrolling
 
-
-//create a sprite and put it in the center of the screen
-// this.scrollBG = this.game.add.sprite(devWidth / 2, devHeight / 2, 'bgs', 'scrollBG.png');
-// this.scrollBG.width = yourWidth;
-// this.scrollBG.height = yourHeight;
-// this.scrollBG.anchor.setTo(0.5, 0.5); //optional, but some math later assumes this
-//
-//
-
-      var statsBack= this.game.add.bitmapData(700,300);
-
-      var  grd=statsBack.context.createLinearGradient(0,0,0,this.game.height);
-      grd.addColorStop(0,"black");
-      statsBack.context.fillStyle=grd;
-      statsBack.context.fillRect(0,0,this.game.width,this.game.height);
-      statsBackground=this.game.add.sprite(300,300,statsBack);
-      statsBackground.alpha=.3;
-      statsBackground.position={x: this.game.width/2- statsBackground.width/2,y:200};
+      // tatsBack= this.game.add.bitmapData(700,300);
+      //
+      // grd=statsBack.context.createLinearGradient(0,0,0,this.game.height);
+      // grd.addColorStop(0,"black");
+      // statsBack.context.fillStyle=grd;
+      // statsBack.context.fillRect(0,0,this.game.width,this.game.height);
+      // statsBackground=this.game.add.sprite(300,300,statsBack);
+      // statsBackground.alpha=.3;
+      // statsBackground.position={x: this.game.width/2- statsBackground.width/2,y:200};
 
       //fondo de los puintajes y prueba scrolling
 
@@ -129,7 +120,7 @@ Stadistics.prototype = {
       //line.scale.setTo(0.8,0.8);
       var textTitle = game.add.text(game.world.centerX-150, 50, "ESTADÍSTICAS", titleStyle);
       textTitle.addChild(line);
-      var puntajeStyle = { font: '15pt CondensedLight', fill: 'yellow'};
+      puntajeStyle = { font: '15pt CondensedLight', fill: 'yellow'};
 
       var efiArq =(100/((parseInt(localStorage["TotalAtajados"]) || 0) + (parseInt(localStorage["TotalNoAtajados"]) || 0)))* (parseInt(localStorage["TotalAtajados"]) || 0);
       var efiPat = (100/((parseInt(localStorage["TotalConvertidos"]) || 0) + (parseInt(localStorage["TotalErrados"]) || 0)))*(parseInt(localStorage["TotalConvertidos"]) || 0);
@@ -141,39 +132,43 @@ Stadistics.prototype = {
       if (self.isFloat(efiArq,self))efiArq= Number(efiArq).toFixed(1);
       if (self.isFloat(efiPat,self))efiPat= Number(efiPat).toFixed(1);
       if (self.isFloat(efectividad,self))efectividad= efectividad.toFixed(1);
-      var x=statsBackground.position.x+50;
-      var xx= statsBackground.position.x + statsBackground.width-80;
-      var y=220;
+      // x=statsBackground.position.x+50;
+      // xx= statsBackground.position.x + statsBackground.width-80;
+      y=220;
+      n=0;
 
-      a=game.add.text(x, y, "PARTIDOS GANADOS", puntajeStyle);
-      abis=game.add.text(xx, y,localStorage["PartidosGanados"], puntajeStyle);
-      b=game.add.text(x, y+50, "PARTIDOS PERDIDOS", puntajeStyle);
-      bbis=game.add.text(xx, y+50,localStorage["PartidosPerdidos"], puntajeStyle);
-      c=game.add.text(x,y+100, "PENALES ATAJADOS", puntajeStyle);
-      cbis=game.add.text(xx, y+100, localStorage["TotalAtajados"], puntajeStyle);
-      d=game.add.text(x, y+150, "PENALES CONVERTIDOS", puntajeStyle);
-      dbis=game.add.text(xx, y+150, localStorage["TotalConvertidos"], puntajeStyle);
-      e=game.add.text(x, y+200, "PENALES ERRADOS", puntajeStyle);
-      ebis=game.add.text(xx, y+200, localStorage["TotalErrados"], puntajeStyle);
-		
-	var group= game.add.group();
-	group.add(a)
-	group.add(abis)
-	group.add(b)
-	group.add(bbis)
-	group.add(c)
-	group.add(cbis)
-	group.add(d)
-	group.add(dbis)
-	group.add(e)
-	group.add(ebis)
-	
-      group.add(game.add.text(x, y+250, "Total No Atajados: "+localStorage["TotalNoAtajados"], puntajeStyle));
-       group.add(game.add.text(x, y+300, "Racha Ganados: "+localStorage["RachaGanados"], puntajeStyle));
-       group.add(game.add.text(x, y+350, "Racha Perdidos: "+ localStorage["RachaPerdidos"], puntajeStyle));
-      group.add( game.add.text(x, y+400, "Racha Atajados: "+localStorage["RachaAtajados"], puntajeStyle));
-       group.add(game.add.text(x, y+450, "Racha Convertidos: "+localStorage["RachaConvertidos"], puntajeStyle));
-       group.add(game.add.text(x, y+500, "Racha Errados: "+localStorage["RachaErrados"], puntajeStyle));
+      group= game.add.group();
+
+
+  //     // a=game.add.text(x, y, "PARTIDOS GANADOS", puntajeStyle);
+  //     // abis=game.add.text(xx, y,localStorage["PartidosGanados"], puntajeStyle);
+  //     // b=game.add.text(x, y+50, "PARTIDOS GANADOS", puntajeStyle);
+  //     // bbis=game.add.text(xx, y+50,localStorage["PartidosPerdidos"], puntajeStyle);
+  //     // c=game.add.text(x,y+100, "PENALES ATAJADOS", puntajeStyle);
+  //     // cbis=game.add.text(xx, y+100, localStorage["TotalAtajados"], puntajeStyle);
+  //     // d=game.add.text(x, y+150, "PENALES CONVERTIDOS", puntajeStyle);
+  //     // dbis=game.add.text(xx, y+150, localStorage["TotalConvertidos"], puntajeStyle);
+  //     // e=game.add.text(x, y+200, "PENALES ERRADOS", puntajeStyle);
+  //     // ebis=game.add.text(xx, y+200, localStorage["TotalErrados"], puntajeStyle);
+  //
+	//
+	// group.add(a)
+	// group.add(abis)
+	// group.add(b)
+	// group.add(bbis)
+	// group.add(c)
+	// group.add(cbis)
+	// group.add(d)
+	// group.add(dbis)
+	// group.add(e)
+	// group.add(ebis)
+
+      // group.add(game.add.text(x, y+250, "Total No Atajados: "+localStorage["TotalNoAtajados"], puntajeStyle));
+      //  group.add(game.add.text(x, y+300, "Racha Ganados: "+localStorage["RachaGanados"], puntajeStyle));
+      //  group.add(game.add.text(x, y+350, "Racha Perdidos: "+ localStorage["RachaPerdidos"], puntajeStyle));
+      // group.add( game.add.text(x, y+400, "Racha Atajados: "+localStorage["RachaAtajados"], puntajeStyle));
+      //  group.add(game.add.text(x, y+450, "Racha Convertidos: "+localStorage["RachaConvertidos"], puntajeStyle));
+      //  group.add(game.add.text(x, y+500, "Racha Errados: "+localStorage["RachaErrados"], puntajeStyle));
       // game.add.text(x,y+30, "Racha No Atajados: "+localStorage["RachaNoAtajados"] , puntajeStyle);
       // game.add.text(x, y+30, "Mejor Racha Atajados: "+localStorage["MejorRachaAtajados"], puntajeStyle);
       // game.add.text(x, y+30, "Mejor Racha Convertida: "+localStorage["MejorRachaConvertida"], puntajeStyle);
@@ -183,15 +178,31 @@ Stadistics.prototype = {
       // game.add.text(x, y+30, "Eficiencia como arquero: "+ efiArq +"%" , puntajeStyle);
       // game.add.text(x,y+30, "Eficiencia como pateador: "+ efiPat +"%" , puntajeStyle);
 
-	/*var stats=[
-	{key:"TotalNoAtajados",title:"Total No Atajados:"},
-	{key:"RachaGanados",title:"Racha Ganados:"}
+	stats=[
+  {key:"PartidosGanados",title:"PARTIDOS GANADOS"},
+  {key:"PartidosPerdidos",title:"PARTIDOS PERDIDOS"},
+  {key:"TotalAtajados",title:"PENALES ATAJADOS"},
+  {key:"TotalConvertidos",title:"PENALES CONVERTIDOS"},
+  {key:"TotalErrados",title:"PENALES ERRADOS"},
+	{key:"TotalNoAtajados",title:"PENALES NO ATAJADOS"},
+	{key:"RachaGanados",title:"RACHA GANADOS"},
+  {key:"RachaPerdidos",title:"RACHA PERDIDOS"},
+  {key:"RachaAtajados",title:"RACHA ATAJADOS:"},
+  {key:"RachaConvertidos",title:"RACHA CONVERTIDOS"},
+  {key:"RachaErrados",title:"RACHA ERRADOS"},
+  {key:"RachaNoAtajados",title:"RACHA NO ATAJADOS"},
+  {key:"MejorRachaAtajados",title:"MEJOR RACHA ATAJADOS"},
+  {key:"MejorRachaConvertida",title:"MEJOR RACHA CONVERTIDA"},
+  {key:"PeorRachaErrados",title:"PEOR RACHA ERRADOS"},
+  {key:"PeorRachaNoAtajados",title:"PEOR RACHA NO ATAJADOS"},
+  {key:"Efectividad",title:"EFECTIVIDAD"},
+  {key: efiArq +"%" ,title:"EFICIENCIA COMO ARQUERO"},
+  {key: efiPat +"%" ,title:"EFICIENCIA COMO PATEADOR"}
+
 	];
-	
-	for(var a=3;a<7;a++){
-		
-		 group.add(game.add.text(x, y, stats[a].title+stats[a].key, puntajeStyle));
-	}*/
+    self.createLayoutStats(self,200);
+    self.createLayoutStats(self,600);
+
 	console.log(group.height);
 	game.world.setBounds(0, 0, this.game.width,a.height+group.height+100+leftCorner.height);
   },
@@ -203,6 +214,52 @@ Stadistics.prototype = {
   GoBack: function(target){
     game.state.start("GameMenu");
   },
+
+
+  createLayoutStats: function(target, yy){
+
+    statsBack= this.game.add.bitmapData(700,320);
+
+    grd=statsBack.context.createLinearGradient(0,0,0,this.game.height);
+    grd.addColorStop(0,"black");
+    statsBack.context.fillStyle=grd;
+    statsBack.context.fillRect(0,0,this.game.width,this.game.height);
+    statsBackground=this.game.add.sprite(300,300,statsBack);
+    statsBackground.alpha=.3;
+    statsBackground.position={x: this.game.width/2- statsBackground.width/2,y:yy};
+    x=statsBackground.position.x+50;
+
+
+    y=yy+20;
+
+    for(var a=0;a<6;a++){
+
+       var word=game.add.text(x, y, stats[n].title+'                                                                                  '+ localStorage[stats[n].key], puntajeStyle);
+       group.add(word);
+       self.createLine(x, y+word.height, word.width+x );
+
+
+         y+=50;
+         n++;
+
+
+    };
+
+  n=a;
+
+},
+
+createLine: function(a, b,c){
+
+  var graphics = game.add.graphics(0, 00);
+    graphics.beginFill(0x797979);
+    graphics.lineStyle(2, 0x797979, 1);
+    graphics.moveTo(a,b);
+    graphics.lineTo(c, b);
+    graphics.endFill();
+
+}
+
 
 
 }

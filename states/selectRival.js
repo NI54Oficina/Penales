@@ -180,9 +180,9 @@ Selectplayer.prototype = {
       arrayCr=[img1, img2, img3,img4 , img5];
 
 
-      self.setTo5(img5);
+      self.setTo5(img4);
       self.setTo4(img3);
-      self.setTo3(img4);
+      self.setTo3(img5);
       self.setTo2(img2);
       self.setTo1(img1);
 
@@ -252,6 +252,8 @@ Selectplayer.prototype = {
 // },
   moveToLeft: function(s){
 
+
+
     if(muttex==1){
       return;
     }
@@ -297,7 +299,7 @@ Selectplayer.prototype = {
     e= carrousel[4];
 
 
-
+console.log(carrousel);
 
 
       self.setTo5(arrayCr[e]);

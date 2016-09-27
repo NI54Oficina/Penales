@@ -64,7 +64,7 @@ Singleplayer.prototype = {
     create: function(){
         self = this;
 		game.kineticScrolling=game.plugins.add(Phaser.Plugin.KineticScrolling);
-			
+
 		game.kineticScrolling.configure({
 			kineticMovement: true,
 			timeConstantScroll: 325, //really mimic iOS
@@ -119,10 +119,10 @@ Singleplayer.prototype = {
         y=200;
 
 		var oponentes= game.add.group();
-        puntajeStyle = { font: '15pt CondensedLight', fill: 'yellow'};
-
+        puntajeStyle = { font: '18pt CondensedRegular', fill: 'white'};
+        nombreStyle = { font: '20pt CondensedBold', fill: 'white'};
         usuario={
-          nombre:'pepe',
+          nombre:'FRANCISCO SERANTE',
           racha:  51,
           ganados:5,
           perdidos: 10
@@ -130,8 +130,8 @@ Singleplayer.prototype = {
 		for(var a=0;a<4;a++){
 			oponentes.add( self.createDataForPlayer(self, usuario));
 		}
-       
-        
+
+
 
 
         //fondo de participantes
@@ -207,10 +207,12 @@ Singleplayer.prototype = {
      player.scale.setTo(.7,.7);
      player.position={x:statsBackground.position.x+20,y:statsBackground.position.y+statsBackground.height/2-player.height/2}
 	cuadradoUser.add(player);
-     var txt1 = game.add.text(statsBackground.position.x+statsBackground.width/2,y+20,user.nombre, puntajeStyle);
-     var txt2 = game.add.text(statsBackground.position.x+statsBackground.width/2,y+50,'RACHA ACTUAL DE PARTIDOS:        ' +user.racha, puntajeStyle);
-     var txt4 = game.add.text(statsBackground.position.x+statsBackground.width/2,y+80,'TOTAL PARTIDOS GANADOS:        ' +user.ganados, puntajeStyle);
-     var txt5 = game.add.text(statsBackground.position.x+statsBackground.width/2,y+110,'TOTAL PARTIDOS PERDIDOS:        ' +user.perdidos, puntajeStyle);
+     var txt1 = game.add.text(statsBackground.position.x+statsBackground.width/2.5,y+20,user.nombre, nombreStyle);
+     var line=self.createLine(0,txt1.height,500 );
+     txt1.addChild(line);
+     var txt2 = game.add.text(statsBackground.position.x+statsBackground.width/2.5,y+80,'RACHA ACTUAL DE PARTIDOS        ' +user.racha, puntajeStyle);
+     var txt4 = game.add.text(statsBackground.position.x+statsBackground.width/2.5,y+120,'TOTAL PARTIDOS GANADOS          ' +user.ganados, puntajeStyle);
+     var txt5 = game.add.text(statsBackground.position.x+statsBackground.width/2.5,y+160,'TOTAL PARTIDOS PERDIDOS         ' +user.perdidos, puntajeStyle);
 	cuadradoUser.add(txt1);
 	cuadradoUser.add(txt2);
 	cuadradoUser.add(txt4);
@@ -220,7 +222,21 @@ Singleplayer.prototype = {
 
      console.log(y);
 	 return cuadradoUser;
-   }
+ },
+
+ createLine: function(a, b,c){
+
+   var graphics = game.add.graphics(0, 00);
+     graphics.beginFill(0x1B1464);
+     graphics.lineStyle(2, 0x1B1464, 1);
+     graphics.moveTo(a,b);
+     graphics.lineTo(c, b);
+     graphics.endFill();
+
+   return graphics;
+
+ }
+
 
 
   }
