@@ -666,14 +666,14 @@ establecerParametrosBarra: function(self){
 
 	presicion =  centerBarra - focus.position.x ;
 	if(!Phaser.Math.isEven(modo)){
-	if( rangoDePresicion > presicion && presicion > -rangoDePresicion){
+		if( rangoDePresicion > presicion && presicion > -rangoDePresicion){
+			
+		  self.idElegido=self.getResult();
+		 }else{
+			console.log("entra fail");
+		  self.idElegido=0;
 
-	  self.idElegido=self.getResult();
-	 }else{
-
-	  self.idElegido=0;
-
-	};
+		};
 
 	}else{
 	self.idElegido=self.getResult();
@@ -731,123 +731,66 @@ EnviarJugadaServer: function(self){
 //Respuesta server: resolver jugada
 resolverJugada: function(msg){
 
-  console.log(msg);
+	console.log(msg);
 	var datosServer=JSON.parse(msg)
-  if(Phaser.Math.isEven(modo)){
-    
-	self.ListenerArquero(self, datosServer);
-
-  }else{
-	  
-    self.ListenerPateador(self, datosServer);
-	
-  }
-},
-
-ListenerPateador: function(self, datosServer){
-
-    console.log("DATOS SERVER: "+ datosServer);
-	self.pateadorID=datosServer["user"];
-	self.arqueroID=datosServer["computer"];
-
-	if(datosServer["user"]==0){
-		self.failScore(self,datosServer);
-		return;
-	}
-	
-	self.posArqueroI= self.arqueroID;
-
-	win=false;
 	self.pelotaEntra=false;
-
-	if(self.getResult()!= self.arqueroID){
-	   win=true;
-	};
 	if(datosServer["user"]!=0&&datosServer["user"]!=datosServer["computer"]){
 		self.pelotaEntra=true;		
 	}
-		//cambiar
+	console.log("DATOS SERVER: "+ datosServer);
+	self.pateadorID=datosServer["user"];
+	self.arqueroID=datosServer["computer"];
+
+	if(Phaser.Math.isEven(modo)){
+
+		self.ListenerArquero(self, datosServer);
+
+	}else{
+	  
+		self.ListenerPateador(self, datosServer);
+
+	}
+},
+
+ListenerPateador: function(self, datosServer){
+    
+	self.posArqueroI= self.arqueroID;
+
+	
+	
     self.animarJugada(self,datosServer);
-
-           
-      
-
+	
 },
 
 animarJugada:function(self,datosServer){
-	 self.patear(self);
-	 setTimeout(function(){
+	self.patear(self);
+	setTimeout(function(){
 		 //deprecada
 		self.stopPlayer(self);
 		self.ubicarArquero(datosServer, self);
 		
-		
-    self.seMueveArquero(self);
+		self.seMueveArquero(self);
 	
-    var movimientoPelota=self.moverPelota(self.getResult());
+		var movimientoPelota=self.moverPelota(datosServer["user"]);
 
-      movimientoPelota.onComplete.addOnce(function(){
-		  self.UpdateStats(self);
-	  });
-
-	 },delayPelota);
-},
-
-
-UpdateStats:function(self){
-	//entra en pateador, y actualiza stats y muestra tmb gui???
-	 /*if( rangoDePresicion > presicion && presicion > -rangoDePresicion){
-		self.acertarTiro(self);
-	  
-	  }else{
-
-            self.errarTiro(self);
-
-	 };*/	
-	 if(self.pelotaEntra){
-		 self.acertarTiro(self);
-	 }else{
-		 self.errarTiro(self);
-	 }
+		movimientoPelota.onComplete.addOnce(function(){
+			//updatea stats, muestra ganar/perder
+			if(Phaser.Math.isEven(modo)){
+			    self.atajar(self);
+			}else{
+				self.acertarTiro(self);
+			}
+		});
+	},delayPelota);
 },
 
 ListenerArquero: function(self, datosServer){
 
-    console.log("DATOS SERVER: "+datosServer);
+	/**quitar**/
+	generator = datosServer.computer;
 
-    self.patear(self);
-	console.log("test?");
-	self.setResult(datosServer["user"]);
-
-    setTimeout(function(){
-
-      self.stopPlayer(self);
-
-      self.posArqueroI=self.getResult();
-
-		if(self.getResult()==0){
-			self.posArquero= arquero.position;
-		}else{
-			self.posArquero= buttons.children[self.getResult()-1].position;
-		}
-      generator = datosServer.computer;
-
-      win=false;
-
-      if(self.posArqueroI == generator){
-         win=true;
-      };
-      if( generator!=0){
-
-          self.atajar(self);
-
-         }else{
-
-          self.noAtajar(self);
-
-       };
-
-    },delayPelota);
+	
+	self.animarJugada(self,datosServer);
 
 },
 
@@ -956,13 +899,10 @@ Looser: function(){
 
 acertarTiro: function(self){
 	console.log("intenta obtener el boton "+self.getResult());
-	console.log(buttons);
-    //coordinate= buttons.children[self.getResult()-1].position;
-
-          if(win){
+          if(self.pelotaEntra){
               puntosUser++;
-              tweenTribuna1.resume();
-              tweenTribuna2.resume();
+              //tweenTribuna1.resume();
+              //tweenTribuna2.resume();
               self.AssertPoint(200,triesP);
               self.Win(self);
               localStorage["TotalConvertidos"] = (parseInt(localStorage["TotalConvertidos"]) || 0) + 1;
@@ -990,27 +930,9 @@ acertarTiro: function(self){
 },
 
 atajar: function(self){
-		
-		if(generator>0){
-			//coordinate= buttons.children[generator-1].position;
-			coordinate=generator;
-		}else{
-			/*var posAux = game.rnd.integerInRange(600,800);
-			var posAuxY=-500;
-			coordinate= {x:posAux,y:posAuxY};*/
-			coordinate="failComputer1";
-		}
 
-      self.seMueveArquero(self);
+          if(self.pelotaEntra){
 
-      var movimientoPelota=self.moverPelota(coordinate);
-
-      movimientoPelota.onComplete.addOnce(function(){
-
-          if(win){
-
-              tweenTribuna1.resume();
-              tweenTribuna2.resume();
               self.NoAssertPoint(300,triesA);
               self.Win(self);
               localStorage["TotalAtajados"] = (parseInt(localStorage["TotalAtajados"]) || 0) + 1;
@@ -1037,7 +959,6 @@ atajar: function(self){
 
          };
 
-       });
 },
 
 errarTiro: function(self){
@@ -1075,19 +996,6 @@ errarTiro: function(self){
 		self.seMueveArquero(self);
 		//arrgelar aca
 		var movimientoPelota=self.moverPelota("failUser1");
-		
-		movimientoPelota.onComplete.addOnce(function(){
-		   self.NoAssertPoint(200,triesP);
-		   self.Looser(self);
-		   localStorage["TotalErrados"] = (parseInt(localStorage["TotalErrados"]) || 0) + 1;
-		   localStorage["TotalPartidaErrados"] = (parseInt(localStorage["TotalPartidaErrados"]) || 0) + 1;
-		   localStorage["RachaConvertidos"] = 0;
-		   localStorage["RachaErrados"] = (parseInt(localStorage["RachaErrados"]) || 0) + 1;
-		   if(parseInt(localStorage["RachaErrados"]) > parseInt(localStorage["PeorRachaErrados"])){
-			 localStorage["PeorRachaErrados"]=parseInt(localStorage["RachaErrados"]);
-		   }
-
-		});
 
 },
 
@@ -1113,7 +1021,8 @@ moverPelota: function(coor){
 	var unaCoordenada={x:0,y:0};
 	 var auxTween;
 	 tweenPelota = game.add.tween(pelota);
-	if(coor=="failComputer0"||coor=="failComputer1"){
+	 console.log("entra coor="+coor);
+	if(coor=="failComputer0"||coor=="failComputer1"||coor==0||coor=="0"){
 		var posAux = game.rnd.integerInRange(-800,800);
 		unaCoordenada={x:posAux, y:-500};
 		 auxTween= tweenPelota.to(unaCoordenada,500, 'Linear', true, 0);
@@ -1161,13 +1070,6 @@ moverPelota: function(coor){
 	console.log(unaCoordenada);
   
    console.log("id elegido en mover pelota es "+this.idElegido);
-   /*if(this.idElegido<4){
-		auxTween= tweenPelota.to({x:[pelota.x,unaCoordenada.x+50,unaCoordenada.x],y:[pelota.y,unaCoordenada.y]},400, "Linear", true, 0).interpolation(function(v, k){
-			return Phaser.Math.bezierInterpolation(v, k);
-		});
-   }else{
-	   auxTween= tweenPelota.to(unaCoordenada,500, 'Linear', true, 0);
-   }*/
    
    pelota.play("girar");
    setTimeout(function(){pelota.animations.stop();},1100);
@@ -1180,7 +1082,7 @@ ubicarArquero: function(resultadoServer, self){
 
 	console.log("COMPUTER ID: " +generator);
 
-	if(generator==0){
+	if(generator<=0){
 		self.posArqueroI =game.rnd.integerInRange(0,5);
 		self.posArquero= arquero.position;
 
