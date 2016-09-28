@@ -101,17 +101,6 @@ Stadistics.prototype = {
 
       //esquina
 
-      // fondo de los puntaje y prueba scrolling
-
-      // tatsBack= this.game.add.bitmapData(700,300);
-      //
-      // grd=statsBack.context.createLinearGradient(0,0,0,this.game.height);
-      // grd.addColorStop(0,"black");
-      // statsBack.context.fillStyle=grd;
-      // statsBack.context.fillRect(0,0,this.game.width,this.game.height);
-      // statsBackground=this.game.add.sprite(300,300,statsBack);
-      // statsBackground.alpha=.3;
-      // statsBackground.position={x: this.game.width/2- statsBackground.width/2,y:200};
 
       //fondo de los puintajes y prueba scrolling
 
@@ -121,6 +110,7 @@ Stadistics.prototype = {
       var textTitle = game.add.text(game.world.centerX-150, 50, "ESTADÍSTICAS", titleStyle);
       textTitle.addChild(line);
       puntajeStyle = { font: '15pt CondensedLight', fill: 'yellow'};
+        puntajeStyle2 = { font: '15pt CondensedLight', fill: 'yellow', align:'right'};
 
       var efiArq =(100/((parseInt(localStorage["TotalAtajados"]) || 0) + (parseInt(localStorage["TotalNoAtajados"]) || 0)))* (parseInt(localStorage["TotalAtajados"]) || 0);
       var efiPat = (100/((parseInt(localStorage["TotalConvertidos"]) || 0) + (parseInt(localStorage["TotalErrados"]) || 0)))*(parseInt(localStorage["TotalConvertidos"]) || 0);
@@ -132,51 +122,16 @@ Stadistics.prototype = {
       if (self.isFloat(efiArq,self))efiArq= Number(efiArq).toFixed(1);
       if (self.isFloat(efiPat,self))efiPat= Number(efiPat).toFixed(1);
       if (self.isFloat(efectividad,self))efectividad= efectividad.toFixed(1);
-      // x=statsBackground.position.x+50;
-      // xx= statsBackground.position.x + statsBackground.width-80;
-      y=220;
+
+      y=20;
       n=0;
+      positionY=0;
 
       group= game.add.group();
 
+      group.position.x=200;
+      group.position.y=200;
 
-  //     // a=game.add.text(x, y, "PARTIDOS GANADOS", puntajeStyle);
-  //     // abis=game.add.text(xx, y,localStorage["PartidosGanados"], puntajeStyle);
-  //     // b=game.add.text(x, y+50, "PARTIDOS GANADOS", puntajeStyle);
-  //     // bbis=game.add.text(xx, y+50,localStorage["PartidosPerdidos"], puntajeStyle);
-  //     // c=game.add.text(x,y+100, "PENALES ATAJADOS", puntajeStyle);
-  //     // cbis=game.add.text(xx, y+100, localStorage["TotalAtajados"], puntajeStyle);
-  //     // d=game.add.text(x, y+150, "PENALES CONVERTIDOS", puntajeStyle);
-  //     // dbis=game.add.text(xx, y+150, localStorage["TotalConvertidos"], puntajeStyle);
-  //     // e=game.add.text(x, y+200, "PENALES ERRADOS", puntajeStyle);
-  //     // ebis=game.add.text(xx, y+200, localStorage["TotalErrados"], puntajeStyle);
-  //
-	//
-	// group.add(a)
-	// group.add(abis)
-	// group.add(b)
-	// group.add(bbis)
-	// group.add(c)
-	// group.add(cbis)
-	// group.add(d)
-	// group.add(dbis)
-	// group.add(e)
-	// group.add(ebis)
-
-      // group.add(game.add.text(x, y+250, "Total No Atajados: "+localStorage["TotalNoAtajados"], puntajeStyle));
-      //  group.add(game.add.text(x, y+300, "Racha Ganados: "+localStorage["RachaGanados"], puntajeStyle));
-      //  group.add(game.add.text(x, y+350, "Racha Perdidos: "+ localStorage["RachaPerdidos"], puntajeStyle));
-      // group.add( game.add.text(x, y+400, "Racha Atajados: "+localStorage["RachaAtajados"], puntajeStyle));
-      //  group.add(game.add.text(x, y+450, "Racha Convertidos: "+localStorage["RachaConvertidos"], puntajeStyle));
-      //  group.add(game.add.text(x, y+500, "Racha Errados: "+localStorage["RachaErrados"], puntajeStyle));
-      // game.add.text(x,y+30, "Racha No Atajados: "+localStorage["RachaNoAtajados"] , puntajeStyle);
-      // game.add.text(x, y+30, "Mejor Racha Atajados: "+localStorage["MejorRachaAtajados"], puntajeStyle);
-      // game.add.text(x, y+30, "Mejor Racha Convertida: "+localStorage["MejorRachaConvertida"], puntajeStyle);
-      // game.add.text(x, y+30, "Peor Racha Errados: "+localStorage["PeorRachaErrados"], puntajeStyle);
-      // game.add.text(x, y+30, "Peor Racha No Atajados: "+localStorage["PeorRachaNoAtajados"], puntajeStyle);
-      // game.add.text(x, y+30, "Efectividad: "+ efectividad , puntajeStyle);
-      // game.add.text(x, y+30, "Eficiencia como arquero: "+ efiArq +"%" , puntajeStyle);
-      // game.add.text(x,y+30, "Eficiencia como pateador: "+ efiPat +"%" , puntajeStyle);
 
 	stats=[
   {key:"PartidosGanados",title:"PARTIDOS GANADOS"},
@@ -200,10 +155,12 @@ Stadistics.prototype = {
   {key: efiPat +"%" ,title:"EFICIENCIA COMO PATEADOR"}
 
 	];
-    self.createLayoutStats(self,200);
-    self.createLayoutStats(self,600);
+    self.createLayoutStats(self);
+    self.createLayoutStats(self);
+    self.createLayoutStats(self);
+    self.createLayoutStats(self);
 
-	console.log(group.height);
+
 	game.world.setBounds(0, 0, this.game.width,a.height+group.height+100+leftCorner.height);
   },
 
@@ -215,8 +172,7 @@ Stadistics.prototype = {
     game.state.start("GameMenu");
   },
 
-
-  createLayoutStats: function(target, yy){
+  createLayoutStats: function(target){
 
     statsBack= this.game.add.bitmapData(700,320);
 
@@ -224,28 +180,38 @@ Stadistics.prototype = {
     grd.addColorStop(0,"black");
     statsBack.context.fillStyle=grd;
     statsBack.context.fillRect(0,0,this.game.width,this.game.height);
-    statsBackground=this.game.add.sprite(300,300,statsBack);
+    statsBackground=this.game.add.sprite(0,y,statsBack);
     statsBackground.alpha=.3;
-    statsBackground.position={x: this.game.width/2- statsBackground.width/2,y:yy};
-    x=statsBackground.position.x+50;
+    x=50;
 
+    group.add(statsBackground);
 
-    y=yy+20;
 
     for(var a=0;a<6;a++){
 
-       var word=game.add.text(x, y, stats[n].title+'                                                                                  '+ localStorage[stats[n].key], puntajeStyle);
-       group.add(word);
-       var line =self.createLine(0,word.height,word.width);
-       word.addChild(line);
+        try{
+            var word=game.add.text(x, y+20, stats[n].title, puntajeStyle);
+            var number=game.add.text(group.width-70,y+20,localStorage[stats[n].key], puntajeStyle);
+            group.add(word);
+            group.add(number);
+            var line =self.createLine(0,word.height,600);
+            word.addChild(line);
 
-         y+=50;
-         n++;
+            y+=50;
+            n++;
+
+        }catch(e){
+
+        }
+
 
 
     };
 
-  n=a;
+
+  y+=100;
+
+
 
 },
 
@@ -258,7 +224,7 @@ createLine: function(a, b,c){
     graphics.lineTo(c, b);
     graphics.endFill();
     return graphics;
-}
+},
 
 
 
