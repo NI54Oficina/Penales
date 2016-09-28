@@ -16,6 +16,7 @@ Game.prototype = {
     game.load.image('triangle', 'assets/images/puntero.png', 150,150);
    
     game.load.spritesheet('pelota', 'assets/images/pelota.png', 40, 40);
+    game.load.spritesheet('pelota-sombra', 'assets/images/sombraPelota.png', 40, 40);
 	game.load.image('arco-0', 'assets/images/arco-0.png');
 	game.load.atlas('arco', 'assets/images/arcos-sprite.png', 'assets/images/arcos-sprite.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
     game.load.atlas('arquero-local', 'assets/images/out.png', 'assets/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
@@ -152,13 +153,27 @@ drawArquero:function(){
 
 drawPelota:function(){
 	pelotaPosition= {x:580,y:490};
-	pelota= game.add.sprite(pelotaPosition.x,pelotaPosition.y ,'pelota');
+	
+	
+	pelotaSombra= game.add.sprite(0,0 ,'pelota-sombra');
+	pelotaSombra.scale.setTo(0.9,0.9);
+	pelota= game.add.group();
+	pelota.x= pelotaPosition.x;
+	pelota.y=pelotaPosition.y;
+	console.log(pelota);
+	pelotaSombra.anchor.x=1;
+	pelotaSombra.anchor.y=1;
+	pelota.add(pelotaSombra);
+	pelotaSombra.x=0;
+	pelotaSombra.y=20;
 	pelota.scale.setTo(0.9,0.9);
-	 pelota.anchor.x=0.5;
-	pelota.anchor.y=0.5;
+
+	pelotaSprite=game.add.sprite(-20,-20 ,'pelota');
+	pelota.addChild(pelotaSprite);
 	duracionPelota=400;
 	delayStopPelota=1100;
-	pelota.animations.add("girar",[0,1,2],30,true);
+	pelotaSprite.animations.add("girar",[0,1,2],30,true);
+	console.log("termina");
 },
 
 
@@ -376,7 +391,7 @@ updateCounter: function () {
   },
 
   restart: function(self){
-
+	console.log("entra restart0");
     counter=self.tiempoMaximo;
     self.pause=false;
     modo++;
@@ -394,7 +409,13 @@ updateCounter: function () {
 	
 	self.resetGui();
 	self.resetPlayers();
+	
+	console.log("entra restart1");
+	
 	game.tweens.remove(tweenPelota);
+	game.tweens.remove(tweenSombra);
+	pelotaSombra.position.y=20;
+	console.log("entra restart2");
 	try{
 		game.tweens.remove(tweenFocus);
 		game.tweens.remove(tweenArquero);
@@ -426,7 +447,7 @@ updateCounter: function () {
 	player.position.x=playerIPos.x;
 	player.position.y=playerIPos.y;
 	arquero.bringToTop();
-	pelota.bringToTop();
+	game.world.bringToTop(pelota);
 	player.bringToTop();
 	arquero.position.x= arqueroPosition.x;
 	arquero.position.y=arqueroPosition.y;
@@ -769,13 +790,13 @@ animarJugada:function(self,datosServer){
 		self.ubicarArquero(self.arqueroID, self);
 		
 		self.seMueveArquero(self);
-	
+		console.log("entra animar");
 		self.moverPelota(self.pateadorID).onComplete.addOnce(function(){
 			if(self.pelotaEntra){
 				self.animarArco(self);
 				arquero.bringToTop();
 			}else{
-				pelota.bringToTop();
+				game.world.bringToTop(pelota);
 				player.bringToTop();
 				if(self.pateadorID>0){
 					self.pelotaFuera(self);
@@ -927,6 +948,7 @@ moverPelota: function(coor){
 	var unaCoordenada={x:0,y:0};
 	 var auxTween;
 	 tweenPelota = game.add.tween(pelota);
+	 tweenSombra = game.add.tween(pelotaSombra);
 	 
 	if(coor==0||coor=="0"){
 		//palo center
@@ -961,6 +983,8 @@ moverPelota: function(coor){
 		switch(coor){
 			case 1: case "1":
 			unaCoordenada=[{x:pelotaPosition.x,y:pelotaPosition.y},{x:437,y:291},{x:392,y:226},{x:345,y:153}];
+			
+			
 			break;
 			case 2: case "2":
 			unaCoordenada=[ {x:pelotaPosition.x,y:pelotaPosition.y},{x:552,y:251},{x:551,y:193},{x:549,y:141}];
@@ -984,13 +1008,30 @@ moverPelota: function(coor){
 		 }, duracionPelota,Phaser.Easing.LINEAR, true, 0).interpolation(function(v, k){
 			  return Phaser.Math.bezierInterpolation(v, k);
 		 }); 
+		 switch(coor){
+			 case 1: case 2: case 3:
+			tweenSombra.to({
+				  x: [0, 0, 0, 0],
+				  y: [20, 30, 60, 160],
+			 }, duracionPelota,Phaser.Easing.LINEAR, true, 0).interpolation(function(v, k){
+				  return Phaser.Math.bezierInterpolation(v, k);
+			 }); 
+		 break;
+		 case 4: case 5: case 6:
+		 tweenSombra.to({
+				  x: [0, 0, 0, 0],
+				  y: [20, 30, 40, 80],
+			 }, duracionPelota,Phaser.Easing.LINEAR, true, 0).interpolation(function(v, k){
+				  return Phaser.Math.bezierInterpolation(v, k);
+			 }); 
+		 break;
+		 }
    
 	}
-  
    
    
-   pelota.play("girar");
-   setTimeout(function(){pelota.animations.stop();},delayStopPelota);
+   pelotaSprite.play("girar");
+   setTimeout(function(){pelotaSprite.animations.stop();},delayStopPelota);
    return auxTween;
 },
 
