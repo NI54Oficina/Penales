@@ -1,4 +1,4 @@
-var serverEnabled=true;
+var serverEnabled=false;
 var socket;
 if(serverEnabled){
 socket = io('http://localhost:3000');

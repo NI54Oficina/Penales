@@ -22,6 +22,7 @@ Multiplayer.prototype = {
           grd.addColorStop(1,"#cea428");
           myBitmap.context.fillStyle=grd;
           myBitmap.context.fillRect(0,0,this.game.height,this.game.width);
+
           var background = this.game.add.sprite(0,0, myBitmap);
           down= this.game.make.sprite(-20,55, 'brillodown');
           up= this.game.make.sprite(200,-15, 'brilloup');
@@ -29,14 +30,15 @@ Multiplayer.prototype = {
           up.scale.setTo(0.5,0.5);
           background.addChild(down);
           background.addChild(up);
-
+        
           // var testMask=game.add.graphics(0, 0);
-          // testMask.beginFill(0xFFFF0B, 0.5);
-          // testMask.drawRoundedRect(0, 0,background.width, background.height,10);
+          // testMask.beginFill(0xFFFF0B, 1);
+          // testMask.drawRoundedRect(0, 0,500 ,50,10);
           // testMask.endFill();
+          //
           // Boton.add(testMask);
           // Boton.mask=testMask;
-          Boton.add(background);
+           Boton.add(background);
 
         // aplicando el background de cada texto
 

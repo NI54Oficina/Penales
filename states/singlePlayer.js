@@ -235,11 +235,11 @@ Singleplayer.prototype = {
      var line=self.createLine(0,txt1.height,400 );
      txt1.addChild(line);
      var txt2 = game.add.text(cuadradoUser.width/2.5,80,'RACHA ACTUAL DE PARTIDOS', puntajeStyle);
-     var txt2a= game.add.text(cuadradoUser.width-30,80,user.racha, puntajeStyle);
+     var txt2a= game.add.text(cuadradoUser.width-40,80,user.racha, puntajeStyle);
      var txt3 = game.add.text(cuadradoUser.width/2.5,120,'TOTAL PARTIDOS GANADOS', puntajeStyle);
-     var txt3a = game.add.text(cuadradoUser.width-30,120,+user.ganados, puntajeStyle);
+     var txt3a = game.add.text(cuadradoUser.width-40,120,+user.ganados, puntajeStyle);
      var txt4 = game.add.text(cuadradoUser.width/2.5,160,'TOTAL PARTIDOS PERDIDOS', puntajeStyle);
-    var txt4a = game.add.text(cuadradoUser.width-30,160,user.perdidos, puntajeStyle);
+    var txt4a = game.add.text(cuadradoUser.width-40,160,user.perdidos, puntajeStyle);
 
     	cuadradoUser.add(txt1);
     	cuadradoUser.add(txt2);

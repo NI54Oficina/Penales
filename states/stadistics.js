@@ -133,6 +133,8 @@ Stadistics.prototype = {
       group.position.y=200;
 
 
+
+
 	stats=[
   {key:"PartidosGanados",title:"PARTIDOS GANADOS"},
   {key:"PartidosPerdidos",title:"PARTIDOS PERDIDOS"},
