@@ -12,6 +12,9 @@ Multiplayer.prototype = {
 
         // aplicando el background de cada texto
 
+          var Boton =game.add.group();
+          Boton.position={x:100,y:this.optionCount*530}
+
           var 	myBitmap = this.game.add.bitmapData(540, 80);
           var  grd=myBitmap.context.createLinearGradient(0,0,0,40);
           grd.addColorStop(0,"#fbe43e");
@@ -19,51 +22,66 @@ Multiplayer.prototype = {
           grd.addColorStop(1,"#cea428");
           myBitmap.context.fillStyle=grd;
           myBitmap.context.fillRect(0,0,this.game.height,this.game.width);
-          var background = this.game.add.sprite(100,this.optionCount*530-10, myBitmap);
+          var background = this.game.add.sprite(0,0, myBitmap);
+          down= this.game.make.sprite(-20,55, 'brillodown');
+          up= this.game.make.sprite(200,-15, 'brilloup');
+          down.scale.setTo(0.5,0.5);
+          up.scale.setTo(0.5,0.5);
+          background.addChild(down);
+          background.addChild(up);
+
+          // var testMask=game.add.graphics(0, 0);
+          // testMask.beginFill(0xFFFF0B, 0.5);
+          // testMask.drawRoundedRect(0, 0,background.width, background.height,10);
+          // testMask.endFill();
+          // Boton.add(testMask);
+          // Boton.mask=testMask;
+          Boton.add(background);
 
         // aplicando el background de cada texto
 
-        var txt = game.add.text(100, 0 , text, optionStyle);
-        txt.position.y= background.position.y+ background.height/2 - txt.height/2;
-
-        down= this.game.make.sprite(-20,55, 'brillodown');
-        up= this.game.make.sprite(200,-15, 'brilloup');
-        down.scale.setTo(0.5,0.5);
-        up.scale.setTo(0.5,0.5);
-        background.addChild(down);
-        background.addChild(up);
+        var txt = game.add.text(0, 10 , text, optionStyle);
 
 
+        Boton.add(txt);
 
-        txt.position.x=this.game.width/2 - txt.width/2;
-        background.position.x=this.game.width/2 - background.width/2;
+        //txt.position.y= background.position.y+ background.height/2 - txt.height/2;
+
+
+        txt.position.x=Boton.width/2 - txt.width/2;
+        Boton.position.x=this.game.width/2 - Boton.width/2;
 
         var onOver = function (target) {
           target.fill = "black";
           target.stroke = "rgba(200,200,200,0.5)";
           txt.useHandCursor = true;
         };
+
         var onOut = function (target) {
           target.fill = "#1b1464";
           target.stroke = "#1b1464";
           txt.useHandCursor = false;
         };
 
-        txt.inputEnabled = true;
-        txt.events.onInputUp.add(callback, this);
+
         txt.events.onInputOver.add(onOver, this);
         txt.events.onInputOut.add(onOut, this);
 
-        this.optionCount ++;
 
+        Boton.forEach(function(item) {
+          item.inputEnabled = true;
+        item.events.onInputUp.add(callback);
+
+    }, this);
+
+        this.optionCount ++;
+        return Boton;
 
 
   },
 
   create: function(){
       self = this;
-	  
-	 
 
       //fondo
       var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);

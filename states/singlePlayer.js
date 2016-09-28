@@ -143,8 +143,6 @@ Singleplayer.prototype = {
 
         //fondo de participantes
 
-
-
         //titulo
 
         var titleStyle = { font: '40px BitterBold', fill: 'white', align: 'center'};

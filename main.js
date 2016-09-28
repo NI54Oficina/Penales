@@ -21,11 +21,12 @@ Main.prototype = {
     game.load.script('scrolls',   'lib/scroll.js');
     game.load.script('utils',   'lib/utils.js');
     game.load.script('splash',  'states/Splash.js');
+    game.load.script('global',   'lib/global.js');
 	game.state.onStateChange.add(function(){
 		try{
 		game.kineticScrolling.stop();
 		}catch(error){
-			
+
 		};
 	});
   },
