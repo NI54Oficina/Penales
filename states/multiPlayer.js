@@ -30,7 +30,7 @@ Multiplayer.prototype = {
           up.scale.setTo(0.5,0.5);
           background.addChild(down);
           background.addChild(up);
-        
+
           // var testMask=game.add.graphics(0, 0);
           // testMask.beginFill(0xFFFF0B, 1);
           // testMask.drawRoundedRect(0, 0,500 ,50,10);
@@ -46,8 +46,6 @@ Multiplayer.prototype = {
 
 
         Boton.add(txt);
-
-        //txt.position.y= background.position.y+ background.height/2 - txt.height/2;
 
 
         txt.position.x=Boton.width/2 - txt.width/2;
