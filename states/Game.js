@@ -14,9 +14,6 @@ Game.prototype = {
     game.load.image('orange-button', 'assets/images/orange-button.png', 150,150);
     game.load.image('yellow-button', 'assets/images/yellow-button.png', 150,150);
     game.load.image('triangle', 'assets/images/puntero.png', 150,150);
-
-    game.load.spritesheet('tribunaAtras', 'assets/images/gente1.png');
-    game.load.spritesheet('tribunaAdelante', 'assets/images/gente2.png');
    
     game.load.spritesheet('pelota', 'assets/images/pelota.png', 40, 40);
 	game.load.image('arco-0', 'assets/images/arco-0.png');
@@ -99,34 +96,34 @@ drawBackground: function(){
 	fondo1 = game.add.sprite(0,0, 'fondo1');
 	fondo2 = game.add.sprite(759,0, 'fondo2');
 	fondo3 = game.add.sprite(0,150, 'fondo3');
-	
+	velocidadArco=10;
 	arco= game.add.sprite(0,80, 'arco-0');
 	arco1= game.add.sprite(270,80, 'arco',"i00.png");
-	arco1.animations.add("up-left",["i01.png","i02.png"],2,false);
-	arco1.animations.add("down-left",["i03.png","i04.png"],2,false);
-	arco1.animations.add("up-right",["i00.png"],2,false);
-	arco1.animations.add("down-right",["i00.png"],2,false);
-	arco1.animations.add("up",["i00.png"],2,false);
-	arco1.animations.add("down",["i00.png"],2,false);
-	arco1.animations.add("idle",["i00.png"],2,false);
+	arco1.animations.add("up-left",["i01.png","i02.png"],velocidadArco,false);
+	arco1.animations.add("down-left",["i03.png","i04.png"],velocidadArco,false);
+	arco1.animations.add("up-right",["i00.png"],velocidadArco,false);
+	arco1.animations.add("down-right",["i00.png"],velocidadArco,false);
+	arco1.animations.add("up",["i00.png"],velocidadArco,false);
+	arco1.animations.add("down",["i00.png"],velocidadArco,false);
+	arco1.animations.add("idle",["i00.png"],velocidadArco,false);
 	
 	arco2= game.add.sprite(456,80, 'arco',"c00.png");
-	arco2.animations.add("up",["c01.png","c02.png"],2,false);
-	arco2.animations.add("down",["c03.png","c04.png"],2,false);
-	arco2.animations.add("up-right",["c00.png"],2,false);
-	arco2.animations.add("down-right",["c00.png"],2,false);
-	arco2.animations.add("up-left",["c00.png"],2,false);
-	arco2.animations.add("down-left",["c00.png"],2,false);
-	arco2.animations.add("idle",["c00.png"],2,false);
+	arco2.animations.add("up",["c01.png","c02.png"],velocidadArco,false);
+	arco2.animations.add("down",["c03.png","c04.png"],velocidadArco,false);
+	arco2.animations.add("up-right",["c00.png"],velocidadArco,false);
+	arco2.animations.add("down-right",["c00.png"],velocidadArco,false);
+	arco2.animations.add("up-left",["c00.png"],velocidadArco,false);
+	arco2.animations.add("down-left",["c00.png"],velocidadArco,false);
+	arco2.animations.add("idle",["c00.png"],velocidadArco,false);
 	
 	arco3= game.add.sprite(642,80, 'arco',"d00.png");
-	arco3.animations.add("up-right",["d01.png","d02.png"],2,false);
-	arco3.animations.add("down-right",["d03.png","d04.png"],2,false);
-	arco3.animations.add("up-left",["d00.png"],2,false);
-	arco3.animations.add("down-left",["d00.png"],2,false);
-	arco3.animations.add("up",["d00.png"],2,false);
-	arco3.animations.add("down",["d00.png"],2,false);
-	arco3.animations.add("idle",["d00.png"],2,false);
+	arco3.animations.add("up-right",["d01.png","d02.png"],velocidadArco,false);
+	arco3.animations.add("down-right",["d03.png","d04.png"],velocidadArco,false);
+	arco3.animations.add("up-left",["d00.png"],velocidadArco,false);
+	arco3.animations.add("down-left",["d00.png"],velocidadArco,false);
+	arco3.animations.add("up",["d00.png"],velocidadArco,false);
+	arco3.animations.add("down",["d00.png"],velocidadArco,false);
+	arco3.animations.add("idle",["d00.png"],velocidadArco,false);
 	
     presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px TheMinion", fill: "black", align: "center" });
 	presicionText.visible=false;
@@ -141,7 +138,7 @@ drawArquero:function(){
 	arquero.animations.add('idle', [00,01,02,03,04], 10, false);
     arquero.animations.add('down-left', [18,19,20,23,24,26,25,19,18,01,00], 10, false);
     arquero.animations.add('up-left',  [18,19,20,21,22,23,24,26,25,19,18,01,00], 10, false);
-    arquero.animations.add('down', [10,08,09,09,08,08,10,15,02,01,00], 10, false);
+    arquero.animations.add('down', [00,00,10,08,09,09,08,08,10,15,02,01,00], 10, false);
     arquero.animations.add('up',  [03,04,11,12,13,14,14,14,13,12,11,04,03,02], 13, false);
 	arquero.animations.add('up-right',  [15,16,17,17,16,08,09,08,10,15,02,01,00], 10, false);
 	arquero.animations.add('down-right', [05,06,07,08,09,08,10,15,02,01,00], 8, false);
@@ -437,6 +434,9 @@ updateCounter: function () {
 	arquero.animations.stop();
 	arquero.frame=0;
 	arquero.visible=false;
+	arco1.play("idle");
+	arco2.play("idle");
+	arco3.play("idle");
   },
 
   patear: function(){
@@ -707,7 +707,6 @@ setDifficult(){
       return;
 },
 
-
 //Envio Jugada///
 EnviarJugadaServer: function(self){
 	
@@ -754,23 +753,33 @@ ListenerPateador: function(self, datosServer){
 	
 },
 
+ListenerArquero: function(self, datosServer){
+
+	/**quitar**/
+	generator = datosServer.computer;
+	
+	self.animarJugada(self,datosServer);
+
+},
+
 animarJugada:function(self,datosServer){
 	self.patear(self);
 	setTimeout(function(){
-		 //deprecada
-		self.stopPlayer(self);
+		
 		self.ubicarArquero(self.arqueroID, self);
 		
 		self.seMueveArquero(self);
 	
-		var movimientoPelota=self.moverPelota(self.pateadorID);
-
-		movimientoPelota.onComplete.addOnce(function(){
+		self.moverPelota(self.pateadorID).onComplete.addOnce(function(){
 			if(self.pelotaEntra){
+				self.animarArco(self);
 				arquero.bringToTop();
 			}else{
 				pelota.bringToTop();
 				player.bringToTop();
+				if(self.pateadorID>0){
+					self.pelotaFuera(self);
+				}
 			}
 			//updatea stats, muestra ganar/perder
 			if(Phaser.Math.isEven(modo)){
@@ -782,15 +791,63 @@ animarJugada:function(self,datosServer){
 	},delayPelota);
 },
 
-ListenerArquero: function(self, datosServer){
-
-	/**quitar**/
-	generator = datosServer.computer;
-	
-	self.animarJugada(self,datosServer);
-
+animarArco:function(self){
+	switch(self.pateadorID){
+		case 1:
+			arco1.play("up-left");
+			arco2.play("up-left");
+			arco3.play("up-left");
+		break;
+		case 2:
+			arco1.play("up");
+			arco2.play("up");
+			arco3.play("up");
+		break;
+		case 3:
+			arco1.play("up-right");
+			arco2.play("up-right");
+			arco3.play("up-right");
+		break;
+		case 4:
+			arco1.play("down-left");
+			arco2.play("down-left");
+			arco3.play("down-left");
+		break;
+		case 5:
+			arco1.play("down");
+			arco2.play("down");
+			arco3.play("down");
+		break;
+		case 6:
+			arco1.play("down-right");
+			arco2.play("down-right");
+			arco3.play("down-right");
+		break;
+		
+	}
 },
 
+pelotaFuera:function(self){
+	var auxCoordenada={};
+	switch(self.pateadorID){
+		case 1: case 4:
+		auxCoordenada.x=-100;
+		auxCoordenada.y=0;
+		break;
+		case 2:
+		auxCoordenada.x=pelota.x;
+		auxCoordenada.y=-500;
+		break;
+		case 3: case 6: case 5:
+		auxCoordenada.x=1000;
+		auxCoordenada.y=-100;
+		break;
+		
+	}
+	game.tweens.remove(tweenPelota);
+	tweenPelota=game.add.tween(pelota);
+	auxTween= tweenPelota.to(auxCoordenada,duracionPelota, 'Linear', true, 0);
+},
 
 Win: function(){
   looser.visible=false;
@@ -865,8 +922,6 @@ atajar: function(self){
          };
 
 },
-
-
 
 moverPelota: function(coor){
 	var unaCoordenada={x:0,y:0};

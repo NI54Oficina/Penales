@@ -250,6 +250,9 @@ function CalculateAtaje(msg){
 }
 
 function calculoChancesAtajar(msg){
+	/**borrar
+	return msg;
+	/**end borrar**/
     var chanceAtajar = randomBetween(1,oponente["efectividadA"]);
 
     if(chanceAtajar==1){
