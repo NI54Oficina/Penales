@@ -323,16 +323,22 @@ function randomBetween(min, max) {
 
 
 function calculatePuntaje(msg, generator){
-	if(generator!=0 && msg!=generator){
+	if(mod%2 == 0){
+		//entra en jugador modo arquero
+		if(generator>0 && msg!=generator){
 
-			if(mod%2 == 0){
-				golesComputer++;
-			}else{
+			golesComputer++;
+			
 
-				if(msg!=0)golesUser++;
-			};
-
-	};
+		};
+	}else{
+		//entra en jugador modo pateador
+		if(msg>0 && msg!=generator){
+			golesUser++;
+		}
+		
+	}
+	
 	return;
 }
 

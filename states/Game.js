@@ -14,7 +14,6 @@ Game.prototype = {
     game.load.image('orange-button', 'assets/images/orange-button.png', 150,150);
     game.load.image('yellow-button', 'assets/images/yellow-button.png', 150,150);
     game.load.image('triangle', 'assets/images/puntero.png', 150,150);
-    //game.load.image('barra', 'assets/images/barra-p.png', 150,150);
 
     game.load.spritesheet('tribunaAtras', 'assets/images/gente1.png');
     game.load.spritesheet('tribunaAdelante', 'assets/images/gente2.png');
@@ -23,23 +22,18 @@ Game.prototype = {
 	game.load.image('arco-0', 'assets/images/arco-0.png');
 	game.load.atlas('arco', 'assets/images/arcos-sprite.png', 'assets/images/arcos-sprite.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
     game.load.atlas('arquero-local', 'assets/images/out.png', 'assets/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-	 game.load.atlas('pateador-local', 'assets/images/pateador-test.png', 'assets/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+	game.load.atlas('pateador-local', 'assets/images/pateador-test.png', 'assets/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
     game.load.atlas('arquero-visitante', 'assets/images/out2.png', 'assets/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-	 game.load.atlas('pateador-visitante', 'assets/images/pateador-test2.png', 'assets/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-    //game.load.image('barraVertical', 'assets/images/barra_vertical.png');
-
-  
+	game.load.atlas('pateador-visitante', 'assets/images/pateador-test2.png', 'assets/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH); 
     
 	game.load.image('fondo1', 'assets/images/fondo-game1.png', 759, 150);
 	game.load.image('fondo2', 'assets/images/fondo-game2.png', 378, 150);
 	game.load.image('fondo3', 'assets/images/fondo-game3.png', 1136, 491);
 
-
   },
 
   create: function () {
-	console.log(game.stage);
-    console.log("Entra create game");
+    
     self = this;
     triesA=this.triesA;
 
@@ -54,18 +48,11 @@ Game.prototype = {
 	this.pause=true;
 	timer = game.time.events.loop(Phaser.Timer.SECOND, this.updateCounter, this);
 	game.time.events.resume();
-
-
     
     presicionText=0;
 	rangoDePresicion=40;
     counter=this.tiempoMaximo;
 	perfilElegido= this.perfil;
-
-
-    console.log("MODO: "+ this.modo);
-    console.log("PERFIL: "+this.perfil);
-    console.log("TIEMPO MAXIMO: "+this.tiempoMaximo);
 
     modo=this.modo;
 	
@@ -82,7 +69,6 @@ Game.prototype = {
 	equipoDosText = game.add.text(10, 260, 'Equipo 2', { font: " 20px TheMinion", fill: "black", align: "center" });
 
     this.createBarra();
-	
 
     this.drawArquero();
 
@@ -106,26 +92,13 @@ Game.prototype = {
 	}
 
 	this.drawGui();
-	console.log("camera	");
-	console.log(this.camera);
-	this.camera.x=1000;
 },
 
-
-
 drawBackground: function(){
-	tribunaAtras = game.add.sprite(0,0, 'tribunaAtras');
-    tweenTribuna1= game.add.tween(tribunaAtras);
-    tweenTribuna1.to( {x:0, y:20}, 500, 'Linear', true, 0, false).yoyo(true);
-
-
-    tribunaAdelante = game.add.sprite(0,0, 'tribunaAdelante');
-    tweenTribuna2= game.add.tween(tribunaAdelante);
-    tweenTribuna2.to( {x:0, y:-10}, 300, 'Linear', true, 0, false).yoyo(true);
 	
 	fondo1 = game.add.sprite(0,0, 'fondo1');
-	fondo1 = game.add.sprite(759,0, 'fondo2');
-	fondo1 = game.add.sprite(0,150, 'fondo3');
+	fondo2 = game.add.sprite(759,0, 'fondo2');
+	fondo3 = game.add.sprite(0,150, 'fondo3');
 	
 	arco= game.add.sprite(0,80, 'arco-0');
 	arco1= game.add.sprite(270,80, 'arco',"i00.png");
@@ -136,7 +109,6 @@ drawBackground: function(){
 	arco1.animations.add("up",["i00.png"],2,false);
 	arco1.animations.add("down",["i00.png"],2,false);
 	arco1.animations.add("idle",["i00.png"],2,false);
-	
 	
 	arco2= game.add.sprite(456,80, 'arco',"c00.png");
 	arco2.animations.add("up",["c01.png","c02.png"],2,false);
@@ -155,22 +127,22 @@ drawBackground: function(){
 	arco3.animations.add("up",["d00.png"],2,false);
 	arco3.animations.add("down",["d00.png"],2,false);
 	arco3.animations.add("idle",["d00.png"],2,false);
-
-
+	
     presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px TheMinion", fill: "black", align: "center" });
 	presicionText.visible=false;
 },
 
 drawArquero:function(){
-	arquero= game.add.sprite(320,100, 'arquero-local',"test");
+	arqueroPosition= {x:320,y:100};
+	arquero= game.add.sprite(arqueroPosition.x,arqueroPosition.y, 'arquero-local');
 	arquero.scale.setTo(1,1);
     arquero.frame = 0;
    
 	arquero.animations.add('idle', [00,01,02,03,04], 10, false);
     arquero.animations.add('down-left', [18,19,20,23,24,26,25,19,18,01,00], 10, false);
     arquero.animations.add('up-left',  [18,19,20,21,22,23,24,26,25,19,18,01,00], 10, false);
-    arquero.animations.add('down', [10,08,09,08,10,15,02,01,00], 10, false);
-    arquero.animations.add('up',  [03,04,11,12,13,14,13,12,11,04,03,02], 13, false);
+    arquero.animations.add('down', [10,08,09,09,08,08,10,15,02,01,00], 10, false);
+    arquero.animations.add('up',  [03,04,11,12,13,14,14,14,13,12,11,04,03,02], 13, false);
 	arquero.animations.add('up-right',  [15,16,17,17,16,08,09,08,10,15,02,01,00], 10, false);
 	arquero.animations.add('down-right', [05,06,07,08,09,08,10,15,02,01,00], 8, false);
 	arquero.animations.add('derrota', [27,28,29,30,31], 8, false);
@@ -182,9 +154,13 @@ drawArquero:function(){
 
 
 drawPelota:function(){
-	pelota= game.add.sprite(555,470 ,'pelota');
+	pelotaPosition= {x:580,y:490};
+	pelota= game.add.sprite(pelotaPosition.x,pelotaPosition.y ,'pelota');
 	pelota.scale.setTo(0.9,0.9);
-	 
+	 pelota.anchor.x=0.5;
+	pelota.anchor.y=0.5;
+	duracionPelota=400;
+	delayStopPelota=1100;
 	pelota.animations.add("girar",[0,1,2],30,true);
 },
 
@@ -285,6 +261,8 @@ drawGui:function(){
 	winner = game.add.text(350, 350, display2, {  font: 'bold 60pt TheMinion',fill: 'red' });
 	winner.visible=false;
 	points= game.add.group();
+	userPointY=200;
+	enemyPointY=300;
 },
 
 updateCounter: function () {
@@ -314,9 +292,6 @@ updateCounter: function () {
     focus.visible=true;
     game.world.bringToTop(focus);
 
-    tweenTribuna1.pause();
-    tweenTribuna2.pause();
-
   },
 
   setResult: function(auxValue){
@@ -331,7 +306,7 @@ updateCounter: function () {
   },
   
   resetArco:function(){
-	  arco1.play("idle") ;
+	arco1.play("idle") ;
 	arco2.play("idle");
 	arco3.play("idle");
   },
@@ -347,7 +322,6 @@ updateCounter: function () {
     focus.position.y=600;
     tweenFocus = game.add.tween(focus);
     tweenFocus.to( {x:endBarra, y:600}, velocidad, 'Linear', true, 0, false).yoyo(true);
-
     self.setArquero(self);
 
 	buttons.alpha=0;
@@ -359,7 +333,6 @@ updateCounter: function () {
     player.visible=true;
     self.setArquero(self);
     buttons.visible=false;
-	console.log("entra aquiiii???????");
     self.EnviarJugadaServer(self);
 
   },
@@ -432,15 +405,14 @@ updateCounter: function () {
 	catch(e){}
 	
 	self.cambiarRopa(self);
-	pelota.position.x=555;
-	pelota.position.y=470;
+	pelota.position.x=pelotaPosition.x;
+	pelota.position.y=pelotaPosition.y;
 	clicked=0;
 
 
   },
   
   resetGui:function(){
-	console.log("arquero:"+triesA+" pateador:"+triesP);
 
 	presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px TheMinion", fill: "black", align: "center" });
 	presicionText.visible=false;
@@ -456,9 +428,12 @@ updateCounter: function () {
   resetPlayers:function(){
 	player.position.x=playerIPos.x;
 	player.position.y=playerIPos.y;
-	arquero.position.x= 320;
-	arquero.position.y=100;
-	player.frame=0;  
+	arquero.bringToTop();
+	pelota.bringToTop();
+	player.bringToTop();
+	arquero.position.x= arqueroPosition.x;
+	arquero.position.y=arqueroPosition.y;
+	player.play("idle");
 	arquero.animations.stop();
 	arquero.frame=0;
 	arquero.visible=false;
@@ -495,9 +470,7 @@ updateCounter: function () {
 
       tweenArquero = game.add.tween(arquero);
 	  var auxVar=self.posArquero;
-	  
-     // tweenArquero.to(auxVar, 300, 'Linear', true, 0);
-      console.log("entra animacion arquero y posArquero: "+ self.posArqueroI);
+
 
         switch(self.posArqueroI){
 
@@ -549,7 +522,6 @@ updateCounter: function () {
 
     terminarJuego: function(){
 
-      console.log("terminarJuego");
       this.game.state.states["GameOver"].puntosUser = puntosUser;
       this.game.state.states["GameOver"].puntosComputer = puntosComputer;
 
@@ -558,28 +530,22 @@ updateCounter: function () {
 
 	setearResultado: function(msg){
 		 var resultadoArray=JSON.parse(msg);
-		 console.log("entra resultado "+msg);
 		 puntosUser = resultadoArray["golesUser"];
 		 puntosComputer = resultadoArray["golesComputer"];
 		this.checkIntentos(msg);
     },
 
     checkIntentos: function(data){
-		console.log(data);
 		var auxArray=JSON.parse(data);
 		if(modo==1){
 		 	golesUser= auxArray["localGol"];
 		 	golesComputer= auxArray["visitanteGol"];
-			//triesP = auxArray["localTurno"];
-			//triesA = auxArray["visitanteTurno"];
+			
 		}else{
 		 	golesUser= auxArray["visitanteGol"];
 			golesComputer= auxArray["localGol"];
-			//triesP = auxArray["visitanteTurno"];
-			//triesA = auxArray["localTurno"];
+			
 		}
-		console.log(triesA);
-		console.log("entra check intentos");
       if( triesA  >= 5 &&  triesP  >= 5 ){
 
         if(self.esEmpate(self)){
@@ -659,20 +625,46 @@ establecerParametrosBarra: function(self){
 
 	transparentObject.visible=false;
 	try{
-	tweenFocus.pause();
+		tweenFocus.pause();
 	}
 	catch(i){
 	}
 
 	presicion =  centerBarra - focus.position.x ;
 	if(!Phaser.Math.isEven(modo)){
+		
 		if( rangoDePresicion > presicion && presicion > -rangoDePresicion){
 			
 		  self.idElegido=self.getResult();
 		 }else{
-			console.log("entra fail");
-		  self.idElegido=0;
+			
+			  if( presicion < rangoDePresicion+25 ||  presicion < -(rangoDePresicion+25) ){
+					switch (self.getResult()) {
+					  case 1:
+					  case 4:
+							//erra left
+							self.idElegido=-1;
+						break;
 
+					  case 3:
+					  case 6:
+							//erra right
+							self.idElegido=-2;
+						break;
+
+					  case 2:
+					  case 5:
+							//erra centro
+							self.idElegido=0;
+						break;
+
+					};
+			}else if(presicion > rangoDePresicion+30){
+				self.idElegido=-3;
+			}else{
+				self.idElegido=-4;
+			}
+		
 		};
 
 	}else{
@@ -699,7 +691,7 @@ updateBarra: function(){
 		barra = this.game.add.sprite(this.game.width/2 - 250,600, myBitmap);
 
 	}else{ 
-		console.log("Barra Tiempo añadido")
+		
 	}
 
 	self.setDifficult(self);
@@ -724,29 +716,31 @@ EnviarJugadaServer: function(self){
 	self.establecerParametrosBarra(self);
 	counter=150000;
 	buttons.visible=false;
-	console.log("idElegido: "+self.idElegido);
     Emit("enviarJugada",self.idElegido,"recibeJugada","resolverJugada",self);
 },
 
 //Respuesta server: resolver jugada
 resolverJugada: function(msg){
 
-	console.log(msg);
 	var datosServer=JSON.parse(msg)
 	self.pelotaEntra=false;
-	if(datosServer["user"]!=0&&datosServer["user"]!=datosServer["computer"]){
-		self.pelotaEntra=true;		
-	}
-	console.log("DATOS SERVER: "+ datosServer);
-	self.pateadorID=datosServer["user"];
-	self.arqueroID=datosServer["computer"];
-
+	
+	
 	if(Phaser.Math.isEven(modo)){
-
+		if(datosServer["computer"]>0&&datosServer["user"]!=datosServer["computer"]){
+			self.pelotaEntra=true;		
+		}
+		self.pateadorID=datosServer["computer"];
+		self.arqueroID=datosServer["user"];
 		self.ListenerArquero(self, datosServer);
-
+		
 	}else{
-	  
+		if(datosServer["user"]>0&&datosServer["user"]!=datosServer["computer"]){
+			self.pelotaEntra=true;		
+		}
+		self.pateadorID=datosServer["user"];
+		self.arqueroID=datosServer["computer"];
+
 		self.ListenerPateador(self, datosServer);
 
 	}
@@ -755,8 +749,6 @@ resolverJugada: function(msg){
 ListenerPateador: function(self, datosServer){
     
 	self.posArqueroI= self.arqueroID;
-
-	
 	
     self.animarJugada(self,datosServer);
 	
@@ -767,13 +759,19 @@ animarJugada:function(self,datosServer){
 	setTimeout(function(){
 		 //deprecada
 		self.stopPlayer(self);
-		self.ubicarArquero(datosServer, self);
+		self.ubicarArquero(self.arqueroID, self);
 		
 		self.seMueveArquero(self);
 	
-		var movimientoPelota=self.moverPelota(datosServer["user"]);
+		var movimientoPelota=self.moverPelota(self.pateadorID);
 
 		movimientoPelota.onComplete.addOnce(function(){
+			if(self.pelotaEntra){
+				arquero.bringToTop();
+			}else{
+				pelota.bringToTop();
+				player.bringToTop();
+			}
 			//updatea stats, muestra ganar/perder
 			if(Phaser.Math.isEven(modo)){
 			    self.atajar(self);
@@ -788,122 +786,29 @@ ListenerArquero: function(self, datosServer){
 
 	/**quitar**/
 	generator = datosServer.computer;
-
 	
 	self.animarJugada(self,datosServer);
 
 },
 
 
-failScore: function(self,datosServer){
-      console.log("DATOS SERVER: "+datosServer);
-
-    
-
-      presicionText.destroy();
-
-      self.setArquero(self);
-
-      clicked=1;
-
-      self.patear(self);
-
-      setTimeout(function(){
-
-        self.stopPlayer(self);
-
-        self.ubicarArquero(datosServer,self);
-
-        if(Phaser.Math.isEven(modo)){
-
-          if(datosServer.computer==0){
-            
-			movimientoPelota= self.moverPelota("failComputer0");
-          }else{
-
-            self.ubicarArquero(datosServer,self);
-			movimientoPelota= self.moverPelota(datosServer);
-          };
-
-        }else{
-
-          if(datosServer.user==0){
-            
-            movimientoPelota= self.moverPelota("failUser0");
-          }else{
-
-            
-            movimientoPelota= self.moverPelota("failUser1");
-
-          };
-
-          self.seMueveArquero(self);
-        
-        }
-		
-         movimientoPelota.onComplete.addOnce(function(){
-
-              if(Phaser.Math.isEven(modo)){
-
-                if(datosServer.computer <= 0){
-
-                  self.NoAssertPoint(300,triesA);
-                  self.Win(self);
-
-                }else{
-
-                  self.AssertPoint(300,triesA);
-                  self.Looser(self);
-                  puntosComputer++;
-
-                  localStorage["TotalNoAtajados"] = (parseInt(localStorage["TotalNoAtajados"]) || 0) + 1;
-                  localStorage["TotalPartidaNoAtajados"] = (parseInt(localStorage["TotalPartidaNoAtajados"]) || 0) + 1;
-                  localStorage["RachaAtajados"] = 0;
-
-                  localStorage["RachaNoAtajados"] = (parseInt(localStorage["RachaNoAtajados"]) || 0) + 1;
-                  if(parseInt(localStorage["RachaNoAtajados"]) > parseInt(localStorage["PeorRachaNoAtajados"])){
-                    localStorage["PeorRachaNoAtajados"]=parseInt(localStorage["RachaNoAtajados"]);
-                  }
-
-                }
-
-              }else{
-
-                self.NoAssertPoint(200,triesP);
-                self.Looser(self);
-                localStorage["TotalErrados"] = (parseInt(localStorage["TotalErrados"]) || 0) + 1;
-                localStorage["TotalPartidaErrados"] = (parseInt(localStorage["TotalPartidaErrados"]) || 0) + 1;
-                localStorage["RachaConvertidos"] = 0;
-                localStorage["RachaErrados"] = (parseInt(localStorage["RachaErrados"]) || 0) + 1;
-                if(parseInt(localStorage["RachaErrados"]) > parseInt(localStorage["PeorRachaErrados"])){
-                  localStorage["PeorRachaErrados"]=parseInt(localStorage["RachaErrados"]);
-                }
-
-              }
-
-            });
-
-      },delayPelota);
-
-},
-
 Win: function(){
   looser.visible=false;
   winner.visible=true;
+  winner.bringToTop();
 },
 
 Looser: function(){
   looser.visible=true;
   winner.visible=false;
+  looser.bringToTop();
 },
 
 acertarTiro: function(self){
-	console.log("intenta obtener el boton "+self.getResult());
+	
           if(self.pelotaEntra){
               puntosUser++;
-              //tweenTribuna1.resume();
-              //tweenTribuna2.resume();
-              self.AssertPoint(200,triesP);
+              self.AssertPoint(userPointY,triesP);
               self.Win(self);
               localStorage["TotalConvertidos"] = (parseInt(localStorage["TotalConvertidos"]) || 0) + 1;
               localStorage["TotalPartidaConvertidos"] = (parseInt(localStorage["TotalPartidaConvertidos"]) || 0) + 1;
@@ -914,7 +819,7 @@ acertarTiro: function(self){
               }
 			  
           }else{
-              self.NoAssertPoint(200,triesP);
+              self.NoAssertPoint(userPointY,triesP);
               self.Looser(self);
               localStorage["TotalErrados"] = (parseInt(localStorage["TotalErrados"]) || 0) + 1;
               localStorage["TotalPartidaErrados"] = (parseInt(localStorage["TotalPartidaErrados"]) || 0) + 1;
@@ -931,9 +836,9 @@ acertarTiro: function(self){
 
 atajar: function(self){
 
-          if(self.pelotaEntra){
+          if(!self.pelotaEntra){
 
-              self.NoAssertPoint(300,triesA);
+              self.NoAssertPoint(enemyPointY,triesA);
               self.Win(self);
               localStorage["TotalAtajados"] = (parseInt(localStorage["TotalAtajados"]) || 0) + 1;
               localStorage["RachaAtajados"] = (parseInt(localStorage["RachaAtajados"]) || 0) + 1;
@@ -945,7 +850,7 @@ atajar: function(self){
 
           }else{
 
-              self.AssertPoint(300,triesA);
+              self.AssertPoint(enemyPointY,triesA);
               self.Looser(self);
               puntosComputer++;
               localStorage["TotalNoAtajados"] = (parseInt(localStorage["TotalNoAtajados"]) || 0) + 1;
@@ -961,126 +866,84 @@ atajar: function(self){
 
 },
 
-errarTiro: function(self){
-		//reemplazar rango de precisión por id enviado :/
-		if( presicion < rangoDePresicion+25 ||  presicion < -(rangoDePresicion+25) ){
-				switch (self.getResult()) {
-				  case 1:
-				  case 4:
-					  posAux= arco.position.x-10;
-					  posAuxY=  game.rnd.integerInRange(arco.position.y,arco.position.y+ arco.height);
-					break;
 
-				  case 3:
-				  case 6:
-					  posAux= arco.position.x+10 + arco.width;
-					  posAuxY=  game.rnd.integerInRange(arco.position.y,arco.position.y + arco.height);
-					break;
-
-				  case 2:
-				  case 5:
-					  posAux= game.rnd.integerInRange(arco.position.x,arco.position.x + arco.width);
-					  posAuxY=  arco.position.y-10;
-					break;
-
-				};
-		}else if(presicion > rangoDePresicion+30){
-		  posAux = game.rnd.integerInRange(600,800);
-		  posAuxY=-500;
-		}else{
-		  posAux = game.rnd.integerInRange(-800,200);
-		  posAuxY=-500;
-		}
-
-		console.log(" POS AUX: "+posAux+"  POS AUX Y: "+posAuxY);
-		self.seMueveArquero(self);
-		//arrgelar aca
-		var movimientoPelota=self.moverPelota("failUser1");
-
-},
-
-noAtajar: function(self){
-
-     posAux = game.rnd.integerInRange(-800,800);
-
-     self.seMueveArquero(self);
-     var movimientoPelota=self.moverPelota("failComputer0");
-
-     movimientoPelota.onComplete.addOnce(function(){
-
-       tweenTribuna1.resume();
-       tweenTribuna2.resume();
-       self.NoAssertPoint(300,triesA);
-       self.Win(self);
-      
-     });
-
-},
 
 moverPelota: function(coor){
 	var unaCoordenada={x:0,y:0};
 	 var auxTween;
 	 tweenPelota = game.add.tween(pelota);
-	 console.log("entra coor="+coor);
-	if(coor=="failComputer0"||coor=="failComputer1"||coor==0||coor=="0"){
-		var posAux = game.rnd.integerInRange(-800,800);
+	 
+	if(coor==0||coor=="0"){
+		//palo center
+		var posAux = game.rnd.integerInRange(300,600);
 		unaCoordenada={x:posAux, y:-500};
-		 auxTween= tweenPelota.to(unaCoordenada,500, 'Linear', true, 0);
+		auxTween= tweenPelota.to(unaCoordenada,duracionPelota, 'Linear', true, 0);
 	}else
-	if(coor=="failUser0"){
-		var posAux = game.rnd.integerInRange(600,800);
+	if(coor==-1||coor=="-1"){
+		//palo left
+		var posAux = 200;
        unaCoordenada={x:posAux, y:-500};
-	   auxTween= tweenPelota.to(unaCoordenada,500, 'Linear', true, 0);
+	   auxTween= tweenPelota.to(unaCoordenada,duracionPelota, 'Linear', true, 0);
 	}else
-	if(coor=="failUser1"){
-		var posAux = game.rnd.integerInRange(-800,600);
+	if(coor==-2||coor=="-2"){
+		//palo right
+		var posAux = 700;
         unaCoordenada={x:posAux, y:-500};
-		 auxTween= tweenPelota.to(unaCoordenada,500, 'Linear', true, 0);
+		 auxTween= tweenPelota.to(unaCoordenada,duracionPelota, 'Linear', true, 0);
+	}else
+	if(coor==-3||coor=="-3"){
+		//afuera right
+		var posAux = game.rnd.integerInRange(-800,100);
+        unaCoordenada={x:posAux, y:-500};
+		 auxTween= tweenPelota.to(unaCoordenada,duracionPelota, 'Linear', true, 0);
+	}else
+	if(coor==-4||coor=="-4"){
+		//afuera left
+		var posAux = game.rnd.integerInRange(1000,700);
+        unaCoordenada={x:posAux, y:-500};
+		 auxTween= tweenPelota.to(unaCoordenada,duracionPelota, 'Linear', true, 0);
 	} else{
 		switch(coor){
 			case 1: case "1":
-			unaCoordenada=[{x:555,y:470},{x:437,y:291},{x:392,y:226},{x:345,y:153}];
+			unaCoordenada=[{x:pelotaPosition.x,y:pelotaPosition.y},{x:437,y:291},{x:392,y:226},{x:345,y:153}];
 			break;
 			case 2: case "2":
-			unaCoordenada=[ {x:555,y:470},{x:552,y:251},{x:551,y:193},{x:549,y:141}];
+			unaCoordenada=[ {x:pelotaPosition.x,y:pelotaPosition.y},{x:552,y:251},{x:551,y:193},{x:549,y:141}];
 			break;
 			case 3: case "3":
-			unaCoordenada=[{x:555,y:470},{x:756,y:265},{x:755,y:207},{x:752,y:158}];
+			unaCoordenada=[{x:pelotaPosition.x,y:pelotaPosition.y},{x:756,y:265},{x:755,y:207},{x:752,y:158}];
 			break;
 			case 4: case "4":
-			unaCoordenada=[{x:555,y:470},{x:471,y:370},{x:416,y:297},{x:347,y:212}];
+			unaCoordenada=[{x:pelotaPosition.x,y:pelotaPosition.y},{x:471,y:370},{x:416,y:297},{x:347,y:212}];
 			break;
 			case 5: case "5":
-			unaCoordenada=[{x:555,y:470},{x:554,y:387},{x:553,y:311},{x:545,y:208}];
+			unaCoordenada=[{x:pelotaPosition.x,y:pelotaPosition.y},{x:554,y:387},{x:553,y:311},{x:545,y:208}];
 			break;
 			case 6: case "6":
-			unaCoordenada=[{x:555,y:470},{x:555,y:470},{x:741,y:316},{x:767,y:207}];
+			unaCoordenada=[{x:pelotaPosition.x,y:pelotaPosition.y},{x:555,y:470},{x:741,y:316},{x:767,y:207}];
 			break;
 		}
 		auxTween= tweenPelota.to({
 			  x: [unaCoordenada[0].x, unaCoordenada[1].x, unaCoordenada[2].x, unaCoordenada[3].x],
 			  y: [unaCoordenada[0].y, unaCoordenada[1].y, unaCoordenada[2].y, unaCoordenada[3].y],
-		 }, 400,Phaser.Easing.LINEAR, true, 0).interpolation(function(v, k){
+		 }, duracionPelota,Phaser.Easing.LINEAR, true, 0).interpolation(function(v, k){
 			  return Phaser.Math.bezierInterpolation(v, k);
 		 }); 
    
 	}
-	
-	console.log("coordenada");
-	console.log(unaCoordenada);
   
-   console.log("id elegido en mover pelota es "+this.idElegido);
+   
    
    pelota.play("girar");
-   setTimeout(function(){pelota.animations.stop();},1100);
+   setTimeout(function(){pelota.animations.stop();},delayStopPelota);
    return auxTween;
 },
 
 ubicarArquero: function(resultadoServer, self){
 
-    generator = resultadoServer.computer;
+    generator = resultadoServer;
 
-	console.log("COMPUTER ID: " +generator);
+	
 
 	if(generator<=0){
 		self.posArqueroI =game.rnd.integerInRange(0,5);
@@ -1128,12 +991,10 @@ Clicked: function(){
 },
 
 mouseUpPateador:function(){
-	console.log("entra uppppp "+this.pause);
-	 if(!Phaser.Math.isEven(modo)&&!this.pause){
+	
+	if(!Phaser.Math.isEven(modo)&&!this.pause){
 		this.EnviarJugadaServer(this);
-	 }
+	}
 },
-
-
 
 };
