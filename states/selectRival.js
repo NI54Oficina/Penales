@@ -14,7 +14,7 @@ Selectplayer.prototype = {
             // aplicando el background de cada texto
 
               var Boton =game.add.group();
-              Boton.position={x:100,y:this.optionCount*530}
+              Boton.position={x:100,y:this.optionCount*530};
 
               var 	myBitmap = this.game.add.bitmapData(540, 80);
               var  grd=myBitmap.context.createLinearGradient(0,0,0,40);
@@ -32,14 +32,14 @@ Selectplayer.prototype = {
               background.addChild(down);
               background.addChild(up);
 
-              // var testMask=game.add.graphics(0, 0);
-              // testMask.beginFill(0xFFFF0B, 1);
-              // testMask.drawRoundedRect(0, 0,500 ,50,10);
+              // var testMask=game.add.graphics(0,0);
+              // testMask.beginFill(0xFFFF0B, 2);
+              // testMask.drawRoundedRect(0, 0,540,90,10);
               // testMask.endFill();
               //
               // Boton.add(testMask);
               // Boton.mask=testMask;
-               Boton.add(background);
+              Boton.add(background);
 
             // aplicando el background de cada texto
 
@@ -51,6 +51,8 @@ Selectplayer.prototype = {
 
             txt.position.x=Boton.width/2 - txt.width/2;
             Boton.position.x=this.game.width/2 - Boton.width/2;
+
+            this.world.bringToTop(txt);
 
             var onOver = function (target) {
               target.fill = "black";
@@ -240,39 +242,6 @@ Selectplayer.prototype = {
 
   },
 
-
-// moveToRight: function(s){
-//
-//
-//
-//   golden.destroy();
-//
-//
-//   self.getID(s);
-//
-//   var carrousel=[];
-//   var j=i;
-//
-//   while(carrousel.length <= 5) {
-//
-//     if(j<arrayCr.length){
-//
-//       carrousel.push(j);
-//
-//     }else{
-//
-//       j=0;
-//
-//       carrousel.push(j);
-//     }
-//
-//     j--;
-//   }
-//
-//
-//
-//
-// },
   moveToLeft: function(s){
 
 
@@ -337,7 +306,6 @@ console.log(carrousel);
 
 },
 
-
 setTo5: function(target){
   target.visible=true;
 
@@ -356,8 +324,6 @@ setTo5: function(target){
     tweenB.start();
     tweenC.start();
 
-
-
 },
 
 setTo4: function(target){
@@ -375,9 +341,6 @@ setTo4: function(target){
    tweenA.start();
    tweenB.start();
    tweenC.start();
-
-
-
 },
 
 setTo3: function(target){

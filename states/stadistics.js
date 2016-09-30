@@ -110,7 +110,9 @@ Stadistics.prototype = {
       var textTitle = game.add.text(game.world.centerX-150, 50, "ESTADÍSTICAS", titleStyle);
       textTitle.addChild(line);
       puntajeStyle = { font: '15pt CondensedLight', fill: 'yellow'};
-        puntajeStyle2 = { font: '15pt CondensedLight', fill: 'yellow', align:'right'};
+      puntajeStyle2 = { font: '15pt CondensedLight', fill: 'white'};
+      titleStyle2 = { font: '20pt CondensedLight', fill: 'white'};
+
 
       var efiArq =(100/((parseInt(localStorage["TotalAtajados"]) || 0) + (parseInt(localStorage["TotalNoAtajados"]) || 0)))* (parseInt(localStorage["TotalAtajados"]) || 0);
       var efiPat = (100/((parseInt(localStorage["TotalConvertidos"]) || 0) + (parseInt(localStorage["TotalErrados"]) || 0)))*(parseInt(localStorage["TotalConvertidos"]) || 0);
@@ -142,25 +144,32 @@ Stadistics.prototype = {
   {key:"TotalConvertidos",title:"PENALES CONVERTIDOS"},
   {key:"TotalErrados",title:"PENALES ERRADOS"},
 	{key:"TotalNoAtajados",title:"PENALES NO ATAJADOS"},
-	{key:"RachaGanados",title:"RACHA GANADOS"},
+
+  {key:"RachaConvertidos",title:"RACHA ACTUAL DE PENALES PATEADOS"},
+  {key:"RachaErrados",title:"RACHA ACTUAL DE PENALES ERRADOS"},
+  {key:"MejorRachaConvertida",title:"MEJOR RACHA HISTÓRICA DE PENALES PATEADOS"},
+  {key:"PeorRachaErrados",title:"PEOR RACHA HISTÓRICA DE PENALES PATEADOS"},
+
+
+  {key:"RachaAtajados",title:"RACHA ACTUAL DE PENALES ATAJADOS"},
+  {key:"RachaNoAtajados",title:"RACHA ACTUAL DE PENALES NO ATAJADOS"},
+  {key:"MejorRachaAtajados",title:"MEJOR RACHA HISTÓRICA DE PENALES ATAJADOS"},
+  {key:"PeorRachaNoAtajados",title:"PEOR RACHA HISTÓRICA DE PENALES NO ATAJADOS"},
+
+
+
+  {key:"RachaGanados",title:"RACHA GANADOS"},
   {key:"RachaPerdidos",title:"RACHA PERDIDOS"},
-  {key:"RachaAtajados",title:"RACHA ATAJADOS:"},
-  {key:"RachaConvertidos",title:"RACHA CONVERTIDOS"},
-  {key:"RachaErrados",title:"RACHA ERRADOS"},
-  {key:"RachaNoAtajados",title:"RACHA NO ATAJADOS"},
-  {key:"MejorRachaAtajados",title:"MEJOR RACHA ATAJADOS"},
-  {key:"MejorRachaConvertida",title:"MEJOR RACHA CONVERTIDA"},
-  {key:"PeorRachaErrados",title:"PEOR RACHA ERRADOS"},
-  {key:"PeorRachaNoAtajados",title:"PEOR RACHA NO ATAJADOS"},
   {key:"Efectividad",title:"EFECTIVIDAD"},
   {key: efiArq +"%" ,title:"EFICIENCIA COMO ARQUERO"},
   {key: efiPat +"%" ,title:"EFICIENCIA COMO PATEADOR"}
 
 	];
     self.createLayoutStats(self);
-    self.createLayoutStats(self);
-    self.createLayoutStats(self);
-    self.createLayoutStats(self);
+    self.createLayoutStatsVariable('PENALES PATEADOS');
+    self.createLayoutStatsVariable('PENALES ATAJADOS');
+    self.createLayoutStatsVariable('PARTIDOS');
+
 
 
 	game.world.setBounds(0, 0, this.game.width,a.height+group.height+100+leftCorner.height);
@@ -205,15 +214,8 @@ Stadistics.prototype = {
         }catch(e){
 
         }
-
-
-
     };
-
-
-  y+=100;
-
-
+  y+=50;
 
 },
 
@@ -229,5 +231,67 @@ createLine: function(a, b,c){
 },
 
 
+createLayoutStatsVariable: function(text){
+
+  statsBack= this.game.add.bitmapData(700,250);
+
+  grd=statsBack.context.createLinearGradient(0,0,0,this.game.height);
+  grd.addColorStop(0,"black");
+  statsBack.context.fillStyle=grd;
+  statsBack.context.fillRect(0,0,this.game.width,this.game.height);
+  statsBackground=this.game.add.sprite(0,y,statsBack);
+  statsBackground.alpha=.3;
+
+  var difBack= this.game.add.bitmapData(680,30);
+  var  grdd=statsBack.context.createLinearGradient(0,0,0,this.game.height );
+  grdd.addColorStop(0,'#00396e');
+  difBack.context.fillStyle=grdd;
+  difBack.context.fillRect(0,0,this.game.width,this.game.height);
+
+
+
+  x=50;
+
+  group.add(statsBackground);
+
+  var h=game.add.text(x, y+30, text, titleStyle2);
+  h.position.x= group.width/2-h.width/2;
+  group.add(h);
+  y+=90;
+
+
+  difBackground=this.game.add.sprite(10,y+35 ,difBack);
+  difBackground2=this.game.add.sprite(10,y+115 ,difBack);
+  difBackground.alpha=.5;
+  difBackground2.alpha=.5;
+  group.add(difBackground);
+  group.add(difBackground2);
+
+  for(var a=0;a<4;a++){
+
+      try{
+
+
+          var word=game.add.text(x, y, stats[n].title, puntajeStyle2);
+          var number=game.add.text(group.width-70,y,localStorage[stats[n].key], puntajeStyle2);
+
+          group.add(word);
+          group.add(number);
+
+
+          y+=40;
+          n++;
+        //  m+?
+
+      }catch(e){
+
+
+       }
+  };
+y+=50;
+
+},
+
+//#00396e
 
 }

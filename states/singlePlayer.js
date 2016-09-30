@@ -212,14 +212,14 @@ Singleplayer.prototype = {
 
     var difBack= this.game.add.bitmapData(420,30);
     var  grdd=statsBack.context.createLinearGradient(0,0,0,this.game.height );
-    grdd.addColorStop(0,'#1B1464');
+    grdd.addColorStop(0,'#00396e');
     difBack.context.fillStyle=grdd;
     difBack.context.fillRect(0,0,this.game.width,this.game.height);
 
     cuadradoUser.add(statsBackground);
 
     difBackground=this.game.add.sprite(cuadradoUser.width/2.6,120,difBack);
-    difBackground.alpha=.8;
+    difBackground.alpha=.7;
 
 
      //creacion 2
@@ -250,7 +250,7 @@ Singleplayer.prototype = {
       cuadradoUser.add(txt3a);
 
 
-     positionY+=350;
+     positionY+=320;
 
 
 	 return cuadradoUser;
@@ -259,8 +259,8 @@ Singleplayer.prototype = {
  createLine: function(a, b,c){
 
    var graphics = game.add.graphics(0, 00);
-     graphics.beginFill(0x1B1464);
-     graphics.lineStyle(2, 0x1B1464, 1);
+     graphics.beginFill(0x00396e);
+     graphics.lineStyle(2, 0x00396e, 1);
      graphics.moveTo(a,b);
      graphics.lineTo(c, b);
      graphics.endFill();
