@@ -202,14 +202,14 @@ Selectplayer.prototype = {
         golden.alpha=0;
 
 
-      arrayCr=[img1, img2, img3,img4 , img5];
+      arrayCr=[img3, img4, img1,img2 , img5];
 
 
-      self.setTo5(img4);
-      self.setTo4(img3);
+      self.setTo5(img2);
+      self.setTo4(img1);
       self.setTo3(img5);
-      self.setTo2(img2);
-      self.setTo1(img1);
+      self.setTo2(img4);
+      self.setTo1(img3);
 
 
      jugar= this.addMenuOption('JUGAR', function () {
@@ -217,6 +217,8 @@ Selectplayer.prototype = {
         Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
 
       });
+
+      game.world.bringToTop(search);
 
 
   },
@@ -303,6 +305,7 @@ console.log(carrousel);
       muttex=0;
 
       game.world.bringToTop(jugar);
+      game.world.bringToTop(search);
 
 },
 
@@ -318,7 +321,7 @@ setTo5: function(target){
 
   var tweenA= game.add.tween(target).to({x:145, y:225}, 500, 'Linear');
   var tweenB =game.add.tween(target.scale).to( {x:.50, y:.50}, 500, 'Linear');
-  var tweenC =game.add.tween(target).to( {alpha:.5}, 500, 'Linear');
+  var tweenC =game.add.tween(target).to( {alpha:.9}, 500, 'Linear');
 
     tweenA.start();
     tweenB.start();
@@ -336,7 +339,7 @@ setTo4: function(target){
 
    var tweenA= game.add.tween(target).to({x:800, y:225}, 500, 'Linear');
    var tweenB =game.add.tween(target.scale).to( {x:.50, y:.50}, 500, 'Linear');
-   var tweenC =game.add.tween(target).to( {alpha:.5}, 500, 'Linear');
+   var tweenC =game.add.tween(target).to( {alpha:.9}, 500, 'Linear');
 
    tweenA.start();
    tweenB.start();
@@ -353,7 +356,7 @@ setTo3: function(target){
 
   var tweenA= game.add.tween(target).to({x:255, y:210}, 500, 'Linear');
   var tweenB =game.add.tween(target.scale).to( {x:.6, y:.6}, 500, 'Linear');
-  var tweenC =game.add.tween(target).to( {alpha:.7}, 500, 'Linear');
+  var tweenC =game.add.tween(target).to( {alpha:1}, 500, 'Linear');
 
   tweenA.start();
   tweenB.start();
@@ -373,7 +376,7 @@ target.visible=true;
 
   var tweenA= game.add.tween(target).to({x:650, y:210}, 500, 'Linear');
   var tweenB =game.add.tween(target.scale).to( {x:.6, y:.6}, 500, 'Linear');
-  var tweenC =game.add.tween(target).to( {alpha:.7}, 500, 'Linear');
+  var tweenC =game.add.tween(target).to( {alpha:1}, 500, 'Linear');
 
   tweenA.start();
   tweenB.start();

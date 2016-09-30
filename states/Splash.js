@@ -59,6 +59,11 @@ var Splash = function () {};
     game.load.image('line', 'assets/images/titulo_linea.png');
     game.load.image('player', 'assets/images/bt_anon.png');
 
+    game.load.image('musica-on', 'assets/images/musica-on.png');
+    game.load.image('musica-off', 'assets/images/musica-off.png');
+    game.load.image('sonido-on', 'assets/images/sonido-on.png');
+    game.load.image('sonido-off', 'assets/images/sonido-off.png');
+
 
 
   },
