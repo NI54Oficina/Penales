@@ -267,7 +267,7 @@ function CalculateTiro(){
 	var errar=randomBetween(1,oponente['efectividadP']);
 	
 	if(errar==1){
-		return -1;
+		return randomBetween(0,-4);
 	}
 	if(!enAlargue){
 		var a = getMaso();

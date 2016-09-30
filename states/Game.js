@@ -1022,7 +1022,7 @@ moverPelota: function(coor){
 			  case 1:
 			  tweenSombra.to({
 				  x: [0, -30, -50, -50],
-				  y: [20, 30, 60, 140],
+				  y: [20, 30, 80, 200],
 			 }, duracionPelota,Phaser.Easing.LINEAR, true, 0).interpolation(function(v, k){
 				  return Phaser.Math.bezierInterpolation(v, k);
 			 }); 
@@ -1030,7 +1030,7 @@ moverPelota: function(coor){
 			 case 3:
 			tweenSombra.to({
 				  x: [0, -30, -50, -50],
-				  y: [20, 30, 60, 130],
+				  y: [20, 30, 80, 170],
 			 }, duracionPelota,Phaser.Easing.LINEAR, true, 0).interpolation(function(v, k){
 				  return Phaser.Math.bezierInterpolation(v, k);
 			 }); 
@@ -1038,7 +1038,7 @@ moverPelota: function(coor){
 		  case 2:
 			tweenSombra.to({
 				  x: [0, -30, -50, -50],
-				  y: [20, 30, 60, 150],
+				  y: [20, 30, 80, 190],
 			 }, duracionPelota,Phaser.Easing.LINEAR, true, 0).interpolation(function(v, k){
 				  return Phaser.Math.bezierInterpolation(v, k);
 			 }); 
@@ -1046,7 +1046,7 @@ moverPelota: function(coor){
 		 case 4: case 5: case 6:
 		 tweenSombra.to({
 				  x: [0, -10, -20, -30],
-				  y: [20, 30, 40, 80],
+				  y: [20, 30, 50, 100],
 			 }, duracionPelota,Phaser.Easing.LINEAR, true, 0).interpolation(function(v, k){
 				  return Phaser.Math.bezierInterpolation(v, k);
 			 }); 
