@@ -90,7 +90,7 @@ var perfiles;
 
 			partida["oponente"]=oponente;
 
-			partida["tiempomaximo"]= 5;
+			partida["tiempomaximo"]= 10;
 
 			if(mod==1){
 				partida["camiseta"]= "local";
