@@ -88,9 +88,7 @@ Singleplayer.prototype = {
         this.game.add.sprite(0,0,gameBack).fixedToCamera=true;;
 
         game.stage.disableVisibilityChange = true;
-        curva=game.add.sprite(0,0, 'curva');
-        curva.position={x:this.game.width/2-curva.width/2, y:this.game.height/2};
-		curva.fixedToCamera=true;
+
         dots = game.add.tileSprite(0, 0, this.game.width,this.game.height,'puntitos');
         dots.alpha=0.3;
         //fondo

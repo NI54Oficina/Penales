@@ -81,6 +81,11 @@ GameMenu.prototype = {
       game.state.start("Stadistics");
     });
 
+    // this.addMenuOption('GAMEOVER', function () {
+    //   game.state.start("GameOver");
+    // });
+
+
 
     //Creacion variables en localStorage
 
