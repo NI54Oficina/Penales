@@ -106,22 +106,22 @@ Selectplayer.prototype = {
       curva.position={x:this.game.width/2-curva.width/2, y:this.game.height/2};
       dots = game.add.tileSprite(0, 0, this.game.width,this.game.height,'puntitos');
       dots.alpha=0.3;
+      dots.fixedToCamera=true;
+
       //fondo
 
 
 
-      game.add.sprite(0, 0, 'left-corner');
+      leftCorner=game.add.sprite(0, 0, 'left-corner');
+      leftCorner.scale.setTo(.75,0.75);
       a= game.add.sprite(this.game.width, 0, 'right-corner');
-      a.scale.x = -1;
+      a.scale.setTo(-.75,0.75);
 
 
-      volver= game.add.sprite(50, 50, 'volver');
+      volver= game.add.sprite(40, 30, 'volver');
       volver.inputEnabled = true;
       volver.events.onInputDown.add(this.GoBack,volver);
 
-      menu= game.add.sprite(this.game.width-100, 50, 'menu');
-      menu.inputEnabled = true;
-      menu.events.onInputDown.add(this.GoBack,menu);
 
       titulo= game.add.text(0,50, 'SELECCIONAR RIVAL', { font: " 40px BitterBold", fill: "white", align:'center' });
       titulo.position.x= this.game.width/2- titulo.width/2;

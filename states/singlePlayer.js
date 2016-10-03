@@ -91,26 +91,8 @@ Singleplayer.prototype = {
 
         dots = game.add.tileSprite(0, 0, this.game.width,this.game.height,'puntitos');
         dots.alpha=0.3;
-        //fondo
-        //esquinas
-        var leftCorner= game.add.sprite(0, 0, 'left-corner');
-		leftCorner.fixedToCamera=true;
-        a= game.add.sprite(this.game.width, 0, 'right-corner');
-        a.scale.x = -1;
-		a.fixedToCamera=true;
+        dots.fixedToCamera=true;
 
-
-        volver= game.add.sprite(50, 50, 'volver');
-        volver.inputEnabled = true;
-        volver.events.onInputDown.add(this.GoBack,volver);
-		volver.fixedToCamera=true;
-
-        menu= game.add.sprite(this.game.width-100, 50, 'menu');
-        menu.inputEnabled = true;
-        menu.events.onInputDown.add(this.Menu,menu);
-		menu.fixedToCamera=true;
-
-        //esquina
 
         //fondo de participantes
 
@@ -148,6 +130,7 @@ Singleplayer.prototype = {
 
         var textTitle = game.add.text(game.world.centerX-200, 50, "SELECCIONAR RIVAL", titleStyle);
         textTitle.addChild(line);
+        textTitle.fixedToCamera=true;
 
         //titulo
 
@@ -157,7 +140,30 @@ Singleplayer.prototype = {
         search.visible=false;
 
 
+
+
+
+    //fondo
+    //esquinas
+
+    var leftCorner= game.add.sprite(0, 0, 'left-corner');
+    leftCorner.scale.setTo(.75,0.75);
+    leftCorner.fixedToCamera=true;
+    a= game.add.sprite(this.game.width, 0, 'right-corner');
+    a.scale.setTo(-.75,0.75);
+    a.fixedToCamera=true;
+
+
+    volver= game.add.sprite(40, 30, 'volver');
+    volver.inputEnabled = true;
+    volver.events.onInputDown.add(this.GoBack,volver);
+    volver.fixedToCamera=true;
+
+
+    //esquina
 		game.world.setBounds(0, 0, this.game.width,oponentes.height+100+leftCorner.height);
+
+
     },
 
     listenerSearch: function (msg){

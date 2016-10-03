@@ -62,117 +62,117 @@ Stadistics.prototype = {
 		 game.kineticScrolling.start();
 
 
-      //fondo
-      var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
-      var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
-      grd.addColorStop(0,"black");
-      grd.addColorStop(0.15,"#1a1750");
-      grd.addColorStop(0.3,"#1a1750");
-      grd.addColorStop(1,"#009ee1");
-      gameBack.context.fillStyle=grd;
-      gameBack.context.fillRect(0,0,this.game.width,this.game.height);
 
-      this.game.add.sprite(0,0,gameBack).fixedToCamera=true;
-      dots = game.add.tileSprite(0, 0, this.game.width,this.game.height,'puntitos');
-      dots.alpha=0.3;
+     //fondo
+     var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
+     var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
+     grd.addColorStop(0,"black");
+     grd.addColorStop(0.15,"#1a1750");
+     grd.addColorStop(0.3,"#1a1750");
+     grd.addColorStop(1,"#009ee1");
+     gameBack.context.fillStyle=grd;
+     gameBack.context.fillRect(0,0,this.game.width,this.game.height);
 
-      game.stage.disableVisibilityChange = true;
+     this.game.add.sprite(0,0,gameBack).fixedToCamera=true;
+     dots = game.add.tileSprite(0, 0, this.game.width,this.game.height,'puntitos');
+     dots.alpha=0.3;
+     dots.fixedToCamera=true;
 
-      //fondo
+     game.stage.disableVisibilityChange = true;
 
-      //esquinas
-
-      var leftCorner=game.add.sprite(0, 0, 'left-corner');
-	  leftCorner.fixedToCamera=true;
-      a= game.add.sprite(this.game.width, 0, 'right-corner');
-	  a.fixedToCamera=true;
-      a.scale.x = -1;
+     //fondo
 
 
-      volver= game.add.sprite(50, 50, 'volver');
-      volver.inputEnabled = true;
-	  volver.fixedToCamera=true;
-      volver.events.onInputDown.add(this.GoBack,volver);
-
-      menu= game.add.sprite(this.game.width-100, 50, 'menu');
-	  menu.fixedToCamera=true;
-      menu.inputEnabled = true;
-      menu.events.onInputDown.add(this.GoBack,menu);
-
-      //esquina
-
-
-      //fondo de los puintajes y prueba scrolling
-
-      var titleStyle = { font: '40px BitterBold', fill: 'white', align: 'center'};
-      var line = this.game.make.sprite(-200,45, 'line');
-      //line.scale.setTo(0.8,0.8);
-      var textTitle = game.add.text(game.world.centerX-150, 50, "ESTADÍSTICAS", titleStyle);
-      textTitle.addChild(line);
-      puntajeStyle = { font: '15pt CondensedLight', fill: 'yellow'};
-      puntajeStyle2 = { font: '15pt CondensedLight', fill: 'white'};
-      titleStyle2 = { font: '20pt CondensedLight', fill: 'white'};
-
-
-      var efiArq =(100/((parseInt(localStorage["TotalAtajados"]) || 0) + (parseInt(localStorage["TotalNoAtajados"]) || 0)))* (parseInt(localStorage["TotalAtajados"]) || 0);
-      var efiPat = (100/((parseInt(localStorage["TotalConvertidos"]) || 0) + (parseInt(localStorage["TotalErrados"]) || 0)))*(parseInt(localStorage["TotalConvertidos"]) || 0);
-      var efectividad = (parseInt(localStorage["PartidosGanados"]) || 0) /(parseInt(localStorage["PartidosPerdidos"]) || 0);
-
-      if (isNaN(efiArq))efiArq=0;
-      if (isNaN(efiPat))efiPat=0;
-      if (isNaN(efectividad))efectividad=0;
-      if (self.isFloat(efiArq,self))efiArq= Number(efiArq).toFixed(1);
-      if (self.isFloat(efiPat,self))efiPat= Number(efiPat).toFixed(1);
-      if (self.isFloat(efectividad,self))efectividad= efectividad.toFixed(1);
-
-      y=20;
-      n=0;
-      positionY=0;
-
-      group= game.add.group();
-
-      group.position.x=200;
-      group.position.y=200;
+               //prueba
 
 
 
+    //fondo de los puintajes y prueba scrolling
 
-	stats=[
-  {key:"PartidosGanados",title:"PARTIDOS GANADOS"},
-  {key:"PartidosPerdidos",title:"PARTIDOS PERDIDOS"},
-  {key:"TotalAtajados",title:"PENALES ATAJADOS"},
-  {key:"TotalConvertidos",title:"PENALES CONVERTIDOS"},
-  {key:"TotalErrados",title:"PENALES ERRADOS"},
-	{key:"TotalNoAtajados",title:"PENALES NO ATAJADOS"},
-
-  {key:"RachaConvertidos",title:"RACHA ACTUAL DE PENALES PATEADOS"},
-  {key:"RachaErrados",title:"RACHA ACTUAL DE PENALES ERRADOS"},
-  {key:"MejorRachaConvertida",title:"MEJOR RACHA HISTÓRICA DE PENALES PATEADOS"},
-  {key:"PeorRachaErrados",title:"PEOR RACHA HISTÓRICA DE PENALES PATEADOS"},
+    var titleStyle = { font: '40px BitterBold', fill: 'white', align: 'center'};
+    var line = this.game.make.sprite(-200,45, 'line');
+    //line.scale.setTo(0.8,0.8);
+    var textTitle = game.add.text(game.world.centerX-150, 50, "ESTADÍSTICAS", titleStyle);
+    textTitle.addChild(line);
+    textTitle.fixedToCamera=true;
+    puntajeStyle = { font: '15pt CondensedLight', fill: 'yellow'};
+    puntajeStyle2 = { font: '15pt CondensedLight', fill: 'white'};
+    titleStyle2 = { font: '20pt CondensedLight', fill: 'white'};
 
 
-  {key:"RachaAtajados",title:"RACHA ACTUAL DE PENALES ATAJADOS"},
-  {key:"RachaNoAtajados",title:"RACHA ACTUAL DE PENALES NO ATAJADOS"},
-  {key:"MejorRachaAtajados",title:"MEJOR RACHA HISTÓRICA DE PENALES ATAJADOS"},
-  {key:"PeorRachaNoAtajados",title:"PEOR RACHA HISTÓRICA DE PENALES NO ATAJADOS"},
+    var efiArq =(100/((parseInt(localStorage["TotalAtajados"]) || 0) + (parseInt(localStorage["TotalNoAtajados"]) || 0)))* (parseInt(localStorage["TotalAtajados"]) || 0);
+    var efiPat = (100/((parseInt(localStorage["TotalConvertidos"]) || 0) + (parseInt(localStorage["TotalErrados"]) || 0)))*(parseInt(localStorage["TotalConvertidos"]) || 0);
+    var efectividad = (parseInt(localStorage["PartidosGanados"]) || 0) /(parseInt(localStorage["PartidosPerdidos"]) || 0);
+
+    if (isNaN(efiArq))efiArq=0;
+    if (isNaN(efiPat))efiPat=0;
+    if (isNaN(efectividad))efectividad=0;
+    if (self.isFloat(efiArq,self))efiArq= Number(efiArq).toFixed(1);
+    if (self.isFloat(efiPat,self))efiPat= Number(efiPat).toFixed(1);
+    if (self.isFloat(efectividad,self))efectividad= efectividad.toFixed(1);
+
+    y=20;
+    n=0;
+    positionY=0;
+
+    group= game.add.group();
+
+    group.position.x=200;
+    group.position.y=200;
+
+
+  	stats=[
+    {key:"PartidosGanados",title:"PARTIDOS GANADOS"},
+    {key:"PartidosPerdidos",title:"PARTIDOS PERDIDOS"},
+    {key:"TotalAtajados",title:"PENALES ATAJADOS"},
+    {key:"TotalConvertidos",title:"PENALES CONVERTIDOS"},
+    {key:"TotalErrados",title:"PENALES ERRADOS"},
+  	{key:"TotalNoAtajados",title:"PENALES NO ATAJADOS"},
+
+    {key:"RachaConvertidos",title:"RACHA ACTUAL DE PENALES PATEADOS"},
+    {key:"RachaErrados",title:"RACHA ACTUAL DE PENALES ERRADOS"},
+    {key:"MejorRachaConvertida",title:"MEJOR RACHA HISTÓRICA DE PENALES PATEADOS"},
+    {key:"PeorRachaErrados",title:"PEOR RACHA HISTÓRICA DE PENALES PATEADOS"},
+
+
+    {key:"RachaAtajados",title:"RACHA ACTUAL DE PENALES ATAJADOS"},
+    {key:"RachaNoAtajados",title:"RACHA ACTUAL DE PENALES NO ATAJADOS"},
+    {key:"MejorRachaAtajados",title:"MEJOR RACHA HISTÓRICA DE PENALES ATAJADOS"},
+    {key:"PeorRachaNoAtajados",title:"PEOR RACHA HISTÓRICA DE PENALES NO ATAJADOS"},
 
 
 
-  {key:"RachaGanados",title:"RACHA GANADOS"},
-  {key:"RachaPerdidos",title:"RACHA PERDIDOS"},
-  {key:"Efectividad",title:"EFECTIVIDAD"},
-  {key: efiArq +"%" ,title:"EFICIENCIA COMO ARQUERO"},
-  {key: efiPat +"%" ,title:"EFICIENCIA COMO PATEADOR"}
+    {key:"RachaGanados",title:"RACHA GANADOS"},
+    {key:"RachaPerdidos",title:"RACHA PERDIDOS"},
+    {key:"Efectividad",title:"EFECTIVIDAD"},
+    {key: efiArq +"%" ,title:"EFICIENCIA COMO ARQUERO"},
+    {key: efiPat +"%" ,title:"EFICIENCIA COMO PATEADOR"}
 
-	];
+  	];
     self.createLayoutStats(self);
     self.createLayoutStatsVariable('PENALES PATEADOS');
     self.createLayoutStatsVariable('PENALES ATAJADOS');
     self.createLayoutStatsVariable('PARTIDOS');
 
+    //esquinas
+
+    var leftCorner=game.add.sprite(0, 0, 'left-corner');
+	  leftCorner.fixedToCamera=true;
+    leftCorner.scale.setTo(.75,0.75)
+    a= game.add.sprite(this.game.width, 0, 'right-corner');
+	  a.fixedToCamera=true;
+    a.scale.setTo(-.75,0.75)
 
 
-	game.world.setBounds(0, 0, this.game.width,a.height+group.height+100+leftCorner.height);
+    volver= game.add.sprite(40, 30, 'volver');
+    volver.inputEnabled = true;
+	  volver.fixedToCamera=true;
+    volver.events.onInputDown.add(this.GoBack,volver);
+
+    //esquina
+
+	  game.world.setBounds(0, 0, this.game.width,a.height+group.height+100+leftCorner.height);
+
   },
 
   isFloat: function(n,target) {
@@ -222,12 +222,12 @@ Stadistics.prototype = {
 createLine: function(a, b,c){
 
   var graphics = game.add.graphics(0, 00);
-    graphics.beginFill(0x797979);
-    graphics.lineStyle(2, 0x797979, 1);
-    graphics.moveTo(a,b);
-    graphics.lineTo(c, b);
-    graphics.endFill();
-    return graphics;
+  graphics.beginFill(0x797979);
+  graphics.lineStyle(2, 0x797979, 1);
+  graphics.moveTo(a,b);
+  graphics.lineTo(c, b);
+  graphics.endFill();
+  return graphics;
 },
 
 
@@ -292,6 +292,5 @@ y+=50;
 
 },
 
-//#00396e
 
 }

@@ -35,7 +35,7 @@ GameMenu.prototype = {
 
 
     //fondo
-  //  game.stage.disableVisibilityChange = true;
+    //  game.stage.disableVisibilityChange = true;
 
     game.add.sprite(0, 0, 'menu-bg');
 
@@ -50,7 +50,6 @@ GameMenu.prototype = {
     // this.addMenuOption('Multiplayer', function () {
     //   game.state.start("Multiplayer");
     // });
-
 
     this.addMenuOption("CLÁSICO(o)", function () {
 
@@ -71,7 +70,6 @@ GameMenu.prototype = {
     // this.addMenuOption('GAMEOVER', function () {
     //   game.state.start("GameOver");
     // });
-
 
 
     //Creacion variables en localStorage
