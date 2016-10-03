@@ -34,14 +34,7 @@ Selectplayer.prototype = {
 
 
                Boton.add(background);
-			  
-			  /*var testMask=game.add.graphics(0, 0);
-	testMask.beginFill(0xFFFF0B, 0.5);
-	testMask.drawRoundedRect(0, 0, 200, 200,10);
-	testMask.endFill();
-	Boton.add(testMask);
-	Boton.mask=  testMask;*/
- 	
+
             // aplicando el background de cada texto
 
             var txt = game.add.text(0, 10 , text, optionStyle);
@@ -53,7 +46,7 @@ Selectplayer.prototype = {
             txt.position.x=Boton.width/2 - txt.width/2;
 
             Boton.position.x=game.width/2 - Boton.width/2;
-	
+
             this.world.bringToTop(txt);
 
             var onOver = function (target) {
@@ -80,8 +73,8 @@ Selectplayer.prototype = {
         }, this);
 
             this.optionCount ++;
-			
-			
+
+
                var testMask=game.add.graphics(0, 0);
                testMask.beginFill(0xFFFF0B, 0.5);
                testMask.drawRoundedRect(0, 0,background.width ,70,10);
@@ -90,7 +83,7 @@ Selectplayer.prototype = {
                Boton.add(testMask);
               background.mask=testMask;
 			console.log(Boton);
-			
+
             return Boton;
 
 

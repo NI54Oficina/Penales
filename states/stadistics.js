@@ -144,7 +144,7 @@ Stadistics.prototype = {
     self.createLayoutStatsVariable('PARTIDOS');
 
 
-     //fondo de prueba
+     //fondo del header
 
      var 	bitmap = this.game.add.bitmapData(this.game.width,200);
      var  bit=gameBack.context.createLinearGradient(0,0,0,200);
@@ -161,7 +161,7 @@ Stadistics.prototype = {
      headerDot.alpha=1;
      header.addChild(headerDot);
 
-     //fondo de prueba
+     //fondo del header
 
     //title
 
@@ -193,7 +193,6 @@ Stadistics.prototype = {
     volver.events.onInputDown.add(this.GoBack,volver);
 
     group.position.x= this.game.width/2-group.width/2;
-
 
     //esquina
 
@@ -241,7 +240,7 @@ Stadistics.prototype = {
 
         }
     };
-  y+=50;
+  y+=35;
 
 },
 
@@ -314,7 +313,7 @@ createLayoutStatsVariable: function(text){
 
        }
   };
-y+=50;
+y+=15;
 
 },
 

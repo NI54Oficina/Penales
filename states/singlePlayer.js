@@ -6,60 +6,6 @@ Singleplayer.prototype = {
     this.optionCount = 1;
   },
 
-  addMenuOption: function(text, callback) {
-
-          var optionStyle = { font: '40pt RobotoBold', align: 'center',fill:'#1b1464' ,stroke: '#1b1464'};
-
-        // aplicando el background de cada texto
-
-          var 	myBitmap = this.game.add.bitmapData(540, 80);
-          var  grd=myBitmap.context.createLinearGradient(0,0,0,40);
-          grd.addColorStop(0,"#fbe43e");
-          grd.addColorStop(0.9,"#fbe43e");
-          grd.addColorStop(1,"#cea428");
-          myBitmap.context.fillStyle=grd;
-          myBitmap.context.fillRect(0,0,this.game.height,this.game.width);
-          var background = this.game.add.sprite(100,this.optionCount*530-10, myBitmap);
-
-        // aplicando el background de cada texto
-
-        var txt = game.add.text(100, 0 , text, optionStyle);
-        txt.position.y= background.position.y+ background.height/2 - txt.height/2;
-
-        down= this.game.make.sprite(-20,55, 'brillodown');
-        up= this.game.make.sprite(200,-15, 'brilloup');
-        down.scale.setTo(0.5,0.5);
-        up.scale.setTo(0.5,0.5);
-        background.addChild(down);
-        background.addChild(up);
-
-
-
-        txt.position.x=this.game.width/2 - txt.width/2;
-        background.position.x=this.game.width/2 - background.width/2;
-
-        var onOver = function (target) {
-          target.fill = "black";
-          target.stroke = "rgba(200,200,200,0.5)";
-          txt.useHandCursor = true;
-        };
-        var onOut = function (target) {
-          target.fill = "#1b1464";
-          target.stroke = "#1b1464";
-          txt.useHandCursor = false;
-        };
-
-        txt.inputEnabled = true;
-        txt.events.onInputUp.add(callback, this);
-        txt.events.onInputOver.add(onOver, this);
-        txt.events.onInputOut.add(onOut, this);
-
-        this.optionCount ++;
-
-
-
-  },
-
 
     create: function(){
         self = this;
@@ -76,56 +22,56 @@ Singleplayer.prototype = {
 		});
 
 		 game.kineticScrolling.start();
-        //fondo
-        var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
-        var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
-        grd.addColorStop(0,"black");
-        grd.addColorStop(0.15,"#1a1750");
-        grd.addColorStop(0.3,"#1a1750");
-        grd.addColorStop(1,"#009ee1");
-        gameBack.context.fillStyle=grd;
-        gameBack.context.fillRect(0,0,this.game.width,this.game.height);
-        this.game.add.sprite(0,0,gameBack).fixedToCamera=true;;
+      //fondo
+      var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
+      var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
+      grd.addColorStop(0,"black");
+      grd.addColorStop(0.15,"#1a1750");
+      grd.addColorStop(0.3,"#1a1750");
+      grd.addColorStop(1,"#009ee1");
+      gameBack.context.fillStyle=grd;
+      gameBack.context.fillRect(0,0,this.game.width,this.game.height);
+      this.game.add.sprite(0,0,gameBack).fixedToCamera=true;;
 
-        game.stage.disableVisibilityChange = true;
+      game.stage.disableVisibilityChange = true;
 
-        dots = game.add.tileSprite(0, 0, this.game.width,this.game.height,'puntitos');
-        dots.alpha=0.3;
-        dots.fixedToCamera=true;
-
-
-        //fondo de participantes
-
-        y=20;
-        n=0;
-        positionY=0;
-
-		var oponentes= game.add.group();
-    positionY=200;
-    positionX=200;
+      dots = game.add.tileSprite(0, 0, this.game.width,this.game.height,'puntitos');
+      dots.alpha=0.3;
+      dots.fixedToCamera=true;
 
 
+      //fondo de participantes
 
-        puntajeStyle = { font: '18pt CondensedRegular', fill: 'white'};
-        nombreStyle = { font: '20pt CondensedBold', fill: 'white'};
-        usuario={
-          nombre:'FRANCISCO SERANTE',
-          racha:  51,
-          ganados:5,
-          perdidos: 10
+      y=20;
+      n=0;
+      positionY=0;
 
-        };
-
-
-    		for(var a=0;a<4;a++){
-    			oponentes.add( self.createDataForPlayer(self, usuario));
-    		}
-
-        //fondo de participantes
+  		var oponentes= game.add.group();
+      positionY=200;
+      positionX=200;
 
 
 
-      //fondo de prueba
+      puntajeStyle = { font: '18pt CondensedRegular', fill: 'white'};
+      nombreStyle = { font: '20pt CondensedBold', fill: 'white'};
+      usuario={
+        nombre:'FRANCISCO SERANTE',
+        racha:  51,
+        ganados:5,
+        perdidos: 10
+
+      };
+
+
+  		for(var a=0;a<4;a++){
+  			oponentes.add( self.createDataForPlayer(self, usuario));
+  		}
+
+      //fondo de participantes
+
+
+
+      //fondo del header
 
       var 	bitmap = this.game.add.bitmapData(this.game.width,200);
       var  bit=gameBack.context.createLinearGradient(0,0,0,200);
@@ -142,7 +88,7 @@ Singleplayer.prototype = {
       headerDot.alpha=1;
       header.addChild(headerDot);
 
-      //fondo de prueba
+      //fondo del header
 
      //title
 
@@ -177,6 +123,7 @@ Singleplayer.prototype = {
 
     search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
     search.visible=false;
+
 
 
     //esquina
@@ -230,7 +177,7 @@ Singleplayer.prototype = {
      statsBackground=this.game.add.sprite(0,0,statsBack);
      statsBackground.alpha=.3;
 
-     //termina creacino de background
+     //termina creacion de background
 
      //creacion 2
 
@@ -247,7 +194,6 @@ Singleplayer.prototype = {
 
 
      //creacion 2
-
 
      cuadradoUser.add(difBackground);
 
@@ -274,7 +220,7 @@ Singleplayer.prototype = {
       cuadradoUser.add(txt3a);
 
 
-     positionY+=320;
+     positionY+=215;
 
 
 	 return cuadradoUser;
