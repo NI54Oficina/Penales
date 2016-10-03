@@ -106,7 +106,7 @@ Stadistics.prototype = {
 
     group= game.add.group();
 
-    group.position.x=200;
+
     group.position.y=200;
 
 
@@ -144,38 +144,38 @@ Stadistics.prototype = {
     self.createLayoutStatsVariable('PARTIDOS');
 
 
-         //fondo de prueba
+     //fondo de prueba
 
-         var 	prueba = this.game.add.bitmapData(this.game.width,200);
-         var  grd2=gameBack.context.createLinearGradient(0,0,0,200);
-         grd2.addColorStop(0,"rgba(17,16,20,1)");
-         grd2.addColorStop(0.40,"rgba(26,23,80,1)");
-         grd2.addColorStop(0.60,"rgba(26,23,80,1)");
-         grd2.addColorStop(0.75,"rgba(26,23,80,.8)");
-         grd2.addColorStop(0.90,"rgba(26,23,80,.3)");
-         //grd2.addColorStop(1,"black");
-         grd2.addColorStop(1,"rgba(26,23,80, 0)");
-         prueba.context.fillStyle=grd2;
-         prueba.context.fillRect(0,0,this.game.width,this.game.height);
-         pruebaFondo=this.game.add.sprite(0,0,prueba);
-         pruebaFondo2 = game.add.tileSprite(0, 0,this.game.width,200,'puntitos');
-         pruebaFondo2.alpha=1;
-         pruebaFondo.addChild(pruebaFondo2);
+     var 	bitmap = this.game.add.bitmapData(this.game.width,200);
+     var  bit=gameBack.context.createLinearGradient(0,0,0,200);
+     bit.addColorStop(0,"rgba(17,16,20,1)");
+     bit.addColorStop(0.40,"rgba(26,23,80,1)");
+     bit.addColorStop(0.60,"rgba(26,23,80,1)");
+     bit.addColorStop(0.75,"rgba(26,23,80,.8)");
+     bit.addColorStop(0.90,"rgba(26,23,80,.3)");
+     bit.addColorStop(1,"rgba(26,23,80, 0)");
+     bitmap.context.fillStyle=bit;
+     bitmap.context.fillRect(0,0,this.game.width,this.game.height);
+     header=this.game.add.sprite(0,0,bitmap);
+     headerDot = game.add.tileSprite(0, 0,this.game.width,200,'puntitos');
+     headerDot.alpha=1;
+     header.addChild(headerDot);
 
-         //fondo de prueba
+     //fondo de prueba
 
-        //title
+    //title
 
-        var titleStyle = { font: '40px BitterBold', fill: 'white', align: 'center'};
-        var line = this.game.make.sprite(-200,45, 'line');
-        //line.scale.setTo(0.8,0.8);
-        var textTitle = game.add.text(game.world.centerX-200, 50, "ESTADÍSTICAS", titleStyle);
+    var titleStyle = { font: '40px BitterBold', fill: 'white', align: 'center'};
+    var line = this.game.make.sprite(-220,45, 'line');
+    //line.scale.setTo(0.8,0.8);
+    var textTitle = game.add.text(0, 50, "ESTADÍSTICAS", titleStyle);
+    textTitle.position.x=this.game.width/2- textTitle.width/2;
 
-        pruebaFondo.addChild(textTitle);
+    header.addChild(textTitle);
 
-        textTitle.addChild(line);
-        pruebaFondo.fixedToCamera=true;
-        //title
+    textTitle.addChild(line);
+    header.fixedToCamera=true;
+    //title
 
     //esquinas
 
@@ -192,7 +192,7 @@ Stadistics.prototype = {
     volver.fixedToCamera=true;
     volver.events.onInputDown.add(this.GoBack,volver);
 
-
+    group.position.x= this.game.width/2-group.width/2;
 
 
     //esquina
