@@ -35,26 +35,13 @@ GameMenu.prototype = {
 
 
     //fondo
-  //  game.stage.disableVisibilityChange = true;
+    //  game.stage.disableVisibilityChange = true;
 
     game.add.sprite(0, 0, 'menu-bg');
 
     var graphics = game.add.graphics(100, 100);
 
 
-    // var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
-    // var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
-    // grd.addColorStop(0,"#1a1750");
-    // grd.addColorStop(0.3,"#1a1750");
-    // grd.addColorStop(1,"#009ee1");
-    // gameBack.context.fillStyle=grd;
-    // gameBack.context.fillRect(0,0,this.game.width,this.game.height);
-    // this.game.add.sprite(0,0,gameBack);
-    //
-    // game.stage.disableVisibilityChange = true;
-    // curva=game.add.sprite(0,0, 'curva');
-    // curva.position={x:this.game.width/2-curva.width/2, y:this.game.height/2};
-    //fondo
 
     game.add.existing(this.titleText);
     search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
@@ -64,8 +51,7 @@ GameMenu.prototype = {
     //   game.state.start("Multiplayer");
     // });
 
-
-    this.addMenuOption("CLÁSICO\n(1 Jugador)", function () {
+    this.addMenuOption("CLÁSICO(o)", function () {
 
       game.state.start("Selectplayer");
 
@@ -73,13 +59,17 @@ GameMenu.prototype = {
     });
 
 
-    this.addMenuOption('DESAFÍO\n(2 Jugadores)', function () {
+    this.addMenuOption('DESAFÍO(o)', function () {
       game.state.start("Multiplayer");
     });
 
     this.addMenuOption('ESTADÍSTICAS', function () {
       game.state.start("Stadistics");
     });
+
+    // this.addMenuOption('GAMEOVER', function () {
+    //   game.state.start("GameOver");
+    // });
 
 
     //Creacion variables en localStorage

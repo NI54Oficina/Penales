@@ -14,7 +14,7 @@ Selectplayer.prototype = {
             // aplicando el background de cada texto
 
               var Boton =game.add.group();
-              Boton.position={x:100,y:this.optionCount*530}
+              Boton.position={x:100,y:this.optionCount*530};
 
               var 	myBitmap = this.game.add.bitmapData(540, 80);
               var  grd=myBitmap.context.createLinearGradient(0,0,0,40);
@@ -31,6 +31,7 @@ Selectplayer.prototype = {
               up.scale.setTo(0.5,0.5);
               Boton.add(down);
               Boton.add(up);
+
 
                Boton.add(background);
 			  
@@ -50,8 +51,11 @@ Selectplayer.prototype = {
 
 
             txt.position.x=Boton.width/2 - txt.width/2;
+
             Boton.position.x=game.width/2 - Boton.width/2;
 	
+            this.world.bringToTop(txt);
+
             var onOver = function (target) {
               target.fill = "black";
               target.stroke = "rgba(200,200,200,0.5)";
@@ -115,22 +119,22 @@ Selectplayer.prototype = {
       curva.position={x:this.game.width/2-curva.width/2, y:this.game.height/2};
       dots = game.add.tileSprite(0, 0, this.game.width,this.game.height,'puntitos');
       dots.alpha=0.3;
+      dots.fixedToCamera=true;
+
       //fondo
 
 
 
-      game.add.sprite(0, 0, 'left-corner');
+      leftCorner=game.add.sprite(0, 0, 'left-corner');
+      leftCorner.scale.setTo(.75,0.75);
       a= game.add.sprite(this.game.width, 0, 'right-corner');
-      a.scale.x = -1;
+      a.scale.setTo(-.75,0.75);
 
 
-      volver= game.add.sprite(50, 50, 'volver');
+      volver= game.add.sprite(40, 30, 'volver');
       volver.inputEnabled = true;
       volver.events.onInputDown.add(this.GoBack,volver);
 
-      menu= game.add.sprite(this.game.width-100, 50, 'menu');
-      menu.inputEnabled = true;
-      menu.events.onInputDown.add(this.GoBack,menu);
 
       titulo= game.add.text(0,50, 'SELECCIONAR RIVAL', { font: " 40px BitterBold", fill: "white", align:'center' });
       titulo.position.x= this.game.width/2- titulo.width/2;
@@ -211,14 +215,14 @@ Selectplayer.prototype = {
         golden.alpha=0;
 
 
-      arrayCr=[img1, img2, img3,img4 , img5];
+      arrayCr=[img3, img4, img1,img2 , img5];
 
 
-      self.setTo5(img4);
-      self.setTo4(img3);
+      self.setTo5(img2);
+      self.setTo4(img1);
       self.setTo3(img5);
-      self.setTo2(img2);
-      self.setTo1(img1);
+      self.setTo2(img4);
+      self.setTo1(img3);
 
 
      jugar= this.addMenuOption('JUGAR', function () {
@@ -226,6 +230,8 @@ Selectplayer.prototype = {
         Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
 
       });
+
+      game.world.bringToTop(search);
 
 
   },
@@ -251,39 +257,6 @@ Selectplayer.prototype = {
 
   },
 
-
-// moveToRight: function(s){
-//
-//
-//
-//   golden.destroy();
-//
-//
-//   self.getID(s);
-//
-//   var carrousel=[];
-//   var j=i;
-//
-//   while(carrousel.length <= 5) {
-//
-//     if(j<arrayCr.length){
-//
-//       carrousel.push(j);
-//
-//     }else{
-//
-//       j=0;
-//
-//       carrousel.push(j);
-//     }
-//
-//     j--;
-//   }
-//
-//
-//
-//
-// },
   moveToLeft: function(s){
 
 
@@ -345,9 +318,9 @@ console.log(carrousel);
       muttex=0;
 
       game.world.bringToTop(jugar);
+      game.world.bringToTop(search);
 
 },
-
 
 setTo5: function(target){
   target.visible=true;
@@ -361,13 +334,11 @@ setTo5: function(target){
 
   var tweenA= game.add.tween(target).to({x:145, y:225}, 500, 'Linear');
   var tweenB =game.add.tween(target.scale).to( {x:.50, y:.50}, 500, 'Linear');
-  var tweenC =game.add.tween(target).to( {alpha:.5}, 500, 'Linear');
+  var tweenC =game.add.tween(target).to( {alpha:.9}, 500, 'Linear');
 
     tweenA.start();
     tweenB.start();
     tweenC.start();
-
-
 
 },
 
@@ -381,14 +352,11 @@ setTo4: function(target){
 
    var tweenA= game.add.tween(target).to({x:800, y:225}, 500, 'Linear');
    var tweenB =game.add.tween(target.scale).to( {x:.50, y:.50}, 500, 'Linear');
-   var tweenC =game.add.tween(target).to( {alpha:.5}, 500, 'Linear');
+   var tweenC =game.add.tween(target).to( {alpha:.9}, 500, 'Linear');
 
    tweenA.start();
    tweenB.start();
    tweenC.start();
-
-
-
 },
 
 setTo3: function(target){
@@ -401,7 +369,7 @@ setTo3: function(target){
 
   var tweenA= game.add.tween(target).to({x:255, y:210}, 500, 'Linear');
   var tweenB =game.add.tween(target.scale).to( {x:.6, y:.6}, 500, 'Linear');
-  var tweenC =game.add.tween(target).to( {alpha:.7}, 500, 'Linear');
+  var tweenC =game.add.tween(target).to( {alpha:1}, 500, 'Linear');
 
   tweenA.start();
   tweenB.start();
@@ -421,7 +389,7 @@ target.visible=true;
 
   var tweenA= game.add.tween(target).to({x:650, y:210}, 500, 'Linear');
   var tweenB =game.add.tween(target.scale).to( {x:.6, y:.6}, 500, 'Linear');
-  var tweenC =game.add.tween(target).to( {alpha:.7}, 500, 'Linear');
+  var tweenC =game.add.tween(target).to( {alpha:1}, 500, 'Linear');
 
   tweenA.start();
   tweenB.start();
