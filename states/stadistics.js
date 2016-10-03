@@ -75,7 +75,7 @@ Stadistics.prototype = {
 
      this.game.add.sprite(0,0,gameBack).fixedToCamera=true;
      dots = game.add.tileSprite(0, 0, this.game.width,this.game.height,'puntitos');
-     dots.alpha=0.3;
+     dots.alpha=.5;
      dots.fixedToCamera=true;
 
      game.stage.disableVisibilityChange = true;
@@ -83,18 +83,7 @@ Stadistics.prototype = {
      //fondo
 
 
-               //prueba
 
-
-
-    //fondo de los puintajes y prueba scrolling
-
-    var titleStyle = { font: '40px BitterBold', fill: 'white', align: 'center'};
-    var line = this.game.make.sprite(-200,45, 'line');
-    //line.scale.setTo(0.8,0.8);
-    var textTitle = game.add.text(game.world.centerX-150, 50, "ESTADÍSTICAS", titleStyle);
-    textTitle.addChild(line);
-    textTitle.fixedToCamera=true;
     puntajeStyle = { font: '15pt CondensedLight', fill: 'yellow'};
     puntajeStyle2 = { font: '15pt CondensedLight', fill: 'white'};
     titleStyle2 = { font: '20pt CondensedLight', fill: 'white'};
@@ -154,20 +143,57 @@ Stadistics.prototype = {
     self.createLayoutStatsVariable('PENALES ATAJADOS');
     self.createLayoutStatsVariable('PARTIDOS');
 
+
+         //fondo de prueba
+
+         var 	prueba = this.game.add.bitmapData(this.game.width,200);
+         var  grd2=gameBack.context.createLinearGradient(0,0,0,200);
+         grd2.addColorStop(0,"rgba(17,16,20,1)");
+         grd2.addColorStop(0.40,"rgba(26,23,80,1)");
+         grd2.addColorStop(0.60,"rgba(26,23,80,1)");
+         grd2.addColorStop(0.75,"rgba(26,23,80,.8)");
+         grd2.addColorStop(0.90,"rgba(26,23,80,.3)");
+         //grd2.addColorStop(1,"black");
+         grd2.addColorStop(1,"rgba(26,23,80, 0)");
+         prueba.context.fillStyle=grd2;
+         prueba.context.fillRect(0,0,this.game.width,this.game.height);
+         pruebaFondo=this.game.add.sprite(0,0,prueba);
+         pruebaFondo2 = game.add.tileSprite(0, 0,this.game.width,200,'puntitos');
+         pruebaFondo2.alpha=1;
+         pruebaFondo.addChild(pruebaFondo2);
+
+         //fondo de prueba
+
+        //title
+
+        var titleStyle = { font: '40px BitterBold', fill: 'white', align: 'center'};
+        var line = this.game.make.sprite(-200,45, 'line');
+        //line.scale.setTo(0.8,0.8);
+        var textTitle = game.add.text(game.world.centerX-200, 50, "ESTADÍSTICAS", titleStyle);
+
+        pruebaFondo.addChild(textTitle);
+
+        textTitle.addChild(line);
+        pruebaFondo.fixedToCamera=true;
+        //title
+
     //esquinas
 
     var leftCorner=game.add.sprite(0, 0, 'left-corner');
-	  leftCorner.fixedToCamera=true;
+    leftCorner.fixedToCamera=true;
     leftCorner.scale.setTo(.75,0.75)
     a= game.add.sprite(this.game.width, 0, 'right-corner');
-	  a.fixedToCamera=true;
+    a.fixedToCamera=true;
     a.scale.setTo(-.75,0.75)
 
 
     volver= game.add.sprite(40, 30, 'volver');
     volver.inputEnabled = true;
-	  volver.fixedToCamera=true;
+    volver.fixedToCamera=true;
     volver.events.onInputDown.add(this.GoBack,volver);
+
+
+
 
     //esquina
 
