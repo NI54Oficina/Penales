@@ -100,7 +100,7 @@ Selectplayer.prototype = {
       var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
       var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
       grd.addColorStop(0,"black");
-      grd.addColorStop(0.15,"#1a1750");
+      grd.addColorStop(0.15,"#11224d");
       grd.addColorStop(0.4,"#0d4e88");
       grd.addColorStop(.5,"#0d4e88");
       grd.addColorStop(1,"#009ee1");

@@ -67,8 +67,9 @@ Stadistics.prototype = {
      var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
      var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
      grd.addColorStop(0,"black");
-     grd.addColorStop(0.15,"#1a1750");
-     grd.addColorStop(0.3,"#1a1750");
+     grd.addColorStop(0.15,"#11224d");
+     grd.addColorStop(0.4,"#0d4e88");
+     grd.addColorStop(.5,"#0d4e88");
      grd.addColorStop(1,"#009ee1");
      gameBack.context.fillStyle=grd;
      gameBack.context.fillRect(0,0,this.game.width,this.game.height);
@@ -149,16 +150,17 @@ Stadistics.prototype = {
      var 	bitmap = this.game.add.bitmapData(this.game.width,200);
      var  bit=gameBack.context.createLinearGradient(0,0,0,200);
      bit.addColorStop(0,"rgba(17,16,20,1)");
-     bit.addColorStop(0.40,"rgba(26,23,80,1)");
-     bit.addColorStop(0.60,"rgba(26,23,80,1)");
-     bit.addColorStop(0.75,"rgba(26,23,80,.8)");
-     bit.addColorStop(0.90,"rgba(26,23,80,.3)");
-     bit.addColorStop(1,"rgba(26,23,80, 0)");
+     bit.addColorStop(0.30,"rgba(17,36,80,1)");
+     bit.addColorStop(0.40,"rgba(17,36,80,1)");
+     bit.addColorStop(0.50,"rgba(20,43,90,1)");
+     bit.addColorStop(0.80,"rgba(16,59,114,.5)");
+     bit.addColorStop(0.90,"rgba(16,59,114,.2)");
+     bit.addColorStop(1,"rgba(16,59,114,0)");
      bitmap.context.fillStyle=bit;
      bitmap.context.fillRect(0,0,this.game.width,this.game.height);
      header=this.game.add.sprite(0,0,bitmap);
      headerDot = game.add.tileSprite(0, 0,this.game.width,200,'puntitos');
-     headerDot.alpha=1;
+     headerDot.alpha=.1;
      header.addChild(headerDot);
 
      //fondo del header
