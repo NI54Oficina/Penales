@@ -25,33 +25,33 @@ Selectplayer.prototype = {
               myBitmap.context.fillRect(0,0,this.game.height,this.game.width);
 
               var background = this.game.add.sprite(0,0, myBitmap);
-              down= this.game.make.sprite(-20,55, 'brillodown');
+              down= this.game.make.sprite(-20,45, 'brillodown');
               up= this.game.make.sprite(200,-15, 'brilloup');
               down.scale.setTo(0.5,0.5);
               up.scale.setTo(0.5,0.5);
-              background.addChild(down);
-              background.addChild(up);
+              Boton.add(down);
+              Boton.add(up);
 
-              // var testMask=game.add.graphics(0, 0);
-              // testMask.beginFill(0xFFFF0B, 1);
-              // testMask.drawRoundedRect(0, 0,500 ,50,10);
-              // testMask.endFill();
-              //
-              // Boton.add(testMask);
-              // Boton.mask=testMask;
                Boton.add(background);
-
+			  
+			  /*var testMask=game.add.graphics(0, 0);
+	testMask.beginFill(0xFFFF0B, 0.5);
+	testMask.drawRoundedRect(0, 0, 200, 200,10);
+	testMask.endFill();
+	Boton.add(testMask);
+	Boton.mask=  testMask;*/
+ 	
             // aplicando el background de cada texto
 
             var txt = game.add.text(0, 10 , text, optionStyle);
 
-
+			console.log(Boton);
             Boton.add(txt);
 
 
             txt.position.x=Boton.width/2 - txt.width/2;
-            Boton.position.x=this.game.width/2 - Boton.width/2;
-
+            Boton.position.x=game.width/2 - Boton.width/2;
+	
             var onOver = function (target) {
               target.fill = "black";
               target.stroke = "rgba(200,200,200,0.5)";
@@ -76,6 +76,17 @@ Selectplayer.prototype = {
         }, this);
 
             this.optionCount ++;
+			
+			
+               var testMask=game.add.graphics(0, 0);
+               testMask.beginFill(0xFFFF0B, 0.5);
+               testMask.drawRoundedRect(0, 0,background.width ,70,10);
+               testMask.endFill();
+              //
+               Boton.add(testMask);
+              background.mask=testMask;
+			console.log(Boton);
+			
             return Boton;
 
 
