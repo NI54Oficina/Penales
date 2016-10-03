@@ -9,82 +9,82 @@ Selectplayer.prototype = {
   addMenuOption: function(text, callback) {
 
 
-              var optionStyle = { font: '40pt RobotoBold', align: 'center',fill:'#1b1464' ,stroke: '#1b1464'};
+        var optionStyle = { font: '40pt RobotoBold', align: 'center',fill:'#1b1464' ,stroke: '#1b1464'};
 
-            // aplicando el background de cada texto
+      // aplicando el background de cada texto
 
-              var Boton =game.add.group();
-              Boton.position={x:100,y:this.optionCount*530};
+        var Boton =game.add.group();
+        Boton.position={x:100,y:this.optionCount*530};
 
-              var 	myBitmap = this.game.add.bitmapData(540, 80);
-              var  grd=myBitmap.context.createLinearGradient(0,0,0,40);
-              grd.addColorStop(0,"#fbe43e");
-              grd.addColorStop(0.9,"#fbe43e");
-              grd.addColorStop(1,"#cea428");
-              myBitmap.context.fillStyle=grd;
-              myBitmap.context.fillRect(0,0,this.game.height,this.game.width);
+        var 	myBitmap = this.game.add.bitmapData(540, 80);
+        var  grd=myBitmap.context.createLinearGradient(0,0,0,40);
+        grd.addColorStop(0,"#fbe43e");
+        grd.addColorStop(0.9,"#fbe43e");
+        grd.addColorStop(1,"#cea428");
+        myBitmap.context.fillStyle=grd;
+        myBitmap.context.fillRect(0,0,this.game.height,this.game.width);
 
-              var background = this.game.add.sprite(0,0, myBitmap);
-              down= this.game.make.sprite(-20,45, 'brillodown');
-              up= this.game.make.sprite(200,-15, 'brilloup');
-              down.scale.setTo(0.5,0.5);
-              up.scale.setTo(0.5,0.5);
-              Boton.add(down);
-              Boton.add(up);
-
-
-               Boton.add(background);
-
-            // aplicando el background de cada texto
-
-            var txt = game.add.text(0, 10 , text, optionStyle);
-
-			console.log(Boton);
-            Boton.add(txt);
+        var background = this.game.add.sprite(0,0, myBitmap);
+        down= this.game.make.sprite(-20,45, 'brillodown');
+        up= this.game.make.sprite(200,-15, 'brilloup');
+        down.scale.setTo(0.5,0.5);
+        up.scale.setTo(0.5,0.5);
+        Boton.add(down);
+        Boton.add(up);
 
 
-            txt.position.x=Boton.width/2 - txt.width/2;
+         Boton.add(background);
 
-            Boton.position.x=game.width/2 - Boton.width/2;
+      // aplicando el background de cada texto
 
-            this.world.bringToTop(txt);
-
-            var onOver = function (target) {
-              target.fill = "black";
-              target.stroke = "rgba(200,200,200,0.5)";
-              txt.useHandCursor = true;
-            };
-
-            var onOut = function (target) {
-              target.fill = "#1b1464";
-              target.stroke = "#1b1464";
-              txt.useHandCursor = false;
-            };
+      var txt = game.add.text(0, 10 , text, optionStyle);
 
 
-            txt.events.onInputOver.add(onOver, this);
-            txt.events.onInputOut.add(onOut, this);
+      Boton.add(txt);
 
 
-            Boton.forEach(function(item) {
-              item.inputEnabled = true;
-            item.events.onInputUp.add(callback);
+      txt.position.x=Boton.width/2 - txt.width/2;
 
-        }, this);
+      Boton.position.x=game.width/2 - Boton.width/2;
 
-            this.optionCount ++;
+      this.world.bringToTop(txt);
+
+      var onOver = function (target) {
+        target.fill = "black";
+        target.stroke = "rgba(200,200,200,0.5)";
+        txt.useHandCursor = true;
+      };
+
+      var onOut = function (target) {
+        target.fill = "#1b1464";
+        target.stroke = "#1b1464";
+        txt.useHandCursor = false;
+      };
 
 
-               var testMask=game.add.graphics(0, 0);
-               testMask.beginFill(0xFFFF0B, 0.5);
-               testMask.drawRoundedRect(0, 0,background.width ,70,10);
-               testMask.endFill();
-              //
-               Boton.add(testMask);
-              background.mask=testMask;
-			console.log(Boton);
+      txt.events.onInputOver.add(onOver, this);
+      txt.events.onInputOut.add(onOut, this);
 
-            return Boton;
+
+      Boton.forEach(function(item) {
+        item.inputEnabled = true;
+      item.events.onInputUp.add(callback);
+
+  }, this);
+
+      this.optionCount ++;
+
+
+         var testMask=game.add.graphics(0, 0);
+         testMask.beginFill(0xFFFF0B, 0.5);
+         testMask.drawRoundedRect(0, 0,background.width ,70,10);
+         testMask.endFill();
+        //
+         Boton.add(testMask);
+        background.mask=testMask;
+
+
+      return Boton;
 
 
 
@@ -101,7 +101,8 @@ Selectplayer.prototype = {
       var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
       grd.addColorStop(0,"black");
       grd.addColorStop(0.15,"#1a1750");
-      grd.addColorStop(0.3,"#1a1750");
+      grd.addColorStop(0.4,"#0d4e88");
+      grd.addColorStop(.5,"#0d4e88");
       grd.addColorStop(1,"#009ee1");
       gameBack.context.fillStyle=grd;
       gameBack.context.fillRect(0,0,this.game.width,this.game.height);
