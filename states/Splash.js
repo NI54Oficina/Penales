@@ -19,8 +19,8 @@ var Splash = function () {};
 
   loadBgm: function () {
 
-    game.load.audio('dangerous', 'assets/bgm/Dangerous.mp3');
-    game.load.audio('exit', 'assets/bgm/Exit the Premises.mp3');
+    game.load.audio('musica', 'assets/bgm/Dangerous.mp3');
+    game.load.audio('sonido', 'assets/bgm/sonido_prueba.mp3');
   },
 
   loadImages: function () {
@@ -112,9 +112,12 @@ var Splash = function () {};
   },
 
   addGameMusic: function () {
-    fondoMusic = game.add.audio('dangerous');
+    fondoMusic = game.add.audio('musica');
     fondoMusic.loop = true;
-    fondoMusic.play();
+
+    fondoSonido = game.add.audio('sonido');
+    fondoSonido.loop = true;
+    
   },
 
   create: function () {
