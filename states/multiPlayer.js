@@ -8,7 +8,7 @@ Multiplayer.prototype = {
 
   addMenuOption: function(text, callback) {
 
-                  var optionStyle = { font: '40pt RobotoBold', align: 'center',fill:'#1b1464' ,stroke: '#1b1464'};
+                  var optionStyle = { font: '35pt RobotoBold', align: 'center',fill:'#1b1464' ,stroke: '#1b1464'};
 
                 // aplicando el background de cada texto
 
@@ -42,9 +42,9 @@ Multiplayer.prototype = {
                 Boton.add(txt);
 
 
-                txt.position.x=Boton.width/2 - txt.width/2;
+                txt.position.x=background.width/2 - txt.width/2;
 
-                Boton.position.x=game.width/2 - Boton.width/2;
+                Boton.position.x=game.width/2 - background.width/2;
 
                 this.world.bringToTop(txt);
 

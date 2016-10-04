@@ -82,13 +82,6 @@ Selectplayer.prototype = {
          Boton.add(testMask);
         background.mask=testMask;
 
-      //   console.log(Boton.position);
-      //   console.log(background.width);
-      //   console.log(this.game.width);
-      //
-      // //  console.log(this.game.width/2 - Boton.width/2);
-
-
       return Boton;
 
 
@@ -137,14 +130,11 @@ Selectplayer.prototype = {
       titulo.position.x= this.game.width/2- titulo.width/2;
 
 
-
-
       search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
       search.visible=false;
 
       //creating the carrousel
 
-      //arrayimg=['img-1', 'img-2', 'img-3', 'img-4', 'img-5', 'img-6', 'img-7', 'img-8', 'img-9', 'img-10'];
 
       // imagen mas baja a la izquierda
       img5= game.add.sprite(145, 225, 'img-5');
@@ -165,21 +155,18 @@ Selectplayer.prototype = {
       img1=game.add.sprite(145, 225, 'img-1');
       h1=img1.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
 
-      //
-      // img6=game.add.sprite(800, 225, 'img-6');
-      // h6=img6.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
-      //
-      // img7=game.add.sprite(800, 225, 'img-7');
-      // h7=img7.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
-      //
-      // img8=game.add.sprite(800, 225,'img-8');
-      // h8=img8.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
-      //
-      // img9=game.add.sprite(800, 225, 'img-9');
-      // h9=img9.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
-      //
-      // img10=game.add.sprite(800, 225, 'img-10');
-      // h10=img10.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
+      arrayCr=[img3, img4, img1,img2 , img5];
+
+      for(var i=0; i<arrayCr.length; i++){
+
+        var cover=game.add.graphics(0, 0);
+        cover.beginFill(0x004c81,0.8);
+        cover.drawRoundedRect(18, 19,arrayCr[i].width-52 ,arrayCr[i].height-52,35);
+        cover.endFill();
+        cv=arrayCr[i].addChild(cover);
+
+      }
+
 
 
       img1.scale.setTo(.9, .9);
@@ -189,22 +176,12 @@ Selectplayer.prototype = {
       img3.visible=false;
       img4.visible=false;
       img5.visible=false;
-      // img6.visible=false;
-      // img7.visible=false;
-      // img8.visible=false;
-      // img9.visible=false;
-      // img10.visible=false;
 
       img1.scale.setTo(.5,.5);
       img2.scale.setTo(.5,.5);
       img3.scale.setTo(.5,.5);
       img4.scale.setTo(.5,.5);
       img5.scale.setTo(.5,.5);
-      // img6.scale.setTo(.5,.5);
-      // img7.scale.setTo(.5,.5);
-      // img8.scale.setTo(.5,.5);
-      // img9.scale.setTo(.5,.5);
-      // img10.scale.setTo(.5,.5);
 
 
         golden=game.add.sprite(this.game.width/2- wd/2, 150, 'golden');
@@ -212,7 +189,7 @@ Selectplayer.prototype = {
         golden.alpha=0;
 
 
-      arrayCr=[img3, img4, img1,img2 , img5];
+
 
 
       self.setTo5(img2);
@@ -220,6 +197,7 @@ Selectplayer.prototype = {
       self.setTo3(img5);
       self.setTo2(img4);
       self.setTo1(img3);
+
 
 
      jugar= this.addMenuOption('JUGAR', function () {
@@ -322,6 +300,7 @@ console.log(carrousel);
 setTo5: function(target){
   target.visible=true;
 
+
   s5= target;
 
   this.world.bringToTop(s5);
@@ -332,10 +311,12 @@ setTo5: function(target){
   var tweenA= game.add.tween(target).to({x:145, y:225}, 500, 'Linear');
   var tweenB =game.add.tween(target.scale).to( {x:.50, y:.50}, 500, 'Linear');
   var tweenC =game.add.tween(target).to( {alpha:.9}, 500, 'Linear');
+  var tweenD =game.add.tween(target.children[1]).to( {alpha:.8}, 500, 'Linear');
 
-    tweenA.start();
-    tweenB.start();
-    tweenC.start();
+  tweenA.start();
+  tweenB.start();
+  tweenC.start();
+  tweenD.start();
 
 },
 
@@ -350,10 +331,12 @@ setTo4: function(target){
    var tweenA= game.add.tween(target).to({x:800, y:225}, 500, 'Linear');
    var tweenB =game.add.tween(target.scale).to( {x:.50, y:.50}, 500, 'Linear');
    var tweenC =game.add.tween(target).to( {alpha:.9}, 500, 'Linear');
+   var tweenD =game.add.tween(target.children[1]).to( {alpha:.8}, 500, 'Linear');
 
    tweenA.start();
    tweenB.start();
    tweenC.start();
+   tweenD.start();
 },
 
 setTo3: function(target){
@@ -367,10 +350,12 @@ setTo3: function(target){
   var tweenA= game.add.tween(target).to({x:255, y:210}, 500, 'Linear');
   var tweenB =game.add.tween(target.scale).to( {x:.6, y:.6}, 500, 'Linear');
   var tweenC =game.add.tween(target).to( {alpha:1}, 500, 'Linear');
+  var tweenD =game.add.tween(target.children[1]).to( {alpha:.3}, 500, 'Linear');
 
   tweenA.start();
   tweenB.start();
   tweenC.start();
+  tweenD.start();
 
   // shadow3 = game.add.sprite(245, 193+s3.height, 'shadow');
   // shadow3.scale.setTo(.6,.6);
@@ -387,10 +372,12 @@ target.visible=true;
   var tweenA= game.add.tween(target).to({x:650, y:210}, 500, 'Linear');
   var tweenB =game.add.tween(target.scale).to( {x:.6, y:.6}, 500, 'Linear');
   var tweenC =game.add.tween(target).to( {alpha:1}, 500, 'Linear');
+  var tweenD =game.add.tween(target.children[1]).to( {alpha:.3}, 500, 'Linear');
 
   tweenA.start();
   tweenB.start();
   tweenC.start();
+  tweenD.start();
 },
 
 setTo1: function(target){
@@ -401,10 +388,18 @@ setTo1: function(target){
   this.world.bringToTop(s1);
    var tweenA= game.add.tween(target).to({x:this.game.width/2- wd/2, y:150}, 500, 'Linear');
    var tweenB =game.add.tween(target.scale).to( {x:0.9, y:.9}, 500, 'Linear');
-  var tweenC =game.add.tween(target).to( {alpha:1}, 500, 'Linear');
+   var tweenC =game.add.tween(target).to( {alpha:1}, 500, 'Linear');
+   var tweenD =game.add.tween(target.children[1]).to( {alpha:0}, 500, 'Linear');
+
+   tweenD.start();
+   tweenA.start();
+   tweenB.start();
+   tweenC.start();
+
 
 
    tweenA.onComplete.addOnce(function(){
+
      tweenD=game.add.tween(golden).to( {alpha:1}, 50, 'Linear');
      tweenD.start();
 
@@ -413,9 +408,7 @@ setTo1: function(target){
 
 
 
-   tweenA.start();
-   tweenB.start();
-   tweenC.start();
+
 
    this.world.bringToTop(golden);
 

@@ -4,7 +4,7 @@ var GameMenu = function() {};
 GameMenu.prototype = {
 
   menuConfig: {
-    startY: -30,
+    startY: 10,
     startX: 600
   },
 
