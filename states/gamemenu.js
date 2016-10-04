@@ -51,7 +51,7 @@ GameMenu.prototype = {
     //   game.state.start("Multiplayer");
     // });
 
-    this.addMenuOption("CLÁSICO(o)", function () {
+    this.addMenuOption('CLÁSICO \none', function () {
 
       game.state.start("Selectplayer");
 
@@ -59,7 +59,7 @@ GameMenu.prototype = {
     });
 
 
-    this.addMenuOption('DESAFÍO(o)', function () {
+    this.addMenuOption('DESAFÍO \ntwo', function () {
       game.state.start("Multiplayer");
     });
 

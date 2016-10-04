@@ -26,8 +26,6 @@ var Splash = function () {};
   loadImages: function () {
 
     game.load.image('menu-bg', 'assets/images/bg-menu.png');
-    game.load.image('options-bg', 'assets/images/menu-bg.jpg');
-    game.load.image('gameover-bg', 'assets/images/menu-bg.jpg');
     game.load.image('stats-bg', 'assets/images/bg-stats.jpg');
     game.load.image('rival-bg', 'assets/images/bg-rival.jpg');
     game.load.image('multi-bg', 'assets/images/bg-multi.jpg');
@@ -43,7 +41,6 @@ var Splash = function () {};
     // game.load.image('img-8', 'assets/images/bt_escudo.png');
     // game.load.image('img-9', 'assets/images/bt_escudo.png');
     // game.load.image('img-10', 'assets/images/bt_escudo.png');
-    game.load.image('test', 'assets/images/test10.png');
     game.load.image('left-corner', 'assets/images/left-corner.png');
     game.load.image('right-corner', 'assets/images/left-corner.png');
     game.load.image('volver', 'assets/images/arrow-back.png');
@@ -63,6 +60,9 @@ var Splash = function () {};
     game.load.image('musica-off', 'assets/images/musica-off.png');
     game.load.image('sonido-on', 'assets/images/sonido-on.png');
     game.load.image('sonido-off', 'assets/images/sonido-off.png');
+
+    game.load.image('two', 'assets/images/dos-jugadores.png');
+    game.load.image('one', 'assets/images/un-jugador.png');
 
 
 

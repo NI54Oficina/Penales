@@ -70,8 +70,6 @@ Singleplayer.prototype = {
 
       //fondo de participantes
 
-
-
       //fondo del header
 
       var 	bitmap = this.game.add.bitmapData(this.game.width,200);
