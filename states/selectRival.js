@@ -67,7 +67,7 @@ Selectplayer.prototype = {
 
       Boton.forEach(function(item) {
         item.inputEnabled = true;
-      item.events.onInputUp.add(callback);
+        item.events.onInputUp.add(callback);
 
   }, this);
 

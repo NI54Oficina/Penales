@@ -7,14 +7,14 @@ Game.prototype = {
 
     this.optionCount = 1;
     game.physics.startSystem(Phaser.Physics.ARCADE);
-   
+
     game.load.spritesheet('button', 'assets/images/boton.png', 300, 300);
     game.load.image('assert', 'assets/images/green-button.png', 150,150);
     game.load.image('noassert', 'assets/images/red-button.png', 150,150);
     game.load.image('orange-button', 'assets/images/orange-button.png', 150,150);
     game.load.image('yellow-button', 'assets/images/yellow-button.png', 150,150);
     game.load.image('triangle', 'assets/images/puntero.png', 150,150);
-   
+
     game.load.spritesheet('pelota', 'assets/images/pelota.png', 40, 40);
     game.load.spritesheet('pelota-sombra', 'assets/images/sombraPelota.png', 40, 40);
 	game.load.image('arco-0', 'assets/images/arco-0.png');
@@ -22,8 +22,8 @@ Game.prototype = {
     game.load.atlas('arquero-local', 'assets/images/out.png', 'assets/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
 	game.load.atlas('pateador-local', 'assets/images/pateador-test.png', 'assets/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
     game.load.atlas('arquero-visitante', 'assets/images/out2.png', 'assets/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-	game.load.atlas('pateador-visitante', 'assets/images/pateador-test2.png', 'assets/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH); 
-    
+	game.load.atlas('pateador-visitante', 'assets/images/pateador-test2.png', 'assets/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+
 	game.load.image('fondo1', 'assets/images/fondo-game1.png', 759, 150);
 	game.load.image('fondo2', 'assets/images/fondo-game2.png', 378, 150);
 	game.load.image('fondo3', 'assets/images/fondo-game3.png', 1136, 491);
@@ -31,7 +31,7 @@ Game.prototype = {
   },
 
   create: function () {
-    
+
     self = this;
     triesA=this.triesA;
 
@@ -46,21 +46,21 @@ Game.prototype = {
 	this.pause=true;
 	timer = game.time.events.loop(Phaser.Timer.SECOND, this.updateCounter, this);
 	game.time.events.resume();
-    
+
     presicionText=0;
 	rangoDePresicion=40;
     counter=this.tiempoMaximo;
 	perfilElegido= this.perfil;
 
     modo=this.modo;
-	
+
     puntosComputer=0;
     puntosUser=0;
     enAlargue=false;
 	clicked =1;
 	presicion= 0;
 	velocidad=2000;
-	 
+
     this.drawBackground();
 
 	equipoUnoText = game.add.text(10, 160, 'Equipo 1', { font: " 20px TheMinion", fill: "black", align: "center" });
@@ -79,7 +79,7 @@ Game.prototype = {
 	this.createButtons();
 
 	this.cambiarRopa(self);
-	
+
 	if(Phaser.Math.isEven(modo)){
 		triesA=1;
 		triesP=0;
@@ -93,7 +93,7 @@ Game.prototype = {
 },
 
 drawBackground: function(){
-	
+
 	fondo1 = game.add.sprite(0,0, 'fondo1');
 	fondo2 = game.add.sprite(759,0, 'fondo2');
 	fondo3 = game.add.sprite(0,150, 'fondo3');
@@ -107,7 +107,7 @@ drawBackground: function(){
 	arco1.animations.add("up",["i00.png"],velocidadArco,false);
 	arco1.animations.add("down",["i00.png"],velocidadArco,false);
 	arco1.animations.add("idle",["i00.png"],velocidadArco,false);
-	
+
 	arco2= game.add.sprite(456,80, 'arco',"c00.png");
 	arco2.animations.add("up",["c01.png","c02.png"],velocidadArco,false);
 	arco2.animations.add("down",["c03.png","c04.png"],velocidadArco,false);
@@ -116,7 +116,7 @@ drawBackground: function(){
 	arco2.animations.add("up-left",["c00.png"],velocidadArco,false);
 	arco2.animations.add("down-left",["c00.png"],velocidadArco,false);
 	arco2.animations.add("idle",["c00.png"],velocidadArco,false);
-	
+
 	arco3= game.add.sprite(642,80, 'arco',"d00.png");
 	arco3.animations.add("up-right",["d01.png","d02.png"],velocidadArco,false);
 	arco3.animations.add("down-right",["d03.png","d04.png"],velocidadArco,false);
@@ -125,7 +125,7 @@ drawBackground: function(){
 	arco3.animations.add("up",["d00.png"],velocidadArco,false);
 	arco3.animations.add("down",["d00.png"],velocidadArco,false);
 	arco3.animations.add("idle",["d00.png"],velocidadArco,false);
-	
+
     presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px TheMinion", fill: "black", align: "center" });
 	presicionText.visible=false;
 },
@@ -135,7 +135,7 @@ drawArquero:function(){
 	arquero= game.add.sprite(arqueroPosition.x,arqueroPosition.y, 'arquero-local');
 	arquero.scale.setTo(1,1);
     arquero.frame = 0;
-   
+
 	arquero.animations.add('idle', [00,01,02,03,04], 10, false);
     arquero.animations.add('down-left', [18,19,20,23,24,26,25,19,18,01,00], 10, false);
     arquero.animations.add('up-left',  [18,19,20,21,22,23,24,26,25,19,18,01,00], 10, false);
@@ -153,8 +153,8 @@ drawArquero:function(){
 
 drawPelota:function(){
 	pelotaPosition= {x:580,y:490};
-	
-	
+
+
 	pelotaSombra= game.add.sprite(0,0 ,'pelota-sombra');
 	pelotaSombra.scale.setTo(0.9,0.9);
 	pelota= game.add.group();
@@ -215,9 +215,9 @@ createBarra: function(){
 					[[0, "red"],[0.35,"orange"],[0.50,"green"],[0.65,"orange"],[1,"red"]],
 					[[0, "red"],[0.40,"orange"],[0.50,"green"],[0.60,"orange"],[1,"red"]]
 					];
-   
+
 	barra = this.game.add.sprite(this.game.width/2 - 250,600, myBitmap);
-   
+
    //rangoDePresicion=40;
 
 	focus = game.add.sprite(barra.position.x,600, 'triangle');
@@ -226,12 +226,12 @@ createBarra: function(){
 	beginBarra = barra.position.x;
 	centerBarra = barra.position.x + barra.width/2 -focus.width/2 ;
 	endBarra = barra.position.x + barra.width - focus.width/2;
-	
+
 	barra.visible=false;
 	focus.visible=false;
-	
+
 },
-	
+
 createButtons:function(){
 	buttons= game.add.group();
 	  var auxID=1;
@@ -310,13 +310,13 @@ updateCounter: function () {
 
      result=auxValue;
   },
-  
+
   setArco:function(posicion){
 	arco1.play(posicion) ;
 	arco2.play(posicion);
 	arco3.play(posicion);
   },
-  
+
   resetArco:function(){
 	arco1.play("idle") ;
 	arco2.play("idle");
@@ -339,7 +339,7 @@ updateCounter: function () {
 	buttons.alpha=0;
 
   },
-  
+
   setPlayersMode2: function(self){
 
     player.visible=true;
@@ -406,12 +406,12 @@ updateCounter: function () {
 
     }
 
-	
+
 	self.resetGui();
 	self.resetPlayers();
-	
+
 	console.log("entra restart1");
-	
+
 	game.tweens.remove(tweenPelota);
 	game.tweens.remove(tweenPelota2);
 	game.tweens.remove(tweenSombra);
@@ -426,7 +426,7 @@ updateCounter: function () {
 		game.tweens.remove(tweenArquero);
 	}
 	catch(e){}
-	
+
 	self.cambiarRopa(self);
 	pelota.position.x=pelotaPosition.x;
 	pelota.position.y=pelotaPosition.y;
@@ -434,7 +434,7 @@ updateCounter: function () {
 
 
   },
-  
+
   resetGui:function(){
 
 	presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px TheMinion", fill: "black", align: "center" });
@@ -445,9 +445,9 @@ updateCounter: function () {
 
 	focus.visible=false;
 	buttons.visible=true;
-	buttons.alpha=1;  
+	buttons.alpha=1;
   },
-  
+
   resetPlayers:function(){
 	player.position.x=playerIPos.x;
 	player.position.y=playerIPos.y;
@@ -467,8 +467,8 @@ updateCounter: function () {
 
   patear: function(){
     tweenPlayer = game.add.tween(player);
-	
-    setTimeout(function(){tweenPlayer.to({x:200, y:300},500, 'Linear', true, 0);},0); 
+
+    setTimeout(function(){tweenPlayer.to({x:200, y:300},500, 'Linear', true, 0);},0);
 
     player.animations.play('right');
   },
@@ -486,7 +486,7 @@ updateCounter: function () {
   },
 
   AssertPoint: function(ubiPuntaje, tries){
-	  
+
     var point= game.add.sprite(10+tries*40, ubiPuntaje, 'assert');
     point.scale.setTo(0.10,0.10);
     points.add(point);
@@ -551,7 +551,7 @@ updateCounter: function () {
       this.game.state.states["GameOver"].puntosUser = puntosUser;
       this.game.state.states["GameOver"].puntosComputer = puntosComputer;
 
-      this.game.state.start("GameOver")
+      this.game.state.start("GameOver");
     },
 
 	setearResultado: function(msg){
@@ -566,11 +566,11 @@ updateCounter: function () {
 		if(modo==1){
 		 	golesUser= auxArray["localGol"];
 		 	golesComputer= auxArray["visitanteGol"];
-			
+
 		}else{
 		 	golesUser= auxArray["visitanteGol"];
 			golesComputer= auxArray["localGol"];
-			
+
 		}
       if( triesA  >= 5 &&  triesP  >= 5 ){
 
@@ -588,7 +588,7 @@ updateCounter: function () {
         if(!enAlargue){
              self.restart(self);
         }else{
-			
+
               if(triesA >=1 && triesP>=1){
 
                 if(puntosUser!=puntosComputer){
@@ -658,12 +658,12 @@ establecerParametrosBarra: function(self){
 
 	presicion =  centerBarra - focus.position.x ;
 	if(!Phaser.Math.isEven(modo)){
-		
+
 		if( rangoDePresicion > presicion && presicion > -rangoDePresicion){
-			
+
 		  self.idElegido=self.getResult();
 		 }else{
-			
+
 			  if( presicion < rangoDePresicion+25 ||  presicion < -(rangoDePresicion+25) ){
 					switch (self.getResult()) {
 					  case 1:
@@ -690,7 +690,7 @@ establecerParametrosBarra: function(self){
 			}else{
 				self.idElegido=-4;
 			}
-		
+
 		};
 
 	}else{
@@ -716,8 +716,8 @@ updateBarra: function(){
 
 		barra = this.game.add.sprite(this.game.width/2 - 250,600, myBitmap);
 
-	}else{ 
-		
+	}else{
+
 	}
 
 	self.setDifficult(self);
@@ -735,7 +735,7 @@ setDifficult(){
 
 //Envio Jugada///
 EnviarJugadaServer: function(self){
-	
+
 	self.pause=true;
 	self.setArquero();
 	self.establecerParametrosBarra(self);
@@ -749,19 +749,19 @@ resolverJugada: function(msg){
 
 	var datosServer=JSON.parse(msg)
 	self.pelotaEntra=false;
-	
-	
+
+
 	if(Phaser.Math.isEven(modo)){
 		if(datosServer["computer"]>0&&datosServer["user"]!=datosServer["computer"]){
-			self.pelotaEntra=true;		
+			self.pelotaEntra=true;
 		}
 		self.pateadorID=datosServer["computer"];
 		self.arqueroID=datosServer["user"];
 		self.ListenerArquero(self, datosServer);
-		
+
 	}else{
 		if(datosServer["user"]>0&&datosServer["user"]!=datosServer["computer"]){
-			self.pelotaEntra=true;		
+			self.pelotaEntra=true;
 		}
 		self.pateadorID=datosServer["user"];
 		self.arqueroID=datosServer["computer"];
@@ -772,18 +772,18 @@ resolverJugada: function(msg){
 },
 
 ListenerPateador: function(self, datosServer){
-    
+
 	self.posArqueroI= self.arqueroID;
-	
+
     self.animarJugada(self,datosServer);
-	
+
 },
 
 ListenerArquero: function(self, datosServer){
 
 	/**quitar**/
 	generator = datosServer.computer;
-	
+
 	self.animarJugada(self,datosServer);
 
 },
@@ -792,9 +792,9 @@ animarJugada:function(self,datosServer){
 	self.patear(self);
 	arquero.animations.play("idle");
 	setTimeout(function(){
-		
+
 		self.ubicarArquero(self.arqueroID, self);
-		
+
 		self.seMueveArquero(self);
 		console.log("entra animar");
 		self.moverPelota(self.pateadorID).onComplete.addOnce(function(){
@@ -854,7 +854,7 @@ animarArco:function(self){
 			arco2.play("down-right");
 			arco3.play("down-right");
 		break;
-		
+
 	}
 },
 
@@ -871,7 +871,7 @@ Looser: function(){
 },
 
 acertarTiro: function(self){
-	
+
           if(self.pelotaEntra){
               puntosUser++;
               self.AssertPoint(userPointY,triesP);
@@ -883,7 +883,7 @@ acertarTiro: function(self){
               if( parseInt(localStorage["RachaConvertidos"]) > parseInt(localStorage["MejorRachaConvertida"]) ){
                 localStorage["MejorRachaConvertida"]= parseInt(localStorage["RachaConvertidos"]);
               }
-			  
+
           }else{
               self.NoAssertPoint(userPointY,triesP);
               self.Looser(self);
@@ -897,7 +897,7 @@ acertarTiro: function(self){
 
          };
 
-       
+
 },
 
 atajar: function(self){
@@ -937,7 +937,7 @@ moverPelota: function(coor){
 	 var auxTween;
 	 tweenPelota = game.add.tween(pelota);
 	 tweenSombra = game.add.tween(pelotaSombra);
-	 
+
 	if(coor==0||coor=="0"){
 		//palo center
 		var posAux = 500;
@@ -948,7 +948,7 @@ moverPelota: function(coor){
 				  y: [200],
 			 }, duracionPelota,Phaser.Easing.LINEAR, true, 0).interpolation(function(v, k){
 				  return Phaser.Math.bezierInterpolation(v, k);
-			 }); 
+			 });
 	}else
 	if(coor==-1||coor=="-1"){
 		//palo left
@@ -960,7 +960,7 @@ moverPelota: function(coor){
 				  y: [90],
 			 }, duracionPelota,Phaser.Easing.LINEAR, true, 0).interpolation(function(v, k){
 				  return Phaser.Math.bezierInterpolation(v, k);
-			 }); 
+			 });
 	}else
 	if(coor==-2||coor=="-2"){
 		//palo right
@@ -972,7 +972,7 @@ moverPelota: function(coor){
 				  y: [90],
 			 }, duracionPelota,Phaser.Easing.LINEAR, true, 0).interpolation(function(v, k){
 				  return Phaser.Math.bezierInterpolation(v, k);
-			 }); 
+			 });
 	}else
 	if(coor==-3||coor=="-3"){
 		//afuera right
@@ -1017,7 +1017,7 @@ moverPelota: function(coor){
 			  y: [unaCoordenada[0].y, unaCoordenada[1].y, unaCoordenada[2].y, unaCoordenada[3].y],
 		 }, duracionPelota,Phaser.Easing.LINEAR, true, 0).interpolation(function(v, k){
 			  return Phaser.Math.bezierInterpolation(v, k);
-		 }); 
+		 });
 		 switch(coor){
 			  case 1:
 			  tweenSombra.to({
@@ -1025,7 +1025,7 @@ moverPelota: function(coor){
 				  y: [20, 30, 80, 200],
 			 }, duracionPelota,Phaser.Easing.LINEAR, true, 0).interpolation(function(v, k){
 				  return Phaser.Math.bezierInterpolation(v, k);
-			 }); 
+			 });
 			  break;
 			 case 3:
 			tweenSombra.to({
@@ -1033,7 +1033,7 @@ moverPelota: function(coor){
 				  y: [20, 30, 80, 170],
 			 }, duracionPelota,Phaser.Easing.LINEAR, true, 0).interpolation(function(v, k){
 				  return Phaser.Math.bezierInterpolation(v, k);
-			 }); 
+			 });
 		 break;
 		  case 2:
 			tweenSombra.to({
@@ -1041,7 +1041,7 @@ moverPelota: function(coor){
 				  y: [20, 30, 80, 190],
 			 }, duracionPelota,Phaser.Easing.LINEAR, true, 0).interpolation(function(v, k){
 				  return Phaser.Math.bezierInterpolation(v, k);
-			 }); 
+			 });
 		  break;
 		 case 4: case 5: case 6:
 		 tweenSombra.to({
@@ -1049,12 +1049,12 @@ moverPelota: function(coor){
 				  y: [20, 30, 50, 100],
 			 }, duracionPelota,Phaser.Easing.LINEAR, true, 0).interpolation(function(v, k){
 				  return Phaser.Math.bezierInterpolation(v, k);
-			 }); 
+			 });
 		 break;
 		 }
-   
+
 	}
-   
+
     tweenPelota2 = game.add.tween(pelota.scale);
 	 tweenPelota2.to({x:0.6,y:0.6},duracionPelota, 'Linear', true, 0);
    pelotaSprite.play("girar");
@@ -1077,7 +1077,7 @@ pelotaFuera:function(self){
 		auxCoordenada.x=1000;
 		auxCoordenada.y=-100;
 		break;
-		
+
 	}
 	game.tweens.remove(tweenPelota);
 	game.tweens.remove(tweenSombra);
@@ -1086,7 +1086,7 @@ pelotaFuera:function(self){
 	auxTween= tweenPelota.to(auxCoordenada,duracionPelota, 'Linear', true, 0);
 	//tweenSombra.to({alpha:0},200, 'Linear', true, 0);
 	pelotaSombra.alpha=0;
-	
+
 },
 
 rebotaPalo:function(){
@@ -1107,10 +1107,10 @@ rebotaPalo:function(){
 		case -2:
 		//right
 		auxCoordenada.x=1500;
-		auxCoordenada.y=400;		
+		auxCoordenada.y=400;
 		break;
 	}
-	
+
 	//tweenSombra= game.add.tween(pelotaSombra);
 	auxTween= tweenPelota.to(auxCoordenada,duracionPelota, 'Linear', true, 0);
 	//tweenSombra.to({alpha:0},200, 'Linear', true, 0);
@@ -1134,7 +1134,7 @@ caePelota:function(){
 	game.tweens.remove(tweenSombra);
 	tweenPelota=game.add.tween(pelota);
 	tweenSombra= game.add.tween(pelotaSombra);
-	
+
 	auxTween= tweenPelota.to(auxCoordenada,300, 'Linear', true, 0);
 	tweenSombra.to({x:0,y:20},300, 'Linear', true, 0);
 	setTimeout(function(){
@@ -1148,7 +1148,7 @@ caePelota:function(){
 ubicarArquero: function(resultadoServer, self){
 
     generator = resultadoServer;
-	
+
 	if(generator<=0){
 		self.posArqueroI =game.rnd.integerInRange(0,5);
 		self.posArquero= arquero.position;
@@ -1158,7 +1158,7 @@ ubicarArquero: function(resultadoServer, self){
 		self.posArqueroI =generator;
 	}
 
-},	
+},
 
 //Animaciones arquero
 moveLeftDown: function(){
@@ -1195,7 +1195,7 @@ Clicked: function(){
 },
 
 mouseUpPateador:function(){
-	
+
 	if(!Phaser.Math.isEven(modo)&&!this.pause){
 		this.EnviarJugadaServer(this);
 	}

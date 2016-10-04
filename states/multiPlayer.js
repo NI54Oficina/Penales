@@ -38,7 +38,7 @@ Multiplayer.prototype = {
 
                 var txt = game.add.text(0, 10 , text, optionStyle);
 
-    			console.log(Boton);
+
                 Boton.add(txt);
 
 
@@ -81,7 +81,8 @@ Multiplayer.prototype = {
                   //
                    Boton.add(testMask);
                   background.mask=testMask;
-    			console.log(Boton);
+
+
 
                 return Boton;
 
@@ -89,6 +90,13 @@ Multiplayer.prototype = {
 
   create: function(){
       self = this;
+
+      txtstyle= { font: '25pt CondensedRegular', fill: 'white'};
+
+      this.playerSelected;
+
+
+      console.log(this.playerSelected);
 
       //fondo
       var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
@@ -140,15 +148,13 @@ Multiplayer.prototype = {
       leftPlayer=game.add.sprite(-50,150, 'player');
       leftPlayer.scale.setTo(.9);
       leftPlayer.alpha=0;
+
       rightPlayer=game.add.sprite(this.game.width+50, 150, 'player');
       rightPlayer.scale.setTo(.9);
       rightPlayer.alpha=0;
 
-      // leftPlayer.position.x= this.game.width/2 - leftPlayer.width-30;
-      // rightPlayer.position.x=this.game.width/2 + 30;
       rightPlayer.inputEnabled=true;
-
-      rightPlayer.events.onInputDown.add(this.SelectyPlayer, leftPlayer);
+      rightPlayer.events.onInputDown.add(this.SelectPlayer, leftPlayer);
 
       var tweenA= game.add.tween(rightPlayer).to({x:this.game.width/2 + 30}, 200, 'Linear');
       var tweenB= game.add.tween(leftPlayer).to({x:this.game.width/2 - leftPlayer.width-30}, 200, 'Linear');
@@ -159,6 +165,27 @@ Multiplayer.prototype = {
       tweenB.start();
       tweenC.start();
       tweenD.start();
+
+      //modificacion de texto si selecciona el jugador o no;
+
+      if( this.playerSelected!= undefined){
+        var aleatorio = game.add.text(90,170, "ALEATORIO", txtstyle);
+        leftPlayer.addChild(aleatorio);
+
+        var imgPlayer=game.add.sprite(-5,0, this.playerSelected.player.key);
+        imgPlayer.scale.setTo(.95,.95);
+        rightPlayer.addChild(imgPlayer);
+
+
+      }else{
+        var aleatorio = game.add.text(90,170, "ALEATORIO", txtstyle);
+        leftPlayer.addChild(aleatorio);
+        var notaleatorio = game.add.text(90,170, "A ELECCIÓN", txtstyle);
+        rightPlayer.addChild(notaleatorio);
+      }
+
+      //modificacion de texto si selecciona el jugador o no;
+
 
 
       //pantalla de seleccion
@@ -176,21 +203,17 @@ Multiplayer.prototype = {
     game.state.start("GameMenu");
   },
 
-  SelectyPlayer: function(target){
+  SelectPlayer: function(target){
     game.state.start("Singleplayer");
   },
 
   Menu: function(target){
     game.state.start("GameMenu");
   },
-  test:function(){
-	  console.log("test entra");
-  },
 
   listenerSearch: function (msg){
 
 	search.visible=false;
-	this.test();
     console.log(msg);
 	auxArray=JSON.parse(msg);
 

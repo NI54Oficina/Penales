@@ -58,14 +58,44 @@ Singleplayer.prototype = {
       usuario={
         nombre:'FRANCISCO SERANTE',
         racha:  51,
-        ganados:5,
-        perdidos: 10
+        ganados:0,
+        perdidos: 10,
+        avatar:'img-1'
 
       };
 
+      usuario2={
+        nombre:'MELANIA MIRANDA',
+        racha:  100,
+        ganados:100,
+        perdidos:0,
+        avatar:'img-2'
 
-  		for(var a=0;a<4;a++){
-  			oponentes.add( self.createDataForPlayer(self, usuario));
+      };
+
+      usuario3={
+        nombre:'CRISTIANO RONALDO',
+        racha:  100,
+        ganados:100,
+        perdidos:0,
+        avatar:'img-3'
+
+      };
+
+      usuario4={
+        nombre:'DIEGO MARADONA',
+        racha:  100,
+        ganados:100,
+        perdidos:0,
+        avatar:'img-4'
+
+      };
+
+      usuarios=[usuario, usuario2,usuario3, usuario4];
+
+      console.log(usuarios);
+  		for(var a=0;a<usuarios.length;a++){
+  			oponentes.add( self.createDataForPlayer(self, usuarios[a]));
   		}
 
       //fondo de participantes
@@ -197,7 +227,9 @@ Singleplayer.prototype = {
 
      cuadradoUser.add(difBackground);
 
-     var player=this.game.add.sprite(20,5,'img-1');
+     var player=this.game.add.sprite(20,5,user.avatar);
+
+     console.log(player);
      player.scale.setTo(.5,.5);
     // player.position={x:statsBackground.position.x+20,y:statsBackground.position.y+statsBackground.height/2-player.height/2};
 	   cuadradoUser.add(player);
@@ -209,7 +241,7 @@ Singleplayer.prototype = {
      var txt3 = game.add.text(cuadradoUser.width/3,120,'TOTAL PARTIDOS GANADOS', puntajeStyle);
      var txt3a = game.add.text(cuadradoUser.width-60,120,' '+user.ganados, puntajeStyle);
      var txt4 = game.add.text(cuadradoUser.width/3,160,'TOTAL PARTIDOS PERDIDOS', puntajeStyle);
-    var txt4a = game.add.text(cuadradoUser.width-60,160,user.perdidos, puntajeStyle);
+     var txt4a = game.add.text(cuadradoUser.width-60,160,user.perdidos, puntajeStyle);
 
     	cuadradoUser.add(txt1);
     	cuadradoUser.add(txt2);
@@ -222,6 +254,11 @@ Singleplayer.prototype = {
 
      positionY+=215;
 
+     cuadradoUser.forEach(function(item) {
+     item.inputEnabled = true;
+
+     item.events.onInputDown.add(self.sendPlayer, item);
+   });
 
 	 return cuadradoUser;
  },
@@ -229,13 +266,26 @@ Singleplayer.prototype = {
  createLine: function(a, b,c){
 
    var graphics = game.add.graphics(0, 00);
-     graphics.beginFill(0x00396e);
-     graphics.lineStyle(2, 0x00396e, 1);
-     graphics.moveTo(a,b);
-     graphics.lineTo(c, b);
-     graphics.endFill();
+   graphics.beginFill(0x00396e);
+   graphics.lineStyle(2, 0x00396e, 1);
+   graphics.moveTo(a,b);
+   graphics.lineTo(c, b);
+   graphics.endFill();
 
    return graphics;
+
+ },
+
+
+ sendPlayer: function(grupo){
+
+   var object={
+     player: grupo.parent.children[2]
+   };
+
+   this.game.state.states["Multiplayer"].playerSelected= object;
+
+   this.game.state.start("Multiplayer");
 
  }
 
