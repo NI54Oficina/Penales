@@ -24,13 +24,16 @@ GameMenu.prototype = {
   create: function () {
 
     self=this;
-
-    // if (music.name !== "dangerous" && playMusic) {
-    //   music.stop();
-    //   music = game.add.audio('dangerous');
-    //   music.loop = true;
-    //   music.play();
+    //
+    // if (fondoMusic.name !== "dangerous" && playMusic) {
+    //   fondoMusic.stop();
+    //   fondoMusic= game.add.audio('dangerous');
+    //   fondoMusic.loop = true;
+    //   fondoMusic.play();
     // }
+    fondoMusic = game.add.audio('dangerous');
+    fondoMusic.loop = true;
+    fondoMusic.play();
 
 
 
@@ -40,6 +43,16 @@ GameMenu.prototype = {
     game.add.sprite(0, 0, 'menu-bg');
 
     var graphics = game.add.graphics(100, 100);
+
+    musica= game.add.sprite(this.game.width-100,20, 'musica-on');
+    musica.inputEnabled = true;
+    musica.events.onInputDown.add(this.Musica, musica);
+
+
+    sonido= game.add.sprite(this.game.width-50,20, 'sonido-on');
+    sonido.inputEnabled = true;
+  //  sonido.events.onInputDown.add(this.Sonido, sonido);
+
 
 
 
@@ -146,6 +159,33 @@ GameMenu.prototype = {
 	game.state.start("Game");
 
   },
+
+  Musica: function(target){
+    if(fondoMusic.mute ==true){
+      target.loadTexture('musica-on', 0, false);
+      game.sound.mute = false;
+      console.log("play");
+
+    }else{
+      target.loadTexture('musica-off', 0, false);
+      game.sound.mute = true;
+      console.log("stop");
+    }
+
+  },
+
+  Sonido: function(target){
+
+    console.log("Agregar Sonido");
+    // if(fondoSonido.mute ==true){
+    //   target.loadTexture('sonido-off', 0, false);
+    //   music.mute = false;
+    // }else{
+    //   target.loadTexture('sonido-on', 0, false);
+    //   music.mute = true;
+    // }
+  }
+
 
 
 };

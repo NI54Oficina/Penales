@@ -94,7 +94,7 @@ var Splash = function () {};
     this.loadScripts();
     this.loadImages();
     this.loadFonts();
-  //  this.loadBgm();
+    this.loadBgm();
 
   },
 
@@ -112,15 +112,15 @@ var Splash = function () {};
   },
 
   addGameMusic: function () {
-    music = game.add.audio('dangerous');
-    music.loop = true;
-    music.play();
+    fondoMusic = game.add.audio('dangerous');
+    fondoMusic.loop = true;
+    fondoMusic.play();
   },
 
   create: function () {
     this.status.setText('Cargando');
     this.addGameStates();
-  //this.addGameMusic();
+    this.addGameMusic();
 	  Emit("login"," ","loginConfirmed","logueado",this);
   },
 
