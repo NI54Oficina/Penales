@@ -9,14 +9,14 @@ Selectplayer.prototype = {
   addMenuOption: function(text, callback) {
 
 
-        var optionStyle = { font: '40pt RobotoBold', align: 'center',fill:'#1b1464' ,stroke: '#1b1464'};
+        var optionStyle = { font: '35pt RobotoBold', align: 'center',fill:'#1b1464' ,stroke: '#1b1464'};
 
       // aplicando el background de cada texto
 
         var Boton =game.add.group();
-        Boton.position={x:100,y:this.optionCount*530};
+        Boton.position={y:this.optionCount*530};
 
-        var 	myBitmap = this.game.add.bitmapData(540, 80);
+        var 	myBitmap = this.game.add.bitmapData(450, 80);
         var  grd=myBitmap.context.createLinearGradient(0,0,0,40);
         grd.addColorStop(0,"#fbe43e");
         grd.addColorStop(0.9,"#fbe43e");
@@ -25,15 +25,14 @@ Selectplayer.prototype = {
         myBitmap.context.fillRect(0,0,this.game.height,this.game.width);
 
         var background = this.game.add.sprite(0,0, myBitmap);
+      //  background.position.x= this.game.width/2  - background.wid
         down= this.game.make.sprite(-20,45, 'brillodown');
-        up= this.game.make.sprite(200,-15, 'brilloup');
+        up= this.game.make.sprite(150,-15, 'brilloup');
         down.scale.setTo(0.5,0.5);
         up.scale.setTo(0.5,0.5);
         Boton.add(down);
         Boton.add(up);
-
-
-         Boton.add(background);
+        Boton.add(background);
 
       // aplicando el background de cada texto
 
@@ -43,9 +42,9 @@ Selectplayer.prototype = {
       Boton.add(txt);
 
 
-      txt.position.x=Boton.width/2 - txt.width/2;
+      txt.position.x=background.width/2 - txt.width/2;
 
-      Boton.position.x=game.width/2 - Boton.width/2;
+      Boton.position.x=this.game.width/2 - background.width/2;
 
       this.world.bringToTop(txt);
 
@@ -83,6 +82,12 @@ Selectplayer.prototype = {
          Boton.add(testMask);
         background.mask=testMask;
 
+      //   console.log(Boton.position);
+      //   console.log(background.width);
+      //   console.log(this.game.width);
+      //
+      // //  console.log(this.game.width/2 - Boton.width/2);
+
 
       return Boton;
 
@@ -117,8 +122,6 @@ Selectplayer.prototype = {
 
       //fondo
 
-
-
       leftCorner=game.add.sprite(0, 0, 'left-corner');
       leftCorner.scale.setTo(.75,0.75);
       a= game.add.sprite(this.game.width, 0, 'right-corner');
@@ -145,8 +148,8 @@ Selectplayer.prototype = {
 
       // imagen mas baja a la izquierda
       img5= game.add.sprite(145, 225, 'img-5');
-	  var shadowX=20;
-	  var shadowY=365;
+  	  var shadowX=20;
+  	  var shadowY=365;
       h5=img5.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
 
       // imagen mas baja aa la derecha
