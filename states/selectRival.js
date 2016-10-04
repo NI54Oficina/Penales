@@ -164,7 +164,6 @@ Selectplayer.prototype = {
         cover.drawRoundedRect(18, 19,arrayCr[i].width-52 ,arrayCr[i].height-52,35);
         cover.endFill();
         cv=arrayCr[i].addChild(cover);
-
       }
 
 
@@ -282,7 +281,6 @@ Selectplayer.prototype = {
 
 
 console.log(carrousel);
-
 
       self.setTo5(arrayCr[e]);
       self.setTo4(arrayCr[d]);
