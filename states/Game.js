@@ -74,7 +74,7 @@ Game.prototype = {
 
 	this.drawGui();
 
-  // this.pantallaOponente();
+  this.pantallaOponente();
 },
 
 drawBackground: function(){
