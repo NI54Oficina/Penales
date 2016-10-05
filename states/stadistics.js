@@ -167,15 +167,10 @@ Stadistics.prototype = {
 
     //title
 
-    var titleStyle = { font: '40px BitterBold', fill: 'white', align: 'center'};
-    var line = this.game.make.sprite(-220,45, 'line');
-    //line.scale.setTo(0.8,0.8);
-    var textTitle = game.add.text(0, 50, "ESTADÍSTICAS", titleStyle);
-    textTitle.position.x=this.game.width/2- textTitle.width/2;
+    textTitle= self.createGeneralTitle("ESTADISTICAS", true);
 
     header.addChild(textTitle);
 
-    textTitle.addChild(line);
     header.fixedToCamera=true;
     //title
 

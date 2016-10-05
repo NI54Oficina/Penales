@@ -37,9 +37,8 @@ Selectplayer.prototype = {
       leftCorner.scale.setTo(.75,0.75);
       a= game.add.sprite(this.game.width, 0, 'right-corner');
       a.scale.setTo(-.75,0.75);
-
+      
       self.createSoundGraphics();
-
 
 
       volver= game.add.sprite(40, 30, 'volver');
@@ -47,8 +46,9 @@ Selectplayer.prototype = {
       volver.events.onInputDown.add(this.GoBack,volver);
 
 
-      titulo= game.add.text(0,50, 'SELECCIONAR RIVAL', { font: " 40px BitterBold", fill: "white", align:'center' });
-      titulo.position.x= this.game.width/2- titulo.width/2;
+      self.createGeneralTitle("SELECCIONAR RIVAL", false);
+      // titulo= game.add.text(0,50, 'SELECCIONAR RIVAL', { font: " 40px BitterBold", fill: "white", align:'center' });
+      // titulo.position.x= this.game.width/2- titulo.width/2;
 
 
       search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });

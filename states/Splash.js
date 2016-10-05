@@ -135,12 +135,12 @@ var Splash = function () {};
   addGameMusic: function () {
     fondoMusic = game.add.audio('musica');
     fondoMusic.loop = true;
-    // fondoMusic.mute=true;
+    fondoMusic.mute=true;
     fondoMusic.play();
 
     fondoSonido = game.add.audio('sonido');
     fondoSonido.loop = true;
-    // fondoSonido.mute=true;
+    fondoSonido.mute=true;
     fondoSonido.play();
 
 

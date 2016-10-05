@@ -53,11 +53,13 @@ create: function(){
       //esquina
 
       //titulo
-      var titleStyle = { font: '40px BitterBold', fill: 'white', align: 'center'};
-      var line = this.game.make.sprite(-160,45, 'line');
 
-      var textTitle = game.add.text(game.world.centerX-200, 50, "SELECCIONAR RIVAL", titleStyle);
-      textTitle.addChild(line);
+      self.createGeneralTitle("SELECCIONAR RIVAL", true);
+      // var titleStyle = { font: '40px BitterBold', fill: 'white', align: 'center'};
+      // var line = this.game.make.sprite(-160,45, 'line');
+      //
+      // var textTitle = game.add.text(game.world.centerX-200, 50, "SELECCIONAR RIVAL", titleStyle);
+      // textTitle.addChild(line);
       //titulo
 
       //pantalla de seleccion
