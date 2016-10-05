@@ -8,26 +8,7 @@ Game.prototype = {
     this.optionCount = 1;
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
-    game.load.spritesheet('button', 'assets/images/boton.png', 300, 300);
-    game.load.image('assert', 'assets/images/green-button.png', 150,150);
-    game.load.image('noassert', 'assets/images/red-button.png', 150,150);
-    game.load.image('orange-button', 'assets/images/orange-button.png', 150,150);
-    game.load.image('yellow-button', 'assets/images/yellow-button.png', 150,150);
-    game.load.image('triangle', 'assets/images/puntero.png', 150,150);
-
-    game.load.spritesheet('pelota', 'assets/images/pelota.png', 40, 40);
-    game.load.spritesheet('pelota-sombra', 'assets/images/sombraPelota.png', 40, 40);
-	game.load.image('arco-0', 'assets/images/arco-0.png');
-	game.load.atlas('arco', 'assets/images/arcos-sprite.png', 'assets/images/arcos-sprite.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-    game.load.atlas('arquero-local', 'assets/images/out.png', 'assets/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-	game.load.atlas('pateador-local', 'assets/images/pateador-test.png', 'assets/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-    game.load.atlas('arquero-visitante', 'assets/images/out2.png', 'assets/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-	game.load.atlas('pateador-visitante', 'assets/images/pateador-test2.png', 'assets/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-
-	game.load.image('fondo1', 'assets/images/fondo-game1.png', 759, 150);
-	game.load.image('fondo2', 'assets/images/fondo-game2.png', 378, 150);
-	game.load.image('fondo3', 'assets/images/fondo-game3.png', 1136, 491);
-
+  
   },
 
   create: function () {
@@ -61,6 +42,8 @@ Game.prototype = {
 	presicion= 0;
 	velocidad=2000;
 
+
+
     this.drawBackground();
 
 	equipoUnoText = game.add.text(10, 160, 'Equipo 1', { font: " 20px TheMinion", fill: "black", align: "center" });
@@ -90,6 +73,8 @@ Game.prototype = {
 	}
 
 	this.drawGui();
+
+  // this.pantallaOponente();
 },
 
 drawBackground: function(){
@@ -312,15 +297,15 @@ updateCounter: function () {
   },
 
   setArco:function(posicion){
-	arco1.play(posicion) ;
-	arco2.play(posicion);
-	arco3.play(posicion);
+  	arco1.play(posicion) ;
+  	arco2.play(posicion);
+  	arco3.play(posicion);
   },
 
   resetArco:function(){
-	arco1.play("idle") ;
-	arco2.play("idle");
-	arco3.play("idle");
+  	arco1.play("idle") ;
+  	arco2.play("idle");
+  	arco3.play("idle");
   },
 
   getResult: function(){
@@ -1192,6 +1177,7 @@ moveDown: function(){
 Clicked: function(){
 	clicked=0;
 	this.pause=false;
+  //aca desaparece la pantalla de oponente
 },
 
 mouseUpPateador:function(){

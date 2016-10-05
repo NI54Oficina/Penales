@@ -55,43 +55,8 @@ Singleplayer.prototype = {
 
       puntajeStyle = { font: '18pt CondensedRegular', fill: 'white'};
       nombreStyle = { font: '20pt CondensedBold', fill: 'white'};
-      usuario={
-        nombre:'FRANCISCO SERANTE',
-        racha:  51,
-        ganados:0,
-        perdidos: 10,
-        avatar:'img-1'
 
-      };
-
-      usuario2={
-        nombre:'MELANIA MIRANDA',
-        racha:  100,
-        ganados:100,
-        perdidos:0,
-        avatar:'img-2'
-
-      };
-
-      usuario3={
-        nombre:'CRISTIANO RONALDO',
-        racha:  100,
-        ganados:100,
-        perdidos:0,
-        avatar:'img-3'
-
-      };
-
-      usuario4={
-        nombre:'DIEGO MARADONA',
-        racha:  100,
-        ganados:100,
-        perdidos:0,
-        avatar:'img-4'
-
-      };
-
-      usuarios=[usuario, usuario2,usuario3, usuario4];
+      usuarios= self.generateDemoUsers(self);
 
       console.log(usuarios);
   		for(var a=0;a<usuarios.length;a++){

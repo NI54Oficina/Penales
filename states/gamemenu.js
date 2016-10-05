@@ -24,23 +24,10 @@ GameMenu.prototype = {
   create: function () {
 
     self=this;
-    //
-    // if (fondoMusic.name !== "dangerous" && playMusic) {
-    //   fondoMusic.stop();
-    //   fondoMusic= game.add.audio('dangerous');
-    //   fondoMusic.loop = true;
-    //   fondoMusic.play();
-    // }
-    // fondoMusic = game.add.audio('musica');
-    // fondoMusic.loop = true;
+
     fondoMusic.play();
 
-    // fondoSonido = game.add.audio('sonido');
-    // fondoSonido.loop = true;
     fondoSonido.play();
-
-    //fondo
-    //  game.stage.disableVisibilityChange = true;
 
     game.add.sprite(0, 0, 'menu-bg');
 
@@ -56,8 +43,6 @@ GameMenu.prototype = {
     sonido.events.onInputDown.add(this.Sonido, sonido);
 
 
-
-
     game.add.existing(this.titleText);
     search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
     search.visible=false;
@@ -67,10 +52,7 @@ GameMenu.prototype = {
     // });
 
     this.addMenuOption('CLÁSICO \none', function () {
-
       game.state.start("Selectplayer");
-
-
     });
 
 
@@ -82,6 +64,11 @@ GameMenu.prototype = {
       game.state.start("Stadistics");
     });
 
+    this.addMenuOption('VERSUS', function () {
+      game.state.start("Versus");
+    });
+
+
     // this.addMenuOption('GAMEOVER', function () {
     //   game.state.start("GameOver");
     // });
@@ -90,34 +77,34 @@ GameMenu.prototype = {
     //Creacion variables en localStorage
 
 
-            localStorage["TotalPartidaAtajados"] = 0;
-            localStorage["TotalPartidaConvertidos"] = 0;
-            localStorage["TotalPartidaErrados"] = 0;
-            localStorage["TotalPartidaNoAtajados"] = 0;
-            localStorage["TotalPartidaUser"] = 0;
-            localStorage["TotalPartidaComputer"] = 0;
+      localStorage["TotalPartidaAtajados"] = 0;
+      localStorage["TotalPartidaConvertidos"] = 0;
+      localStorage["TotalPartidaErrados"] = 0;
+      localStorage["TotalPartidaNoAtajados"] = 0;
+      localStorage["TotalPartidaUser"] = 0;
+      localStorage["TotalPartidaComputer"] = 0;
 
 
-          if(localStorage.getItem("PartidosGanados")===null){
-             localStorage["PartidosGanados"] = 0;
-             localStorage["PartidosPerdidos"] = 0;
-             localStorage["TotalAtajados"] = 0;
-             localStorage["TotalConvertidos"] = 0;
-             localStorage["TotalErrados"] = 0;
-             localStorage["TotalNoAtajados"] = 0;
-             localStorage["RachaGanados"] = 0;
-             localStorage["RachaPerdidos"] = 0;
-             localStorage["MejorRachaConvertida"] = 0;
-             localStorage["RachaConvertidos"] = 0;
-             localStorage["MejorRachaAtajados"] = 0;
-             localStorage["RachaAtajados"] = 0;
-             localStorage["PeorRachaErrados"] = 0;
-             localStorage["RachaErrados"] = 0;
-             localStorage["PeorRachaNoAtajados"] = 0;
-             localStorage["RachaNoAtajados"] = 0;
+    if(localStorage.getItem("PartidosGanados")===null){
+       localStorage["PartidosGanados"] = 0;
+       localStorage["PartidosPerdidos"] = 0;
+       localStorage["TotalAtajados"] = 0;
+       localStorage["TotalConvertidos"] = 0;
+       localStorage["TotalErrados"] = 0;
+       localStorage["TotalNoAtajados"] = 0;
+       localStorage["RachaGanados"] = 0;
+       localStorage["RachaPerdidos"] = 0;
+       localStorage["MejorRachaConvertida"] = 0;
+       localStorage["RachaConvertidos"] = 0;
+       localStorage["MejorRachaAtajados"] = 0;
+       localStorage["RachaAtajados"] = 0;
+       localStorage["PeorRachaErrados"] = 0;
+       localStorage["RachaErrados"] = 0;
+       localStorage["PeorRachaNoAtajados"] = 0;
+       localStorage["RachaNoAtajados"] = 0;
 
 
-          }
+    }
 
   //Fin Creacion ariables en localStorage
 	//game.world.setBounds(0, 0, 10000, 10000);
@@ -144,21 +131,21 @@ GameMenu.prototype = {
 
   listenerSearch: function (msg){
 
-	search.visible=false;
-	this.test();
+    search.visible=false;
+    this.test();
     console.log(msg);
-	auxArray=JSON.parse(msg);
+    auxArray=JSON.parse(msg);
 
-	console.log("Oponente Encontrado");
+    console.log("Oponente Encontrado");
 
-	this.game.state.states["Game"].partida=auxArray;
-	this.game.state.states['Game'].perfil = auxArray.oponente;
-	this.game.state.states['Game'].tiempoMaximo = auxArray.tiempomaximo;
-	this.game.state.states['Game'].triesA= auxArray.IntentosOponente;
-	this.game.state.states['Game'].triesP= auxArray.Intentoslocal;
-	this.game.state.states['Game'].modo=auxArray.rol;
+    this.game.state.states["Game"].partida=auxArray;
+    this.game.state.states['Game'].perfil = auxArray.oponente;
+    this.game.state.states['Game'].tiempoMaximo = auxArray.tiempomaximo;
+    this.game.state.states['Game'].triesA= auxArray.IntentosOponente;
+    this.game.state.states['Game'].triesP= auxArray.Intentoslocal;
+    this.game.state.states['Game'].modo=auxArray.rol;
 
-	game.state.start("Game");
+    game.state.start("Game");
 
   },
 

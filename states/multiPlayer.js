@@ -2,93 +2,11 @@ var Multiplayer = function(game) {};
 
 Multiplayer.prototype = {
 
-  preload: function () {
+preload: function () {
     this.optionCount = 1;
-  },
+},
 
-  addMenuOption: function(text, callback) {
-
-                  var optionStyle = { font: '35pt RobotoBold', align: 'center',fill:'#1b1464' ,stroke: '#1b1464'};
-
-                // aplicando el background de cada texto
-
-                  var Boton =game.add.group();
-                  Boton.position={x:100,y:this.optionCount*530};
-
-                  var 	myBitmap = this.game.add.bitmapData(540, 80);
-                  var  grd=myBitmap.context.createLinearGradient(0,0,0,40);
-                  grd.addColorStop(0,"#fbe43e");
-                  grd.addColorStop(0.9,"#fbe43e");
-                  grd.addColorStop(1,"#cea428");
-                  myBitmap.context.fillStyle=grd;
-                  myBitmap.context.fillRect(0,0,this.game.height,this.game.width);
-
-                  var background = this.game.add.sprite(0,0, myBitmap);
-                  down= this.game.make.sprite(-20,45, 'brillodown');
-                  up= this.game.make.sprite(200,-15, 'brilloup');
-                  down.scale.setTo(0.5,0.5);
-                  up.scale.setTo(0.5,0.5);
-                  Boton.add(down);
-                  Boton.add(up);
-
-
-                   Boton.add(background);
-
-                // aplicando el background de cada texto
-
-                var txt = game.add.text(0, 10 , text, optionStyle);
-
-
-                Boton.add(txt);
-
-
-                txt.position.x=background.width/2 - txt.width/2;
-
-                Boton.position.x=game.width/2 - background.width/2;
-
-                this.world.bringToTop(txt);
-
-                var onOver = function (target) {
-                  target.fill = "black";
-                  target.stroke = "rgba(200,200,200,0.5)";
-                  txt.useHandCursor = true;
-                };
-
-                var onOut = function (target) {
-                  target.fill = "#1b1464";
-                  target.stroke = "#1b1464";
-                  txt.useHandCursor = false;
-                };
-
-
-                txt.events.onInputOver.add(onOver, this);
-                txt.events.onInputOut.add(onOut, this);
-
-
-                Boton.forEach(function(item) {
-                  item.inputEnabled = true;
-                item.events.onInputUp.add(callback);
-
-            }, this);
-
-                this.optionCount ++;
-
-
-                   var testMask=game.add.graphics(0, 0);
-                   testMask.beginFill(0xFFFF0B, 0.5);
-                   testMask.drawRoundedRect(0, 0,background.width ,70,10);
-                   testMask.endFill();
-                  //
-                   Boton.add(testMask);
-                  background.mask=testMask;
-
-
-
-                return Boton;
-
-  },
-
-  create: function(){
+create: function(){
       self = this;
 
       txtstyle= { font: '25pt CondensedRegular', fill: 'white'};
@@ -119,9 +37,6 @@ Multiplayer.prototype = {
 
       //fondo
 
-
-
-
       //esquinas
       leftCorner=game.add.sprite(0, 0, 'left-corner');
       leftCorner.scale.setTo(.75,0.75);
@@ -132,7 +47,6 @@ Multiplayer.prototype = {
       volver= game.add.sprite(40, 30, 'volver');
       volver.inputEnabled = true;
       volver.events.onInputDown.add(this.GoBack,volver);
-
 
       //esquina
 
@@ -186,48 +100,48 @@ Multiplayer.prototype = {
 
       //modificacion de texto si selecciona el jugador o no;
 
-
-
       //pantalla de seleccion
 
-      this.addMenuOption('COMENZAR', function () {
+      this.addMenuOptionInner('COMENZAR', function () {
         search.visible=true;
         Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
 
       });
 
 
-  },
+},
 
   GoBack: function(target){
     game.state.start("GameMenu");
-  },
+},
 
-  SelectPlayer: function(target){
+SelectPlayer: function(target){
     game.state.start("Singleplayer");
-  },
+},
 
-  Menu: function(target){
+Menu: function(target){
     game.state.start("GameMenu");
-  },
+},
 
-  listenerSearch: function (msg){
+listenerSearch: function (msg){
 
-	search.visible=false;
+  	search.visible=false;
     console.log(msg);
-	auxArray=JSON.parse(msg);
+  	auxArray=JSON.parse(msg);
 
-	console.log("Oponente Encontrado");
+  	console.log("Oponente Encontrado");
 
-	this.game.state.states["Game"].partida=auxArray;
-	this.game.state.states['Game'].perfil = auxArray.oponente;
-	this.game.state.states['Game'].tiempoMaximo = auxArray.tiempomaximo;
-	this.game.state.states['Game'].triesA= auxArray.IntentosOponente;
-	this.game.state.states['Game'].triesP= auxArray.Intentoslocal;
-	this.game.state.states['Game'].modo=auxArray.rol;
+  	this.game.state.states["Game"].partida=auxArray;
+  	this.game.state.states['Game'].perfil = auxArray.oponente;
+  	this.game.state.states['Game'].tiempoMaximo = auxArray.tiempomaximo;
+  	this.game.state.states['Game'].triesA= auxArray.IntentosOponente;
+  	this.game.state.states['Game'].triesP= auxArray.Intentoslocal;
+  	this.game.state.states['Game'].modo=auxArray.rol;
 
-	game.state.start("Game");
+  	game.state.start("Game");
 
-  },
+},
 
 }
+
+Phaser.Utils.mixinPrototype(Multiplayer.prototype, mixins);
