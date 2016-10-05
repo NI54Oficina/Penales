@@ -16,50 +16,11 @@ create: function(){
 
       console.log(this.playerSelected);
 
-      //fondo
-      var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
-      var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
-      grd.addColorStop(0,"black");
-      grd.addColorStop(0.15,"#11224d");
-      grd.addColorStop(0.4,"#0d4e88");
-      grd.addColorStop(.5,"#0d4e88");
-      grd.addColorStop(1,"#009ee1");
-      gameBack.context.fillStyle=grd;
-      gameBack.context.fillRect(0,0,this.game.width,this.game.height);
-      this.game.add.sprite(0,0,gameBack);
-
-      game.stage.disableVisibilityChange = true;
-      curva=game.add.sprite(0,0, 'curva');
-      curva.position={x:this.game.width/2-curva.width/2, y:this.game.height/2};
-      dots = game.add.tileSprite(0, 0, this.game.width,this.game.height,'puntitos');
-      dots.alpha=0.3;
-      dots.fixedToCamera=true;
-
-      //fondo
-
-      //esquinas
-      leftCorner=game.add.sprite(0, 0, 'left-corner');
-      leftCorner.scale.setTo(.75,0.75);
-      a= game.add.sprite(this.game.width, 0, 'right-corner');
-      a.scale.setTo(-.75,0.75);
-
+      self.createBackground(true);
+      self.createHeader(this.GoBack,false);
       self.createSoundGraphics();
-
-
-      volver= game.add.sprite(40, 30, 'volver');
-      volver.inputEnabled = true;
-      volver.events.onInputDown.add(this.GoBack,volver);
-
-      //esquina
-
-      //titulo
-
       self.createGeneralTitle("SELECCIONAR RIVAL", true);
-      // var titleStyle = { font: '40px BitterBold', fill: 'white', align: 'center'};
-      // var line = this.game.make.sprite(-160,45, 'line');
-      //
-      // var textTitle = game.add.text(game.world.centerX-200, 50, "SELECCIONAR RIVAL", titleStyle);
-      // textTitle.addChild(line);
+
       //titulo
 
       //pantalla de seleccion
@@ -123,9 +84,6 @@ SelectPlayer: function(target){
     game.state.start("Singleplayer");
 },
 
-Menu: function(target){
-    game.state.start("GameMenu");
-},
 
 listenerSearch: function (msg){
 

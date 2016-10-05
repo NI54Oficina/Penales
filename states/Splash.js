@@ -140,7 +140,7 @@ var Splash = function () {};
 
     fondoSonido = game.add.audio('sonido');
     fondoSonido.loop = true;
-    fondoSonido.mute=true;
+    fondoSonido.mute = true;
     fondoSonido.play();
 
 

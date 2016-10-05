@@ -8,7 +8,7 @@ Game.prototype = {
     this.optionCount = 1;
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
-  
+
   },
 
   create: function () {
@@ -1188,3 +1188,5 @@ mouseUpPateador:function(){
 },
 
 };
+
+Phaser.Utils.mixinPrototype(Game.prototype, mixins);

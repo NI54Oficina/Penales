@@ -12,43 +12,13 @@ Selectplayer.prototype = {
       i=0;
       muttex=0;
 
-      //fondo
-      var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
-      var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
-      grd.addColorStop(0,"black");
-      grd.addColorStop(0.15,"#11224d");
-      grd.addColorStop(0.4,"#0d4e88");
-      grd.addColorStop(.5,"#0d4e88");
-      grd.addColorStop(1,"#009ee1");
-      gameBack.context.fillStyle=grd;
-      gameBack.context.fillRect(0,0,this.game.width,this.game.height);
-      this.game.add.sprite(0,0,gameBack);
 
-      game.stage.disableVisibilityChange = true;
-      curva=game.add.sprite(0,0, 'curva');
-      curva.position={x:this.game.width/2-curva.width/2, y:this.game.height/2};
-      dots = game.add.tileSprite(0, 0, this.game.width,this.game.height,'puntitos');
-      dots.alpha=0.3;
-      dots.fixedToCamera=true;
-
-      //fondo
-
-      leftCorner=game.add.sprite(0, 0, 'left-corner');
-      leftCorner.scale.setTo(.75,0.75);
-      a= game.add.sprite(this.game.width, 0, 'right-corner');
-      a.scale.setTo(-.75,0.75);
-      
+      self.createBackground(true);
+      self.createHeader(this.GoBack,false);
       self.createSoundGraphics();
 
 
-      volver= game.add.sprite(40, 30, 'volver');
-      volver.inputEnabled = true;
-      volver.events.onInputDown.add(this.GoBack,volver);
-
-
       self.createGeneralTitle("SELECCIONAR RIVAL", false);
-      // titulo= game.add.text(0,50, 'SELECCIONAR RIVAL', { font: " 40px BitterBold", fill: "white", align:'center' });
-      // titulo.position.x= this.game.width/2- titulo.width/2;
 
 
       search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
@@ -63,7 +33,7 @@ Selectplayer.prototype = {
   	  var shadowY=365;
       h5=img5.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
 
-      // imagen mas baja aa la derecha
+      // imagen mas baja a la derecha
       img4= game.add.sprite(145, 225, 'img-4');
       h4=img4.addChild(game.make.sprite(shadowX,shadowY, 'shadow'));
       //imagen menos baja a la izquierda

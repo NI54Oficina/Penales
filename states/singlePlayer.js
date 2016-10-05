@@ -22,26 +22,8 @@ Singleplayer.prototype = {
 		});
 
 		 game.kineticScrolling.start();
-      //fondo
-      var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
-      var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
-      grd.addColorStop(0,"black");
-      grd.addColorStop(0.15,"#11224d");
-      grd.addColorStop(0.4,"#0d4e88");
-      grd.addColorStop(.5,"#0d4e88");
-      grd.addColorStop(1,"#009ee1");
-      gameBack.context.fillStyle=grd;
-      gameBack.context.fillRect(0,0,this.game.width,this.game.height);
-      this.game.add.sprite(0,0,gameBack).fixedToCamera=true;;
 
-      game.stage.disableVisibilityChange = true;
-
-      dots = game.add.tileSprite(0, 0, this.game.width,this.game.height,'puntitos');
-      dots.alpha=0.3;
-      dots.fixedToCamera=true;
-
-
-      //fondo de participantes
+     self.createBackground(false);
 
       y=20;
       n=0;
@@ -50,7 +32,6 @@ Singleplayer.prototype = {
   		var oponentes= game.add.group();
       positionY=200;
       positionX=200;
-
 
 
       puntajeStyle = { font: '18pt CondensedRegular', fill: 'white'};
@@ -63,62 +44,14 @@ Singleplayer.prototype = {
   			oponentes.add( self.createDataForPlayer(self, usuarios[a]));
   		}
 
-      //fondo de participantes
-
-      //fondo del header
-
-      var 	bitmap = this.game.add.bitmapData(this.game.width,200);
-      var  bit=gameBack.context.createLinearGradient(0,0,0,200);
-      bit.addColorStop(0,"rgba(17,16,20,1)");
-      bit.addColorStop(0.30,"rgba(17,36,80,1)");
-      bit.addColorStop(0.40,"rgba(17,36,80,1)");
-      bit.addColorStop(0.50,"rgba(20,43,90,1)");
-      bit.addColorStop(0.80,"rgba(16,59,114,.5)");
-      bit.addColorStop(0.90,"rgba(16,59,114,.2)");
-      bit.addColorStop(1,"rgba(16,59,114,0)");
-      bitmap.context.fillStyle=bit;
-      bitmap.context.fillRect(0,0,this.game.width,this.game.height);
-      header=this.game.add.sprite(0,0,bitmap);
-      headerDot = game.add.tileSprite(0, 0,this.game.width,200,'puntitos');
-      headerDot.alpha=.1;
-      header.addChild(headerDot);
-
-      //fondo del header
-
-     //title
-
-    var textTitle=self.createGeneralTitle("SELECCIONAR RIVAL", true);
-
-     header.addChild(textTitle);
-
-     header.fixedToCamera=true;
-     //title
-
-    //esquinas
-
-    var leftCorner= game.add.sprite(0, 0, 'left-corner');
-    leftCorner.scale.setTo(.75,0.75);
-    leftCorner.fixedToCamera=true;
-    a= game.add.sprite(this.game.width, 0, 'right-corner');
-    a.scale.setTo(-.75,0.75);
-    a.fixedToCamera=true;
-
-    self.createSoundGraphics();
-
-
-    volver= game.add.sprite(40, 30, 'volver');
-    volver.inputEnabled = true;
-    volver.events.onInputDown.add(this.GoBack,volver);
-    volver.fixedToCamera=true;
-
-
+     self.createHeader(this.GoBack,true);
+     self.createSoundGraphics();
+     var textTitle=self.createGeneralTitle("SELECCIONAR RIVAL", true);
 
     search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
     search.visible=false;
 
 
-
-    //esquina
 		game.world.setBounds(0, 0, this.game.width,oponentes.height+100+leftCorner.height);
 
 
