@@ -38,6 +38,9 @@ Selectplayer.prototype = {
       a= game.add.sprite(this.game.width, 0, 'right-corner');
       a.scale.setTo(-.75,0.75);
 
+      self.createSoundGraphics();
+
+
 
       volver= game.add.sprite(40, 30, 'volver');
       volver.inputEnabled = true;

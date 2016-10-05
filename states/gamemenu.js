@@ -25,22 +25,12 @@ GameMenu.prototype = {
 
     self=this;
 
-    fondoMusic.play();
-
-    fondoSonido.play();
 
     game.add.sprite(0, 0, 'menu-bg');
 
     var graphics = game.add.graphics(100, 100);
 
-    musica= game.add.sprite(this.game.width-100,20, 'musica-on');
-    musica.inputEnabled = true;
-    musica.events.onInputDown.add(this.Musica, musica);
-
-
-    sonido= game.add.sprite(this.game.width-50,20, 'sonido-on');
-    sonido.inputEnabled = true;
-    sonido.events.onInputDown.add(this.Sonido, sonido);
+    self.createSoundGraphics();
 
 
     game.add.existing(this.titleText);
@@ -149,33 +139,6 @@ GameMenu.prototype = {
 
   },
 
-  Musica: function(target){
-
-    if(fondoMusic.mute ==true){
-      target.loadTexture('musica-on', 0, false);
-
-      fondoMusic.mute= false;
-
-    }else{
-      target.loadTexture('musica-off', 0, false);
-
-      fondoMusic.mute= true;
-    }
-
-  },
-
-  Sonido: function(target){
-
-
-    if(fondoSonido.mute ==true){
-      target.loadTexture('sonido-on', 0, false);
-      fondoSonido.mute=false;
-    }else{
-      target.loadTexture('sonido-off', 0, false);
-
-      fondoSonido.mute=true;
-    }
-  }
 
 
 

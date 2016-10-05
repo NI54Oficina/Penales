@@ -188,6 +188,8 @@ Stadistics.prototype = {
     a.fixedToCamera=true;
     a.scale.setTo(-.75,0.75)
 
+    self.createSoundGraphics();
+
 
     volver= game.add.sprite(40, 30, 'volver');
     volver.inputEnabled = true;
@@ -321,3 +323,5 @@ y+=15;
 
 
 }
+
+Phaser.Utils.mixinPrototype(Stadistics.prototype, mixins);

@@ -108,6 +108,8 @@ Singleplayer.prototype = {
     a.scale.setTo(-.75,0.75);
     a.fixedToCamera=true;
 
+    self.createSoundGraphics();
+
 
     volver= game.add.sprite(40, 30, 'volver');
     volver.inputEnabled = true;
@@ -257,3 +259,5 @@ Singleplayer.prototype = {
 
 
   }
+
+  Phaser.Utils.mixinPrototype(Singleplayer.prototype, mixins);

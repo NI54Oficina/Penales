@@ -65,24 +65,43 @@ Versus.prototype = {
     console.log(usuarios);
 
     datos=game.add.group();
+    datos.width=700;
+    datos.height=200;
     puntajeStyle = { font: '15pt CondensedLight', fill: 'yellow'};
-    var nombreDatos1 = game.add.text(0, 0, "RACHA ACTUAL",puntajeStyle);
-    var nombreDatos2 = game.add.text(0, 0, "PARTIDOS GANADOS",puntajeStyle);
-    var nombreDatos3 = game.add.text(0, 0, "PARTIDOS PERDIDOS",puntajeStyle);
-    datos.add( nombreDatos1 );
-    datos.add( nombreDatos2 );
-    datos.add( nombreDatos3 );
+    var nombreDatos1 = game.add.text(300, 0, "RACHA ACTUAL",puntajeStyle);
+    var numberDatos1 = game.add.text(30, 0,usuarios[1].racha,puntajeStyle);
+    var datos1 = game.add.text(650, 0,usuarios[2].racha,puntajeStyle);
+    var line1=self.createLine(0,30,700);
 
-    usuarios[1].racha = ;
-    usuarios[1].ganados= ;
-    usuarios[1].perdidos= ;
-
-    usuarios[2].racha= ;
-    usuarios[2].ganados= ;
-    usuarios[2].perdidos= ;
+    var nombreDatos2 = game.add.text(290, 50, "PARTIDOS GANADOS",puntajeStyle);
+    var numberDatos2 = game.add.text(30, 50, usuarios[1].ganados,puntajeStyle);
+    var datos2 = game.add.text(650, 50,usuarios[2].ganados,puntajeStyle);
+    var line2=self.createLine(0,80,700);
 
 
+    var nombreDatos3 = game.add.text(290, 100, "PARTIDOS PERDIDOS",puntajeStyle);
+    var numberDatos3 = game.add.text(30, 100, usuarios[1].perdidos,puntajeStyle);
+    var datos3 = game.add.text(650, 100,usuarios[2].perdidos,puntajeStyle);
+    var line3=self.createLine(0,130,700);
 
+    datos.add(nombreDatos1);
+    datos.add(nombreDatos2);
+    datos.add(nombreDatos3);
+
+    datos.add(numberDatos1);
+    datos.add(numberDatos2);
+    datos.add(numberDatos3);
+
+    datos.add(datos1);
+    datos.add(datos2);
+    datos.add(datos3);
+
+    datos.add(line1);
+    datos.add(line2);
+    datos.add(line3);
+
+
+    datos.position={x: this.game.width/2 - datos.width/2, y: 450 };
 
 
   },
@@ -90,8 +109,8 @@ Versus.prototype = {
   createLine: function(a, b,c){
 
     var graphics = game.add.graphics(0, 00);
-    graphics.beginFill(0x00396e);
-    graphics.lineStyle(2, 0x00396e, 1);
+    graphics.beginFill(0x797979);
+    graphics.lineStyle(2, 0x797979, 1);
     graphics.moveTo(a,b);
     graphics.lineTo(c, b);
     graphics.endFill();

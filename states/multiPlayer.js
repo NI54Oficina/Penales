@@ -43,6 +43,8 @@ create: function(){
       a= game.add.sprite(this.game.width, 0, 'right-corner');
       a.scale.setTo(-.75,0.75);
 
+      self.createSoundGraphics();
+
 
       volver= game.add.sprite(40, 30, 'volver');
       volver.inputEnabled = true;
@@ -111,7 +113,7 @@ create: function(){
 
 },
 
-  GoBack: function(target){
+GoBack: function(target){
     game.state.start("GameMenu");
 },
 
