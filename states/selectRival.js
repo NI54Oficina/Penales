@@ -171,7 +171,6 @@ Selectplayer.prototype = {
     e= carrousel[4];
 
 
-console.log(carrousel);
 
       self.setTo5(arrayCr[e]);
       self.setTo4(arrayCr[d]);
@@ -199,12 +198,10 @@ setTo5: function(target){
 
   var tweenA= game.add.tween(target).to({x:145, y:225}, 500, 'Linear');
   var tweenB =game.add.tween(target.scale).to( {x:.50, y:.50}, 500, 'Linear');
-  var tweenC =game.add.tween(target).to( {alpha:.9}, 500, 'Linear');
   var tweenD =game.add.tween(target.children[1]).to( {alpha:.8}, 500, 'Linear');
 
   tweenA.start();
   tweenB.start();
-  tweenC.start();
   tweenD.start();
 
 },
@@ -219,12 +216,10 @@ setTo4: function(target){
 
    var tweenA= game.add.tween(target).to({x:800, y:225}, 500, 'Linear');
    var tweenB =game.add.tween(target.scale).to( {x:.50, y:.50}, 500, 'Linear');
-   var tweenC =game.add.tween(target).to( {alpha:.9}, 500, 'Linear');
    var tweenD =game.add.tween(target.children[1]).to( {alpha:.8}, 500, 'Linear');
 
    tweenA.start();
    tweenB.start();
-   tweenC.start();
    tweenD.start();
 },
 
@@ -238,12 +233,10 @@ setTo3: function(target){
 
   var tweenA= game.add.tween(target).to({x:255, y:210}, 500, 'Linear');
   var tweenB =game.add.tween(target.scale).to( {x:.6, y:.6}, 500, 'Linear');
-  var tweenC =game.add.tween(target).to( {alpha:1}, 500, 'Linear');
   var tweenD =game.add.tween(target.children[1]).to( {alpha:.3}, 500, 'Linear');
 
   tweenA.start();
   tweenB.start();
-  tweenC.start();
   tweenD.start();
 
   // shadow3 = game.add.sprite(245, 193+s3.height, 'shadow');
@@ -260,12 +253,10 @@ target.visible=true;
 
   var tweenA= game.add.tween(target).to({x:650, y:210}, 500, 'Linear');
   var tweenB =game.add.tween(target.scale).to( {x:.6, y:.6}, 500, 'Linear');
-  var tweenC =game.add.tween(target).to( {alpha:1}, 500, 'Linear');
   var tweenD =game.add.tween(target.children[1]).to( {alpha:.3}, 500, 'Linear');
 
   tweenA.start();
   tweenB.start();
-  tweenC.start();
   tweenD.start();
 },
 
@@ -296,12 +287,7 @@ setTo1: function(target){
    });
 
 
-
-
-
    this.world.bringToTop(golden);
-
-
 
 
 },
