@@ -40,6 +40,7 @@ var Splash = function () {};
     game.load.image('golden', 'assets/images/bt_golden.png');
     game.load.image('shadow', 'assets/images/bt_reflex.png');
     game.load.image('selected', 'assets/images/bt_seleccion.png');
+    game.load.image('selector', 'assets/images/bt_selector.png');
 
     //Sprites fondo
     game.load.image('left-corner', 'assets/images/left-corner.png');

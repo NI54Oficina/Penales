@@ -122,9 +122,13 @@ Singleplayer.prototype = {
      cuadradoUser.add(difBackground);
 
      var player=this.game.add.sprite(20,5,user.avatar);
-
-
      player.scale.setTo(.5,.5);
+     var selector=this.game.add.sprite(0,0,'selector');
+     //selector.scale.setTo(.5,.5);
+    player.addChild(selector);
+
+
+
     // player.position={x:statsBackground.position.x+20,y:statsBackground.position.y+statsBackground.height/2-player.height/2};
 	   cuadradoUser.add(player);
      var txt1 = game.add.text(cuadradoUser.width/3,20,user.nombre, nombreStyle);
