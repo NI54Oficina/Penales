@@ -13,23 +13,13 @@ Versus.prototype = {
 
     //fondo
 
-    var 	gameBack = this.game.add.bitmapData(this.game.width,this.game.height);
-    var  grd=gameBack.context.createLinearGradient(0,0,0,this.game.height);
-    grd.addColorStop(0,"black");
-    grd.addColorStop(0.15,"#11224d");
-    grd.addColorStop(0.4,"#0d4e88");
-    grd.addColorStop(.5,"#0d4e88");
-    grd.addColorStop(1,"#009ee1");
-    gameBack.context.fillStyle=grd;
-    gameBack.context.fillRect(0,0,this.game.width,this.game.height);
-    this.game.add.sprite(0,0,gameBack);
+    screenOponente= game.add.group();
+    screenOponente.width = this.game.width;
+    screenOponente.height = this.game.height;
 
-    game.stage.disableVisibilityChange = true;
-    curva=game.add.sprite(0,0, 'curva');
-    curva.position={x:this.game.width/2-curva.width/2, y:this.game.height/2};
-    dots = game.add.tileSprite(0, 0, this.game.width,this.game.height,'puntitos');
-    dots.alpha=0.3;
-    dots.fixedToCamera=true;
+
+    background=this.createBackground(true);
+
 
     //fin fondo
 
@@ -41,6 +31,8 @@ Versus.prototype = {
     leftPlayer=game.add.sprite(-50,130, 'player');
     leftPlayer.scale.setTo(.8);
     leftPlayer.alpha=0;
+
+
 
     rightPlayer=game.add.sprite(this.game.width+50, 130, 'player');
     rightPlayer.scale.setTo(.8);
@@ -62,27 +54,26 @@ Versus.prototype = {
 
     var usuarios= self.generateDemoUsers(self);
 
-    console.log(usuarios);
-
     datos=game.add.group();
     datos.width=700;
     datos.height=200;
+
     puntajeStyle = { font: '15pt CondensedLight', fill: 'yellow'};
     var nombreDatos1 = game.add.text(300, 0, "RACHA ACTUAL",puntajeStyle);
     var numberDatos1 = game.add.text(30, 0,usuarios[1].racha,puntajeStyle);
     var datos1 = game.add.text(650, 0,usuarios[2].racha,puntajeStyle);
-    var line1=self.createLine(0,30,700);
+    var line1=self.createLineGlobal(0,30,700);
 
     var nombreDatos2 = game.add.text(290, 50, "PARTIDOS GANADOS",puntajeStyle);
     var numberDatos2 = game.add.text(30, 50, usuarios[1].ganados,puntajeStyle);
     var datos2 = game.add.text(650, 50,usuarios[2].ganados,puntajeStyle);
-    var line2=self.createLine(0,80,700);
+    var line2=self.createLineGlobal(0,80,700);
 
 
     var nombreDatos3 = game.add.text(290, 100, "PARTIDOS PERDIDOS",puntajeStyle);
     var numberDatos3 = game.add.text(30, 100, usuarios[1].perdidos,puntajeStyle);
     var datos3 = game.add.text(650, 100,usuarios[2].perdidos,puntajeStyle);
-    var line3=self.createLine(0,130,700);
+    var line3=self.createLineGlobal(0,130,700);
 
     datos.add(nombreDatos1);
     datos.add(nombreDatos2);
@@ -102,6 +93,15 @@ Versus.prototype = {
 
 
     datos.position={x: this.game.width/2 - datos.width/2, y: 450 };
+
+screenOponente.add(background);
+screenOponente.add(leftPlayer);
+screenOponente.add(rightPlayer);
+screenOponente.add(textTitle);
+screenOponente.add(datos);
+
+
+return screenOponente;
 
 
   },

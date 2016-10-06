@@ -33,7 +33,7 @@ GameMenu.prototype = {
     self.createSoundGraphics();
 
 
-    game.add.existing(this.titleText);
+    //game.add.existing(this.titleText);
     search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
     search.visible=false;
 

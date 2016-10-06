@@ -74,7 +74,9 @@ Game.prototype = {
 
 	this.drawGui();
 
-  this.pantallaOponente();
+
+  screenOponente=self.pantallaOponente(self);
+  screenOponente.visible=true;
 },
 
 drawBackground: function(){
@@ -119,27 +121,25 @@ drawArquero:function(){
 	arqueroPosition= {x:320,y:100};
 	arquero= game.add.sprite(arqueroPosition.x,arqueroPosition.y, 'arquero-local');
 	arquero.scale.setTo(1,1);
-    arquero.frame = 0;
+  arquero.frame = 0;
 
 	arquero.animations.add('idle', [00,01,02,03,04], 10, false);
-    arquero.animations.add('down-left', [18,19,20,23,24,26,25,19,18,01,00], 10, false);
-    arquero.animations.add('up-left',  [18,19,20,21,22,23,24,26,25,19,18,01,00], 10, false);
-    arquero.animations.add('down', [00,00,10,08,09,09,08,08,10,15,02,01,00], 10, false);
-    arquero.animations.add('up',  [03,04,11,12,13,14,14,14,13,12,11,04,03,02], 13, false);
+  arquero.animations.add('down-left', [18,19,20,23,24,26,25,19,18,01,00], 10, false);
+  arquero.animations.add('up-left',  [18,19,20,21,22,23,24,26,25,19,18,01,00], 10, false);
+  arquero.animations.add('down', [00,00,10,08,09,09,08,08,10,15,02,01,00], 10, false);
+  arquero.animations.add('up',  [03,04,11,12,13,14,14,14,13,12,11,04,03,02], 13, false);
 	arquero.animations.add('up-right',  [15,16,17,17,16,08,09,08,10,15,02,01,00], 10, false);
 	arquero.animations.add('down-right', [05,06,07,08,09,08,10,15,02,01,00], 8, false);
 	arquero.animations.add('derrota', [27,28,29,30,31], 8, false);
 	arquero.animations.add('festejo', [32,33,34,35,34,33], 8, false);
 	arquero.animations.add('festejo2', [36,37,38], 8, false);
 
-    arquero.visible=false;
+  arquero.visible=false;
 },
 
 
 drawPelota:function(){
 	pelotaPosition= {x:580,y:490};
-
-
 	pelotaSombra= game.add.sprite(0,0 ,'pelota-sombra');
 	pelotaSombra.scale.setTo(0.9,0.9);
 	pelota= game.add.group();
@@ -202,9 +202,6 @@ createBarra: function(){
 					];
 
 	barra = this.game.add.sprite(this.game.width/2 - 250,600, myBitmap);
-
-   //rangoDePresicion=40;
-
 	focus = game.add.sprite(barra.position.x,600, 'triangle');
 	focus.scale.setTo(0.05,0.05);
 
@@ -219,23 +216,23 @@ createBarra: function(){
 
 createButtons:function(){
 	buttons= game.add.group();
-	  var auxID=1;
+	var auxID=1;
 
-	  for (var i = 1; i < 3; i++)
-	  {
-		  for(var j=0; j < 3; j++){
+	for (var i = 1; i < 3; i++){
 
-			auxButton = game.add.button((j*120)+400, (i*90)+80, 'button', function(self){}, this, 50, 50, 0);
-			auxButton.id=auxID++;
+      for(var j=0; j < 3; j++){
+
+    			auxButton = game.add.button((j*120)+400, (i*90)+80, 'button', function(self){}, this, 50, 50, 0);
+    			auxButton.id=auxID++;
 
 
-			auxButton.events.onInputDown.add(this.actionOnClick,auxButton);
+    			auxButton.events.onInputDown.add(this.actionOnClick,auxButton);
 
-			auxButton.scale.setTo(0.25,0.25);
+    			auxButton.scale.setTo(0.25,0.25);
 
-			buttons.add(auxButton);
-			buttons.visible=true;
-			game.world.bringToTop(buttons);
+    			buttons.add(auxButton);
+    			buttons.visible=true;
+    			game.world.bringToTop(buttons);
 		  };
 	  };
 	  buttons.y=-70;
@@ -246,13 +243,12 @@ setClickArea:function(){
 
 	transparentObject.scale.setTo(game.world.width, game.world.height);
 	transparentObject.alpha =0;
-
 	transparentObject.visible=false;
 },
 
 drawGui:function(){
 	var display1="Fallaste!";
-    var display2="Ganaste!";
+  var display2="Ganaste!";
 	looser = game.add.text(350, 350, display1, { font: 'bold 60pt TheMinion',fill: 'red' });
 	looser.visible=false;
 	winner = game.add.text(350, 350, display2, {  font: 'bold 60pt TheMinion',fill: 'red' });
@@ -273,7 +269,8 @@ updateCounter: function () {
 	}else{
 		presicionText.visible=false;
 	}
-	if (counter==-1) {
+
+  if (counter==-1) {
 		this.pause=true;
 		counter=150000;
 		presicionText.visible=false;
@@ -292,7 +289,6 @@ updateCounter: function () {
   },
 
   setResult: function(auxValue){
-
      result=auxValue;
   },
 
@@ -320,8 +316,7 @@ updateCounter: function () {
     tweenFocus = game.add.tween(focus);
     tweenFocus.to( {x:endBarra, y:600}, velocidad, 'Linear', true, 0, false).yoyo(true);
     self.setArquero(self);
-
-	buttons.alpha=0;
+    buttons.alpha=0;
 
   },
 
@@ -337,7 +332,7 @@ updateCounter: function () {
   setArquero: function(){
     arquero.visible=true;
     arquero.frame=0;
-	arqueroPiso=75;
+	   arqueroPiso=75;
     arquero.position.x =320;
     arquero.position.y =arqueroPiso;
   },
@@ -366,7 +361,7 @@ updateCounter: function () {
       self.setPlayersMode2(self);
 
     }else{
-		target.events.onInputUp.addOnce(self.mouseUpPateador,self);
+		  target.events.onInputUp.addOnce(self.mouseUpPateador,self);
       self.updateBarra(self);
       self.setBarraPresicion(self);
       self.setPlayersMode1(self);
@@ -376,7 +371,7 @@ updateCounter: function () {
   },
 
   restart: function(self){
-	console.log("entra restart0");
+	  console.log("entra restart0");
     counter=self.tiempoMaximo;
     self.pause=false;
     modo++;
@@ -392,62 +387,62 @@ updateCounter: function () {
     }
 
 
-	self.resetGui();
-	self.resetPlayers();
+  	self.resetGui();
+  	self.resetPlayers();
 
-	console.log("entra restart1");
+  	console.log("entra restart1");
 
-	game.tweens.remove(tweenPelota);
-	game.tweens.remove(tweenPelota2);
-	game.tweens.remove(tweenSombra);
-	pelotaSombra.position.y=20;
-	pelotaSombra.position.x=0;
-	pelotaSombra.alpha=1;
-	pelota.scale.x=0.9;
-	pelota.scale.y=0.9;
-	console.log("entra restart2");
-	try{
-		game.tweens.remove(tweenFocus);
-		game.tweens.remove(tweenArquero);
-	}
-	catch(e){}
+  	game.tweens.remove(tweenPelota);
+  	game.tweens.remove(tweenPelota2);
+  	game.tweens.remove(tweenSombra);
+  	pelotaSombra.position.y=20;
+  	pelotaSombra.position.x=0;
+  	pelotaSombra.alpha=1;
+  	pelota.scale.x=0.9;
+  	pelota.scale.y=0.9;
+  	console.log("entra restart2");
+  	try{
+  		game.tweens.remove(tweenFocus);
+  		game.tweens.remove(tweenArquero);
+  	}
+  	catch(e){}
 
-	self.cambiarRopa(self);
-	pelota.position.x=pelotaPosition.x;
-	pelota.position.y=pelotaPosition.y;
-	clicked=0;
+  	self.cambiarRopa(self);
+  	pelota.position.x=pelotaPosition.x;
+  	pelota.position.y=pelotaPosition.y;
+  	clicked=0;
 
 
   },
 
   resetGui:function(){
 
-	presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px TheMinion", fill: "black", align: "center" });
-	presicionText.visible=false;
-	winner.visible=false;
-	looser.visible=false;
-	barra.visible=false;
+  	presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px TheMinion", fill: "black", align: "center" });
+  	presicionText.visible=false;
+  	winner.visible=false;
+  	looser.visible=false;
+  	barra.visible=false;
 
-	focus.visible=false;
-	buttons.visible=true;
-	buttons.alpha=1;
+  	focus.visible=false;
+  	buttons.visible=true;
+  	buttons.alpha=1;
   },
 
   resetPlayers:function(){
-	player.position.x=playerIPos.x;
-	player.position.y=playerIPos.y;
-	arquero.bringToTop();
-	game.world.bringToTop(pelota);
-	player.bringToTop();
-	arquero.position.x= arqueroPosition.x;
-	arquero.position.y=arqueroPosition.y;
-	player.play("idle");
-	arquero.animations.stop();
-	arquero.frame=0;
-	arquero.visible=false;
-	arco1.play("idle");
-	arco2.play("idle");
-	arco3.play("idle");
+  	player.position.x=playerIPos.x;
+  	player.position.y=playerIPos.y;
+  	arquero.bringToTop();
+  	game.world.bringToTop(pelota);
+  	player.bringToTop();
+  	arquero.position.x= arqueroPosition.x;
+  	arquero.position.y=arqueroPosition.y;
+  	player.play("idle");
+  	arquero.animations.stop();
+  	arquero.frame=0;
+  	arquero.visible=false;
+  	arco1.play("idle");
+  	arco2.play("idle");
+  	arco3.play("idle");
   },
 
   patear: function(){
@@ -456,11 +451,6 @@ updateCounter: function () {
     setTimeout(function(){tweenPlayer.to({x:200, y:300},500, 'Linear', true, 0);},0);
 
     player.animations.play('right');
-  },
-
-  stopPlayer: function(){
-    //player.animations.stop();
-    //player.frame=2;
   },
 
   NoAssertPoint: function(ubiPuntaje, tries){
@@ -480,39 +470,39 @@ updateCounter: function () {
   seMueveArquero: function(self){
 
       tweenArquero = game.add.tween(arquero);
-	  var auxVar=self.posArquero;
+	    var auxVar=self.posArquero;
 
 
-        switch(self.posArqueroI){
+      switch(self.posArqueroI){
 
           case 1:
-		  tweenArquero.to({x:100,y:arqueroPiso}, 500, 'Linear', true, 0);
-          arquero.animations.play('up-left');
+		        tweenArquero.to({x:100,y:arqueroPiso}, 500, 'Linear', true, 0);
+            arquero.animations.play('up-left');
           break;
 
           case 2:
-		  tweenArquero.to({x:320,y:arqueroPiso}, 500, 'Linear', true, 0);
-          arquero.animations.play('up');
+		        tweenArquero.to({x:320,y:arqueroPiso}, 500, 'Linear', true, 0);
+            arquero.animations.play('up');
           break;
 
           case 3:
-		  tweenArquero.to({x:520,y:arqueroPiso}, 500, 'Linear', true, 0);
-          arquero.animations.play('up-right');
+		        tweenArquero.to({x:520,y:arqueroPiso}, 500, 'Linear', true, 0);
+            arquero.animations.play('up-right');
           break;
 
           case 4:
-		  tweenArquero.to({x:100,y:arqueroPiso}, 500, 'Linear', true, 0);
-          arquero.animations.play('down-left');
+		        tweenArquero.to({x:100,y:arqueroPiso}, 500, 'Linear', true, 0);
+            arquero.animations.play('down-left');
           break;
 
           case 5:
-		  tweenArquero.to({x:320,y:arqueroPiso}, 500, 'Linear', true, 0);
-          arquero.animations.play('down');
+		        tweenArquero.to({x:320,y:arqueroPiso}, 500, 'Linear', true, 0);
+            arquero.animations.play('down');
           break;
 
           case 6:
-		  tweenArquero.to({x:520,y:arqueroPiso}, 500, 'Linear', true, 0);
-          arquero.animations.play('down-right');
+		        tweenArquero.to({x:520,y:arqueroPiso}, 500, 'Linear', true, 0);
+            arquero.animations.play('down-right');
           break;
 
         }
@@ -523,30 +513,33 @@ updateCounter: function () {
       enAlargue=true;
       desempateText= game.add.text(600, 10, 'Alargue. Desempate', { font: " 20px TheMinion", fill: "black", align: "right" });
       points.removeAll(true);
+
       setTimeout(function(){
          self.restart(self);
       },200);
+
       triesA=0;
       triesP=0;
 
     },
 
-    terminarJuego: function(){
+  terminarJuego: function(){
 
       this.game.state.states["GameOver"].puntosUser = puntosUser;
       this.game.state.states["GameOver"].puntosComputer = puntosComputer;
 
       this.game.state.start("GameOver");
-    },
+  },
 
 	setearResultado: function(msg){
 		 var resultadoArray=JSON.parse(msg);
 		 puntosUser = resultadoArray["golesUser"];
 		 puntosComputer = resultadoArray["golesComputer"];
-		this.checkIntentos(msg);
-    },
+	    this.checkIntentos(msg);
+   },
 
-    checkIntentos: function(data){
+  checkIntentos: function(data){
+
 		var auxArray=JSON.parse(data);
 		if(modo==1){
 		 	golesUser= auxArray["localGol"];
@@ -557,9 +550,11 @@ updateCounter: function () {
 			golesComputer= auxArray["localGol"];
 
 		}
-      if( triesA  >= 5 &&  triesP  >= 5 ){
+
+    if( triesA  >= 5 &&  triesP  >= 5 ){
 
         if(self.esEmpate(self)){
+
           setTimeout(function(){self.desempatar(self);},200);
 
         }else{
@@ -568,44 +563,47 @@ updateCounter: function () {
 
         };
 
-      }else{
+    }else{
 
         if(!enAlargue){
              self.restart(self);
-        }else{
+         }else{
 
-              if(triesA >=1 && triesP>=1){
+            if(triesA >=1 && triesP>=1){
 
-                if(puntosUser!=puntosComputer){
+              if(puntosUser!=puntosComputer){
 
-                  self.terminarJuego(self);
-
-                }else{
-                  setTimeout(function(){self.desempatar(self);},500);
-
-                }
+                self.terminarJuego(self);
 
               }else{
+                setTimeout(function(){self.desempatar(self);},500);
 
-                 self.restart(self);
               }
+
+            }else{
+
+               self.restart(self);
+            }
 
         }
 
       };
 
-    },
+  },
 
 esEmpate: function(){
+
   if(puntosUser==puntosComputer)return true;
   return false;
+
 },
 
 getRiesgo: function(){
+
   if(Phaser.Math.isEven(modo)){
     return this.perfil.tendencia[triesA-1];
   }else{
-      return this.perfil.tendencia[triesP-1];
+    return this.perfil.tendencia[triesP-1];
   }
 
 },
@@ -1175,9 +1173,11 @@ moveDown: function(){
 //fin animaciones arquero ////
 
 Clicked: function(){
+
 	clicked=0;
 	this.pause=false;
-  //aca desaparece la pantalla de oponente
+  screenOponente.visible=false;
+  
 },
 
 mouseUpPateador:function(){
