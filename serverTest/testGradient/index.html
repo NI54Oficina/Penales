@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Phaser - Making your first game, part 3</title>
+	<script type="text/javascript" src="js/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+						padding: 0 250px;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create });
+
+function preload() {
+		game.physics.startSystem(Phaser.Physics.ARCADE);
+    game.load.image('sky', 'sky.png');
+		game.load.spritesheet('button', 'boton.png', 300, 300);
+
+}
+
+
+
+
+var button;
+var i=0
+
+
+function create() {
+
+	game.add.sprite(0, 0, 'sky');
+	self=this;
+
+
+		var 	myBitmap = this.game.add.bitmapData(500, 20);
+    var  grd=myBitmap.context.createLinearGradient(500,0,0,0);
+
+
+      grd.addColorStop(0,"red");
+		 grd.addColorStop(.10,"orange");
+     grd.addColorStop(.50,"green");
+		 grd.addColorStop(.90,"orange");
+			grd.addColorStop(1,"red");
+
+    myBitmap.context.fillStyle=grd;
+    myBitmap.context.fillRect(0,0,this.game.height,this.game.width);
+
+
+			arrayGradient =[[[0, "red"],[0.15,"orange"],[0.50,"green"],[0.85,"orange"],[1,"red"]],
+											[[0, "red"],[0.25,"orange"],[0.50,"green"],[0.75,"orange"],[1,"red"]],
+											[[0, "red"],[0.35,"orange"],[0.50,"green"],[0.65,"orange"],[1,"red"]],
+											[[0, "red"],[0.40,"orange"],[0.50,"green"],[0.60,"orange"],[1,"red"]]
+										];
+
+
+   barra = this.game.add.sprite(100,100, myBitmap);
+
+
+
+		 button = game.add.button(game.world.height - 500,200, 'button', setColor,self, 50, 50, 0);
+		 button.scale.setTo(0.15,0.15);
+
+}
+
+function setColor(){
+
+
+
+		if(i<(arrayGradient.length)){
+			barra.destroy();
+				var	myBitmap = this.game.add.bitmapData(500, 20);
+
+				var  mov=myBitmap.context.createLinearGradient(500,0,0,0);
+
+				for(var j=0; j<=(arrayGradient[i].length-1); j++){
+
+					mov.addColorStop(arrayGradient[i][j][0],arrayGradient[i][j][1]);
+					}
+
+					myBitmap.context.fillStyle=mov;
+					myBitmap.context.fillRect(0,0,this.game.height,this.game.width);
+					barra = this.game.add.sprite(100,100, myBitmap);
+
+
+		}else{ console.log("Termino iteracion")}
+
+i++;
+
+}
+
+
+
+
+
+</script>
+
+</body>
+</html>

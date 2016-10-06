@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <main id="game"></main>
+    <script src="socket.io-1.2.0.js"></script>
+    <script src="jquery-1.11.1.js"></script>
+  <!-- <script src="bower_components/jquery/dist/jquery.min.js"></script> -->
+      <script src="states/Client.js"></script>
+    <script src="index.js"></script>
+	
+	
+	<button id="conectarse" type="button" class="sender" code="login" params="" listen="loginConfirmed" callback="logueado">Conectarse</button>
+	<button id="buscarPartida" type="button" class="sender" code="buscarPartida" params="" listen="partidaEncontrada" callback="listenerSearch">Buscar Partida</button>
+	<button type="button" class="sender jugada" code="enviarJugada" params="1" listen="recibeJugada" callback="resolverJugada">1</button>
+	<button type="button" class="sender jugada" code="enviarJugada" params="2" listen="recibeJugada" callback="resolverJugada">2</button>
+	<button type="button" class="sender jugada" code="enviarJugada" params="3" listen="recibeJugada" callback="resolverJugada">3</button>
+	<button type="button" class="sender jugada" code="enviarJugada" params="4" listen="recibeJugada" callback="resolverJugada">4</button>
+	<button type="button" class="sender jugada" code="enviarJugada" params="5" listen="recibeJugada" callback="resolverJugada">5</button>
+	<button type="button" class="sender jugada" code="enviarJugada" params="6" listen="recibeJugada" callback="resolverJugada">6</button>
+	
+	<button type="button" class="sender" code="" params="" listen="" callback=""></button>
+	
+	<div id="log" style="width:100%; height:400px;overflow:auto;">
+	
+	</div>
+</body>
+</html>
