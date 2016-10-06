@@ -39,7 +39,6 @@ Singleplayer.prototype = {
 
       usuarios= self.generateDemoUsers(self);
 
-      console.log(usuarios);
   		for(var a=0;a<usuarios.length;a++){
   			oponentes.add( self.createDataForPlayer(self, usuarios[a]));
   		}
@@ -124,7 +123,7 @@ Singleplayer.prototype = {
 
      var player=this.game.add.sprite(20,5,user.avatar);
 
-     console.log(player);
+
      player.scale.setTo(.5,.5);
     // player.position={x:statsBackground.position.x+20,y:statsBackground.position.y+statsBackground.height/2-player.height/2};
 	   cuadradoUser.add(player);

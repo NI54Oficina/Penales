@@ -13,9 +13,6 @@ create: function(){
 
       this.playerSelected;
 
-
-      console.log(this.playerSelected);
-
       self.createBackground(true);
       self.createHeader(this.GoBack,false);
       self.createSoundGraphics();
@@ -23,17 +20,48 @@ create: function(){
 
       //titulo
 
-      //pantalla de seleccion
-      leftPlayer=game.add.sprite(-50,150, 'player');
-      leftPlayer.scale.setTo(.9);
-      leftPlayer.alpha=0;
+      //modificacion de texto si selecciona el jugador o no;
 
-      rightPlayer=game.add.sprite(this.game.width+50, 150, 'player');
-      rightPlayer.scale.setTo(.9);
-      rightPlayer.alpha=0;
+      if( this.playerSelected!= undefined){
 
-      rightPlayer.inputEnabled=true;
-      rightPlayer.events.onInputDown.add(this.SelectPlayer, leftPlayer);
+        leftPlayer=game.add.sprite(-50,150, 'player');
+        leftPlayer.scale.setTo(.9);
+        leftPlayer.alpha=0;
+
+        var aleatorio = game.add.text(90,170, "ALEATORIO", txtstyle);
+        leftPlayer.addChild(aleatorio);
+
+        rightPlayer=game.add.sprite(this.game.width+50, 142,this.playerSelected.player.key);
+        rightPlayer.scale.setTo(.9);
+        rightPlayer.alpha=0;
+
+        rightPlayer.inputEnabled=true;
+        rightPlayer.events.onInputDown.add(this.SelectPlayer, leftPlayer);
+
+        var borderSelected=game.add.sprite(0,0, 'selected');
+        rightPlayer.addChild(borderSelected);
+
+      }else{
+        leftPlayer=game.add.sprite(-50,150, 'player');
+        leftPlayer.scale.setTo(.9);
+        leftPlayer.alpha=0;
+
+        rightPlayer=game.add.sprite(this.game.width+50, 150, 'player');
+        rightPlayer.scale.setTo(.9);
+        rightPlayer.alpha=0;
+
+        rightPlayer.inputEnabled=true;
+        rightPlayer.events.onInputDown.add(this.SelectPlayer, leftPlayer);
+
+        var aleatorio = game.add.text(90,170, "ALEATORIO", txtstyle);
+        leftPlayer.addChild(aleatorio);
+        var notaleatorio = game.add.text(90,170, "A ELECCIÓN", txtstyle);
+        rightPlayer.addChild(notaleatorio);
+      }
+
+      // fin modificacion de texto si selecciona el jugador o no;
+
+
 
       var tweenA= game.add.tween(rightPlayer).to({x:this.game.width/2 + 30}, 200, 'Linear');
       var tweenB= game.add.tween(leftPlayer).to({x:this.game.width/2 - leftPlayer.width-30}, 200, 'Linear');
@@ -45,27 +73,6 @@ create: function(){
       tweenC.start();
       tweenD.start();
 
-      //modificacion de texto si selecciona el jugador o no;
-
-      if( this.playerSelected!= undefined){
-        var aleatorio = game.add.text(90,170, "ALEATORIO", txtstyle);
-        leftPlayer.addChild(aleatorio);
-
-        var imgPlayer=game.add.sprite(-5,0, this.playerSelected.player.key);
-        imgPlayer.scale.setTo(.95,.95);
-        rightPlayer.addChild(imgPlayer);
-
-
-      }else{
-        var aleatorio = game.add.text(90,170, "ALEATORIO", txtstyle);
-        leftPlayer.addChild(aleatorio);
-        var notaleatorio = game.add.text(90,170, "A ELECCIÓN", txtstyle);
-        rightPlayer.addChild(notaleatorio);
-      }
-
-      //modificacion de texto si selecciona el jugador o no;
-
-      //pantalla de seleccion
 
       this.addMenuOptionInner('COMENZAR', function () {
         search.visible=true;

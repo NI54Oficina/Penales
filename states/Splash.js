@@ -37,6 +37,9 @@ var Splash = function () {};
     game.load.image('img-3', 'assets/images/bt_escudos_03.png');
     game.load.image('img-4', 'assets/images/bt_escudos_04.png');
     game.load.image('img-5', 'assets/images/bt_escudos_05.png');
+    game.load.image('golden', 'assets/images/bt_golden.png');
+    game.load.image('shadow', 'assets/images/bt_reflex.png');
+    game.load.image('selected', 'assets/images/bt_seleccion.png');
 
     //Sprites fondo
     game.load.image('left-corner', 'assets/images/left-corner.png');
@@ -44,8 +47,6 @@ var Splash = function () {};
     game.load.image('volver', 'assets/images/arrow-back.png');
     game.load.image('menu', 'assets/images/menu.png');
     game.load.image('puntitos', 'assets/images/fondo_trama.png');
-    game.load.image('golden', 'assets/images/bt_golden.png');
-    game.load.image('shadow', 'assets/images/bt_reflex.png');
     game.load.image('curva', 'assets/images/fondo_curva.png');
 
     game.load.image('brillodown', 'assets/images/brillodown.png');
