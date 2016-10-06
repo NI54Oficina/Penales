@@ -24,7 +24,10 @@ Main.prototype = {
     game.load.script('global',   'lib/global.js');
 	game.state.onStateChange.add(function(){
 		try{
-		game.kineticScrolling.stop();
+			game.kineticScrolling.velocityWheelY=0;
+			game.kineticScrolling.velocityWheelX=0;
+			game.kineticScrolling.endMove();
+			game.kineticScrolling.stop();
 		}catch(error){
 
 		};
