@@ -55,25 +55,30 @@ Versus.prototype = {
     var usuarios= self.generateDemoUsers(self);
 
     datos=game.add.group();
-    datos.width=700;
+    datos.width=800;
     datos.height=200;
 
     puntajeStyle = { font: '15pt CondensedLight', fill: 'yellow'};
-    var nombreDatos1 = game.add.text(300, 0, "RACHA ACTUAL",puntajeStyle);
-    var numberDatos1 = game.add.text(30, 0,usuarios[1].racha,puntajeStyle);
+    var nombreDatos1 = game.add.text(330, 0, "RACHA ACTUAL",puntajeStyle);
+
+    var numberDatos1 = game.add.text(130, 0,usuarios[1].racha,puntajeStyle);
     var datos1 = game.add.text(650, 0,usuarios[2].racha,puntajeStyle);
-    var line1=self.createLineGlobal(0,30,700);
+    var line1=self.createLineGlobal(0,30,800, true);
 
-    var nombreDatos2 = game.add.text(290, 50, "PARTIDOS GANADOS",puntajeStyle);
-    var numberDatos2 = game.add.text(30, 50, usuarios[1].ganados,puntajeStyle);
+    var nombreDatos2 = game.add.text(320, 50, "PARTIDOS GANADOS",puntajeStyle);
+    var numberDatos2 = game.add.text(130, 50, usuarios[1].ganados,puntajeStyle);
     var datos2 = game.add.text(650, 50,usuarios[2].ganados,puntajeStyle);
-    var line2=self.createLineGlobal(0,80,700);
+    var line2=self.createLineGlobal(0,80,800, true);
 
 
-    var nombreDatos3 = game.add.text(290, 100, "PARTIDOS PERDIDOS",puntajeStyle);
-    var numberDatos3 = game.add.text(30, 100, usuarios[1].perdidos,puntajeStyle);
+    var nombreDatos3 = game.add.text(320, 100, "PARTIDOS PERDIDOS",puntajeStyle);
+    var numberDatos3 = game.add.text(130, 100, usuarios[1].perdidos,puntajeStyle);
     var datos3 = game.add.text(650, 100,usuarios[2].perdidos,puntajeStyle);
-    var line3=self.createLineGlobal(0,130,700);
+    var line3=self.createLineGlobal(0,130,800, true);
+
+    // nombreDatos1.position.x= datos.width/2 - nombreDatos1.width/2;
+    // nombreDatos2.position.x= datos.width/2 - nombreDatos2.width/2;
+    // nombreDatos3.position.x= datos.width/2 - nombreDatos3.width/2;
 
     datos.add(nombreDatos1);
     datos.add(nombreDatos2);
@@ -94,11 +99,11 @@ Versus.prototype = {
 
     datos.position={x: this.game.width/2 - datos.width/2, y: 450 };
 
-screenOponente.add(background);
-screenOponente.add(leftPlayer);
-screenOponente.add(rightPlayer);
-screenOponente.add(textTitle);
-screenOponente.add(datos);
+    screenOponente.add(background);
+    screenOponente.add(leftPlayer);
+    screenOponente.add(rightPlayer);
+    screenOponente.add(textTitle);
+    screenOponente.add(datos);
 
 
 return screenOponente;

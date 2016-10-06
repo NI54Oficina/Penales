@@ -34,8 +34,8 @@ Singleplayer.prototype = {
       positionX=200;
 
 
-      puntajeStyle = { font: '18pt CondensedRegular', fill: 'white'};
-      nombreStyle = { font: '20pt CondensedBold', fill: 'white'};
+      puntajeStyle = { font: '17pt CondensedRegular', fill: 'white'};
+      nombreStyle = { font: '19pt CondensedBold', fill: 'white'};
 
       usuarios= self.generateDemoUsers(self);
 
@@ -108,13 +108,13 @@ Singleplayer.prototype = {
 
     var difBack= this.game.add.bitmapData(470,35);
     var  grdd=statsBack.context.createLinearGradient(0,0,0,this.game.height );
-    grdd.addColorStop(0,'#00396e');
+    grdd.addColorStop(0,'#01365f');
     difBack.context.fillStyle=grdd;
     difBack.context.fillRect(0,0,this.game.width,this.game.height);
 
     cuadradoUser.add(statsBackground);
 
-    difBackground=this.game.add.sprite(cuadradoUser.width/3.2,115,difBack);
+    difBackground=this.game.add.sprite(cuadradoUser.width/3.2,108,difBack);
     difBackground.alpha=.7;
 
 
@@ -131,12 +131,12 @@ Singleplayer.prototype = {
      var txt1 = game.add.text(cuadradoUser.width/3,20,user.nombre, nombreStyle);
      var line=self.createLine(-15,txt1.height,455 );
      txt1.addChild(line);
-     var txt2 = game.add.text(cuadradoUser.width/3,80,'RACHA ACTUAL DE PARTIDOS', puntajeStyle);
-     var txt2a= game.add.text(cuadradoUser.width-60,80,user.racha, puntajeStyle);
-     var txt3 = game.add.text(cuadradoUser.width/3,120,'TOTAL PARTIDOS GANADOS', puntajeStyle);
-     var txt3a = game.add.text(cuadradoUser.width-60,120,' '+user.ganados, puntajeStyle);
-     var txt4 = game.add.text(cuadradoUser.width/3,160,'TOTAL PARTIDOS PERDIDOS', puntajeStyle);
-     var txt4a = game.add.text(cuadradoUser.width-60,160,user.perdidos, puntajeStyle);
+     var txt2 = game.add.text(cuadradoUser.width/3,75,'RACHA ACTUAL DE PARTIDOS', puntajeStyle);
+     var txt2a= game.add.text(cuadradoUser.width-60,75,user.racha, puntajeStyle);
+     var txt3 = game.add.text(cuadradoUser.width/3,113,'TOTAL PARTIDOS GANADOS', puntajeStyle);
+     var txt3a = game.add.text(cuadradoUser.width-60,113,' '+user.ganados, puntajeStyle);
+     var txt4 = game.add.text(cuadradoUser.width/3,153,'TOTAL PARTIDOS PERDIDOS', puntajeStyle);
+     var txt4a = game.add.text(cuadradoUser.width-60,153,user.perdidos, puntajeStyle);
 
     	cuadradoUser.add(txt1);
     	cuadradoUser.add(txt2);
