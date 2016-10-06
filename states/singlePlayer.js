@@ -107,7 +107,7 @@ Singleplayer.prototype = {
 
     var difBack= this.game.add.bitmapData(470,35);
     var  grdd=statsBack.context.createLinearGradient(0,0,0,this.game.height );
-    grdd.addColorStop(0,'#01365f');
+    grdd.addColorStop(0,'#061a27');
     difBack.context.fillStyle=grdd;
     difBack.context.fillRect(0,0,this.game.width,this.game.height);
 
