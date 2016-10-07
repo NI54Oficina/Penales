@@ -40,7 +40,10 @@ Singleplayer.prototype = {
       usuarios= self.generateDemoUsers(self);
 
   		for(var a=0;a<usuarios.length;a++){
-  			oponentes.add( self.createDataForPlayer(self, usuarios[a]));
+
+        var tabla=self.createDataForPlayer(self, usuarios[a]);
+        tabla.position.x= this.game.width/2 - tabla.width/2;
+  			oponentes.add(tabla );
   		}
 
      self.createHeader(this.GoBack,true);
@@ -107,7 +110,7 @@ Singleplayer.prototype = {
 
     var difBack= this.game.add.bitmapData(470,35);
     var  grdd=statsBack.context.createLinearGradient(0,0,0,this.game.height );
-    grdd.addColorStop(0,'#061a27');
+    grdd.addColorStop(0,'#0b3048');
     difBack.context.fillStyle=grdd;
     difBack.context.fillRect(0,0,this.game.width,this.game.height);
 
