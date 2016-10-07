@@ -95,7 +95,8 @@ GameMenu.prototype = {
 
 
     }
-
+ //self.notification("asdkjasndjansdnajskd askdjakjsdkajsdkjasndkjasd asjdkajsdjkasd kjasdjkashdjkaskdij");
+ 
   //Fin Creacion ariables en localStorage
 	//game.world.setBounds(0, 0, 10000, 10000);
 	//this.game.camera.x=0;
