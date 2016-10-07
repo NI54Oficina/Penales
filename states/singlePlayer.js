@@ -152,7 +152,6 @@ Singleplayer.prototype = {
       cuadradoUser.add(txt4a);
       cuadradoUser.add(txt3a);
 
-
      positionY+=215;
 
      cuadradoUser.forEach(function(item) {

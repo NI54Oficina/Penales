@@ -63,7 +63,7 @@ Stadistics.prototype = {
 
     self.createBackground(false);
 
-    puntajeStyle = { font: '15pt CondensedLight', fill: 'yellow'};
+    puntajeStyle = { font: '15pt CondensedLight', fill: '#ffff56'};
     puntajeStyle2 = { font: '15pt CondensedLight', fill: 'white'};
     titleStyle2 = { font: '20pt CondensedLight', fill: 'white'};
 
@@ -164,7 +164,7 @@ Stadistics.prototype = {
             var number=game.add.text(group.width-70,y+20,localStorage[stats[n].key], puntajeStyle);
             group.add(word);
             group.add(number);
-            var line =self.createLine(0,word.height,600);
+            var line =self.createLineGlobal(0,word.height,600, true,0x797979 );
             word.addChild(line);
 
             y+=50;
@@ -176,17 +176,6 @@ Stadistics.prototype = {
     };
   y+=35;
 
-},
-
-createLine: function(a, b,c){
-
-  var graphics = game.add.graphics(0, 00);
-  graphics.beginFill(0x797979);
-  graphics.lineStyle(2, 0x797979, 1);
-  graphics.moveTo(a,b);
-  graphics.lineTo(c, b);
-  graphics.endFill();
-  return graphics;
 },
 
 
