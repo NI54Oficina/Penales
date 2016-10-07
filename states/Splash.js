@@ -18,10 +18,18 @@ var Splash = function () {};
     game.load.script('Anims','states/AnimTests.js' );
   },
 
-  loadBgm: function () {
+  loadSound: function () {
 
-    game.load.audio('musica', 'assets/bgm/Dangerous.mp3');
-    game.load.audio('sonido', 'assets/bgm/sonido_prueba.mp3');
+    game.load.audio('musica', 'assets/sound/Fondo_1.mp3');
+    game.load.audio('sonido', 'assets/sound/Fondo_2.mp3');
+    game.load.audio('musica', 'assets/sound/Fondo_errar_1.mp3');
+    game.load.audio('sonido', 'assets/sound/Fondo_SinCanto_1.mp3');
+    game.load.audio('musica', 'assets/sound/Ganado.mp3');
+    game.load.audio('sonido', 'assets/sound/Perdedor.mp3');
+    game.load.audio('sonido', 'assets/sound/Gol.mp3');
+    game.load.audio('sonido', 'assets/sound/Gol_2.mp3');
+    game.load.audio('sonido', 'assets/sound/Patada_1.mp3');
+
   },
 
   loadImages: function () {
@@ -116,7 +124,7 @@ var Splash = function () {};
     this.loadScripts();
     this.loadImages();
     this.loadFonts();
-    this.loadBgm();
+    this.loadSound();
 
   },
 
