@@ -451,6 +451,9 @@ updateCounter: function () {
     setTimeout(function(){tweenPlayer.to({x:200, y:300},500, 'Linear', true, 0);},0);
 
     player.animations.play('right');
+    
+    tweenPlayer.onComplete.addOnce(function(){self.activateButtonSound(sonido_patada)});
+
   },
 
   NoAssertPoint: function(ubiPuntaje, tries){
@@ -1177,7 +1180,7 @@ Clicked: function(){
 	clicked=0;
 	this.pause=false;
   screenOponente.visible=false;
-  
+
 },
 
 mouseUpPateador:function(){

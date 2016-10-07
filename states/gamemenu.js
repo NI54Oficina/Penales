@@ -46,6 +46,7 @@ GameMenu.prototype = {
 
 
     this.addMenuOption('DESAFÍO \ntwo', function () {
+
       game.state.start("Multiplayer");
     });
 
