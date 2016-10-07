@@ -74,9 +74,9 @@ Selectplayer.prototype = {
       img5.scale.setTo(.5,.5);
 
 
-        golden=game.add.sprite(this.game.width/2- wd/2, 150, 'golden');
-        golden.scale.setTo(0.9,0.9);
-        golden.alpha=0;
+      golden=game.add.sprite(this.game.width/2- wd/2, 150, 'golden');
+      golden.scale.setTo(0.9,0.9);
+      golden.alpha=0;
 
 
 
@@ -136,8 +136,6 @@ Selectplayer.prototype = {
     self.getID(s);
     golden.alpha=0;
 
-
-
     var carrousel=[];
     var j=i;
 
@@ -170,10 +168,13 @@ Selectplayer.prototype = {
     d= carrousel[2];
     e= carrousel[4];
 
-
-
+    if(s.pos <4){
       self.setTo5(arrayCr[e]);
       self.setTo4(arrayCr[d]);
+    }else{
+      self.setTo4(arrayCr[d]);
+      self.setTo5(arrayCr[e]);
+    }
       self.setTo3(arrayCr[c]);
       self.setTo2(arrayCr[b]);
       self.setTo1(arrayCr[a]);
@@ -194,6 +195,7 @@ setTo5: function(target){
   this.world.bringToTop(s5);
 
   s5.inputEnabled = true;
+  s5.pos=1;
   s5.events.onInputDown.add(this.moveToLeft,s5);
 
   var tweenA= game.add.tween(target).to({x:145, y:225}, 500, 'Linear');
@@ -212,6 +214,7 @@ setTo4: function(target){
   s4= target;
   this.world.bringToTop(s4);
    s4.inputEnabled = true;
+   s4.pos=5;
    s4.events.onInputDown.add(this.moveToLeft, s4);
 
    var tweenA= game.add.tween(target).to({x:800, y:225}, 500, 'Linear');
@@ -229,6 +232,7 @@ setTo3: function(target){
   s3=target;
   this.world.bringToTop(s3);
   s3.inputEnabled = true;
+  s3.pos=2;
   s3.events.onInputDown.add(this.moveToLeft, s3);
 
   var tweenA= game.add.tween(target).to({x:255, y:210}, 500, 'Linear');
@@ -249,6 +253,7 @@ target.visible=true;
   s2= target;
   this.world.bringToTop(s2);
   s2.inputEnabled = true;
+  s2.pos=4;
   s2.events.onInputDown.add(this.moveToLeft,s2);
 
   var tweenA= game.add.tween(target).to({x:650, y:210}, 500, 'Linear');
@@ -264,6 +269,7 @@ setTo1: function(target){
   target.visible=true;
 
   s1= target;
+  s1.pos=3;
 
   this.world.bringToTop(s1);
    var tweenA= game.add.tween(target).to({x:this.game.width/2- wd/2, y:150}, 500, 'Linear');

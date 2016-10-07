@@ -33,7 +33,6 @@ GameMenu.prototype = {
     self.createSoundGraphics();
 
 
-    //game.add.existing(this.titleText);
     search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
     search.visible=false;
 
@@ -53,11 +52,11 @@ GameMenu.prototype = {
     this.addMenuOption('ESTADÍSTICAS', function () {
       game.state.start("Stadistics");
     });
-
-    this.addMenuOption('VERSUS', function () {
-      game.state.start("Versus");
-    });
-
+    //
+    // this.addMenuOption('VERSUS', function () {
+    //   game.state.start("Versus");
+    // });
+    //
 
     // this.addMenuOption('GAMEOVER', function () {
     //   game.state.start("GameOver");
