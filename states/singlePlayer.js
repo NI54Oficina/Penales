@@ -108,7 +108,7 @@ Singleplayer.prototype = {
 
      //creacion 2
 
-    var difBack= this.game.add.bitmapData(470,35);
+    var difBack= this.game.add.bitmapData(455,35);
     var  grdd=statsBack.context.createLinearGradient(0,0,0,this.game.height );
     grdd.addColorStop(0,'#0b3048');
     difBack.context.fillStyle=grdd;
@@ -135,14 +135,14 @@ Singleplayer.prototype = {
     // player.position={x:statsBackground.position.x+20,y:statsBackground.position.y+statsBackground.height/2-player.height/2};
 	   cuadradoUser.add(player);
      var txt1 = game.add.text(cuadradoUser.width/3,20,user.nombre, nombreStyle);
-     var line=self.createLine(-15,txt1.height,455 );
+     var line=self.createLineGlobal(-15,txt1.height,440, false, 0x0b3048 );
      txt1.addChild(line);
      var txt2 = game.add.text(cuadradoUser.width/3,75,'RACHA ACTUAL DE PARTIDOS', puntajeStyle);
-     var txt2a= game.add.text(cuadradoUser.width-60,75,user.racha, puntajeStyle);
+     var txt2a= game.add.text(cuadradoUser.width-80,75,user.racha, puntajeStyle);
      var txt3 = game.add.text(cuadradoUser.width/3,113,'TOTAL PARTIDOS GANADOS', puntajeStyle);
-     var txt3a = game.add.text(cuadradoUser.width-60,113,' '+user.ganados, puntajeStyle);
+     var txt3a = game.add.text(cuadradoUser.width-80,113,user.ganados, puntajeStyle);
      var txt4 = game.add.text(cuadradoUser.width/3,153,'TOTAL PARTIDOS PERDIDOS', puntajeStyle);
-     var txt4a = game.add.text(cuadradoUser.width-60,153,user.perdidos, puntajeStyle);
+     var txt4a = game.add.text(cuadradoUser.width-80,153,user.perdidos, puntajeStyle);
 
     	cuadradoUser.add(txt1);
     	cuadradoUser.add(txt2);
@@ -162,19 +162,6 @@ Singleplayer.prototype = {
    });
 
 	 return cuadradoUser;
- },
-
- createLine: function(a, b,c){
-
-   var graphics = game.add.graphics(0, 00);
-   graphics.beginFill(0x00396e);
-   graphics.lineStyle(2, 0x00396e, 1);
-   graphics.moveTo(a,b);
-   graphics.lineTo(c, b);
-   graphics.endFill();
-
-   return graphics;
-
  },
 
 
