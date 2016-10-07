@@ -24,10 +24,10 @@ var Splash = function () {};
     game.load.audio('musica_2', 'assets/sound/Fondo_2.mp3');
     game.load.audio('musica_errar', 'assets/sound/Fondo_errar_1.mp3');
     game.load.audio('musica_sin_canto', 'assets/sound/Fondo_SinCanto_1.mp3');
-    game.load.audio('musica_ganado', 'assets/sound/Ganador.mp3');
-    game.load.audio('musica_perdido', 'assets/sound/Perdedor.mp3');
-    game.load.audio('musica_gol', 'assets/sound/Gol.mp3');
-    game.load.audio('musica_gol_1', 'assets/sound/Gol_2.mp3');
+    game.load.audio('sonido_ganado', 'assets/sound/Ganador.mp3');
+    game.load.audio('sonido_perdido', 'assets/sound/Perdedor.mp3');
+    game.load.audio('sonido_gol', 'assets/sound/Gol.mp3');
+    game.load.audio('sonido_gol_1', 'assets/sound/Gol_2.mp3');
     game.load.audio('sonido_patada', 'assets/sound/Patada_1.mp3');
 
   },
@@ -157,10 +157,10 @@ var Splash = function () {};
     musica_2= game.add.audio('musica_2');
     musica_sin_canto= game.add.audio('musica_sin_canto');
     musica_errar= game.add.audio('musica_errar');
-    musica_ganado= game.add.audio('musica_ganado');
-    musica_perdido= game.add.audio('musica_perdido');
-    musica_gol= game.add.audio('musica_gol');
-    musica_gol_1= game.add.audio('musica_gol_1');
+    sonido_ganado= game.add.audio('sonido_ganado');
+    sonido_perdido= game.add.audio('sonido_perdido');
+    sonido_gol= game.add.audio('sonido_gol');
+    sonido_gol_1= game.add.audio('sonido_gol_1');
     sonido_patada = game.add.audio('sonido_patada');
 
     fondoSonidoP=[sonido_patada];

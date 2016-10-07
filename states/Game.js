@@ -451,8 +451,8 @@ updateCounter: function () {
     setTimeout(function(){tweenPlayer.to({x:200, y:300},500, 'Linear', true, 0);},0);
 
     player.animations.play('right');
-    
-    tweenPlayer.onComplete.addOnce(function(){self.activateButtonSound(sonido_patada)});
+
+    tweenPlayer.onComplete.addOnce(function(){self.activateSound(sonido_patada)});
 
   },
 
@@ -859,6 +859,7 @@ Looser: function(){
 acertarTiro: function(self){
 
           if(self.pelotaEntra){
+              self.activateSound(sonido_gol_1);
               puntosUser++;
               self.AssertPoint(userPointY,triesP);
               self.Win(self);
@@ -889,6 +890,7 @@ acertarTiro: function(self){
 atajar: function(self){
 
           if(!self.pelotaEntra){
+              self.activateSound(sonido_gol_1);
 
               self.NoAssertPoint(enemyPointY,triesA);
               self.Win(self);
