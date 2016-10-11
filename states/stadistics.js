@@ -111,10 +111,10 @@ Stadistics.prototype = {
 
 
     {key:"RachaGanados",title:"RACHA GANADOS"},
-    {key:"RachaPerdidos",title:"RACHA PERDIDOS"},
-    {key:"Efectividad",title:"EFECTIVIDAD"},
-    {key: efiArq +"%" ,title:"EFICIENCIA COMO ARQUERO"},
-    {key: efiPat +"%" ,title:"EFICIENCIA COMO PATEADOR"}
+    {key:"RachaPerdidos",title:"RACHA PERDIDOS"}
+    //{key:"Efectividad",title:"EFECTIVIDAD"},
+    //{key: efiArq +"%" ,title:"EFICIENCIA COMO ARQUERO"},
+    //{key: efiPat +"%" ,title:"EFICIENCIA COMO PATEADOR"}
 
   	];
     self.createLayoutStats(self);
