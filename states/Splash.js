@@ -30,6 +30,12 @@ var Splash = function () {};
     game.load.audio('sonido_gol_1', 'assets/sound/Gol_2.mp3');
     game.load.audio('sonido_patada', 'assets/sound/Patada_1.mp3');
 
+    game.load.audio('musica_loading', 'assets/sound/Loading.mp3');
+    game.load.audio('musica_end', 'assets/sound/Partido_end.mp3');
+    game.load.audio('musica_start', 'assets/sound/Partido_start.mp3');
+    game.load.audio('musica_singleplayer', 'assets/sound/Fondo_singlePlayer.mp3');
+    //faltar temrinar de aplicar.
+
   },
 
   loadImages: function () {
