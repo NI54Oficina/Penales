@@ -9,12 +9,12 @@ Stadistics.prototype = {
 
   preload: function () {
     this.optionCount = 1;
-    game.load.image('left-corner', 'assets/images/left-corner.png');
-    game.load.image('right-corner', 'assets/images/left-corner.png');
-    game.load.image('volver', 'assets/images/arrow-back.png');
-    game.load.image('menu', 'assets/images/menu.png');
-    game.load.image('puntitos', 'assets/images/fondo_trama.png');
-    game.load.image('line', 'assets/images/titulo_linea.png');
+    game.load.image('left-corner', 'assets/general/images/left-corner.png');
+    game.load.image('right-corner', 'assets/general/images/left-corner.png');
+    game.load.image('volver', 'assets/general/images/arrow-back.png');
+    game.load.image('menu', 'assets/general/images/menu.png');
+    game.load.image('puntitos', 'assets/general/images/fondo_trama.png');
+    game.load.image('line', 'assets/general/images/titulo_linea.png');
   },
 
   addMenuOption: function(text, callback) {

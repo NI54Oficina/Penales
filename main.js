@@ -14,9 +14,9 @@ var
 Main.prototype = {
 
   preload: function () {
-    game.load.image('stars',    'assets/images/sky.png');
-    game.load.image('loading',  'assets/images/loading.png');
-    game.load.image('brand',    'assets/images/logo.png');
+    game.load.image('stars',    'assets/general/images/sky.png');
+    game.load.image('loading',  'assets/general/images/loading.png');
+    game.load.image('brand',    'assets/general/images/logo.png');
     game.load.script('polyfill',   'lib/polyfill.js');
     game.load.script('scrolls',   'lib/scroll.js');
     game.load.script('utils',   'lib/utils.js');

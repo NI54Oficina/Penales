@@ -36,8 +36,8 @@ GameMenu.prototype = {
     search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
     search.visible=false;
 
-    // this.addMenuOption('Multiplayer', function () {
-    //   game.state.start("Multiplayer");
+    // this.addMenuOption('Selectplayer_2', function () {
+    //   game.state.start("Selectplayer_2");
     // });
 
      this.addMenuOption('CLÁSICO \none', function () {
@@ -47,7 +47,7 @@ GameMenu.prototype = {
 
     /*this.addMenuOption('DESAFÍO \ntwo', function () {
 
-      game.state.start("Multiplayer");
+      game.state.start("Selectplayer_2");
     }).x=600;*/
 
     this.addMenuOption('ESTADÍSTICAS', function () {
@@ -96,7 +96,7 @@ GameMenu.prototype = {
 
     }
  //self.notification("asdkjasndjansdnajskd askdjakjsdkajsdkjasndkjasd asjdkajsdjkasd kjasdjkashdjkaskdij");
- 
+
   //Fin Creacion ariables en localStorage
 	//game.world.setBounds(0, 0, 10000, 10000);
 	//this.game.camera.x=0;

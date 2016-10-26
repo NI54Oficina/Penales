@@ -1,6 +1,6 @@
-var Singleplayer = function(game) {};
+var Selectplayer_3 = function(game) {};
 
-Singleplayer.prototype = {
+Selectplayer_3.prototype = {
 
   preload: function () {
     this.optionCount = 1;
@@ -81,7 +81,7 @@ Singleplayer.prototype = {
     },
 
     GoBack: function(target){
-      game.state.start("Multiplayer");
+      game.state.start("Selectplayer_2");
     },
 
     Menu: function(target){
@@ -170,9 +170,9 @@ Singleplayer.prototype = {
      player: grupo.parent.children[2]
    };
 
-   this.game.state.states["Multiplayer"].playerSelected= object;
+   this.game.state.states["Selectplayer_2"].playerSelected= object;
 
-   this.game.state.start("Multiplayer");
+   this.game.state.start("Selectplayer_2");
 
  }
 
@@ -180,4 +180,4 @@ Singleplayer.prototype = {
 
   }
 
-  Phaser.Utils.mixinPrototype(Singleplayer.prototype, mixins);
+  Phaser.Utils.mixinPrototype(Selectplayer_3.prototype, mixins);

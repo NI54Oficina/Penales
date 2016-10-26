@@ -1,6 +1,6 @@
-var Multiplayer = function(game) {};
+var Selectplayer_2 = function(game) {};
 
-Multiplayer.prototype = {
+Selectplayer_2.prototype = {
 
 preload: function () {
     this.optionCount = 1;
@@ -88,7 +88,7 @@ GoBack: function(target){
 },
 
 SelectPlayer: function(target){
-    game.state.start("Singleplayer");
+    game.state.start("Selectplayer_3");
 },
 
 
@@ -113,4 +113,4 @@ listenerSearch: function (msg){
 
 }
 
-Phaser.Utils.mixinPrototype(Multiplayer.prototype, mixins);
+Phaser.Utils.mixinPrototype(Selectplayer_2.prototype, mixins);
