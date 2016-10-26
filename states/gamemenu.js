@@ -40,19 +40,19 @@ GameMenu.prototype = {
     //   game.state.start("Multiplayer");
     // });
 
-    this.addMenuOption('CLÁSICO \none', function () {
+     this.addMenuOption('CLÁSICO \none', function () {
       game.state.start("Selectplayer");
-    });
+    }).x=600;;
 
 
-    this.addMenuOption('DESAFÍO \ntwo', function () {
+    /*this.addMenuOption('DESAFÍO \ntwo', function () {
 
       game.state.start("Multiplayer");
-    });
+    }).x=600;*/
 
     this.addMenuOption('ESTADÍSTICAS', function () {
       game.state.start("Stadistics");
-    });
+    }).x=600;
     //
     // this.addMenuOption('VERSUS', function () {
     //   game.state.start("Versus");

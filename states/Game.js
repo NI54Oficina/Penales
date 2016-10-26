@@ -1,5 +1,5 @@
 var Game = function(game) {};
-var delayPelota=500;
+var delayPelota=900;
 
 Game.prototype = {
 
@@ -76,7 +76,15 @@ Game.prototype = {
 
 
   screenOponente=self.pantallaOponente(self);
-  screenOponente.visible=true;
+  //screenOponente.visible=true;
+  
+  if(!serverEnabled){
+	  setTimeout(function(){
+		  CheckEvent("inicioPartida"," ");
+	  },300)
+  }else{
+	  screenOponente.visible=true;
+  }
 },
 
 drawBackground: function(){
@@ -165,17 +173,17 @@ drawPelota:function(){
 drawPlayer:function(){
 	player = game.add.sprite(318,210, 'pateador-local');
 	playerIPos=  new Phaser.Point();
-	playerIPos.x= 100;
+	playerIPos.x= 50;
 	playerIPos.y=350;
 	player.scale.setTo(1.3,1.3);
 	player.x=playerIPos.x;
 	player.y=playerIPos.y;
 	player.frame = 0;
 	//animacion player
-	player.animations.add('right', [04,05,06,07,08,09,10,11,12,13,14,15,00,01,02], 12, false);
-	player.animations.add('idle', [00,01,02,01], 2 , true);
-	player.animations.add('derrota', [15,16,17,18,19,20,21,22], 12 , false);
-	player.animations.add('festejo', [23,24,25,26,27,28,29,30,31,32], 12 , false);
+	player.animations.add('right', [04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26], 14, false);
+	player.animations.add('idle', [00,01,02,03,02,01], 2 , true);
+	player.animations.add('derrota', [27,28,29,30,31,32,33], 12 , false);
+	player.animations.add('festejo', [34,35,36,37,38,39,40,41,42,43], 12 , false);
 	player.visible=true;
 	player.play("idle");
 },
@@ -448,7 +456,7 @@ updateCounter: function () {
   patear: function(){
     tweenPlayer = game.add.tween(player);
 
-    setTimeout(function(){tweenPlayer.to({x:200, y:300},500, 'Linear', true, 0);},0);
+    setTimeout(function(){tweenPlayer.to({x:260, y:300},700, 'Linear', true, 0);},0);
 
     player.animations.play('right');
 
@@ -727,6 +735,9 @@ EnviarJugadaServer: function(self){
 	self.establecerParametrosBarra(self);
 	counter=150000;
 	buttons.visible=false;
+	if(!serverEnabled){
+		localStorage["jugadaPlayer"]= self.idElegido;
+	}
     Emit("enviarJugada",self.idElegido,"recibeJugada","resolverJugada",self);
 },
 
@@ -760,8 +771,14 @@ resolverJugada: function(msg){
 ListenerPateador: function(self, datosServer){
 
 	self.posArqueroI= self.arqueroID;
-
-    self.animarJugada(self,datosServer);
+	if(!serverEnabled){
+		setTimeout(function(){
+			self.animarJugada(self,datosServer);
+		},2000);
+	}else{
+		self.animarJugada(self,datosServer);
+	}
+    
 
 },
 
@@ -770,7 +787,13 @@ ListenerArquero: function(self, datosServer){
 	/**quitar**/
 	generator = datosServer.computer;
 
-	self.animarJugada(self,datosServer);
+	if(!serverEnabled){
+		setTimeout(function(){
+			self.animarJugada(self,datosServer);
+		},2000);
+	}else{
+		self.animarJugada(self,datosServer);
+	}
 
 },
 
@@ -806,6 +829,11 @@ animarJugada:function(self,datosServer){
 			}
 		});
 	},delayPelota);
+	if(!serverEnabled){
+		setTimeout(function(){
+			CheckEvent("inicioTurno","{}");
+		},4000);
+	}
 },
 
 animarArco:function(self){

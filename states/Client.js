@@ -1,4 +1,4 @@
-var serverEnabled=true;
+var serverEnabled=false;
 var socket;
 if(serverEnabled){
 socket = io('http://localhost:3000');
@@ -55,6 +55,7 @@ var currentContext;
 function Emit(toEmit,params,eventListen="",callback="",context="",oneshot=true){
 	if(toEmit=='enviarJugada'){
 		console.log("envia jugada al servidor");
+		console.log("params "+params);
 	}
 	console.log("params "+params);
 	console.log("event listen "+eventListen);
@@ -107,6 +108,9 @@ function GetStorage(code){
 }
 
 function GetDummy(event){
+	if(!serverEnabled&&event=='recibeJugada'){
+		return '{"user":'+localStorage["jugadaPlayer"]+',"computer":'+game.rnd.integerInRange(1,6)+'}';
+	}
 	return dummys[event];
 }
 
