@@ -53,6 +53,11 @@ GameMenu.prototype = {
     this.addMenuOption('ESTADÍSTICAS', function () {
       game.state.start("Stadistics");
     }).x=600;
+
+    this.addMenuOption('INSTRUCCIONES', function () {
+      console.log("va Splash de instrucciones");
+    }).x=600;
+
     //
     // this.addMenuOption('VERSUS', function () {
     //   game.state.start("Versus");

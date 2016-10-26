@@ -9,7 +9,7 @@ var Splash = function () {};
     game.load.script('gamemenu','states/GameMenu.js');
     game.load.script('game', 'states/Game.js');
     game.load.script('gameover','states/GameOver.js');
-  //  game.load.script('options', 'states/Options.js');general/
+  //  game.load.script('options', 'states/Options.js');
     game.load.script('Versus', 'states/versus.js');
     game.load.script('Stadistics', 'states/stadistics.js');
     game.load.script('Selectplayer_2','states/selectPlayer_2.js' );
@@ -83,7 +83,7 @@ var Splash = function () {};
 
     game.load.spritesheet('button', 'assets/general/images/boton.png', 300, 300);
     game.load.image('assert', 'assets/general/images/green-button.png', 150,150);
-    game.load.image('noassert', 'assets/general/imgeneral/ages/red-button.png', 150,150);
+    game.load.image('noassert', 'assets/general/images/red-button.png', 150,150);
     game.load.image('orange-button', 'assets/general/images/orange-button.png', 150,150);
     game.load.image('yellow-button', 'assets/general/images/yellow-button.png', 150,150);
     game.load.image('triangle', 'assets/general/images/puntero.png', 150,150);
@@ -98,8 +98,6 @@ var Splash = function () {};
     game.load.image('fondo1', 'assets/general/images/fondo-game1.png', 759, 150);
     game.load.image('fondo2', 'assets/general/images/fondo-game2.png', 378, 150);
     game.load.image('fondo3', 'assets/general/images/fondo-game3.png', 1136, 491);
-
-
 
 
   },
