@@ -1,0 +1,276 @@
+{"frames": {
+
+"Jugador_01.png":
+{
+	"frame": {"x":1276,"y":367,"w":258,"h":178},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":22,"y":18,"w":258,"h":178},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_02.png":
+{
+	"frame": {"x":1679,"y":541,"w":258,"h":177},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":22,"y":19,"w":258,"h":177},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_03.png":
+{
+	"frame": {"x":1286,"y":182,"w":258,"h":178},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":22,"y":19,"w":258,"h":178},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_04.png":
+{
+	"frame": {"x":1,"y":191,"w":238,"h":187},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":34,"y":19,"w":238,"h":187},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_05.png":
+{
+	"frame": {"x":1038,"y":367,"w":236,"h":179},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":45,"y":20,"w":236,"h":179},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_06.png":
+{
+	"frame": {"x":1777,"y":178,"w":225,"h":175},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":55,"y":24,"w":225,"h":175},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_07.png":
+{
+	"frame": {"x":1546,"y":181,"w":229,"h":177},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":49,"y":22,"w":229,"h":177},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_08.png":
+{
+	"frame": {"x":1299,"y":1,"w":254,"h":178},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":50,"y":21,"w":254,"h":178},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_09.png":
+{
+	"frame": {"x":1012,"y":186,"w":272,"h":179},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":45,"y":20,"w":272,"h":179},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_10.png":
+{
+	"frame": {"x":756,"y":372,"w":280,"h":180},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":18,"y":19,"w":280,"h":180},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_11.png":
+{
+	"frame": {"x":1039,"y":1,"w":258,"h":179},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":31,"y":13,"w":258,"h":179},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_12.png":
+{
+	"frame": {"x":1,"y":380,"w":253,"h":185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":31,"y":8,"w":253,"h":185},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_13.png":
+{
+	"frame": {"x":1,"y":1,"w":277,"h":188},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":28,"y":4,"w":277,"h":188},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_14.png":
+{
+	"frame": {"x":1420,"y":547,"w":257,"h":172},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":29,"y":14,"w":257,"h":172},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_15.png":
+{
+	"frame": {"x":1536,"y":362,"w":259,"h":177},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":32,"y":15,"w":259,"h":177},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_16.png":
+{
+	"frame": {"x":241,"y":191,"w":257,"h":184},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":24,"y":12,"w":257,"h":184},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_17.png":
+{
+	"frame": {"x":280,"y":1,"w":253,"h":184},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":23,"y":12,"w":253,"h":184},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_18.png":
+{
+	"frame": {"x":535,"y":1,"w":248,"h":184},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":27,"y":12,"w":248,"h":184},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_19.png":
+{
+	"frame": {"x":509,"y":373,"w":245,"h":184},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":29,"y":12,"w":245,"h":184},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_20.png":
+{
+	"frame": {"x":256,"y":377,"w":251,"h":184},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":12,"w":251,"h":184},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_21.png":
+{
+	"frame": {"x":500,"y":187,"w":251,"h":184},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":12,"w":251,"h":184},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_22.png":
+{
+	"frame": {"x":785,"y":1,"w":252,"h":183},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":29,"y":13,"w":252,"h":183},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_23.png":
+{
+	"frame": {"x":753,"y":187,"w":257,"h":183},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":25,"y":13,"w":257,"h":183},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_24.png":
+{
+	"frame": {"x":1555,"y":1,"w":246,"h":175},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":35,"y":17,"w":246,"h":175},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_25.png":
+{
+	"frame": {"x":797,"y":554,"w":225,"h":161},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":60,"y":31,"w":225,"h":161},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_26.png":
+{
+	"frame": {"x":395,"y":563,"w":198,"h":144},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":79,"y":42,"w":198,"h":144},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_27.png":
+{
+	"frame": {"x":1797,"y":355,"w":193,"h":142},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":83,"y":44,"w":193,"h":142},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_28.png":
+{
+	"frame": {"x":1224,"y":548,"w":194,"h":142},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":85,"y":44,"w":194,"h":142},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_29.png":
+{
+	"frame": {"x":1024,"y":554,"w":198,"h":142},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":85,"y":44,"w":198,"h":142},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_30.png":
+{
+	"frame": {"x":194,"y":567,"w":199,"h":146},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":86,"y":40,"w":199,"h":146},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_31.png":
+{
+	"frame": {"x":1,"y":567,"w":191,"h":151},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":86,"y":35,"w":191,"h":151},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_32.png":
+{
+	"frame": {"x":1803,"y":1,"w":194,"h":142},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":86,"y":44,"w":194,"h":142},
+	"sourceSize": {"w":318,"h":210}
+},
+"Jugador_33.png":
+{
+	"frame": {"x":595,"y":559,"w":200,"h":143},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":80,"y":43,"w":200,"h":143},
+	"sourceSize": {"w":318,"h":210}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "pateador-test.png",
+	"format": "RGBA8888",
+	"size": {"w":2003,"h":720},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:eeb3dff69f0ffffd0fd0db8559044ff3:ac3c8628d52eff861634a763b27e67af:3c8516fcb8738f34ceb3472446c409e2$"
+}
+}
