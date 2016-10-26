@@ -55,7 +55,8 @@ GameMenu.prototype = {
     }).x=600;
 
     this.addMenuOption('INSTRUCCIONES', function () {
-      console.log("va Splash de instrucciones");
+      self.notification('INSTRUCCIONES', "asjanskjda aksjdnajksd askdkajsd asdaksjd asdakjsd asdaksjd asdkjajksd asdajksd aksdkajsnkd");
+      
     }).x=600;
 
     //
