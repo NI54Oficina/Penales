@@ -107,8 +107,12 @@ GameOver.prototype = {
     //  game.add.text(10, 220, "Partidos Perdidos: "+ localStorage["PartidosPerdidos"], puntajeStyle);
 
       game.add.text(10, 300, "PUNTOS BOCAFAN: 0 ", { font: 'bold 15pt CondensedLight', fill: 'white'});
-     game.add.text(10, 330, "PENALES ATAJADOS: "+ localStorage["TotalAtajados"], puntajeStyle);
-     game.add.text(10, 360, "PENALES CONVERTIDOS: "+ localStorage["TotalConvertidos"], puntajeStyle);
+      self.createLineGlobal(50,330,800, false, 0x797979);
+     game.add.text(10, 360, "PENALES ATAJADOS: "+ localStorage["TotalAtajados"], puntajeStyle);
+     self.createLineGlobal(50,450,800, false, 0x797979);
+     game.add.text(10, 420, "PENALES CONVERTIDOS: "+ localStorage["TotalConvertidos"], puntajeStyle);
+     self.createLineGlobal(50,390,800, false, 0x797979);
+     game.add.text(10, 480, "PREMIOS ", puntajeStyle);
 
     //  game.add.text(10, 280, "Total Errados: "+localStorage["TotalErrados"], puntajeStyle);
     //  game.add.text(10, 300, "Total No Atajados: "+localStorage["TotalNoAtajados"], puntajeStyle);
