@@ -63,6 +63,7 @@ var Splash = function () {};
     game.load.image('menu', 'assets/general/images/menu.png');
     game.load.image('puntitos', 'assets/general/images/fondo_trama.png');
     game.load.image('curva', 'assets/general/images/fondo_curva.png');
+    game.load.image('curva_alta', 'assets/general/images/fondo_curva_alta.png');
 
     game.load.image('brillodown', 'assets/general/images/brillodown.png');
     game.load.image('brilloup', 'assets/general/images/brilloup.png');

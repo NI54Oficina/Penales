@@ -65,9 +65,9 @@ GameMenu.prototype = {
     // });
     //
 
-    // this.addMenuOption('GAMEOVER', function () {
-    //   game.state.start("GameOver");
-    // });
+    this.addMenuOption('GAMEOVER', function () {
+      game.state.start("GameOver");
+    });
 
 
     //Creacion variables en localStorage
