@@ -99,6 +99,7 @@ var Splash = function () {};
     game.load.image('fondo1', 'assets/general/images/fondo-game1.png', 759, 150);
     game.load.image('fondo2', 'assets/general/images/fondo-game2.png', 378, 150);
     game.load.image('fondo3', 'assets/general/images/fondo-game3.png', 1136, 491);
+    game.load.image('tablero', 'assets/general/images/tablero.png');
 
 
   },

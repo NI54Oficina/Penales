@@ -123,6 +123,9 @@ drawBackground: function(){
 
     presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px TheMinion", fill: "black", align: "center" });
 	presicionText.visible=false;
+
+  tablero = this.game.add.sprite(0,0, 'tablero');
+  tablero.y= this.game.height-tablero.height;
 },
 
 drawArquero:function(){
@@ -230,13 +233,14 @@ createButtons:function(){
 
       for(var j=0; j < 3; j++){
 
-    			auxButton = game.add.button((j*120)+400, (i*90)+80, 'button', function(self){}, this, 50, 50, 0);
+    			auxButton = game.add.button((j*190)+330, (i*90)+100, 'button', function(self){}, this, 50, 50, 0);
     			auxButton.id=auxID++;
 
 
     			auxButton.events.onInputDown.add(this.actionOnClick,auxButton);
 
-    			// auxButton.scale.setTo(0.25,0.25);
+    			auxButton.scale.setTo(2,2);
+          //Cambiar esta escala y pasar nueva foto
 
     			buttons.add(auxButton);
     			buttons.visible=true;
@@ -262,8 +266,11 @@ drawGui:function(){
 	winner = game.add.text(350, 350, display2, {  font: 'bold 60pt TheMinion',fill: 'red' });
 	winner.visible=false;
 	points= game.add.group();
-	userPointY=200;
-	enemyPointY=300;
+	userPointY=true;
+	enemyPointY=false;
+
+
+
 },
 
 updateCounter: function () {
@@ -465,16 +472,32 @@ updateCounter: function () {
   },
 
   NoAssertPoint: function(ubiPuntaje, tries){
-    var point= game.add.sprite(10+tries*40,ubiPuntaje, 'noassert');
-    // point.scale.setTo(0.10,0.10);
+    if(ubiPuntaje){
+      var point= game.add.sprite(138.5+tries*(-24),608, 'noassert');
+      // point.scale.setTo(0.10,0.10);
+
+    }else{
+      var point= game.add.sprite(981.5+tries*24,608, 'noassert');
+      // point.scale.setTo(0.10,0.10);
+
+    }
+
+    this.world.bringToTop(point);
     points.add(point);
 
   },
 
   AssertPoint: function(ubiPuntaje, tries){
 
-    var point= game.add.sprite(10+tries*40, ubiPuntaje, 'assert');
-    // point.scale.setTo(0.10,0.10);
+    if(ubiPuntaje){
+      var point= game.add.sprite(138.5+tries*(-24), 608, 'assert');
+      // point.scale.setTo(0.10,0.10);
+    }else{
+      var point= game.add.sprite(981.5+tries*24, 608, 'assert');
+      // point.scale.setTo(0.10,0.10);
+    }
+
+    this.world.bringToTop(point);
     points.add(point);
   },
 
