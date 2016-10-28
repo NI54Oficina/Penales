@@ -26,7 +26,7 @@ GameMenu.prototype = {
     self=this;
 
 
-    game.add.sprite(0, 0, 'menu-bg');
+    game.add.sprite(0, 0, 'menu-bg').scale.setTo(.80,.80);
 
     var graphics = game.add.graphics(100, 100);
 
@@ -54,10 +54,16 @@ GameMenu.prototype = {
       game.state.start("Stadistics");
     }).x=600;
 
-    this.addMenuOption('INSTRUCCIONES', function () {
-      self.notification('INSTRUCCIONES', "asjanskjda aksjdnajksd askdkajsd asdaksjd asdakjsd asdaksjd asdkjajksd asdajksd aksdkajsnkd", [['Boton de Prueba', self.testGlobal],['Boton de Prueba', self.testGlobal],['Boton de Prueba', self.testGlobal]]);
+    // this.addMenuOption('INSTRUCCIONES', function () {
+    //   self.notification('INSTRUCCIONES', "asjanskjda aksjdnajksd askdkajsd asdaksjd asdakjsd asdaksjd asdkjajksd asdajksd aksdkajsnkd", [['Boton de Prueba', self.testGlobal],['Boton de Prueba', self.testGlobal],['Boton de Prueba', self.testGlobal]]);
+    //
+    // }).x=600;
 
-    }).x=600;
+      instrucciones= game.add.text(720, 400, "INSTRUCCIONES", { font: 'bold 20pt RobotoBold', fill: '#fff03a'});
+      self.createLineGlobal(710,435,720+instrucciones.width+10, false, 0xfff03a);
+
+      instrucciones.inputEnabled = true;
+      instrucciones.events.onInputDown.add(function(){self.notification('INSTRUCCIONES', "asjanskjda aksjdnajksd askdkajsd asdaksjd asdakjsd asdaksjd asdkjajksd asdajksd aksdkajsnkd", [['Boton de Prueba', self.testGlobal],['Boton de Prueba', self.testGlobal],['Boton de Prueba', self.testGlobal]]);});
 
     //
     // this.addMenuOption('VERSUS', function () {

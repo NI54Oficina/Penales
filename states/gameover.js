@@ -59,7 +59,7 @@ GameOver.prototype = {
     })
 
 
-    var puntajeStyle = { font: 'bold 15pt CondensedLight', fill: 'yellow'};
+    var puntajeStyle = { font: 'bold 16pt CondensedLight', fill: 'yellow'};
     var partidaStyle = { font: 'bold 35pt CondensedLight', fill: 'white'};
 
 
@@ -106,13 +106,14 @@ GameOver.prototype = {
     //  game.add.text(10, 200, "Partidos Ganados: "+ localStorage["PartidosGanados"], puntajeStyle);
     //  game.add.text(10, 220, "Partidos Perdidos: "+ localStorage["PartidosPerdidos"], puntajeStyle);
 
-      game.add.text(10, 300, "PUNTOS BOCAFAN: 0 ", { font: 'bold 15pt CondensedLight', fill: 'white'});
-      self.createLineGlobal(50,330,800, false, 0x797979);
-     game.add.text(10, 360, "PENALES ATAJADOS: "+ localStorage["TotalAtajados"], puntajeStyle);
-     self.createLineGlobal(50,450,800, false, 0x797979);
-     game.add.text(10, 420, "PENALES CONVERTIDOS: "+ localStorage["TotalConvertidos"], puntajeStyle);
-     self.createLineGlobal(50,390,800, false, 0x797979);
-     game.add.text(10, 480, "PREMIOS ", puntajeStyle);
+      game.add.text(300, 250, "PUNTOS BOCAFAN: 0 ", { font: 'bold 15pt CondensedLight', fill: 'white'});
+          self.createLineGlobal(200,280,900, false, 0x797979);
+     game.add.text(300, 310, "PENALES ATAJADOS: "+ localStorage["TotalAtajados"], puntajeStyle);
+          self.createLineGlobal(200,340,900, false, 0x797979);
+     game.add.text(300, 370, "PENALES CONVERTIDOS: "+ localStorage["TotalConvertidos"], puntajeStyle);
+          self.createLineGlobal(200,400,900, false, 0x797979);
+
+     game.add.text(300, 420, "PREMIOS ", puntajeStyle);
 
     //  game.add.text(10, 280, "Total Errados: "+localStorage["TotalErrados"], puntajeStyle);
     //  game.add.text(10, 300, "Total No Atajados: "+localStorage["TotalNoAtajados"], puntajeStyle);

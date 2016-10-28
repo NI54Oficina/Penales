@@ -73,10 +73,10 @@ Selectplayer.prototype = {
       img4.scale.setTo(.5,.5);
       img5.scale.setTo(.5,.5);
 
-
-      golden=game.add.sprite(this.game.width/2- wd/2, 150, 'golden');
-      golden.scale.setTo(0.9,0.9);
-      golden.alpha=0;
+      //
+      // golden=game.add.sprite(this.game.width/2- wd/2, 150, 'golden');
+      // golden.scale.setTo(0.9,0.9);
+      // golden.alpha=0;
 
 
 
@@ -134,7 +134,7 @@ Selectplayer.prototype = {
 
 
     self.getID(s);
-    golden.alpha=0;
+    // golden.alpha=0;
 
     var carrousel=[];
     var j=i;
@@ -284,16 +284,16 @@ setTo1: function(target){
 
 
 
-   tweenA.onComplete.addOnce(function(){
+  //  tweenA.onComplete.addOnce(function(){
+   //
+  //    tweenD=game.add.tween(golden).to( {alpha:1}, 50, 'Linear');
+  //    tweenD.start();
+   //
+   //
+  //  });
 
-     tweenD=game.add.tween(golden).to( {alpha:1}, 50, 'Linear');
-     tweenD.start();
-
-
-   });
-
-
-   this.world.bringToTop(golden);
+   //
+  //  this.world.bringToTop(golden);
 
 
 },
