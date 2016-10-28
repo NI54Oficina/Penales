@@ -77,7 +77,7 @@ Game.prototype = {
 
   screenOponente=self.pantallaOponente(self);
   //screenOponente.visible=true;
-  
+
   if(!serverEnabled){
 	  setTimeout(function(){
 		  CheckEvent("inicioPartida"," ");
@@ -236,7 +236,7 @@ createButtons:function(){
 
     			auxButton.events.onInputDown.add(this.actionOnClick,auxButton);
 
-    			auxButton.scale.setTo(0.25,0.25);
+    			// auxButton.scale.setTo(0.25,0.25);
 
     			buttons.add(auxButton);
     			buttons.visible=true;
@@ -466,7 +466,7 @@ updateCounter: function () {
 
   NoAssertPoint: function(ubiPuntaje, tries){
     var point= game.add.sprite(10+tries*40,ubiPuntaje, 'noassert');
-    point.scale.setTo(0.10,0.10);
+    // point.scale.setTo(0.10,0.10);
     points.add(point);
 
   },
@@ -474,7 +474,7 @@ updateCounter: function () {
   AssertPoint: function(ubiPuntaje, tries){
 
     var point= game.add.sprite(10+tries*40, ubiPuntaje, 'assert');
-    point.scale.setTo(0.10,0.10);
+    // point.scale.setTo(0.10,0.10);
     points.add(point);
   },
 
@@ -778,7 +778,7 @@ ListenerPateador: function(self, datosServer){
 	}else{
 		self.animarJugada(self,datosServer);
 	}
-    
+
 
 },
 

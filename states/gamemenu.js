@@ -40,7 +40,7 @@ GameMenu.prototype = {
     //   game.state.start("Selectplayer_2");
     // });
 
-     this.addMenuOption('CLÁSICO \none', function () {
+     this.addMenuOption('CLÁSICO', function () {
       game.state.start("Selectplayer");
     }).x=600;;
 
@@ -59,8 +59,8 @@ GameMenu.prototype = {
     //
     // }).x=600;
 
-      instrucciones= game.add.text(720, 400, "INSTRUCCIONES", { font: 'bold 20pt RobotoBold', fill: '#fff03a'});
-      self.createLineGlobal(710,435,720+instrucciones.width+10, false, 0xfff03a);
+      instrucciones= game.add.text(750, 400, "INSTRUCCIONES", { font: 'bold 15pt RobotoBold', fill: '#fff03a'});
+      self.createLineGlobal(740,425,750+instrucciones.width+10, false, 0xfff03a);
 
       instrucciones.inputEnabled = true;
       instrucciones.events.onInputDown.add(function(){self.notification('INSTRUCCIONES', "asjanskjda aksjdnajksd askdkajsd asdaksjd asdakjsd asdaksjd asdkjajksd asdajksd aksdkajsnkd", [['Boton de Prueba', self.testGlobal],['Boton de Prueba', self.testGlobal],['Boton de Prueba', self.testGlobal]]);});
