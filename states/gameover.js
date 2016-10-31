@@ -61,14 +61,18 @@ GameOver.prototype = {
     search.visible=false;
 
 
-    this.addMenuOptionInner('Play Again', function (e) {
-      search.visible=true;
-      Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
-    });
+    // this.addMenuOptionInner('Play Again', function (e) {
+    //   search.visible=true;
+    //   Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
+    // });
 
-    this.addMenuOptionInner('Main Menu', function (e) {
-      this.game.state.start("GameMenu");
-    })
+    // this.addMenuOptionInner('Main Menu', function (e) {
+    //   this.game.state.start("GameMenu");
+    // })
+
+    var botones=self.generateButtonsInSplash([['Menu', self.MainMenu], ['Volver a Jugar', self.Restart]]);
+
+    botones.position= {x:this.game.width/2 - botones.width/2, y:this.game.height-botones.height*2}
 
 
     var puntajeStyle = { font: 'bold 16pt CondensedLight', fill: 'yellow'};
@@ -203,6 +207,15 @@ GameOver.prototype = {
      this.game.state.states['Game'].modo=auxArray.rol;
 
         game.state.start("Game");
+  },
+
+  Restart: function(){
+    search.visible=true;
+    Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
+  },
+
+  MainMenu: function(){
+    this.game.state.start("GameMenu");
   },
 
 
