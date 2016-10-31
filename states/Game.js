@@ -46,8 +46,8 @@ Game.prototype = {
 
     this.drawBackground();
 
-	equipoUnoText = game.add.text(10, 160, 'Equipo 1', { font: " 20px TheMinion", fill: "black", align: "center" });
-	equipoDosText = game.add.text(10, 260, 'Equipo 2', { font: " 20px TheMinion", fill: "black", align: "center" });
+	equipoUnoText = game.add.text(10, 160, 'Equipo 1', { font: " 20px CondensedLight", fill: "black", align: "center" });
+	equipoDosText = game.add.text(10, 260, 'Equipo 2', { font: " 20px CondensedLight", fill: "black", align: "center" });
 
     this.createBarra();
 
@@ -121,11 +121,14 @@ drawBackground: function(){
 	arco3.animations.add("down",["d00.png"],velocidadArco,false);
 	arco3.animations.add("idle",["d00.png"],velocidadArco,false);
 
-    presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px TheMinion", fill: "black", align: "center" });
+  presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px CondensedLight", fill: "black", align: "center" });
 	presicionText.visible=false;
 
   tablero = this.game.add.sprite(0,0, 'tablero');
   tablero.y= this.game.height-tablero.height;
+  identificadorIzquierdo = this.game.add.sprite(170,this.game.height-40, 'patea');
+  identificadorDerecho = this.game.add.sprite(930,this.game.height-40, 'ataja');
+
 },
 
 drawArquero:function(){
@@ -193,8 +196,9 @@ drawPlayer:function(){
 
 createBarra: function(){
 	// MODIFICAMOS NUEVA BARRA DE COLORES
-	var 	myBitmap = this.game.add.bitmapData(500, 20);
-	var  grd=myBitmap.context.createLinearGradient(500,0,0,0);
+  barraPotencia = this.game.add.sprite(610,460, 'linea-potencia');
+	var 	myBitmap = this.game.add.bitmapData(280, 15);
+	var  grd=myBitmap.context.createLinearGradient(280,0,0,0);
 
 	grd.addColorStop(0,"red");
 	grd.addColorStop(.10,"orange");
@@ -212,16 +216,18 @@ createBarra: function(){
 					[[0, "red"],[0.40,"orange"],[0.50,"green"],[0.60,"orange"],[1,"red"]]
 					];
 
-	barra = this.game.add.sprite(this.game.width/2 - 250,600, myBitmap);
-	focus = game.add.sprite(barra.position.x,600, 'triangle');
-	focus.scale.setTo(0.05,0.05);
+	barra = this.game.add.sprite(630,435, myBitmap);
 
-	beginBarra = barra.position.x;
+	focus = game.add.sprite(barra.position.x-100,400, 'triangle');
+	focus.scale.setTo(0.4,0.4);
+
+	beginBarra = barra.position.x- focus.width/2;
 	centerBarra = barra.position.x + barra.width/2 -focus.width/2 ;
 	endBarra = barra.position.x + barra.width - focus.width/2;
 
 	barra.visible=false;
 	focus.visible=false;
+  barraPotencia.visible=false;
 
 },
 
@@ -261,9 +267,9 @@ setClickArea:function(){
 drawGui:function(){
 	var display1="Fallaste!";
   var display2="Ganaste!";
-	looser = game.add.text(350, 350, display1, { font: 'bold 60pt TheMinion',fill: 'red' });
+	looser = game.add.text(350, 350, display1, { font: 'bold 60pt CondensedLight',fill: 'red' });
 	looser.visible=false;
-	winner = game.add.text(350, 350, display2, {  font: 'bold 60pt TheMinion',fill: 'red' });
+	winner = game.add.text(350, 350, display2, {  font: 'bold 60pt CondensedLight',fill: 'red' });
 	winner.visible=false;
 	points= game.add.group();
 	userPointY=true;
@@ -299,6 +305,7 @@ updateCounter: function () {
 
     barra.visible=true;
     focus.visible=true;
+    barraPotencia.visible=true;
     game.world.bringToTop(focus);
 
   },
@@ -326,10 +333,10 @@ updateCounter: function () {
   setPlayersMode1: function(){
 
     player.visible=true;
-    focus.position.x=barra.position.x;
-    focus.position.y=600;
+    focus.position.x=barra.position.x- focus.width/2;
+    // focus.position.y=600;
     tweenFocus = game.add.tween(focus);
-    tweenFocus.to( {x:endBarra, y:600}, velocidad, 'Linear', true, 0, false).yoyo(true);
+    tweenFocus.to( {x:endBarra}, velocidad, 'Linear', true, 0, false).yoyo(true);
     self.setArquero(self);
     buttons.alpha=0;
 
@@ -432,13 +439,14 @@ updateCounter: function () {
 
   resetGui:function(){
 
-  	presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px TheMinion", fill: "black", align: "center" });
+  	presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px CondensedLight", fill: "black", align: "center" });
   	presicionText.visible=false;
   	winner.visible=false;
   	looser.visible=false;
   	barra.visible=false;
 
   	focus.visible=false;
+    barraPotencia.visible=false;
   	buttons.visible=true;
   	buttons.alpha=1;
   },
@@ -545,7 +553,7 @@ updateCounter: function () {
 
     desempatar:function(){
       enAlargue=true;
-      desempateText= game.add.text(600, 10, 'Alargue. Desempate', { font: " 20px TheMinion", fill: "black", align: "right" });
+      desempateText= game.add.text(600, 10, 'Alargue. Desempate', { font: " 20px CondensedLight", fill: "black", align: "right" });
       points.removeAll(true);
 
       setTimeout(function(){
@@ -719,9 +727,9 @@ updateBarra: function(){
 
 	if(counterBarra<(arrayGradient.length)){
 		barra.destroy();
-		var	myBitmap = this.game.add.bitmapData(500, 20);
+		var	myBitmap = this.game.add.bitmapData(280, 15);
 
-		var  mov=myBitmap.context.createLinearGradient(500,0,0,0);
+		var  mov=myBitmap.context.createLinearGradient(280,0,0,0);
 
 		for(var j=0; j<=(arrayGradient[counterBarra].length-1); j++){
 
@@ -731,7 +739,7 @@ updateBarra: function(){
 		myBitmap.context.fillStyle=mov;
 		myBitmap.context.fillRect(0,0,this.game.height,this.game.width);
 
-		barra = this.game.add.sprite(this.game.width/2 - 250,600, myBitmap);
+		barra = this.game.add.sprite(630,435, myBitmap);
 
 	}else{
 
@@ -1241,6 +1249,16 @@ mouseUpPateador:function(){
 	if(!Phaser.Math.isEven(modo)&&!this.pause){
 		this.EnviarJugadaServer(this);
 	}
+},
+
+setGraphicIdentifier: function(){
+   if(Phaser.Math.isEven(modo)){
+
+   }else{
+     indicadorDerecho.loadTexture('quien-ataja', 0, false);
+     indicadorIzquierdo.loadTexture('quien-patea', 0, false);
+   }
+
 },
 
 };

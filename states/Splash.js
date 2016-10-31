@@ -80,6 +80,7 @@ var Splash = function () {};
 
 
 
+
     //Sprites de GamePlay
 
     game.load.spritesheet('button', 'assets/general/images/boton.png', 300, 300);
@@ -100,6 +101,9 @@ var Splash = function () {};
     game.load.image('fondo2', 'assets/general/images/fondo-game2.png', 378, 150);
     game.load.image('fondo3', 'assets/general/images/fondo-game3.png', 1136, 491);
     game.load.image('tablero', 'assets/general/images/tablero.png');
+    game.load.image('ataja', 'assets/general/images/quien-ataja.png');
+    game.load.image('patea', 'assets/general/images/quien-patea.png');
+    game.load.image('linea-potencia', 'assets/general/images/linea-potencia.png');
 
 
   },
