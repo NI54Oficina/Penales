@@ -46,8 +46,6 @@ Game.prototype = {
 
     this.drawBackground();
 
-	equipoUnoText = game.add.text(10, 160, 'Equipo 1', { font: " 20px CondensedLight", fill: "black", align: "center" });
-	equipoDosText = game.add.text(10, 260, 'Equipo 2', { font: " 20px CondensedLight", fill: "black", align: "center" });
 
     this.createBarra();
 
@@ -121,7 +119,7 @@ drawBackground: function(){
 	arco3.animations.add("down",["d00.png"],velocidadArco,false);
 	arco3.animations.add("idle",["d00.png"],velocidadArco,false);
 
-  presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px CondensedLight", fill: "black", align: "center" });
+  presicionText = game.add.text(10, 370, 'Tiempo: 00:00', { font: " 20px CondensedRegular", fill: "black", align: "center" });
 	presicionText.visible=false;
 
   tablero = this.game.add.sprite(0,0, 'tablero');
@@ -267,10 +265,12 @@ setClickArea:function(){
 drawGui:function(){
 	var display1="Fallaste!";
   var display2="Ganaste!";
-	looser = game.add.text(350, 350, display1, { font: 'bold 60pt CondensedLight',fill: 'red' });
+	looser = game.add.text(0, 350, display1, { font: 'bold 60pt CondensedRegular',fill: 'red' });
 	looser.visible=false;
-	winner = game.add.text(350, 350, display2, {  font: 'bold 60pt CondensedLight',fill: 'red' });
+  looser.position.x=game.world.width/2- looser.width/2;
+	winner = game.add.text(0, 350, display2, {  font: 'bold 60pt CondensedRegular',fill: 'red' });
 	winner.visible=false;
+  winner.position.x=game.world.width/2- winner.width/2;
 	points= game.add.group();
 	userPointY=true;
 	enemyPointY=false;
@@ -439,7 +439,7 @@ updateCounter: function () {
 
   resetGui:function(){
 
-  	presicionText = game.add.text(10, 355, 'Tiempo: 00:00', { font: " 20px CondensedLight", fill: "black", align: "center" });
+  	presicionText = game.add.text(10, 370, 'Tiempo: 00:00', { font: " 20px CondensedRegular", fill: "black", align: "center" });
   	presicionText.visible=false;
   	winner.visible=false;
   	looser.visible=false;
@@ -553,7 +553,7 @@ updateCounter: function () {
 
     desempatar:function(){
       enAlargue=true;
-      desempateText= game.add.text(600, 10, 'Alargue. Desempate', { font: " 20px CondensedLight", fill: "black", align: "right" });
+      desempateText= game.add.text(600, 10, 'Alargue. Desempate', { font: " 20px CondensedRegular", fill: "black", align: "right" });
       points.removeAll(true);
 
       setTimeout(function(){
