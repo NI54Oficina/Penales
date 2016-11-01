@@ -46,11 +46,11 @@ var Splash = function () {};
     game.load.image('multi-bg', 'assets/general/images/bg-multi.jpg');
     game.load.image('single-bg', 'assets/general/images/bg-single.jpg');
 
-    game.load.image('img-1', 'assets/general/images/bt_escudo.png');
-    game.load.image('img-2', 'assets/general/images/bt_escudos_02.png');
-    game.load.image('img-3', 'assets/general/images/bt_escudos_03.png');
-    game.load.image('img-4', 'assets/general/images/bt_escudos_04.png');
-    game.load.image('img-5', 'assets/general/images/bt_escudos_05.png');
+    game.load.image('img-1', 'assets/singleplayer/images/bt_escudo.png');
+    game.load.image('img-2', 'assets/singleplayer/images/bt_escudos_02.png');
+    game.load.image('img-3', 'assets/singleplayer/images/bt_escudos_03.png');
+    game.load.image('img-4', 'assets/singleplayer/images/bt_escudos_04.png');
+    game.load.image('img-5', 'assets/singleplayer/images/bt_escudos_05.png');
     game.load.image('golden', 'assets/general/images/bt_golden.png');
     game.load.image('shadow', 'assets/general/images/bt_reflex.png');
     game.load.image('selected', 'assets/general/images/bt_seleccion.png');
