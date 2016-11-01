@@ -252,7 +252,7 @@ createButtons:function(){
 
     			auxButton.events.onInputDown.add(this.actionOnClick,auxButton);
 
-    			auxButton.scale.setTo(2,2);
+    			auxButton.scale.setTo(1.5,1.5);
           //Cambiar esta escala y pasar nueva foto
 
     			buttons.add(auxButton);
@@ -576,11 +576,17 @@ updateCounter: function () {
     },
 
   terminarJuego: function(){
+    self.activateSound(musica_end);
+    this.game.state.states["GameOver"].puntosUser = puntosUser;
+    this.game.state.states["GameOver"].puntosComputer = puntosComputer;
+    setTimeout(function(){
 
-      this.game.state.states["GameOver"].puntosUser = puntosUser;
-      this.game.state.states["GameOver"].puntosComputer = puntosComputer;
 
       this.game.state.start("GameOver");
+    },1000);
+
+
+
   },
 
 	setearResultado: function(msg){

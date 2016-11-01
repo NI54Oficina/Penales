@@ -10,6 +10,8 @@ GameOver.prototype = {
   create: function () {
 
     self.createBackground(false);
+    fondoMusic.mute= true;
+    activateSonido=false;
 
     curva=game.add.sprite(0,0, 'curva_alta');
     curva.scale.setTo(0.45,0.5);

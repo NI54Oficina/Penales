@@ -156,17 +156,21 @@ var Splash = function () {};
     fondoMusic = game.add.audio('musica');
     fondoMusic.loop = true;
     fondoMusic.mute=true;
+    fondoMusic.volume = 0.80;
     fondoMusic.play();
 
 
-    fondoSonido = game.add.audio('musica_2');
-    fondoSonido.loop = true;
-    fondoSonido.mute = true;
-    fondoSonido.play();
+    // fondoSonido = game.add.audio('musica_2');
+    // fondoSonido.loop = true;
+    // fondoSonido.mute = true;
+    // fondoSonido.volume = 0.05;
+    // fondoSonido.play();
+
 
     musica_2= game.add.audio('musica_2');
     musica_sin_canto= game.add.audio('musica_sin_canto');
     musica_errar= game.add.audio('musica_errar');
+    musica_end= game.add.audio('musica_end');
     sonido_ganado= game.add.audio('sonido_ganado');
     sonido_perdido= game.add.audio('sonido_perdido');
     sonido_gol= game.add.audio('sonido_gol');
