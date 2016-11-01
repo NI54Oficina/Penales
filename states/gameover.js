@@ -58,8 +58,8 @@ GameOver.prototype = {
 
     var titleStyle = { font: 'bold 60pt CondensedLight', fill: '#FDFFB5', align: 'center'};
 
-    search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px CondensedLight", fill: "red", align: "center" });
-
+    search= game.add.text(0, 200, 'Buscando oponente', { font: "bold 60px RobotoBold", fill: "#fff03a" });
+    search.x= game.world.width/2-search.width/2;
     search.visible=false;
 
 

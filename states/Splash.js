@@ -171,6 +171,7 @@ var Splash = function () {};
     musica_sin_canto= game.add.audio('musica_sin_canto');
     musica_errar= game.add.audio('musica_errar');
     musica_end= game.add.audio('musica_end');
+    musica_start= game.add.audio('musica_start');
     sonido_ganado= game.add.audio('sonido_ganado');
     sonido_perdido= game.add.audio('sonido_perdido');
     sonido_gol= game.add.audio('sonido_gol');

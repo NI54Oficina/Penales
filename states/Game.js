@@ -83,6 +83,8 @@ Game.prototype = {
   }else{
 	  screenOponente.visible=true;
   }*/
+
+
 },
 
 drawBackground: function(){
@@ -274,10 +276,10 @@ setClickArea:function(){
 drawGui:function(){
 	var display1="Fallaste!";
   var display2="Ganaste!";
-	looser = game.add.text(0, 350, display1, { font: 'bold 60pt CondensedRegular',fill: 'red' });
+	looser = game.add.text(0, 350, display1, { font: 'bold 60pt CondensedRegular',fill: '#fff03a' });
 	looser.visible=false;
   looser.position.x=game.world.width/2- looser.width/2;
-	winner = game.add.text(0, 350, display2, {  font: 'bold 60pt CondensedRegular',fill: 'red' });
+	winner = game.add.text(0, 350, display2, {  font: 'bold 60pt CondensedRegular',fill: '#fff03a' });
 	winner.visible=false;
   winner.position.x=game.world.width/2- winner.width/2;
 	points= game.add.group();
@@ -1260,6 +1262,10 @@ Clicked: function(){
 	clicked=0;
 	this.pause=false;
   screenOponente.visible=false;
+  setTimeout(function(){
+    self.activateSound(musica_start);
+  },500);
+
 
 },
 
