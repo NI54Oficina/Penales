@@ -50,6 +50,7 @@ GameOver.prototype = {
     {key:"TotalAtajados",title:"PENALES ATAJADOS",point:5},
     {key:"TotalConvertidos",title:"PENALES CONVERTIDOS", point:5},
     {key:"RachaAtajados",title:"VALLA INVICTO", point:5},
+    {key:"RachaAtajados",title:"DELANTERA LETAL", point:5},
 
     ];
 
