@@ -411,13 +411,14 @@ updateCounter: function () {
       triesA++;
 
       self.setBotonesRiesgo(self);
+
     }else{
       triesP++;
       self.setBotonesRojos(self);
 
     }
 
-
+    self.setGraphicIdentifier(self);
   	self.resetGui();
   	self.resetPlayers();
 
@@ -1262,10 +1263,11 @@ mouseUpPateador:function(){
 
 setGraphicIdentifier: function(){
    if(Phaser.Math.isEven(modo)){
-
+     identificadorDerecho.loadTexture('patea', 0, false);
+     identificadorIzquierdo.loadTexture('ataja', 0, false);
    }else{
-     indicadorDerecho.loadTexture('quien-ataja', 0, false);
-     indicadorIzquierdo.loadTexture('quien-patea', 0, false);
+     identificadorDerecho.loadTexture('ataja', 0, false);
+     identificadorIzquierdo.loadTexture('patea', 0, false);
    }
 
 },
