@@ -599,14 +599,16 @@ updateCounter: function () {
   checkIntentos: function(data){
 
 		var auxArray=JSON.parse(data);
-		if(modo==1){
-		 	golesUser= auxArray["localGol"];
-		 	golesComputer= auxArray["visitanteGol"];
+		if(serverEnabled){
+			if(modo==1){
+				golesUser= auxArray["localGol"];
+				golesComputer= auxArray["visitanteGol"];
 
-		}else{
-		 	golesUser= auxArray["visitanteGol"];
-			golesComputer= auxArray["localGol"];
+			}else{
+				golesUser= auxArray["visitanteGol"];
+				golesComputer= auxArray["localGol"];
 
+			}
 		}
 
     if( triesA  >= 5 &&  triesP  >= 5 ){
@@ -936,7 +938,7 @@ acertarTiro: function(self){
 
           if(self.pelotaEntra){
               self.activateSound(sonido_gol_1);
-              //puntosUser++;
+              puntosUser++;
               self.AssertPoint(userPointY,triesP);
               self.Win(self);
               localStorage["TotalConvertidos"] = (parseInt(localStorage["TotalConvertidos"]) || 0) + 1;
@@ -982,7 +984,7 @@ atajar: function(self){
 
               self.AssertPoint(enemyPointY,triesA);
               self.Looser(self);
-              //puntosComputer++;
+              puntosComputer++;
               localStorage["TotalNoAtajados"] = (parseInt(localStorage["TotalNoAtajados"]) || 0) + 1;
               localStorage["TotalPartidaNoAtajados"] = (parseInt(localStorage["TotalPartidaNoAtajados"]) || 0) + 1;
               localStorage["RachaAtajados"] = 0;
