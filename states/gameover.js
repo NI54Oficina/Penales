@@ -70,7 +70,7 @@ GameOver.prototype = {
     //   this.game.state.start("GameMenu");
     // })
 
-    var botones=self.generateButtonsInSplash([['Menu', self.MainMenu], ['Volver a Jugar', self.Restart]]);
+    var botones=self.generateButtonsInSplash([ ['Volver a Jugar', self.Restart],['Menu', self.MainMenu]]);
 
     botones.position= {x:this.game.width/2 - botones.width/2, y:this.game.height-botones.height*2}
 

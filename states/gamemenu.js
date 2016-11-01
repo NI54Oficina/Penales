@@ -63,7 +63,7 @@ GameMenu.prototype = {
       self.createLineGlobal(740,425,750+instrucciones.width+10, false, 0xfff03a);
 
       instrucciones.inputEnabled = true;
-      instrucciones.events.onInputDown.add(function(){self.notification('INSTRUCCIONES', "asjanskjda aksjdnajksd askdkajsd asdaksjd asdakjsd asdaksjd asdkjajksd asdajksd aksdkajsnkd", [['Boton de Prueba', self.testGlobal],['Boton de Prueba', self.testGlobal],['Boton de Prueba', self.testGlobal]]);});
+      instrucciones.events.onInputDown.add(function(){self.notification('INSTRUCCIONES', "asjanskjda aksjdnajksd askdkajsd asdaksjd asdakjsd asdaksjd asdkjajksd asdajksd aksdkajsnkd", [['Test1', self.testGlobal],['Test2', self.testGlobal]]);});
 
     //
     // this.addMenuOption('VERSUS', function () {
