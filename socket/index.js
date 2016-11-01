@@ -282,11 +282,7 @@ function CalculateTiro(){
 }
 
 function getMaso(){
-	//if(mod%2 ==0){
-		return oponente["tendencia"][counterVisitante];
-	//}else{
-	//	return oponente["tendencia"][counterLocal];
-	//}
+	return oponente["tendencia"][counterVisitante];
 }
 
 function generarRiesgo(arrai){
@@ -327,21 +323,15 @@ function randomBetween(min, max) {
 
 function calculatePuntaje(msg, generator){
 	if(mod%2 == 0){
-		//entra en jugador modo arquero
 		if(generator>0 && msg!=generator){
-
 			golesComputer++;
-			
-
 		};
 	}else{
 		//entra en jugador modo pateador
 		if(msg>0 && msg!=generator){
 			golesUser++;
-		}
-		
+		}	
 	}
-	
 	return;
 }
 

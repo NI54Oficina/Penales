@@ -76,13 +76,13 @@ Game.prototype = {
   screenOponente=self.pantallaOponente(self);
   //screenOponente.visible=true;
 
-  if(!serverEnabled){
+  /*if(!serverEnabled){
 	  setTimeout(function(){
 		  CheckEvent("inicioPartida"," ");
 	  },300)
   }else{
 	  screenOponente.visible=true;
-  }
+  }*/
 },
 
 drawBackground: function(){
@@ -812,14 +812,14 @@ resolverJugada: function(msg){
 ListenerPateador: function(self, datosServer){
 
 	self.posArqueroI= self.arqueroID;
-	if(!serverEnabled){
+	/*if(!serverEnabled){
 		setTimeout(function(){
 			self.animarJugada(self,datosServer);
 		},2000);
 	}else{
 		self.animarJugada(self,datosServer);
-	}
-
+	}*/
+	self.animarJugada(self,datosServer);
 
 },
 
@@ -828,13 +828,14 @@ ListenerArquero: function(self, datosServer){
 	/**quitar**/
 	generator = datosServer.computer;
 
-	if(!serverEnabled){
+	/*if(!serverEnabled){
 		setTimeout(function(){
 			self.animarJugada(self,datosServer);
 		},2000);
 	}else{
 		self.animarJugada(self,datosServer);
-	}
+	}*/
+	self.animarJugada(self,datosServer);
 
 },
 
@@ -870,11 +871,11 @@ animarJugada:function(self,datosServer){
 			}
 		});
 	},delayPelota);
-	if(!serverEnabled){
+	/*if(!serverEnabled){
 		setTimeout(function(){
 			CheckEvent("inicioTurno","{}");
 		},4000);
-	}
+	}*/
 },
 
 animarArco:function(self){
