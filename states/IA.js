@@ -388,11 +388,14 @@ function randomBetween(min, max) {
 
 function calculatePuntaje(msg, generator){
 	console.log("entra puntaje");
+	
 	if(mod%2 == 0){
+		console.log("jugador es arquero");
 		if(generator>0 && msg!=generator){
 			golesComputer++;
 		};
 	}else{
+		console.log("jugador es pateador");
 		//entra en jugador modo pateador
 		if(msg>0 && msg!=generator){
 			golesUser++;

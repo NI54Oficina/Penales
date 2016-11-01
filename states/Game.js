@@ -930,7 +930,7 @@ acertarTiro: function(self){
 
           if(self.pelotaEntra){
               self.activateSound(sonido_gol_1);
-              puntosUser++;
+              //puntosUser++;
               self.AssertPoint(userPointY,triesP);
               self.Win(self);
               localStorage["TotalConvertidos"] = (parseInt(localStorage["TotalConvertidos"]) || 0) + 1;
@@ -976,7 +976,7 @@ atajar: function(self){
 
               self.AssertPoint(enemyPointY,triesA);
               self.Looser(self);
-              puntosComputer++;
+              //puntosComputer++;
               localStorage["TotalNoAtajados"] = (parseInt(localStorage["TotalNoAtajados"]) || 0) + 1;
               localStorage["TotalPartidaNoAtajados"] = (parseInt(localStorage["TotalPartidaNoAtajados"]) || 0) + 1;
               localStorage["RachaAtajados"] = 0;
