@@ -70,9 +70,9 @@ GameOver.prototype = {
     //   this.game.state.start("GameMenu");
     // })
 
-    var botones=self.generateButtonsInSplash([ ['Volver a Jugar', self.Restart],['Menu', self.MainMenu]]);
+    var botones=self.generateButtonsInSplash([ ['VOLVER A JUGAR', self.Restart],['MENU', self.MainMenu]]);
 
-    botones.position= {x:this.game.width/2 - botones.width/2, y:this.game.height-botones.height*2}
+    botones.position= {x:this.game.width/2 - botones.width/2-20, y:this.game.height-botones.height*2}
 
 
     var puntajeStyle = { font: 'bold 16pt CondensedLight', fill: 'yellow'};
