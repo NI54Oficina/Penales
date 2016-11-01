@@ -269,7 +269,7 @@
 	"frame": {"x":1687,"y":1,"w":259,"h":180},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":18,"y":14,"w":259,"h":180},
+	"spriteSourceSize": {"x":31,"y":10,"w":259,"h":180},
 	"sourceSize": {"w":320,"h":200}
 },
 "34.png":
@@ -285,7 +285,7 @@
 	"frame": {"x":893,"y":1,"w":265,"h":180},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":28,"y":8,"w":265,"h":180},
+	"spriteSourceSize": {"x":28,"y":9,"w":265,"h":180},
 	"sourceSize": {"w":320,"h":200}
 },
 "36.png":
@@ -309,7 +309,7 @@
 	"frame": {"x":853,"y":183,"w":253,"h":183},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":24,"y":6,"w":253,"h":183},
+	"spriteSourceSize": {"x":7,"y":14,"w":253,"h":183},
 	"sourceSize": {"w":320,"h":200}
 },
 "39.png":
@@ -439,6 +439,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1971,"h":1239},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:a299b57ca97703e713d302da04c53019:b0aadcf68d5dc2f1ffbcbfa5d7ad20f7:3c8516fcb8738f34ceb3472446c409e2$"
+	"smartupdate": "$TexturePacker:SmartUpdate:6aa21222ca0933af4790d57f60130796:e2af4a523db771810874af54ae9cf6ca:3c8516fcb8738f34ceb3472446c409e2$"
 }
 }
