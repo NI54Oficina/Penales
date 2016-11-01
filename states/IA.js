@@ -387,6 +387,7 @@ function randomBetween(min, max) {
 
 
 function calculatePuntaje(msg, generator){
+	console.log("entra puntaje");
 	if(mod%2 == 0){
 		if(generator>0 && msg!=generator){
 			golesComputer++;

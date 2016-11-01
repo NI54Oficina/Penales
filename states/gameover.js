@@ -27,8 +27,8 @@ GameOver.prototype = {
    localStorage["PartidosPerdidos"];
 
     //seteadas en cero por el momento;
-    puntosUser=0;
-    puntosComputer=0;
+    //puntosUser=0;
+    //puntosComputer=0;
 
     //Cuando Setermine la edicion volver a declarar sin inicializar.
 
