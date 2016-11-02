@@ -1,109 +1,110 @@
+ var urlBase="";
 var Splash = function () {};
 
     Splash.prototype = {
 
     loadScripts: function () {
-    game.load.script('style', 'lib/style.js');
-    game.load.script('mixins', 'lib/mixins.js');
-    game.load.script('WebFont', 'vendor/webfontloader.js');
-    game.load.script('gamemenu','states/GameMenu.js');
-    game.load.script('game', 'states/Game.js');
-    game.load.script('gameover','states/GameOver.js');
+    game.load.script('style', urlBase+'lib/style.js');
+    game.load.script('mixins', urlBase+'lib/mixins.js');
+    game.load.script('WebFont', urlBase+'vendor/webfontloader.js');
+    game.load.script('gamemenu',urlBase+'states/GameMenu.js');
+    game.load.script('game', urlBase+'states/Game.js');
+    game.load.script('gameover',urlBase+'states/GameOver.js');
   //  game.load.script('options', 'states/Options.js');
-    game.load.script('Versus', 'states/versus.js');
-    game.load.script('Stadistics', 'states/stadistics.js');
-    game.load.script('Selectplayer_2','states/selectPlayer_2.js' );
-    game.load.script('Selectplayer_3','states/selectPlayer_3.js' );
-    game.load.script('Selectplayer','states/selectPlayer.js' );
-    game.load.script('Anims','states/AnimTests.js' );
+    game.load.script('Versus', urlBase+'states/versus.js');
+    game.load.script('Stadistics', urlBase+'states/stadistics.js');
+    game.load.script('Selectplayer_2',urlBase+'states/selectPlayer_2.js' );
+    game.load.script('Selectplayer_3',urlBase+'states/selectPlayer_3.js' );
+    game.load.script('Selectplayer',urlBase+'states/selectPlayer.js' );
+    game.load.script('Anims',urlBase+'states/AnimTests.js' );
   },
 
   loadSound: function () {
 
-    game.load.audio('musica', 'assets/general/sound/Fondo_1.mp3');
-    game.load.audio('musica_2', 'assets/general/sound/Fondo_2.mp3');
-    game.load.audio('musica_errar', 'assets/general/sound/Fondo_errar_1.mp3');
-    game.load.audio('musica_sin_canto', 'assets/general/sound/Fondo_SinCanto_1.mp3');
-    game.load.audio('sonido_ganado', 'assets/general/sound/Ganador.mp3');
-    game.load.audio('sonido_perdido', 'assets/general/sound/Perdedor.mp3');
-    game.load.audio('sonido_gol', 'assets/general/sound/Gol.mp3');
-    game.load.audio('sonido_gol_1', 'assets/general/sound/Gol_2.mp3');
-    game.load.audio('sonido_patada', 'assets/general/sound/Patada_1.mp3');
+    game.load.audio('musica', urlBase+'assets/general/sound/Fondo_1.mp3');
+    game.load.audio('musica_2', urlBase+'assets/general/sound/Fondo_2.mp3');
+    game.load.audio('musica_errar', urlBase+'assets/general/sound/Fondo_errar_1.mp3');
+    game.load.audio('musica_sin_canto', urlBase+'assets/general/sound/Fondo_SinCanto_1.mp3');
+    game.load.audio('sonido_ganado', urlBase+'assets/general/sound/Ganador.mp3');
+    game.load.audio('sonido_perdido', urlBase+'assets/general/sound/Perdedor.mp3');
+    game.load.audio('sonido_gol', urlBase+'assets/general/sound/Gol.mp3');
+    game.load.audio('sonido_gol_1', urlBase+'assets/general/sound/Gol_2.mp3');
+    game.load.audio('sonido_patada', urlBase+'assets/general/sound/Patada_1.mp3');
 
-    game.load.audio('musica_loading', 'assets/general/sound/Loading.mp3');
-    game.load.audio('musica_end', 'assets/general/sound/Partido_end.mp3');
-    game.load.audio('musica_start', 'assets/general/sound/Partido_start.mp3');
-    game.load.audio('musica_singleplayer', 'assets/general/sound/Fondo_singlePlayer.mp3');
+    game.load.audio('musica_loading', urlBase+'assets/general/sound/Loading.mp3');
+    game.load.audio('musica_end', urlBase+'assets/general/sound/Partido_end.mp3');
+    game.load.audio('musica_start', urlBase+'assets/general/sound/Partido_start.mp3');
+    game.load.audio('musica_singleplayer', urlBase+'assets/general/sound/Fondo_singlePlayer.mp3');
     //faltar temrinar de aplicar.
 
   },
 
   loadImages: function () {
 
-    game.load.image('menu-bg', 'assets/general/images/bg-menu.png');
-    game.load.image('stats-bg', 'assets/general/images/bg-stats.jpg');
-    game.load.image('rival-bg', 'assets/general/images/bg-rival.jpg');
-    game.load.image('multi-bg', 'assets/general/images/bg-multi.jpg');
-    game.load.image('single-bg', 'assets/general/images/bg-single.jpg');
+    game.load.image('menu-bg', urlBase+'assets/general/images/bg-menu.png');
+    game.load.image('stats-bg', urlBase+'assets/general/images/bg-stats.jpg');
+    game.load.image('rival-bg', urlBase+'assets/general/images/bg-rival.jpg');
+    game.load.image('multi-bg', urlBase+'assets/general/images/bg-multi.jpg');
+    game.load.image('single-bg', urlBase+'assets/general/images/bg-single.jpg');
 
-    game.load.image('img-1', 'assets/singleplayer/images/bt_escudo.png');
-    game.load.image('img-2', 'assets/singleplayer/images/bt_escudos_02.png');
-    game.load.image('img-3', 'assets/singleplayer/images/bt_escudos_03.png');
-    game.load.image('img-4', 'assets/singleplayer/images/bt_escudos_04.png');
-    game.load.image('img-5', 'assets/singleplayer/images/bt_escudos_05.png');
-    game.load.image('golden', 'assets/general/images/bt_golden.png');
-    game.load.image('shadow', 'assets/general/images/bt_reflex.png');
-    game.load.image('selected', 'assets/general/images/bt_seleccion.png');
-    game.load.image('selector', 'assets/general/images/bt_selector.png');
+    game.load.image('img-1', urlBase+'assets/singleplayer/images/bt_escudo.png');
+    game.load.image('img-2', urlBase+'assets/singleplayer/images/bt_escudos_02.png');
+    game.load.image('img-3', urlBase+'assets/singleplayer/images/bt_escudos_03.png');
+    game.load.image('img-4', urlBase+'assets/singleplayer/images/bt_escudos_04.png');
+    game.load.image('img-5', urlBase+'assets/singleplayer/images/bt_escudos_05.png');
+    game.load.image('golden', urlBase+'assets/general/images/bt_golden.png');
+    game.load.image('shadow', urlBase+'assets/general/images/bt_reflex.png');
+    game.load.image('selected', urlBase+'assets/general/images/bt_seleccion.png');
+    game.load.image('selector', urlBase+'assets/general/images/bt_selector.png');
 
     //Sprites fondo
-    game.load.image('left-corner', 'assets/general/images/left-corner.png');
-    game.load.image('right-corner', 'assets/general/images/left-corner.png');
-    game.load.image('volver', 'assets/general/images/arrow-back.png');
-    game.load.image('menu', 'assets/general/images/menu.png');
-    game.load.image('puntitos', 'assets/general/images/fondo_trama.png');
-    game.load.image('curva', 'assets/general/images/fondo_curva.png');
-    game.load.image('curva_alta', 'assets/general/images/fondo_curva_alta.png');
+    game.load.image('left-corner', urlBase+'assets/general/images/left-corner.png');
+    game.load.image('right-corner', urlBase+'assets/general/images/left-corner.png');
+    game.load.image('volver', urlBase+'assets/general/images/arrow-back.png');
+    game.load.image('menu', urlBase+'assets/general/images/menu.png');
+    game.load.image('puntitos', urlBase+'assets/general/images/fondo_trama.png');
+    game.load.image('curva', urlBase+'assets/general/images/fondo_curva.png');
+    game.load.image('curva_alta', urlBase+'assets/general/images/fondo_curva_alta.png');
 
-    game.load.image('brillodown', 'assets/general/images/brillodown.png');
-    game.load.image('brilloup', 'assets/general/images/brilloup.png');
-    game.load.image('two', 'assets/general/images/dos-jugadores.png');
-    game.load.image('one', 'assets/general/images/un-jugador.png');
+    game.load.image('brillodown', urlBase+'assets/general/images/brillodown.png');
+    game.load.image('brilloup', urlBase+'assets/general/images/brilloup.png');
+    game.load.image('two', urlBase+'assets/general/images/dos-jugadores.png');
+    game.load.image('one', urlBase+'assets/general/images/un-jugador.png');
 
-    game.load.image('line', 'assets/general/images/titulo_linea.png');
-    game.load.image('player', 'assets/general/images/bt_anon.png');
+    game.load.image('line', urlBase+'assets/general/images/titulo_linea.png');
+    game.load.image('player', urlBase+'assets/general/images/bt_anon.png');
 
-    game.load.image('musica-on', 'assets/general/images/musica-on.png');
-    game.load.image('musica-off', 'assets/general/images/musica-off.png');
-    game.load.image('sonido-on', 'assets/general/images/sonido-on.png');
-    game.load.image('sonido-off', 'assets/general/images/sonido-off.png');
+    game.load.image('musica-on', urlBase+'assets/general/images/musica-on.png');
+    game.load.image('musica-off', urlBase+'assets/general/images/musica-off.png');
+    game.load.image('sonido-on', urlBase+'assets/general/images/sonido-on.png');
+    game.load.image('sonido-off', urlBase+'assets/general/images/sonido-off.png');
 
 
 
 
     //Sprites de GamePlay
 
-    game.load.spritesheet('button', 'assets/general/images/boton.png', 300, 300);
-    game.load.image('assert', 'assets/general/images/green-button.png', 150,150);
-    game.load.image('noassert', 'assets/general/images/red-button.png', 150,150);
-    game.load.image('orange-button', 'assets/general/images/orange-button.png', 150,150);
-    game.load.image('yellow-button', 'assets/general/images/yellow-button.png', 150,150);
-    game.load.image('triangle', 'assets/general/images/puntero.png', 150,150);
-    game.load.spritesheet('pelota', 'assets/general/images/pelota.png', 40, 40);
-    game.load.spritesheet('pelota-sombra', 'assets/general/images/sombraPelota.png', 40, 40);
-    game.load.image('arco-0', 'assets/general/images/arco-0.png');
-    game.load.atlas('arco', 'assets/general/images/arcos-sprite.png', 'assets/general/images/arcos-sprite.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-    game.load.atlas('arquero-local', 'assets/general/images/out.png', 'assets/general/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-    game.load.atlas('pateador-local', 'assets/general/images/pateador-test.png', 'assets/general/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-    game.load.atlas('arquero-visitante', 'assets/general/images/out2.png', 'assets/general/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-    game.load.atlas('pateador-visitante', 'assets/general/images/pateador-test2.png', 'assets/general/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-    game.load.image('fondo1', 'assets/general/images/fondo-game1.png', 759, 150);
-    game.load.image('fondo2', 'assets/general/images/fondo-game2.png', 378, 150);
-    game.load.image('fondo3', 'assets/general/images/fondo-game3.png', 1136, 491);
-    game.load.image('tablero', 'assets/general/images/tablero.png');
-    game.load.image('ataja', 'assets/general/images/quien-ataja.png');
-    game.load.image('patea', 'assets/general/images/quien-patea.png');
-    game.load.image('linea-potencia', 'assets/general/images/linea-potencia.png');
+    game.load.spritesheet('button', urlBase+'assets/general/images/boton.png', 300, 300);
+    game.load.image('assert', urlBase+'assets/general/images/green-button.png', 150,150);
+    game.load.image('noassert', urlBase+'assets/general/images/red-button.png', 150,150);
+    game.load.image('orange-button', urlBase+'assets/general/images/orange-button.png', 150,150);
+    game.load.image('yellow-button', urlBase+'assets/general/images/yellow-button.png', 150,150);
+    game.load.image('triangle', urlBase+'assets/general/images/puntero.png', 150,150);
+    game.load.spritesheet('pelota', urlBase+'assets/general/images/pelota.png', 40, 40);
+    game.load.spritesheet('pelota-sombra', urlBase+'assets/general/images/sombraPelota.png', 40, 40);
+    game.load.image('arco-0', urlBase+'assets/general/images/arco-0.png');
+    game.load.atlas('arco', urlBase+'assets/general/images/arcos-sprite.png', 'assets/general/images/arcos-sprite.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+    game.load.atlas('arquero-local', urlBase+'assets/general/images/out.png', 'assets/general/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+    game.load.atlas('pateador-local', urlBase+'assets/general/images/pateador-test.png', 'assets/general/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+    game.load.atlas('arquero-visitante', urlBase+'assets/general/images/out2.png', 'assets/general/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+    game.load.atlas('pateador-visitante', urlBase+'assets/general/images/pateador-test2.png', 'assets/general/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+    game.load.image('fondo1', urlBase+'assets/general/images/fondo-game1.png', 759, 150);
+    game.load.image('fondo2', urlBase+'assets/general/images/fondo-game2.png', 378, 150);
+    game.load.image('fondo3', urlBase+'assets/general/images/fondo-game3.png', 1136, 491);
+    game.load.image('tablero', urlBase+'assets/general/images/tablero.png');
+    game.load.image('ataja', urlBase+'assets/general/images/quien-ataja.png');
+    game.load.image('patea', urlBase+'assets/general/images/quien-patea.png');
+    game.load.image('linea-potencia', urlBase+'assets/general/images/linea-potencia.png');
 
 
   },
@@ -112,7 +113,7 @@ var Splash = function () {};
     WebFontConfig = {
       custom: {
         families: ['TheMinion',"BitterBold","CondensedLight","RobotoRegular","RobotoBold"],
-        urls: ['assets/general/style/theminion.css']
+        urls: [urlBase+'assets/general/style/theminion.css']
       }
     }
   },
