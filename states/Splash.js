@@ -1,4 +1,4 @@
- var urlBase="";
+
 var Splash = function () {};
 
     Splash.prototype = {

@@ -61,16 +61,26 @@ GameMenu.prototype = {
     // }).x=600;
 
       instrucciones= game.add.text(750, 400, "INSTRUCCIONES", { font: 'bold 15pt RobotoBold', fill: '#fff03a'});
-      self.createLineGlobal(740,425,750+instrucciones.width+10, false, 0xfff03a);
+      insLine=self.createLineGlobal(740,425,750+instrucciones.width+10, false, 0xfff03a);
+
+
+      var onOver = function (target) {
+      target.alpha=.5;
+      insLine.alpha=.5;
+      };
+
+      var onOut = function (target) {
+        target.alpha=1;
+        insLine.alpha=1;
+
+      };
 
       instrucciones.inputEnabled = true;
       instrucciones.events.onInputDown.add(function(){self.notification('INSTRUCCIONES', "asjanskjda aksjdnajksd askdkajsd asdaksjd asdakjsd asdaksjd asdkjajksd asdajksd aksdkajsnkd", [['Test1', self.testGlobal],['Test2', self.testGlobal]]);});
 
-    //
-    // this.addMenuOption('VERSUS', function () {
-    //   game.state.start("Versus");
-    // });
-    //
+      instrucciones.events.onInputOver.add(onOver,this);
+      instrucciones.events.onInputOut.add(onOut,this);
+
 
     // this.addMenuOption('GAMEOVER', function () {
     //   game.state.start("GameOver");
