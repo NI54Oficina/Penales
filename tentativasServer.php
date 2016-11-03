@@ -45,29 +45,12 @@ function GetStats(){
 //quizas recibir el fin de partida?
 function UpdateStats($userId,$gameId,$jugadasLocal,$jugadasVisitante ,$tendencia=null){
 	
-	/*
-	Get Variables del server
-	*/
-	$errados =0;
-	$rachaErrados  =0;
-	$rachaErradosHistorica=0;
-	$convertidos=0;
-	$rachaConvertidosHistorica=0;
-	$noAtajados=0;
-	$rachaNoAtajados=0;
-	$rachaNoAtajadosHistorica=0;
-	$atajados=0;
-	$rachaAtajadosHistorica=0;
-	$rachaGanados=0;
-	$rachaPerdidos=0;
-	$rachaPerdidosHistorica=0;
-	$rachaGanadosHistorica =0;
-	$rachaAtajados=0;
-	$rachaConvertidos=0;
-	$ganados=0;
-	$perdidos=0;
+	//pasaStats del user a función, función devuelve responde de "local"
+	//si no es singleplayer calcula stats del visitante, y devuelve response tmb
+	//se terminar devolviendo un json con ambos arrays separados en local y visitante
 	
-	/*Fin get variables*/
+	//recorre jugadas, arma array 1-0 y, el cual es al reverso para el visitante (el array de arquero invetido es el de pateador, y el de pateador invertido es el de arquero)
+	UpdateUser($userId,$resultadosArquero,$resultadoPateador);
 	
 	//guardaria en db todos los datosa modo de historial y para asi desglozar los puntos de ser necesario
 	//pateador y aruqero son arrays con 0-1 segun si el user fue efectivo o no en sus respectivos turnos de ese modo
@@ -170,6 +153,10 @@ function UpdateStats($userId,$gameId,$jugadasLocal,$jugadasVisitante ,$tendencia
 	$response->puntos=$puntos;
 	$response->detalle= $puntosDiscriminados;
 	echo json_encode($response);
+}
+
+function UpdateUser($idUser,$jugadasUser,$jugadasOponente){
+	
 }
 
 function GetTendencia(){
