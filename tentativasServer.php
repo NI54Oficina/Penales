@@ -21,6 +21,7 @@ function UpdateStats($userId,$gameId,$pateador,$arquero,$tendencia){
 	//tendencia = primeros 5 tiros como pateador a que indice fueron tirados, esto en singleplayer no se usaría
 	$auxPateador=0;
 	$puntos=0;
+	$puntosDiscriminados= array();
 	foreach($pateador as $p){
 		if($p==1){
 			$puntos+=1;
@@ -42,6 +43,7 @@ function UpdateStats($userId,$gameId,$pateador,$arquero,$tendencia){
 			//}
 		}
 	}
+	//array_push($puntosDiscriminados, "Goles Convertidos ". )
 	$auxArquero=0;
 	foreach($arquero as $a){
 		if($a==1){
