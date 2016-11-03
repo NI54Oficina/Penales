@@ -33,8 +33,8 @@ GameMenu.prototype = {
     self.createSoundGraphics();
 
 
-    search= game.add.text(0, 200, 'Buscando oponente', { font: "bold 60px RobotoBold", fill: "#fff03a" });
-    search.x= game.world.width/2-search.width/2;
+    search= game.add.text(0, 200, 'Buscando oponente', { font: "60px RobotoBold", fill: "#fff03a" });
+    search.x= this.game.width/2-search.width/2;
     search.visible=false;
 
     // this.addMenuOption('Selectplayer_2', function () {

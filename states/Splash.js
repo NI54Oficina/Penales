@@ -112,8 +112,8 @@ var Splash = function () {};
   loadFonts: function () {
     WebFontConfig = {
       custom: {
-        families: ['TheMinion',"BitterBold","CondensedLight","RobotoRegular","RobotoBold"],
-        urls: [urlBase+'assets/general/style/theminion.css']
+        families: ["BitterBold","CondensedLight","RobotoRegular","RobotoBold"],
+        urls: [urlBase+'assets/general/style/stylesheet.css']
       }
     }
   },
@@ -201,7 +201,20 @@ var Splash = function () {};
 	  console.log("logueado");
 	  console.log(msg);
 	  this.test();
-	  game.state.start("GameMenu");
+
+    $(document).ready(function(){
+
+        FontDetect.onFontLoaded ('RobotoBold', onMyCoolFontLoaded);
+    });
+
+    function onMyCoolFontLoaded (fontname)
+    {
+        alert("FUENTE CARGADA!");
+          game.state.start("GameMenu");
+
+    }
+
+
 
   },
 
