@@ -1,4 +1,6 @@
 <?php
+
+
 //data={"userId":"1","gameId":"2","pateador":[1,0,0,0,1],"arquero":[1,0,0,0,1]}
 if(isset($_GET)){
 	$data= $_GET["data"];
@@ -41,7 +43,7 @@ function GetStats(){
 }
 
 //quizas recibir el fin de partida?
-function UpdateStats($userId,$gameId,$pateador,$arquero,$tendencia=null){
+function UpdateStats($userId,$gameId,$jugadasLocal,$jugadasVisitante ,$tendencia=null){
 	
 	/*
 	Get Variables del server
@@ -69,7 +71,7 @@ function UpdateStats($userId,$gameId,$pateador,$arquero,$tendencia=null){
 	
 	//guardaria en db todos los datosa modo de historial y para asi desglozar los puntos de ser necesario
 	//pateador y aruqero son arrays con 0-1 segun si el user fue efectivo o no en sus respectivos turnos de ese modo
-	//tendencia = primeros 5 tiros como pateador a que indice fueron tirados, esto en singleplayer no se usaría
+	//tendencia = primeros 5 tiros como pateador a que indice fueron tirados con mayor frecuencia, esto en singleplayer no se usaría
 	$auxPateador=0;
 	$puntos=0;
 	$puntosDiscriminados= array();
@@ -163,12 +165,7 @@ function UpdateStats($userId,$gameId,$pateador,$arquero,$tendencia=null){
 	}
 	
 	GetStats();
-	/*echo $puntos;
-	echo "<br>";
-	foreach($puntosDiscriminados as $p){
-		echo $p;
-		echo "<br>";
-	}*/
+	
 	$response= new stdClass();
 	$response->puntos=$puntos;
 	$response->detalle= $puntosDiscriminados;
