@@ -69,6 +69,16 @@ function UpdateStats($userId,$gameId,$pateador,$arquero,$tendencia){
 	if($auxArquero==count($arquero)){
 		$puntos+=10;
 	}
+	if($rachaGanados>1){
+		$puntos+=4;
+	}
+	if($rachaErrados>1){
+		$auxP= ($rachaErrados-1)*-1;
+		if($auxP<-5){
+			$auxP=-5;
+		}
+		$puntos+=$auxP;
+	}
 	if($auxPateador>$auxArquero){
 		//ganados++
 		//rachaGanados++
