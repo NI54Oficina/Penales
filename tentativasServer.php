@@ -42,12 +42,40 @@ exit();
 //id (o token),idLocal, idVisitante, score=null, tipoPartida(single, multi o tipo de multi), apuesta
 
 function getSession(){
-	echo '{"poyo":"1"}';
+	echo '{"nombre":"Pepe",
+		"id":"2",
+		"avatar":"imagen.jpg",
+		"puntos":1000,
+		"credits":1000}';
 }
 
 
 function GetStats(){
+	/*
+	Get Variables del server
+	*/
+	$stats= new stdClass();
+	$stats['errados']=0;
+	$stats['rachaErrados']  =0;
+	$stats['rachaErradosHistorica']=0;
+	$stats['convertidos']=0;
+	$stats['rachaConvertidosHistorica']=0;
+	$stats['noAtajados']=0;
+	$stats['rachaNoAtajados']=0;
+	$stats['rachaNoAtajadosHistorica']=0;
+	$stats['atajados']=0;
+	$stats['rachaAtajadosHistorica']=0;
+	$stats['rachaGanados']=0;
+	$stats['rachaPerdidos']=0;
+	$stats['rachaPerdidosHistorica']=0;
+	$stats['rachaGanadosHistorica'] =0;
+	$stats['rachaAtajados']=0;
+	$stats['rachaConvertidos']=0;
+	$stats['ganados']=0;
+	$stats['perdidos']=0;
 	
+	/*Fin get variables*/
+	return $stats;
 }
 
 //quizas recibir el fin de partida?
@@ -63,6 +91,7 @@ function UpdateStats($userId,$gameId,$jugadasLocal,$jugadasVisitante ,$tendencia
 	//guardaria en db todos los datosa modo de historial y para asi desglozar los puntos de ser necesario
 	//pateador y aruqero son arrays con 0-1 segun si el user fue efectivo o no en sus respectivos turnos de ese modo
 	//tendencia = primeros 5 tiros como pateador a que indice fueron tirados con mayor frecuencia, esto en singleplayer no se usaría
+	$stats=GetStats();
 	$auxPateador=0;
 	$puntos=0;
 	$puntosDiscriminados= array();
@@ -72,19 +101,19 @@ function UpdateStats($userId,$gameId,$jugadasLocal,$jugadasVisitante ,$tendencia
 			$auxP+=1;
 			
 			$auxPateador++;
-			$convertidos++;
-			$rachaConvertidos ++;
-			$rachaErrados =0;
-			if($rachaConvertidos>$rachaConvertidosHistorica){
-				$rachaConvertidosHistorica=$rachaConvertidos;
+			$stats['convertidos']++;
+			$stats['rachaConvertidos']++;
+			$stats['rachaErrados'] =0;
+			if($stats['rachaConvertidos']>$stats['rachaConvertidosHistorica']){
+				$stats['rachaConvertidosHistorica']=$stats['rachaConvertidos'];
 			}
 		}else{
 			$auxP-=5;
-			$errados++;
-			$rachaConvertidos=0;
-			$rachaErrados ++;
-			if($rachaErrados>$rachaErradosHistorica){
-				$rachaErradosHistorica=$rachaErrados;
+			$stats['errados']++;
+			$stats['rachaConvertidos']=0;
+			$stats['rachaErrados']++;
+			if($stats['rachaErrados']>$stats['rachaErradosHistorica']){
+				$stats['rachaErradosHistorica']=$stats['rachaErrados'];
 			}
 		}
 	}
@@ -96,19 +125,19 @@ function UpdateStats($userId,$gameId,$jugadasLocal,$jugadasVisitante ,$tendencia
 		if($a==1){
 			$auxP+=5;
 			$auxArquero++;
-			$atajados++;
-			$rachaNoAtajados=0;
-			$rachaAtajados++;
-			if($rachaAtajados>$rachaAtajadosHistorica){
-				$rachaAtajadosHistorica= $rachaAtajados;
+			$stats['atajados']++;
+			$stats['rachaNoAtajados']=0;
+			$stats['rachaAtajados']++;
+			if($stats['rachaAtajados']>$stats['rachaAtajadosHistorica']){
+				$stats['rachaAtajadosHistorica']= $stats['rachaAtajados'];
 			}
 		}else{
 			$auxP-=1;
-			$noAtajados++;
-			$rachaAtajados=0;
-			$rachaNoAtajados++;
-			if($rachaNoAtajados>$rachaNoAtajadosHistorica){
-				$rachaNoAtajadosHistorica= $rachaNoAtajados;
+			$stats['noAtajados']++;
+			$stats['rachaAtajados']=0;
+			$stats['rachaNoAtajados']++;
+			if($stats['rachaNoAtajados']>$stats['rachaNoAtajadosHistorica']){
+				$stats['rachaNoAtajadosHistorica']= $stats['rachaNoAtajados'];
 			}
 		}
 	}
@@ -127,21 +156,21 @@ function UpdateStats($userId,$gameId,$jugadasLocal,$jugadasVisitante ,$tendencia
 	
 	if($auxPateador>=$auxArquero){
 		$ganados++;
-		$rachaGanados++;
-		$rachaPerdidos=0;
-		if($rachaGanados>$rachaGanadosHistorica){
-			$rachaGanadosHistorica= $rachaGanados;
+		$stats['rachaGanados']++;
+		$stats['rachaPerdidos']=0;
+		if($stats['rachaGanados']>$stats['rachaGanadosHistorica']){
+			$stats['rachaGanadosHistorica']= $stats['rachaGanados'];
 		}
 	}else{
 		$perdidos++;
-		$rachaPerdidos++;
-		$rachaGanados=0;
-		if($rachaPerdidos>$rachaPerdidosHistorica){
-			$rachaPerdidosHistorica= $rachaPerdidos;
+		$stats['rachaPerdidos']++;
+		$stats['rachaGanados']=0;
+		if($stats['rachaPerdidos']>$stats['rachaPerdidosHistorica']){
+			$stats['rachaPerdidosHistorica']= $stats['rachaPerdidos'];
 		}
 	}
 	
-	if($rachaGanados>1){
+	if($stats['rachaGanados']>1){
 		$puntos+=4;
 		$puntosDiscriminados["Racha Ganados"]=4;
 	}
@@ -155,7 +184,7 @@ function UpdateStats($userId,$gameId,$jugadasLocal,$jugadasVisitante ,$tendencia
 		$puntosDiscriminados["Racha Errados"]=$auxP;
 	}
 	
-	GetStats();
+	//guardar stats actualizados
 	
 	$response= new stdClass();
 	$response->puntos=$puntos;
@@ -164,30 +193,7 @@ function UpdateStats($userId,$gameId,$jugadasLocal,$jugadasVisitante ,$tendencia
 }
 
 function UpdateUser($idUser,$jugadasUser,$jugadasOponente){
-	
-	/*
-	Get Variables del server
-	*/
-	$errados =0;
-	$rachaErrados  =0;
-	$rachaErradosHistorica=0;
-	$convertidos=0;
-	$rachaConvertidosHistorica=0;
-	$noAtajados=0;
-	$rachaNoAtajados=0;
-	$rachaNoAtajadosHistorica=0;
-	$atajados=0;
-	$rachaAtajadosHistorica=0;
-	$rachaGanados=0;
-	$rachaPerdidos=0;
-	$rachaPerdidosHistorica=0;
-	$rachaGanadosHistorica =0;
-	$rachaAtajados=0;
-	$rachaConvertidos=0;
-	$ganados=0;
-	$perdidos=0;
-	
-	/*Fin get variables*/
+	GetStats();
 }
 
 function GetTendencia(){

@@ -494,11 +494,12 @@ function login(msg){
 		datos["id"]= "2";
 		datos["avatar"]= "imagen.jpg";
 		datos["puntos"]= 1000;
+		datos["credits"]= 1000;
 		CheckEvent('loginConfirmed',  JSON.stringify(datos));
 		console.log("log confirmed");
 		SendStats();*/
 		
-		//requestSoap("?code=getSession"," ","loginConfirmed");
+		requestSoap("?code=getSession"," ","loginConfirmed");
 }
 	
 function requestStats(msg){
