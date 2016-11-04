@@ -73,7 +73,7 @@ Game.prototype = {
 	this.drawGui();
 
 
-  screenOponente=self.pantallaOponente(self);
+  // screenOponente=self.pantallaOponente(self);
   //screenOponente.visible=true;
 
   /*if(!serverEnabled){
@@ -371,6 +371,11 @@ updateCounter: function () {
   },
 
  cambiarRopa: function(){
+
+   console.log(self.sortearFrase(2));
+
+
+
      if(Phaser.Math.isEven(modo)){
        player.loadTexture('pateador-visitante', 0, false);
        arquero.loadTexture('arquero-visitante', 0, false);
@@ -1261,7 +1266,7 @@ Clicked: function(){
 
 	clicked=0;
 	this.pause=false;
-  screenOponente.visible=false;
+  // screenOponente.visible=false;
   setTimeout(function(){
     self.activateSound(musica_start);
   },500);
@@ -1286,6 +1291,8 @@ setGraphicIdentifier: function(){
    }
 
 },
+
+
 
 };
 

@@ -69,7 +69,6 @@ GameMenu.prototype = {
       instrucciones.addChild(left);
       instrucciones.addChild(right);
 
-       console.log(left);
 
 
       var onOver = function (target) {

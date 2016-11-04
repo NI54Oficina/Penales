@@ -96,7 +96,7 @@ Selectplayer.prototype = {
 
       });
 
-      game.world.bringToTop(search);
+      // game.world.bringToTop(search);
 
 
   },
