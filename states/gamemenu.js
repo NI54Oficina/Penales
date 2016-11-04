@@ -33,9 +33,7 @@ GameMenu.prototype = {
     self.createSoundGraphics();
 
 
-    search= game.add.text(0, 200, 'Buscando oponente', { font: "60px RobotoBold", fill: "#fff03a" });
-    search.x= this.game.width/2-search.width/2;
-    search.visible=false;
+
 
     // this.addMenuOption('Selectplayer_2', function () {
     //   game.state.start("Selectplayer_2");
@@ -60,28 +58,39 @@ GameMenu.prototype = {
     //
     // }).x=600;
 
-      instrucciones= game.add.text(790, 400, "INSTRUCCIONES", { font: 'bold 20pt RobotoBold', fill: '#ffc400'});
-      insLine=self.createLineGlobal(-10,instrucciones.height,+instrucciones.width+10, false, 0xffc400);
-      instrucciones.addChild(insLine);
-    //  insLine=self.createLineGlobal(780,440,750+instrucciones.width+10, false, 0xffc400);
+      instrucciones= game.add.text(790, 400, "INSTRUCCIONES", { font: 'bold 18pt RobotoBold', fill: '#ffc400'});
+      bottom=self.createLineGlobal(-80,instrucciones.height+10,270, false, 0xffc400);
+
+      topLine=self.createLineGlobal(-80,-15, 270,false, 0xffc400);
+      left=self.createLineGlobal(-80,-15,-80, false, 0xffc400,instrucciones.height+10 );
+      right=self.createLineGlobal(270,-15,270, false, 0xffc400,instrucciones.height+10 );
+
+      instrucciones.addChild(bottom);
+      instrucciones.addChild(topLine);
+      instrucciones.addChild(left);
+      instrucciones.addChild(right);
+
+       console.log(left);
 
 
       var onOver = function (target) {
-      target.alpha=.5;
-      insLine.alpha=.5;
+
+      target.alpha=.4;
+
+
       };
 
       var onOut = function (target) {
         target.alpha=1;
-        insLine.alpha=1;
 
       };
 
       instrucciones.inputEnabled = true;
+      instrucciones.input.useHandCursor = true;
       instrucciones.events.onInputDown.add(function(){self.notification('INSTRUCCIONES', "asjanskjda aksjdnajksd askdkajsd asdaksjd asdakjsd asdaksjd asdkjajksd asdajksd aksdkajsnkd", [['Test1', self.testGlobal],['Test2', self.testGlobal]]);});
 
-      instrucciones.events.onInputOver.add(onOver,this);
-      instrucciones.events.onInputOut.add(onOut,this);
+      instrucciones.events.onInputOver.add(onOver,self);
+      instrucciones.events.onInputOut.add(onOut,self);
 
 
     // this.addMenuOption('GAMEOVER', function () {
@@ -147,7 +156,7 @@ GameMenu.prototype = {
 
   listenerSearch: function (msg){
 
-    search.visible=false;
+
     this.test();
     console.log(msg);
     auxArray=JSON.parse(msg);

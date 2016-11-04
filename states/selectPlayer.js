@@ -21,8 +21,8 @@ Selectplayer.prototype = {
       self.createGeneralTitle("SELECCIONAR RIVAL", false);
 
 
-      search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
-      search.visible=false;
+      // search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px TheMinion", fill: "red", align: "center" });
+      // search.visible=false;
 
       //creating the carrousel
 
@@ -91,7 +91,7 @@ Selectplayer.prototype = {
 
 
      jugar= this.addMenuOptionInner('JUGAR', function () {
-        search.visible=true;
+        // search.visible=true;
         Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
 
       });
@@ -103,7 +103,7 @@ Selectplayer.prototype = {
 
   listenerSearch: function (msg){
 
-      search.visible=false;
+      // search.visible=false;
 
     console.log(msg);
        auxArray=JSON.parse(msg);
@@ -162,7 +162,7 @@ Selectplayer.prototype = {
       }
     }
 
-    
+
 
     a= carrousel[0];
     b= carrousel[1];
@@ -184,7 +184,7 @@ Selectplayer.prototype = {
       muttex=0;
 
       game.world.bringToTop(jugar);
-      game.world.bringToTop(search);
+      // game.world.bringToTop(search);
 
 },
 

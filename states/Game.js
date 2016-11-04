@@ -73,7 +73,7 @@ Game.prototype = {
 	this.drawGui();
 
 
-  screenOponente=self.pantallaOponente(self);
+  // screenOponente=self.pantallaOponente(self);
   //screenOponente.visible=true;
 
   /*if(!serverEnabled){
@@ -1261,7 +1261,7 @@ Clicked: function(){
 
 	clicked=0;
 	this.pause=false;
-  screenOponente.visible=false;
+  // screenOponente.visible=false;
   setTimeout(function(){
     self.activateSound(musica_start);
   },500);
