@@ -2,7 +2,7 @@
 
  var urlBase="";
  var urlConnect="tentativasServer.php";
- 
+
 var
   game = new Phaser.Game( 1136, 640, Phaser.AUTO, 'game'),
   Main = function () {},
@@ -11,8 +11,8 @@ var
     playMusic: true
   },
   musicPlayer;
-  
- 
+
+
 
 
 
@@ -20,9 +20,9 @@ var
 Main.prototype = {
 
   preload: function () {
-    game.load.image('stars',    urlBase+'assets/general/images/sky.png');
+    game.load.image('background',    urlBase+'assets/general/images/fondo-cargando.png');
     game.load.image('loading',  urlBase+'assets/general/images/loading.png');
-    game.load.image('brand',    urlBase+'assets/general/images/logo.png');
+    // game.load.image('brand',    urlBase+'assets/general/images/logo.png');
     game.load.script('polyfill',   urlBase+'lib/polyfill.js');
     game.load.script('scrolls',   urlBase+'lib/scroll.js');
     game.load.script('utils',   urlBase+'lib/utils.js');

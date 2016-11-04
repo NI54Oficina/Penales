@@ -119,23 +119,31 @@ var Splash = function () {};
   },
 
   init: function () {
-    this.loadingBar = game.make.sprite(game.world.centerX-(391/2), 400, "loading");
-    this.logo       = game.make.sprite(game.world.centerX, 200, 'brand');
-    this.status     = game.make.text(game.world.centerX, 380, 'Cargando...', {fill: 'white'});
-    utils.centerGameObjects([this.logo, this.status]);
+
+
+    this.loadingBar = game.make.sprite(game.world.centerX-(66/2), 400, "loading");
+    // this.logo       = game.make.sprite(game.world.centerX, 200, 'brand');
+    this.status     = game.make.text(game.world.centerX, 550, 'CARGANDO...', {font: '35px BitterBold' , fill: 'white'});
+    utils.centerGameObjects([ this.status]);
+
   },
 
   preload: function () {
-    game.add.sprite(0, 0, 'stars');
-    game.add.existing(this.logo).scale.setTo(0.5);
+
+    game.add.sprite(0, 0, 'background');
+
     game.add.existing(this.loadingBar);
     game.add.existing(this.status);
     this.load.setPreloadSprite(this.loadingBar);
 
-    this.loadScripts();
-    this.loadImages();
-    this.loadFonts();
-    this.loadSound();
+
+        this.loadScripts();
+        this.loadImages();
+        this.loadFonts();
+        this.loadSound();
+
+
+
 
   },
 
@@ -186,7 +194,10 @@ var Splash = function () {};
   },
 
   create: function () {
-    this.status.setText('Cargando');
+
+
+
+    this.status.setText('CARGANDO');
     this.addGameStates();
     this.addGameMusic();
 
@@ -195,8 +206,8 @@ var Splash = function () {};
    $(document).ready(function(){
 
      fuentes=['CondensedRegular','CondensedBold','CondensedLight', 'BitterBold', 'RobotoBold', 'RobotoRegular'];
-	
-	
+
+
 	var interval=setInterval(function(){
 		if(!done){
 			chechFuentes(fuentes);
@@ -251,6 +262,7 @@ console.log(cargado);
 	  Emit("login"," ","loginConfirmed","logueado",this);
   },
 
+
   test:function(){
 	  console.log("test entra");
   },
@@ -265,3 +277,5 @@ console.log(cargado);
   },
 
 };
+
+// Phaser.Utils.mixinPrototype(Splash.prototype, mixins);
