@@ -195,10 +195,18 @@ var Splash = function () {};
    $(document).ready(function(){
 
      fuentes=['CondensedRegular','CondensedBold','CondensedLight', 'BitterBold', 'RobotoBold', 'RobotoRegular'];
-
-      while (!done) {
+	
+	
+	var interval=setInterval(function(){
+		if(!done){
+			chechFuentes(fuentes);
+		}else{
+			clearInterval(interval);
+		}
+	},1000);
+     /* while (!done) {
        chechFuentes(fuentes);
-      }
+      }*/
 
 
 

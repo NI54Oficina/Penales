@@ -1,6 +1,8 @@
 // Global Variables
 
  var urlBase="";
+ var urlConnect="tentativasServer.php";
+ 
 var
   game = new Phaser.Game( 1136, 640, Phaser.AUTO, 'game'),
   Main = function () {},
@@ -9,6 +11,8 @@ var
     playMusic: true
   },
   musicPlayer;
+  
+ 
 
 
 

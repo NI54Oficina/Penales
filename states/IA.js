@@ -488,20 +488,30 @@ efectividadP:10,
 
 function login(msg){
 		//consigue datos de la db
-		var datos={};
+		
+		/*var datos={};
 		datos["nombre"]="Pepe";
 		datos["id"]= "2";
 		datos["avatar"]= "imagen.jpg";
 		datos["puntos"]= 1000;
 		CheckEvent('loginConfirmed',  JSON.stringify(datos));
 		console.log("log confirmed");
-		SendStats();
-	}
+		SendStats();*/
+		
+		//requestSoap("?code=getSession"," ","loginConfirmed");
+}
 	
 function requestStats(msg){
 	
 }
 
 function SendStats(){
-	
+	console.log("terminalogin");
+}
+
+function requestSoap(code,params,callback){
+	 $.post (urlConnect+code, function (response) {
+		
+		CheckEvent(callback,JSON.parse(response));
+	});
 }

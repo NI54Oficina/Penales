@@ -3,13 +3,16 @@
 
 //data={"userId":"1","gameId":"2","pateador":[1,0,0,0,1],"arquero":[1,0,0,0,1]}
 if(isset($_GET)){
-	$data= $_GET["data"];
+	//$data= $_GET["data"];
+	if($_GET["code"]=="getSession"){
+		getSession();
+	}
 }else{
 	$data= $_POST["data"];
 }
 
 //echo $data;
-$data=json_decode($data);
+//$data=json_decode($data);
 
 /*foreach($data as $k=>$d){
 	echo "<br>";
@@ -25,7 +28,7 @@ $data=json_decode($data);
 }
 echo "<br>";*/
 
-UpdateStats($data->userId,$data->gameId,$data->pateador,$data->arquero);
+//UpdateStats($data->userId,$data->gameId,$data->pateador,$data->arquero);
 exit();
 
 //get stats en multiplayer que tenga tendencia
@@ -37,6 +40,11 @@ exit();
 
 //tabla partida
 //id (o token),idLocal, idVisitante, score=null, tipoPartida(single, multi o tipo de multi), apuesta
+
+function getSession(){
+	echo '{"poyo":"1"}';
+}
+
 
 function GetStats(){
 	
