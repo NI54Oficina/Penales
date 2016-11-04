@@ -162,6 +162,8 @@ Selectplayer.prototype = {
       }
     }
 
+    
+
     a= carrousel[0];
     b= carrousel[1];
     c= carrousel[3];
@@ -270,6 +272,8 @@ setTo1: function(target){
 
   s1= target;
   s1.pos=3;
+
+  console.log(s1.key);
 
   this.world.bringToTop(s1);
    var tweenA= game.add.tween(target).to({x:this.game.width/2- wd/2, y:150}, 500, 'Linear');

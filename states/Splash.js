@@ -10,7 +10,7 @@ var Splash = function () {};
     game.load.script('gamemenu',urlBase+'states/GameMenu.js');
     game.load.script('game', urlBase+'states/Game.js');
     game.load.script('gameover',urlBase+'states/GameOver.js');
-  //  game.load.script('options', 'states/Options.js');
+    //  game.load.script('options', 'states/Options.js');
     game.load.script('Versus', urlBase+'states/versus.js');
     game.load.script('Stadistics', urlBase+'states/stadistics.js');
     game.load.script('Selectplayer_2',urlBase+'states/selectPlayer_2.js' );
@@ -189,6 +189,57 @@ var Splash = function () {};
     this.status.setText('Cargando');
     this.addGameStates();
     this.addGameMusic();
+
+    var cargado;
+    var done=false;
+   $(document).ready(function(){
+
+     fuentes=['CondensedRegular','CondensedBold','CondensedLight', 'BitterBold', 'RobotoBold', 'RobotoRegular'];
+
+      while (!done) {
+       chechFuentes(fuentes);
+      }
+
+
+
+
+   });
+
+   function onMyCoolFontLoaded (fontname){
+     cargado++;
+console.log(cargado);
+   };
+
+   function chechFuentes(fuentes){
+
+     cargado=0
+
+     for(var i=0; i<fuentes.length; i++){
+           FontDetect.onFontLoaded (fuentes[i], onMyCoolFontLoaded);
+
+     }
+
+
+           if(cargado==fuentes.length){
+             console.log("FUENTES CARGADAS")
+             game.state.start("GameMenu");
+             done=true;
+
+           }else{
+             console.log("NO CARGARON TODAS LAS FUENTES");
+             // chechFuentes(fuentes);
+             done=false;
+
+           }
+
+   };
+
+
+
+
+
+
+
 	  Emit("login"," ","loginConfirmed","logueado",this);
   },
 
@@ -201,19 +252,6 @@ var Splash = function () {};
 	  console.log("logueado");
 	  console.log(msg);
 	  this.test();
-
-    $(document).ready(function(){
-
-        FontDetect.onFontLoaded ('RobotoBold', onMyCoolFontLoaded);
-    });
-
-    function onMyCoolFontLoaded (fontname)
-    {
-        alert("FUENTE CARGADA!");
-          game.state.start("GameMenu");
-
-    }
-
 
 
   },
