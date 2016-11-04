@@ -34,7 +34,6 @@ GameMenu.prototype = {
 
 
 
-
     // this.addMenuOption('Selectplayer_2', function () {
     //   game.state.start("Selectplayer_2");
     // });
@@ -155,6 +154,7 @@ GameMenu.prototype = {
   },
 
   listenerSearch: function (msg){
+
 
 
     this.test();
