@@ -11,7 +11,7 @@ GameMenu.prototype = {
 
   init: function () {
     this.titleText = game.make.text(game.world.centerX+300, 100, "Penales !", {
-      font: 'bold 60pt TheMinion',
+      font: 'bold 60pt BitterBold',
       fill: 'white',
       align: 'center'
     });
@@ -41,9 +41,9 @@ GameMenu.prototype = {
     //   game.state.start("Selectplayer_2");
     // });
 
-     this.addMenuOption('CLÁSICO', function () {
+     this.addMenuOption('JUGAR', function () {
       game.state.start("Selectplayer");
-    }).x=600;;
+    }).x=700;
 
 
     /*this.addMenuOption('DESAFÍO \ntwo', function () {
@@ -53,15 +53,17 @@ GameMenu.prototype = {
 
     this.addMenuOption('ESTADÍSTICAS', function () {
       game.state.start("Stadistics");
-    }).x=600;
+    }).x=700;
 
     // this.addMenuOption('INSTRUCCIONES', function () {
     //   self.notification('INSTRUCCIONES', "asjanskjda aksjdnajksd askdkajsd asdaksjd asdakjsd asdaksjd asdkjajksd asdajksd aksdkajsnkd", [['Boton de Prueba', self.testGlobal],['Boton de Prueba', self.testGlobal],['Boton de Prueba', self.testGlobal]]);
     //
     // }).x=600;
 
-      instrucciones= game.add.text(750, 400, "INSTRUCCIONES", { font: 'bold 15pt RobotoBold', fill: '#fff03a'});
-      insLine=self.createLineGlobal(740,425,750+instrucciones.width+10, false, 0xfff03a);
+      instrucciones= game.add.text(790, 400, "INSTRUCCIONES", { font: 'bold 20pt RobotoBold', fill: '#ffc400'});
+      insLine=self.createLineGlobal(-10,instrucciones.height,+instrucciones.width+10, false, 0xffc400);
+      instrucciones.addChild(insLine);
+    //  insLine=self.createLineGlobal(780,440,750+instrucciones.width+10, false, 0xffc400);
 
 
       var onOver = function (target) {

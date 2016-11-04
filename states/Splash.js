@@ -41,12 +41,7 @@ var Splash = function () {};
 
   loadImages: function () {
 
-    game.load.image('menu-bg', urlBase+'assets/general/images/bg-menu.png');
-    game.load.image('stats-bg', urlBase+'assets/general/images/bg-stats.jpg');
-    game.load.image('rival-bg', urlBase+'assets/general/images/bg-rival.jpg');
-    game.load.image('multi-bg', urlBase+'assets/general/images/bg-multi.jpg');
-    game.load.image('single-bg', urlBase+'assets/general/images/bg-single.jpg');
-
+    game.load.image('menu-bg', urlBase+'assets/singleplayer/images/bg-menu.png');
     game.load.image('img-1', urlBase+'assets/singleplayer/images/bt_escudo.png');
     game.load.image('img-2', urlBase+'assets/singleplayer/images/bt_escudos_02.png');
     game.load.image('img-3', urlBase+'assets/singleplayer/images/bt_escudos_03.png');
@@ -226,7 +221,7 @@ var Splash = function () {};
 
    function onMyCoolFontLoaded (fontname){
      cargado++;
-console.log(cargado);
+// console.log(cargado);
    };
 
    function chechFuentes(fuentes){
