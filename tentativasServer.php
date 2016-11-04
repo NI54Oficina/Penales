@@ -157,6 +157,29 @@ function UpdateStats($userId,$gameId,$jugadasLocal,$jugadasVisitante ,$tendencia
 
 function UpdateUser($idUser,$jugadasUser,$jugadasOponente){
 	
+	/*
+	Get Variables del server
+	*/
+	$errados =0;
+	$rachaErrados  =0;
+	$rachaErradosHistorica=0;
+	$convertidos=0;
+	$rachaConvertidosHistorica=0;
+	$noAtajados=0;
+	$rachaNoAtajados=0;
+	$rachaNoAtajadosHistorica=0;
+	$atajados=0;
+	$rachaAtajadosHistorica=0;
+	$rachaGanados=0;
+	$rachaPerdidos=0;
+	$rachaPerdidosHistorica=0;
+	$rachaGanadosHistorica =0;
+	$rachaAtajados=0;
+	$rachaConvertidos=0;
+	$ganados=0;
+	$perdidos=0;
+	
+	/*Fin get variables*/
 }
 
 function GetTendencia(){
