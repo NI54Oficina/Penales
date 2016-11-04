@@ -1,45 +1,20 @@
 <?php
 
-
-//data={"userId":"1","gameId":"2","pateador":[1,0,0,0,1],"arquero":[1,0,0,0,1]}
 if(isset($_GET)){
 	//$data= $_GET["data"];
 	if(isset($_GET['code'])&&$_GET["code"]=="getSession"){
 		getSession();
 	}
+	if(isset($_GET['code'])&&$_GET["code"]=="UpdateStats"){
+		$data= json_decode($_GET["data"]);
+		//echo $_GET["data"];
+		UpdateStats($data->gameId,$data->localId,$data->visitanteId,$data->jugadasLocal,$data->jugadasVisitante);
+	}
 }else{
 	$data= $_POST["data"];
 }
 
-//echo $data;
-//$data=json_decode($data);
-
-/*foreach($data as $k=>$d){
-	echo "<br>";
-	echo $k;
-	echo "<br>";
-	if(is_array($d)){
-		foreach($d as $i){
-			echo $i;
-		}
-	}else{
-		echo $d;
-	}
-}
-echo "<br>";*/
-//exit();
-//UpdateStats(1,1,[6,1,2,3,4,1,6,1,1,1,1,1],[6,1,1,1,1,1,6,1,1,1,1,1]);
-
-
-//get stats en multiplayer que tenga tendencia
-
-//iniciar partida 
-
-//tabla historial
-//id, userid, partidaid, pateador, arquero, tipo
-
-//tabla partida
-//id (o token),idLocal, idVisitante, score=null, tipoPartida(single, multi o tipo de multi), apuesta
+//UpdateStats(1,1,1,[6,1,2,3,4,1,6,1,1,1,1,1],[6,1,1,1,1,1,6,1,1,1,1,1]);
 
 function getSession(){
 	/*echo '{"nombre":"Pepe",
@@ -56,11 +31,24 @@ function getSession(){
 }
 
 
-function GetStats($userId){
+function GetStats($userId, $tendencia=null){
+	
 	/*
 	Get Variables del server
 	*/
 	$stats= array();
+	
+	if($tendencia!=null&&$tendencia!=0){
+		//tendencia = primeros 5 tiros como pateador a que indice fueron tirados con mayor frecuencia, esto en singleplayer no se usaría
+		$stats["tendencia"]= [
+			[0,1,2,2,1,0],
+			[0,1,2,2,1,0],
+			[0,1,2,2,1,0],
+			[0,1,2,2,1,0],
+			[0,1,2,2,1,0],
+		];
+	}
+	
 	$stats['errados']=0;
 	$stats['rachaErrados']  =0;
 	$stats['rachaErradosHistorica']=0;
@@ -85,13 +73,15 @@ function GetStats($userId){
 }
 
 //quizas recibir el fin de partida?
-function UpdateStats($userId,$gameId,$jugadasLocal,$jugadasVisitante ,$tendencia=null){
+function UpdateStats($gameId,$localId,$visitanteId,$jugadasLocal,$jugadasVisitante){
 	
-	//pasaStats del user a función, función devuelve responde de "local"
-	//si no es singleplayer calcula stats del visitante, y devuelve response tmb
-	//se terminar devolviendo un json con ambos arrays separados en local y visitante
+	if($gameId=-1){
+		//crea la partida, 
+		$modo= 1;
+	}else{
+		//$modo= Obtener partida por el id---> modo;
+	}
 	
-	//recorre jugadas, arma array 1-0 y, el cual es al reverso para el visitante (el array de arquero invetido es el de pateador, y el de pateador invertido es el de arquero)
 	$arqueroLocal= array();
 	$arqueroVisitante= array();
 	$pateadorVisitante= array();
@@ -117,51 +107,19 @@ function UpdateStats($userId,$gameId,$jugadasLocal,$jugadasVisitante ,$tendencia
 			}
 		}
 		
-		
-		
 	}
 	
-	/*foreach($pateadorVisitante as $pV){
-		echo $pV;
-	}
-	echo "<br>";
-	foreach($arqueroLocal as $pV){
-		echo $pV;
-	}
-	echo "<br>";
-	echo "<hr>";
-	
-	foreach($pateadorLocal as $pV){
-		echo $pV;
-	}
-	echo "<br>";
-	foreach($arqueroVisitante as $pV){
-		echo $pV;
-	}
-	echo "<br>";
-	echo "<hr>";
-	*/
 	$response= new stdClass();
 	
-	$response->user1=UpdateUser($userId,$pateadorLocal,$arqueroLocal);
-	if($tendencia!=null){
-	$response->user2=UpdateUser($userId,$pateadorVisitante,$arqueroVisitante);
+	$response->user1=UpdateUser($localId,$pateadorLocal,$arqueroLocal,$modo);
+	if($modo!=1){
+		$response->user2=UpdateUser($visitanteId,$pateadorVisitante,$arqueroVisitante,$modo);
 	}
-	
-	//guardaria en db todos los datosa modo de historial y para asi desglozar los puntos de ser necesario
-	//pateador y aruqero son arrays con 0-1 segun si el user fue efectivo o no en sus respectivos turnos de ese modo
-	//tendencia = primeros 5 tiros como pateador a que indice fueron tirados con mayor frecuencia, esto en singleplayer no se usaría
-	
-	
-	//guardar stats actualizados
-	//sumar puntos o restar segun el caso	
-	
-	
 	
 	echo json_encode($response);
 }
 
-function UpdateUser($idUser,$pateador,$arquero){
+function UpdateUser($idUser,$pateador,$arquero,$modo){
 	
 	$stats=GetStats($idUser);
 	$auxPateador=0;
@@ -257,9 +215,13 @@ function UpdateUser($idUser,$pateador,$arquero){
 	}
 	
 	//aqui debería guardar los nuevos stats
+	//sumar puntos o restar segun el caso
 	$response= new stdClass();
-	$response->puntos=$puntos;
+	$response->puntosNuevos=$puntos;
+	//en puntos totales mostrar los puntos actualizados
+	$response->puntosTotales=$puntos;
 	$response->detalle= $puntosDiscriminados;
+	$response->stats= $stats;
 	return $response;
 }
 

@@ -150,6 +150,9 @@ var finished=true;
 
 var perfiles;
 
+var jugadasLocal=array();
+var jugadasVisitante=array();
+
 function buscarPartida(msg){
 	//io.emit('buscandoPartida', "buscando partida...");
 	CheckEvent("buscandoPartida", "buscando partida...");
@@ -220,7 +223,8 @@ function enviarJugada(msg){
 
 			counterLocal++;
 		}
-
+		jugadasLocal.push(msg);
+		jugadasVisitante.push(ubicacion);
 		calculatePuntaje(msg, ubicacion);
 		jugadaActual["user"]=msg;
 		jugadaActual["computer"]=ubicacion;
@@ -288,11 +292,28 @@ function InicioTurno(){
 }
 
 function GetResultado(){
+	console.log("entra resultado");
 	//tendria que emitir el resultado, cliente lo recibe, setea y va a pantalla correspondiente segun comprobación.
 	var auxArray={};
+	//aca debería de llamar UpdateStats;
+	var toSend={};
+	toSend["gameId"]=-1;
+	toSend["localId"]= 1;
+	toSend["visitanteId"]= -1;
+	toSend["jugadasLocal"]= jugadasLocal;
+	toSend["jugadasVisitante"]= jugadasVisitante;
+	console.log(JSON.stringify(toSend));
+	toSend=JSON.stringify(toSend);
+	//sucribir evento "stats actualizados" a la función del mismo nombre. One shot
+	requestSoap("?code=UpdateStats&data="+toSend," ","loginConfirmed");
+	
+}
+
+function StatsActualizados(){
 	//cambiar por local y visitante segun corresponda
 	auxArray["golesUser"]= golesUser;
 	auxArray["golesComputer"]= golesComputer;
+	
 	CheckEvent('resultadoPartida', JSON.stringify(auxArray));
 	SendStats();
 	golesUser=0;
@@ -399,6 +420,8 @@ function calculatePuntaje(msg, generator){
 }
 
 function Reset(){
+	jugadasLocal=new Array();
+	jugadasVisitante=new Array();
 	finished=true;
 	enAlargue=false;
 	modStart=-1;
@@ -506,8 +529,9 @@ function requestStats(msg){
 	
 }
 
-function SendStats(){
-	console.log("terminalogin");
+function SendStats(msg){
+	//console.log("terminalogin");
+	
 }
 
 function requestSoap(code,params,callback){
