@@ -4,7 +4,7 @@
 //data={"userId":"1","gameId":"2","pateador":[1,0,0,0,1],"arquero":[1,0,0,0,1]}
 if(isset($_GET)){
 	//$data= $_GET["data"];
-	if($_GET["code"]=="getSession"){
+	if(isset($_GET['code'])&&$_GET["code"]=="getSession"){
 		getSession();
 	}
 }else{
@@ -27,9 +27,9 @@ if(isset($_GET)){
 	}
 }
 echo "<br>";*/
+//exit();
+//UpdateStats(1,1,[6,1,2,3,4,1,6,1,1,1,1,1],[6,1,1,1,1,1,6,1,1,1,1,1]);
 
-//UpdateStats($data->userId,$data->gameId,$data->pateador,$data->arquero);
-exit();
 
 //get stats en multiplayer que tenga tendencia
 
@@ -42,19 +42,25 @@ exit();
 //id (o token),idLocal, idVisitante, score=null, tipoPartida(single, multi o tipo de multi), apuesta
 
 function getSession(){
-	echo '{"nombre":"Pepe",
+	/*echo '{"nombre":"Pepe",
 		"id":"2",
 		"avatar":"imagen.jpg",
 		"puntos":1000,
-		"credits":1000}';
+		"credits":1000}';*/
+	$datos= array();
+	$datos["id"]=2;
+	$datos["avatar"]="imagen.jpg";
+	$datos["puntos"]= GetStats(2);
+	$datos["credits"]= 23232;
+	echo json_encode($datos);
 }
 
 
-function GetStats(){
+function GetStats($userId){
 	/*
 	Get Variables del server
 	*/
-	$stats= new stdClass();
+	$stats= array();
 	$stats['errados']=0;
 	$stats['rachaErrados']  =0;
 	$stats['rachaErradosHistorica']=0;
@@ -86,12 +92,78 @@ function UpdateStats($userId,$gameId,$jugadasLocal,$jugadasVisitante ,$tendencia
 	//se terminar devolviendo un json con ambos arrays separados en local y visitante
 	
 	//recorre jugadas, arma array 1-0 y, el cual es al reverso para el visitante (el array de arquero invetido es el de pateador, y el de pateador invertido es el de arquero)
-	UpdateUser($userId,$resultadosArquero,$resultadoPateador);
+	$arqueroLocal= array();
+	$arqueroVisitante= array();
+	$pateadorVisitante= array();
+	$pateadorLocal= array();
+	for($a=0;$a<count($jugadasLocal);$a++){
+		
+		if($jugadasLocal[$a]!=$jugadasVisitante[$a]){
+			//si modulo es 0 sumo a pateador visitante y a arquero local
+			if($a%2==0){
+				array_push($pateadorVisitante,"1");
+				array_push($arqueroLocal,"0");
+			}else{
+				array_push($pateadorLocal,"1");
+				array_push($arqueroVisitante,"0");
+			}
+		}else{
+			if($a%2==0){
+				array_push($pateadorVisitante,"0");
+				array_push($arqueroLocal,"1");
+			}else{
+				array_push($pateadorLocal,"0");
+				array_push($arqueroVisitante,"1");
+			}
+		}
+		
+		
+		
+	}
+	
+	/*foreach($pateadorVisitante as $pV){
+		echo $pV;
+	}
+	echo "<br>";
+	foreach($arqueroLocal as $pV){
+		echo $pV;
+	}
+	echo "<br>";
+	echo "<hr>";
+	
+	foreach($pateadorLocal as $pV){
+		echo $pV;
+	}
+	echo "<br>";
+	foreach($arqueroVisitante as $pV){
+		echo $pV;
+	}
+	echo "<br>";
+	echo "<hr>";
+	*/
+	$response= new stdClass();
+	
+	$response->user1=UpdateUser($userId,$pateadorLocal,$arqueroLocal);
+	if($tendencia!=null){
+	$response->user2=UpdateUser($userId,$pateadorVisitante,$arqueroVisitante);
+	}
 	
 	//guardaria en db todos los datosa modo de historial y para asi desglozar los puntos de ser necesario
 	//pateador y aruqero son arrays con 0-1 segun si el user fue efectivo o no en sus respectivos turnos de ese modo
 	//tendencia = primeros 5 tiros como pateador a que indice fueron tirados con mayor frecuencia, esto en singleplayer no se usaría
-	$stats=GetStats();
+	
+	
+	//guardar stats actualizados
+	//sumar puntos o restar segun el caso	
+	
+	
+	
+	echo json_encode($response);
+}
+
+function UpdateUser($idUser,$pateador,$arquero){
+	
+	$stats=GetStats($idUser);
 	$auxPateador=0;
 	$puntos=0;
 	$puntosDiscriminados= array();
@@ -155,14 +227,14 @@ function UpdateStats($userId,$gameId,$jugadasLocal,$jugadasVisitante ,$tendencia
 	}
 	
 	if($auxPateador>=$auxArquero){
-		$ganados++;
+		$stats['ganados']++;
 		$stats['rachaGanados']++;
 		$stats['rachaPerdidos']=0;
 		if($stats['rachaGanados']>$stats['rachaGanadosHistorica']){
 			$stats['rachaGanadosHistorica']= $stats['rachaGanados'];
 		}
 	}else{
-		$perdidos++;
+		$stats['perdidos']++;
 		$stats['rachaPerdidos']++;
 		$stats['rachaGanados']=0;
 		if($stats['rachaPerdidos']>$stats['rachaPerdidosHistorica']){
@@ -175,8 +247,8 @@ function UpdateStats($userId,$gameId,$jugadasLocal,$jugadasVisitante ,$tendencia
 		$puntosDiscriminados["Racha Ganados"]=4;
 	}
 	//rachas errados o perdidos?
-	if($rachaErrados>1){
-		$auxP= ($rachaErrados-1)*-1;
+	if($stats['rachaErrados']>1){
+		$auxP= ($stats['rachaErrados']-1)*-1;
 		if($auxP<-5){
 			$auxP=-5;
 		}
@@ -184,22 +256,15 @@ function UpdateStats($userId,$gameId,$jugadasLocal,$jugadasVisitante ,$tendencia
 		$puntosDiscriminados["Racha Errados"]=$auxP;
 	}
 	
-	//guardar stats actualizados
-	
+	//aqui debería guardar los nuevos stats
 	$response= new stdClass();
 	$response->puntos=$puntos;
 	$response->detalle= $puntosDiscriminados;
-	echo json_encode($response);
-}
-
-function UpdateUser($idUser,$jugadasUser,$jugadasOponente){
-	GetStats();
+	return $response;
 }
 
 function GetTendencia(){
 		
 }
-
-//UpdateStats("1","2",[1,1,1,1,1],[1,1,1,1,1]);
 
 ?>
