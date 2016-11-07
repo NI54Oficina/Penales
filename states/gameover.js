@@ -19,9 +19,10 @@ GameOver.prototype = {
     curva.fixedToCamera=true;
     background.add(curva);
 
-    playerOne = curva=game.add.sprite(350,70, 'img-1');
+	//reemplazar por imagen de boca
+    playerOne = curva=game.add.sprite(350,70, 'player');
     playerOne.scale.setTo(.3, .3);
-    playerTwo = curva=game.add.sprite(650,70, 'img-2');
+    playerTwo = curva=game.add.sprite(650,70, this.oponente.imagen);
     playerTwo.scale.setTo(.3, .3);
    //self.syncVariables();
    self = this;
@@ -218,7 +219,7 @@ GameOver.prototype = {
 
   Restart: function(){
     search.visible=true;
-    Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
+    Emit("buscarPartida",this.oponente.id,"partidaEncontrada","listenerSearch",self);
   },
 
   MainMenu: function(){

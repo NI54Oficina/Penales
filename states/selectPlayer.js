@@ -86,8 +86,6 @@ Selectplayer.prototype = {
 
 
 
-
-
       self.setTo5(img2);
       self.setTo4(img1);
       self.setTo3(img5);

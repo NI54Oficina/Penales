@@ -604,6 +604,7 @@ updateCounter: function () {
     self.activateSound(musica_end);
     this.game.state.states["GameOver"].puntosUser = puntosUser;
     this.game.state.states["GameOver"].puntosComputer = puntosComputer;
+    this.game.state.states["GameOver"].oponente = perfilElegido;
     setTimeout(function(){
 
 
