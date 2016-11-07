@@ -46,6 +46,8 @@ Game.prototype = {
 
     this.drawBackground();
 
+    this.createSoundGraphics();
+
 
     this.createBarra();
 
@@ -121,13 +123,20 @@ drawBackground: function(){
 	arco3.animations.add("down",["d00.png"],velocidadArco,false);
 	arco3.animations.add("idle",["d00.png"],velocidadArco,false);
 
-  presicionText = game.add.text(10, 370, 'Tiempo: 00:00', { font: " 20px CondensedRegular", fill: "black", align: "center" });
+  presicionText = game.add.text(60, 60, '0', { font: " 90px BitterBold", fill: "white", align: "center", stroke:'yellow' });
+  presicionText.stroke='#ffc400';
+  presicionText.strokeThickness = 5;
 	presicionText.visible=false;
 
   tablero = this.game.add.sprite(0,0, 'tablero');
   tablero.y= this.game.height-tablero.height;
   identificadorIzquierdo = this.game.add.sprite(170,this.game.height-40, 'patea');
   identificadorDerecho = this.game.add.sprite(930,this.game.height-40, 'ataja');
+
+  puntosUserText = game.add.text(this.game.width/2-40, this.game.height-45, puntosUser+' - ', { font: " 40px BitterBold", fill: "white"});
+  puntosComputerText = game.add.text(this.game.width/2+25, this.game.height-45, puntosComputer, { font: " 40px BitterBold", fill: "white"});
+  aliasUser= game.add.text(335, this.game.height-35, 'BOCA', { font: " 20px RobotoBold", fill: "white"});
+  aliasComputer =game.add.text(this.game.width-395,this.game.height-35, 'RIVER', { font: " 20px RobotoBold", fill: "white"});
 
 },
 
@@ -248,7 +257,7 @@ createButtons:function(){
 
       for(var j=0; j < 3; j++){
 
-    			auxButton = game.add.button((j*190)+330, (i*90)+100, 'button', function(self){}, this, 50, 50, 0);
+    			auxButton = game.add.button((j*190)+330, (i*90)+100, 'yellow-button', function(self){}, this, 50, 50, 0);
     			auxButton.id=auxID++;
 
 
@@ -295,7 +304,7 @@ updateCounter: function () {
 		return;
 	}
 	counter--;
-	presicionText.setText('Tiempo: 00:0' + counter);
+	presicionText.setText(counter);
 	if(counter< 6){
 		presicionText.visible=true;
 	}else{
@@ -456,7 +465,9 @@ updateCounter: function () {
 
   resetGui:function(){
 
-  	presicionText = game.add.text(10, 370, 'Tiempo: 00:00', { font: " 20px CondensedRegular", fill: "black", align: "center" });
+  	presicionText = game.add.text(60, 60, '0', { font: " 90px BitterBold", fill: "white", align: "center" });
+    presicionText.stroke='#ffc400';
+    presicionText.strokeThickness = 5;
   	presicionText.visible=false;
   	winner.visible=false;
   	looser.visible=false;
@@ -692,7 +703,7 @@ setBotonesRiesgo: function(self){
 
 setBotonesRojos:function(){
   for(var i=0; i<6; i++){
-	  buttons.children[i].loadTexture('button', 0, false);
+	  buttons.children[i].loadTexture('yellow-button', 0, false);
   }
 },
 
@@ -946,6 +957,7 @@ acertarTiro: function(self){
           if(self.pelotaEntra){
               self.activateSound(sonido_gol_1);
               puntosUser++;
+              puntosUserText.setText(puntosUser+' - ');
               self.AssertPoint(userPointY,triesP);
               self.Win(self);
               localStorage["TotalConvertidos"] = (parseInt(localStorage["TotalConvertidos"]) || 0) + 1;
@@ -992,6 +1004,7 @@ atajar: function(self){
               self.AssertPoint(enemyPointY,triesA);
               self.Looser(self);
               puntosComputer++;
+              puntosComputerText.setText(puntosComputer);
               localStorage["TotalNoAtajados"] = (parseInt(localStorage["TotalNoAtajados"]) || 0) + 1;
               localStorage["TotalPartidaNoAtajados"] = (parseInt(localStorage["TotalPartidaNoAtajados"]) || 0) + 1;
               localStorage["RachaAtajados"] = 0;
