@@ -13,6 +13,11 @@ Game.prototype = {
 
   create: function () {
 
+  //  num 0 -> failArquero
+  //  num 1 -> goodArquero
+  //  num 2 -> failPateador
+  // num 3 ->  goodPateador
+
     self = this;
     triesA=this.triesA;
 
@@ -283,8 +288,8 @@ setClickArea:function(){
 },
 
 drawGui:function(){
-	var display1="Fallaste!";
-  var display2="Ganaste!";
+	var display1="PERDISTE!";
+  var display2="GANASTE!";
 	looser = game.add.text(0, 350, display1, { font: 'bold 60pt CondensedRegular',fill: '#fff03a' });
 	looser.visible=false;
   looser.position.x=game.world.width/2- looser.width/2;
@@ -695,6 +700,8 @@ setBotonesRiesgo: function(self){
 
     }else if(barray[i-1]==1){
         buttons.children[i-1].loadTexture('yellow-button', 0, false);
+    }else{
+        buttons.children[i-1].loadTexture('button', 0, false);
     }
 
   }
@@ -940,13 +947,23 @@ animarArco:function(self){
 	}
 },
 
-Win: function(){
+Win: function(num){
+
+  winner.setText(self.sortearFrase(num));
+
+  winner.position.x=game.world.width/2- winner.width/2;
+
   looser.visible=false;
   winner.visible=true;
   winner.bringToTop();
 },
 
-Looser: function(){
+Looser: function(num){
+
+  looser.setText(self.sortearFrase(num));
+
+  looser.position.x=game.world.width/2- looser.width/2;
+
   looser.visible=true;
   winner.visible=false;
   looser.bringToTop();
@@ -959,7 +976,7 @@ acertarTiro: function(self){
               puntosUser++;
               puntosUserText.setText(puntosUser+' - ');
               self.AssertPoint(userPointY,triesP);
-              self.Win(self);
+              self.Win(3);
               localStorage["TotalConvertidos"] = (parseInt(localStorage["TotalConvertidos"]) || 0) + 1;
               localStorage["TotalPartidaConvertidos"] = (parseInt(localStorage["TotalPartidaConvertidos"]) || 0) + 1;
               localStorage["RachaConvertidos"] = (parseInt(localStorage["RachaConvertidos"]) || 0) + 1;
@@ -970,7 +987,7 @@ acertarTiro: function(self){
 
           }else{
               self.NoAssertPoint(userPointY,triesP);
-              self.Looser(self);
+              self.Looser(2);
               localStorage["TotalErrados"] = (parseInt(localStorage["TotalErrados"]) || 0) + 1;
               localStorage["TotalPartidaErrados"] = (parseInt(localStorage["TotalPartidaErrados"]) || 0) + 1;
               localStorage["RachaConvertidos"] = 0;
@@ -990,7 +1007,7 @@ atajar: function(self){
               self.activateSound(sonido_gol_1);
 
               self.NoAssertPoint(enemyPointY,triesA);
-              self.Win(self);
+              self.Win(1);
               localStorage["TotalAtajados"] = (parseInt(localStorage["TotalAtajados"]) || 0) + 1;
               localStorage["RachaAtajados"] = (parseInt(localStorage["RachaAtajados"]) || 0) + 1;
               localStorage["TotalPartidaAtajados"] = (parseInt(localStorage["TotalPartidaAtajados"]) || 0) + 1;
@@ -1002,7 +1019,7 @@ atajar: function(self){
           }else{
 
               self.AssertPoint(enemyPointY,triesA);
-              self.Looser(self);
+              self.Looser(0);
               puntosComputer++;
               puntosComputerText.setText(puntosComputer);
               localStorage["TotalNoAtajados"] = (parseInt(localStorage["TotalNoAtajados"]) || 0) + 1;
