@@ -38,9 +38,9 @@ function GetStats($userId, $tendencia=null){
 		//tendencia = primeros 5 tiros como pateador a que indice fueron tirados con mayor frecuencia, esto en singleplayer no se usaría
 		$stats["tendencia"]= [
 			[0,1,2,2,1,0],
-			[0,1,2,2,1,0],
-			[0,1,2,2,1,0],
-			[0,1,2,2,1,0],
+			[0,1,0,2,1,0],
+			[1,1,2,2,1,0],
+			[0,2,2,2,1,0],
 			[0,1,2,2,1,0],
 		];
 	}

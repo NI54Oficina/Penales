@@ -156,50 +156,50 @@ var jugadasVisitante= new Array();
 function buscarPartida(msg){
 	//io.emit('buscandoPartida', "buscando partida...");
 	CheckEvent("buscandoPartida", "buscando partida...");
-	
-		Reset();
-		finished=false;
-		mod=randomBetween(0,1);
-		mod=1;
-		modStart=mod;
-		if(mod%2==0){
-			counterLocal=0;
-			counterVisitante=1;
-		}else{
-			counterLocal=1;
-			counterVisitante=0;
-		};
 
-		oponente= GetOponente();
+	Reset();
+	finished=false;
+	mod=randomBetween(0,1);
+	mod=1;
+	modStart=mod;
+	if(mod%2==0){
+		counterLocal=0;
+		counterVisitante=1;
+	}else{
+		counterLocal=1;
+		counterVisitante=0;
+	};
 
-		partida["oponente"]=oponente;
+	oponente= GetOponente();
 
-		partida["tiempomaximo"]= 10;
+	partida["oponente"]=oponente;
 
-		if(mod==1){
-			partida["camiseta"]= "local";
-			partida["rol-inicial"]= "Pateador";
+	partida["tiempomaximo"]= 10;
 
-		}else{
-			partida["camiseta"]= "Visitante";
-			partida["rol-inicial"]= "Arquero";
-		}
+	if(mod==1){
+		partida["camiseta"]= "local";
+		partida["rol-inicial"]= "Pateador";
 
-		partida["rol"]=mod;
-		partida["IntentosOponente"]=counterVisitante;
-		partida["Intentoslocal"]=counterLocal;
+	}else{
+		partida["camiseta"]= "Visitante";
+		partida["rol-inicial"]= "Arquero";
+	}
 
-		CheckEvent('partidaEncontrada', JSON.stringify(partida));
+	partida["rol"]=mod;
+	partida["IntentosOponente"]=counterVisitante;
+	partida["Intentoslocal"]=counterLocal;
 
-		console.log("Partida encontrada");
-		console.log("Goles USER "+golesUser);
-		console.log("Goles COMPUTE "+golesComputer);
+	CheckEvent('partidaEncontrada', JSON.stringify(partida));
 
-		setTimeout(function(){
-		CheckEvent('inicioPartida', "start");
-		console.log("Iniciar Partida");
+	console.log("Partida encontrada");
+	console.log("Goles USER "+golesUser);
+	console.log("Goles COMPUTE "+golesComputer);
 
-		},2000);
+	setTimeout(function(){
+	CheckEvent('inicioPartida', "start");
+	console.log("Iniciar Partida");
+
+	},2000);
 	
 }
 
@@ -310,7 +310,7 @@ function GetResultado(){
 	
 }
 
-var resultadoPartida= msg;
+var resultadoPartida= "";
 
 function StatsActualizados(msg){
 	console.log("entra resultado update");
