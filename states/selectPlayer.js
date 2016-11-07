@@ -79,13 +79,6 @@ Selectplayer.prototype = {
       img4.idk=4;
       img5.idk=5;
 
-      //
-      // golden=game.add.sprite(this.game.width/2- wd/2, 150, 'golden');
-      // golden.scale.setTo(0.9,0.9);
-      // golden.alpha=0;
-
-
-
 
 
       self.setTo5(img2);
@@ -97,7 +90,7 @@ Selectplayer.prototype = {
 
 
      jugar= this.addMenuOptionInner('JUGAR', function () {
-        console.log("ID ELEGIDO:"+ s1.idk);
+
         Emit("buscarPartida",s1.idk,"partidaEncontrada","listenerSearch",self);
 
       });
