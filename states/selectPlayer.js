@@ -98,7 +98,7 @@ Selectplayer.prototype = {
 
      jugar= this.addMenuOptionInner('JUGAR', function () {
         console.log("ID ELEGIDO:"+ s1.idk);
-        Emit("buscarPartida","s1.idk","partidaEncontrada","listenerSearch",self);
+        Emit("buscarPartida",s1.idk,"partidaEncontrada","listenerSearch",self);
 
       });
 
