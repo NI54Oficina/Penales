@@ -170,7 +170,7 @@ function buscarPartida(msg){
 		counterVisitante=0;
 	};
 
-	oponente= GetOponente();
+	oponente= GetOponente(msg);
 
 	partida["oponente"]=oponente;
 
@@ -443,12 +443,18 @@ function Reset(){
 	jugadaActual={};
 }
 
-function GetOponente(){
+function GetOponente(idOponente=-1){
 	var oponente= {};
 	oponente["nombre"]="Pepita";
 	oponente["session"]="token";
 	setPerfiles();
-	var auxP= randomBetween(0,3);
+	var auxP;
+	if(idOponente!=-1&&idOponente!=" "){
+		auxP= idOponente;
+	}else{
+		auxP= randomBetween(0,3);
+	}
+	
 	auxP= perfiles[auxP];
 	oponente["efectividadA"]=auxP["efectividadA"];
 	oponente["efectividadP"]=auxP["efectividadP"];
