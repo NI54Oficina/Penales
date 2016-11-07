@@ -294,7 +294,7 @@ function InicioTurno(){
 function GetResultado(){
 	console.log("entra resultado");
 	//tendria que emitir el resultado, cliente lo recibe, setea y va a pantalla correspondiente segun comprobación.
-	var auxArray={};
+	
 	//aca debería de llamar UpdateStats;
 	var toSend={};
 	toSend["gameId"]=-1;
@@ -310,10 +310,17 @@ function GetResultado(){
 	
 }
 
-function StatsActualizados(){
-	//cambiar por local y visitante segun corresponda
+var resultadoPartida= msg;
+
+function StatsActualizados(msg){
+	console.log("entra resultado update");
+	
+	
+	var auxArray={};
 	auxArray["golesUser"]= golesUser;
 	auxArray["golesComputer"]= golesComputer;
+	resultadoPartida=msg["user1"];
+	
 	
 	CheckEvent('resultadoPartida', JSON.stringify(auxArray));
 	SendStats();

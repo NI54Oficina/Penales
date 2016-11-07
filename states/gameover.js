@@ -25,6 +25,7 @@ GameOver.prototype = {
     playerTwo.scale.setTo(.3, .3);
    //self.syncVariables();
    self = this;
+   console.log(resultadoPartida);
    localStorage["PartidosGanados"];
    localStorage["PartidosPerdidos"];
 
@@ -55,6 +56,9 @@ GameOver.prototype = {
     ];
 
     //VARIABLES DE PRUEBA
+	
+	//Variable global resultadoPartida tiene los puntos ganados en esta partida (puntosNuevos), un array con los puntos detallados con key-->value (detalle), los puntos totales actualizados(puntosTotales).
+	console.log(resultadoPartida);
 
 
     var titleStyle = { font: 'bold 60pt CondensedLight', fill: '#FDFFB5', align: 'center'};
