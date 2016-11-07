@@ -150,13 +150,13 @@ var finished=true;
 
 var perfiles;
 
-var jugadasLocal=array();
-var jugadasVisitante=array();
+var jugadasLocal= new Array();
+var jugadasVisitante= new Array();
 
 function buscarPartida(msg){
 	//io.emit('buscandoPartida', "buscando partida...");
 	CheckEvent("buscandoPartida", "buscando partida...");
-	setTimeout(function(){
+	
 		Reset();
 		finished=false;
 		mod=randomBetween(0,1);
@@ -200,7 +200,7 @@ function buscarPartida(msg){
 		console.log("Iniciar Partida");
 
 		},2000);
-	},2000);
+	
 }
 
 function enviarJugada(msg){
@@ -277,7 +277,7 @@ function enviarJugada(msg){
 			}
 
 		},3000);
-	},2000);
+	},1500);
 }
 
 function InicioTurno(){
@@ -305,7 +305,8 @@ function GetResultado(){
 	console.log(JSON.stringify(toSend));
 	toSend=JSON.stringify(toSend);
 	//sucribir evento "stats actualizados" a la función del mismo nombre. One shot
-	requestSoap("?code=UpdateStats&data="+toSend," ","loginConfirmed");
+	SuscribeServerEvent("statsActualizados","StatsActualizados",this,true);	
+	requestSoap("?code=UpdateStats&data="+toSend," ","statsActualizados");
 	
 }
 

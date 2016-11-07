@@ -1,13 +1,13 @@
 <?php
 
 if(isset($_GET)){
-	//$data= $_GET["data"];
+	
 	if(isset($_GET['code'])&&$_GET["code"]=="getSession"){
 		getSession();
 	}
 	if(isset($_GET['code'])&&$_GET["code"]=="UpdateStats"){
 		$data= json_decode($_GET["data"]);
-		//echo $_GET["data"];
+		
 		UpdateStats($data->gameId,$data->localId,$data->visitanteId,$data->jugadasLocal,$data->jugadasVisitante);
 	}
 }else{
@@ -17,11 +17,7 @@ if(isset($_GET)){
 //UpdateStats(1,1,1,[6,1,2,3,4,1,6,1,1,1,1,1],[6,1,1,1,1,1,6,1,1,1,1,1]);
 
 function getSession(){
-	/*echo '{"nombre":"Pepe",
-		"id":"2",
-		"avatar":"imagen.jpg",
-		"puntos":1000,
-		"credits":1000}';*/
+	
 	$datos= array();
 	$datos["id"]=2;
 	$datos["avatar"]="imagen.jpg";
