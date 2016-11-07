@@ -171,7 +171,7 @@ function buscarPartida(msg){
 	};
 
 	oponente= GetOponente(msg);
-
+	
 	partida["oponente"]=oponente;
 
 	partida["tiempomaximo"]= 10;
@@ -445,7 +445,7 @@ function Reset(){
 
 function GetOponente(idOponente=-1){
 	var oponente= {};
-	oponente["nombre"]="Pepita";
+	
 	oponente["session"]="token";
 	setPerfiles();
 	var auxP;
@@ -456,8 +456,10 @@ function GetOponente(idOponente=-1){
 	}
 	
 	auxP= perfiles[auxP];
+	oponente["nombre"]=auxP["nombre"];
 	oponente["efectividadA"]=auxP["efectividadA"];
 	oponente["efectividadP"]=auxP["efectividadP"];
+	
 
 	oponente["tendencia"]= auxP["tendencia"];
 	return oponente;
@@ -476,6 +478,7 @@ function setPerfiles(){
 	
 	perfil1 = {
 	id:1,
+	nombre: "Riber",
 	efectividadA:2,
 	efectividadP:2,
 	tendencia:[ [0,0,1,2,2,0],
@@ -487,6 +490,7 @@ function setPerfiles(){
 
 	perfil2 = {
 		id:2,
+		nombre: "Mufa",
 		efectividadA:5,
 		efectividadP:5,
 		tendencia:[ [0,1,1,1,2,0],
@@ -499,6 +503,7 @@ function setPerfiles(){
 
   perfil3 = {
   id:3,
+  nombre: "San Mercado",
   efectividadA:10,
 efectividadP:10,
   tendencia:[ [0,0,1,2,2,0],
@@ -510,6 +515,19 @@ efectividadP:10,
 
   perfil4 = {
 	  id:4,
+	  nombre: "Visitante",
+	  efectividadA:20,
+	  efectividadP:20,
+	  tendencia:[ [0,1,1,1,2,0],
+				  [0,1,1,1,2,0],
+				  [0,1,1,1,2,0],
+				  [0,0,1,1,2,0],
+				  [0,0,1,1,2,0] ]
+	};
+	
+	perfil5 = {
+	  id:5,
+	  nombre: "Indesingente",
 	  efectividadA:20,
 	  efectividadP:20,
 	  tendencia:[ [0,1,1,1,2,0],
@@ -520,7 +538,7 @@ efectividadP:10,
 	};
 
 
-	perfiles=[perfil1,perfil2, perfil3, perfil4];
+	perfiles=[perfil1,perfil2, perfil3, perfil4,perfil5];
 }
 
 function login(msg){

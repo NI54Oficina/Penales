@@ -36,6 +36,8 @@ Game.prototype = {
     presicionText=0;
 	rangoDePresicion=40;
     counter=this.tiempoMaximo;
+	console.log("enemigo ");
+	
 	perfilElegido= this.perfil;
 
     modo=this.modo;
@@ -141,7 +143,7 @@ drawBackground: function(){
   puntosUserText = game.add.text(this.game.width/2-40, this.game.height-45, puntosUser+' - ', { font: " 40px BitterBold", fill: "white"});
   puntosComputerText = game.add.text(this.game.width/2+25, this.game.height-45, puntosComputer, { font: " 40px BitterBold", fill: "white"});
   aliasUser= game.add.text(335, this.game.height-35, 'BOCA', { font: " 20px RobotoBold", fill: "white"});
-  aliasComputer =game.add.text(this.game.width-395,this.game.height-35, 'RIVER', { font: " 20px RobotoBold", fill: "white"});
+  aliasComputer =game.add.text(this.game.width-395,this.game.height-35, perfilElegido.nombre, { font: " 20px RobotoBold", fill: "white"});
 
 },
 
@@ -997,7 +999,6 @@ acertarTiro: function(self){
               }
 
          };
-
 
 },
 
