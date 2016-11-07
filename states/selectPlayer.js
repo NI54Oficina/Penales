@@ -73,6 +73,12 @@ Selectplayer.prototype = {
       img4.scale.setTo(.5,.5);
       img5.scale.setTo(.5,.5);
 
+      img1.idk=1;
+      img2.idk=2;
+      img3.idk=3;
+      img4.idk=4;
+      img5.idk=5;
+
       //
       // golden=game.add.sprite(this.game.width/2- wd/2, 150, 'golden');
       // golden.scale.setTo(0.9,0.9);
@@ -91,8 +97,8 @@ Selectplayer.prototype = {
 
 
      jugar= this.addMenuOptionInner('JUGAR', function () {
-        // search.visible=true;
-        Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
+        console.log("ID ELEGIDO:"+ s1.idk);
+        Emit("buscarPartida","s1.idk","partidaEncontrada","listenerSearch",self);
 
       });
 
