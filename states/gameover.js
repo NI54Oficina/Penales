@@ -20,7 +20,7 @@ GameOver.prototype = {
     background.add(curva);
 
 	//reemplazar por imagen de boca
-    playerOne = curva=game.add.sprite(350,70, 'player');
+    playerOne = curva=game.add.sprite(350,70, usuario["avatar"]);
     playerOne.scale.setTo(.3, .3);
     playerTwo = curva=game.add.sprite(650,70, this.oponente.imagen);
     playerTwo.scale.setTo(.3, .3);
