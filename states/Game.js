@@ -975,6 +975,7 @@ acertarTiro: function(self){
               self.activateSound(sonido_gol_1);
               puntosUser++;
               puntosUserText.setText(puntosUser+' - ');
+              
               self.AssertPoint(userPointY,triesP);
               self.Win(3);
               localStorage["TotalConvertidos"] = (parseInt(localStorage["TotalConvertidos"]) || 0) + 1;
@@ -986,6 +987,7 @@ acertarTiro: function(self){
               }
 
           }else{
+
               self.NoAssertPoint(userPointY,triesP);
               self.Looser(2);
               localStorage["TotalErrados"] = (parseInt(localStorage["TotalErrados"]) || 0) + 1;
