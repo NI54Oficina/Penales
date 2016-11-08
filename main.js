@@ -22,7 +22,6 @@ Main.prototype = {
   preload: function () {
     game.load.image('background',    urlBase+'assets/singleplayer/images/fondo-cargando.png');
     game.load.image('loading',  urlBase+'assets/general/images/loading.png');
-    // game.load.image('brand',    urlBase+'assets/general/images/logo.png');
     game.load.script('polyfill',   urlBase+'lib/polyfill.js');
     game.load.script('scrolls',   urlBase+'lib/scroll.js');
     game.load.script('utils',   urlBase+'lib/utils.js');

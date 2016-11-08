@@ -85,7 +85,7 @@ GameMenu.prototype = {
 
       instrucciones.inputEnabled = true;
       instrucciones.input.useHandCursor = true;
-      instrucciones.events.onInputDown.add(function(){self.notification('INSTRUCCIONES', "asjanskjda aksjdnajksd askdkajsd asdaksjd asdakjsd asdaksjd asdkjajksd asdajksd aksdkajsnkd");});
+      instrucciones.events.onInputDown.add(function(){self.notification('INSTRUCCIONES',true);});
 
       instrucciones.events.onInputOver.add(onOver,self);
       instrucciones.events.onInputOut.add(onOut,self);

@@ -199,6 +199,20 @@ var Splash = function () {};
     this.addGameStates();
     this.addGameMusic();
 
+    // this.game.time.events.add(Phaser.Timer.SECOND * 10.0, function() {
+    //         var tween = this.add.tween(this.loadingBar)
+    //             .to({angle: 45}, 750, Phaser.Easing.Linear.none);
+    //
+    //       tween.onComplete.add(function() {
+    //            //  this.logo.destroy();
+    //                Emit("login"," ","loginConfirmed","logueado",this);
+    //         }, this);
+    //
+    //       tween.start();
+    //     }, this);
+
+
+
     var cargado;
     var done=false;
    $(document).ready(function(){
@@ -257,7 +271,7 @@ var Splash = function () {};
 
 
 
-	  Emit("login"," ","loginConfirmed","logueado",this);
+
   },
 
 
