@@ -268,6 +268,7 @@ var Splash = function () {};
   logueado: function(msg){
 
 	  console.log("logueado");
+	  usuario=msg;
 	  console.log(msg);
 	  this.test();
 

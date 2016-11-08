@@ -22,7 +22,7 @@ function getSession(){
 	
 	$datos= array();
 	$datos["id"]=2;
-	$datos["avatar"]="imagen.jpg";
+	$datos["avatar"]="player";
 	$datos["puntos"]= GetStats(2);
 	$datos["credits"]= 23232;
 	echo json_encode($datos);

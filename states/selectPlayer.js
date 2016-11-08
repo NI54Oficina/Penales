@@ -79,14 +79,13 @@ Selectplayer.prototype = {
       img4.idk=4;
       img5.idk=5;
 
-<<<<<<< HEAD
-=======
+
       //
       // golden=game.add.sprite(this.game.width/2- wd/2, 150, 'golden');
       // golden.scale.setTo(0.9,0.9);
       // golden.alpha=0;
 
->>>>>>> origin/master
+
 
 
       self.setTo5(img2);
