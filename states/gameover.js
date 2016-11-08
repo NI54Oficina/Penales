@@ -135,7 +135,7 @@ GameOver.prototype = {
     // var number=game.add.text(group.width-70,y,localStorage[stats[n].key], puntajeStyle2);
     mm=240;
       xx=220;
-    for(var n=0; n< stats.length; n++){
+    /*for(var n=0; n< stats.length; n++){
 
       if(n==0){
         game.add.text(250, mm, stats[n].title, { font: 'bold 15pt CondensedLight', fill: 'white'});
@@ -154,7 +154,32 @@ GameOver.prototype = {
       mm+=60;
       xx+=60;
 
-    }
+    }*/
+	var n=1;
+	game.add.text(250, mm, "Total", { font: 'bold 15pt CondensedLight', fill: 'white'});
+	//game.add.text(850, mm,stats[n].point, { font: 'bold 15pt CondensedLight', fill: 'white'});
+	game.add.text(550, mm,resultadoPartida.puntosNuevos+' pts.', { font: 'bold 15pt CondensedLight', fill: 'white'});
+	mm+=60;
+      xx+=60;
+	$.each(resultadoPartida.detalle,function(index,value){
+		if(n==0){
+        game.add.text(250, mm, index, { font: 'bold 15pt CondensedLight', fill: 'white'});
+        //game.add.text(850, mm,stats[n].point, { font: 'bold 15pt CondensedLight', fill: 'white'});
+        game.add.text(550, mm,value+' pts.', { font: 'bold 15pt CondensedLight', fill: 'white'});
+
+
+      }else{
+        game.add.text(250, mm, index, puntajeStyle);
+        //game.add.text(550, mm,stats[n].point, puntajeStyle);
+        game.add.text(850, mm,value+' pts.', puntajeStyle);
+        self.createLineGlobal(150,xx,950, false, 0x797979);
+
+      }
+	  
+	  n++;
+	   mm+=60;
+      xx+=60;
+	});
 
     //   game.add.text(300, 250, "PUNTOS BOCAFAN: 0 ", { font: 'bold 15pt CondensedLight', fill: 'white'});
     //       game.add.text(300, 250,localStorage[stats[n].key], puntajeStyle);

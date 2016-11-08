@@ -196,7 +196,7 @@ drawPlayer:function(){
 	player = game.add.sprite(318,210, 'pateador-local');
 	playerIPos=  new Phaser.Point();
 	playerIPos.x= 0;
-	playerIPos.y=350;
+	playerIPos.y=340;
 	player.scale.setTo(1.3,1.3);
 	player.x=playerIPos.x;
 	player.y=playerIPos.y;
@@ -506,7 +506,7 @@ updateCounter: function () {
   patear: function(){
     tweenPlayer = game.add.tween(player);
 
-    setTimeout(function(){tweenPlayer.to({x:220, y:300},700, 'Linear', true, 0);},0);
+    setTimeout(function(){tweenPlayer.to({x:235, y:280},700, 'Linear', true, 0);},0);
 
     player.animations.play('right');
 
