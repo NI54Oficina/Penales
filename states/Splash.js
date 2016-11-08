@@ -130,7 +130,7 @@ var Splash = function () {};
     game.add.existing(this.loadingBar);
     game.add.existing(this.status);
    // this.load.setPreloadSprite(this.loadingBar);
-	// Whacking it all into a single function keeps things tidy - the parameters for 'to' are properties, time, ease, auto start, delay and times to repeat (Infinity will keep it repeating forever) and yoyo (not used, makes the tween go backwards every other repeat) 
+	// Whacking it all into a single function keeps things tidy - the parameters for 'to' are properties, time, ease, auto start, delay and times to repeat (Infinity will keep it repeating forever) and yoyo (not used, makes the tween go backwards every other repeat)
 	this.loadingBar.pivot.x=33;
 	this.loadingBar.pivot.y=33;
 	this.add.tween(this.loadingBar)  .to({angle: -359}, 1000, null, true, 0, Infinity);
@@ -198,18 +198,6 @@ var Splash = function () {};
     this.status.setText('CARGANDO');
     this.addGameStates();
     this.addGameMusic();
-
-    // this.game.time.events.add(Phaser.Timer.SECOND * 10.0, function() {
-    //         var tween = this.add.tween(this.loadingBar)
-    //             .to({angle: 45}, 750, Phaser.Easing.Linear.none);
-    //
-    //       tween.onComplete.add(function() {
-    //            //  this.logo.destroy();
-    //                Emit("login"," ","loginConfirmed","logueado",this);
-    //         }, this);
-    //
-    //       tween.start();
-    //     }, this);
 
 
 
