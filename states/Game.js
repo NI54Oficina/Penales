@@ -36,6 +36,8 @@ Game.prototype = {
     presicionText=0;
 	rangoDePresicion=40;
     counter=this.tiempoMaximo;
+	console.log("enemigo ");
+	
 	perfilElegido= this.perfil;
 
     modo=this.modo;
@@ -141,7 +143,7 @@ drawBackground: function(){
   puntosUserText = game.add.text(this.game.width/2-40, this.game.height-45, puntosUser+' - ', { font: " 40px BitterBold", fill: "white"});
   puntosComputerText = game.add.text(this.game.width/2+25, this.game.height-45, puntosComputer, { font: " 40px BitterBold", fill: "white"});
   aliasUser= game.add.text(335, this.game.height-35, 'BOCA', { font: " 20px RobotoBold", fill: "white"});
-  aliasComputer =game.add.text(this.game.width-395,this.game.height-35, 'RIVER', { font: " 20px RobotoBold", fill: "white"});
+  aliasComputer =game.add.text(this.game.width-395,this.game.height-35, perfilElegido.nombre, { font: " 20px RobotoBold", fill: "white"});
 
 },
 
@@ -194,7 +196,7 @@ drawPlayer:function(){
 	player = game.add.sprite(318,210, 'pateador-local');
 	playerIPos=  new Phaser.Point();
 	playerIPos.x= 0;
-	playerIPos.y=350;
+	playerIPos.y=340;
 	player.scale.setTo(1.3,1.3);
 	player.x=playerIPos.x;
 	player.y=playerIPos.y;
@@ -504,7 +506,7 @@ updateCounter: function () {
   patear: function(){
     tweenPlayer = game.add.tween(player);
 
-    setTimeout(function(){tweenPlayer.to({x:220, y:300},700, 'Linear', true, 0);},0);
+    setTimeout(function(){tweenPlayer.to({x:235, y:280},700, 'Linear', true, 0);},0);
 
     player.animations.play('right');
 
@@ -602,6 +604,7 @@ updateCounter: function () {
     self.activateSound(musica_end);
     this.game.state.states["GameOver"].puntosUser = puntosUser;
     this.game.state.states["GameOver"].puntosComputer = puntosComputer;
+    this.game.state.states["GameOver"].oponente = perfilElegido;
     setTimeout(function(){
 
 
@@ -999,7 +1002,6 @@ acertarTiro: function(self){
               }
 
          };
-
 
 },
 

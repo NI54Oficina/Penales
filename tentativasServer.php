@@ -1,5 +1,6 @@
 <?php
 
+/**Codigo para hacerlo funcionar local**/
 if(isset($_GET)){
 	
 	if(isset($_GET['code'])&&$_GET["code"]=="getSession"){
@@ -13,6 +14,7 @@ if(isset($_GET)){
 }else{
 	$data= $_POST["data"];
 }
+/**Fin codigo arreglo **/
 
 //UpdateStats(1,1,1,[6,1,2,3,4,1,6,1,1,1,1,1],[6,1,1,1,1,1,6,1,1,1,1,1]);
 

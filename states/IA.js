@@ -153,6 +153,7 @@ var perfiles;
 var jugadasLocal= new Array();
 var jugadasVisitante= new Array();
 
+
 function buscarPartida(msg){
 	//io.emit('buscandoPartida', "buscando partida...");
 	CheckEvent("buscandoPartida", "buscando partida...");
@@ -171,7 +172,7 @@ function buscarPartida(msg){
 	};
 
 	oponente= GetOponente(msg);
-
+	
 	partida["oponente"]=oponente;
 
 	partida["tiempomaximo"]= 10;
@@ -444,20 +445,25 @@ function Reset(){
 }
 
 function GetOponente(idOponente=-1){
+	console.log("entra oponente "+idOponente);
 	var oponente= {};
-	oponente["nombre"]="Pepita";
+	
 	oponente["session"]="token";
 	setPerfiles();
 	var auxP;
 	if(idOponente!=-1&&idOponente!=" "){
 		auxP= idOponente;
 	}else{
-		auxP= randomBetween(0,3);
+		auxP= randomBetween(1,5);
 	}
 	
-	auxP= perfiles[auxP];
+	auxP= perfiles[auxP-1];
+	oponente["nombre"]=auxP["nombre"];
+	oponente["imagen"]=auxP["imagen"];
+	oponente["id"]=auxP["id"];
 	oponente["efectividadA"]=auxP["efectividadA"];
 	oponente["efectividadP"]=auxP["efectividadP"];
+	
 
 	oponente["tendencia"]= auxP["tendencia"];
 	return oponente;
@@ -476,6 +482,8 @@ function setPerfiles(){
 	
 	perfil1 = {
 	id:1,
+	nombre: "San Mercado",
+	imagen: "img-1",
 	efectividadA:2,
 	efectividadP:2,
 	tendencia:[ [0,0,1,2,2,0],
@@ -487,6 +495,8 @@ function setPerfiles(){
 
 	perfil2 = {
 		id:2,
+		nombre: "Visitante",
+		imagen: "img-2",
 		efectividadA:5,
 		efectividadP:5,
 		tendencia:[ [0,1,1,1,2,0],
@@ -499,6 +509,8 @@ function setPerfiles(){
 
   perfil3 = {
   id:3,
+  nombre: "Riber",
+  imagen: "img-3",
   efectividadA:10,
 efectividadP:10,
   tendencia:[ [0,0,1,2,2,0],
@@ -510,6 +522,21 @@ efectividadP:10,
 
   perfil4 = {
 	  id:4,
+	  nombre: "Mufa",
+	  imagen: "img-4",
+	  efectividadA:20,
+	  efectividadP:20,
+	  tendencia:[ [0,1,1,1,2,0],
+				  [0,1,1,1,2,0],
+				  [0,1,1,1,2,0],
+				  [0,0,1,1,2,0],
+				  [0,0,1,1,2,0] ]
+	};
+	
+	perfil5 = {
+	  id:5,
+	  nombre: "Indesingente",
+	  imagen: "img-5",
 	  efectividadA:20,
 	  efectividadP:20,
 	  tendencia:[ [0,1,1,1,2,0],
@@ -520,7 +547,7 @@ efectividadP:10,
 	};
 
 
-	perfiles=[perfil1,perfil2, perfil3, perfil4];
+	perfiles=[perfil1,perfil2, perfil3, perfil4,perfil5];
 }
 
 function login(msg){
