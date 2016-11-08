@@ -116,7 +116,7 @@ var Splash = function () {};
   init: function () {
 
 
-    this.loadingBar = game.make.sprite(game.world.centerX-(66/2), 400, "loading");
+    this.loadingBar = game.make.sprite(game.world.centerX, 400, "loading");
     // this.logo       = game.make.sprite(game.world.centerX, 200, 'brand');
     this.status     = game.make.text(game.world.centerX, 550, 'CARGANDO...', {font: '35px BitterBold' , fill: 'white'});
     utils.centerGameObjects([ this.status]);
@@ -129,8 +129,11 @@ var Splash = function () {};
 
     game.add.existing(this.loadingBar);
     game.add.existing(this.status);
-    this.load.setPreloadSprite(this.loadingBar);
-
+   // this.load.setPreloadSprite(this.loadingBar);
+	// Whacking it all into a single function keeps things tidy - the parameters for 'to' are properties, time, ease, auto start, delay and times to repeat (Infinity will keep it repeating forever) and yoyo (not used, makes the tween go backwards every other repeat) 
+	this.loadingBar.pivot.x=33;
+	this.loadingBar.pivot.y=33;
+	this.add.tween(this.loadingBar)  .to({angle: -359}, 1000, null, true, 0, Infinity);
 
         this.loadScripts();
         this.loadImages();
