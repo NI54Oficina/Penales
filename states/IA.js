@@ -176,7 +176,7 @@ function buscarPartida(msg){
 	
 	partida["oponente"]=oponente;
 
-	partida["tiempomaximo"]= 10;
+	partida["tiempomaximo"]= 3;
 
 	if(mod==1){
 		partida["camiseta"]= "local";
@@ -302,13 +302,14 @@ function GetResultado(){
 	toSend["gameId"]=-1;
 	toSend["localId"]= 1;
 	toSend["visitanteId"]= -1;
-	toSend["jugadasLocal"]= jugadasLocal;
-	toSend["jugadasVisitante"]= jugadasVisitante;
+	toSend["jugadasLocal"]= jugadasVisitante;
+	toSend["jugadasVisitante"]= jugadasLocal;
 	console.log(JSON.stringify(toSend));
 	toSend=JSON.stringify(toSend);
 	//sucribir evento "stats actualizados" a la función del mismo nombre. One shot
 	SuscribeServerEvent("statsActualizados","StatsActualizados",this,true);	
-	requestSoap("?code=UpdateStats&data="+toSend," ","statsActualizados");
+	//requestSoap("?code=UpdateStats&data="+toSend," ","statsActualizados");
+	requestSoap("/UpdateStats",toSend,"statsActualizados");
 	
 }
 
@@ -565,12 +566,15 @@ function login(msg){
 		SendStats();*/
 		//SuscribeServerEvent("loginConfirmed","setUser",this,true);
 		
-		requestSoap("?code=getSession"," ","loginConfirmed");
+		//requestSoap("?code=getSession"," ","loginConfirmed");
+		requestSoap("/getSession",msg,"loginConfirmed");
 }
 
 	
-function requestStats(msg){
+function getStats(msg){
 	
+	//requestSoap("?code=getStats&data="+msg," ","getStats");
+	requestSoap("/getStats",msg,"getStats");
 }
 
 function SendStats(msg){
@@ -579,8 +583,10 @@ function SendStats(msg){
 }
 
 function requestSoap(code,params,callback){
-	 $.post (urlConnect+code, function (response) {
-		
+	 //$.post (urlConnect+code, function (response) {
+	 $.post (urlConnect+code,params, function (response) {
+		console.log("entra response");
+		console.log(response);
 		CheckEvent(callback,JSON.parse(response));
 	});
 }

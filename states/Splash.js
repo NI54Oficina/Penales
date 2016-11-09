@@ -226,7 +226,7 @@ var Splash = function () {};
 			chechFuentes(fuentes);
 		}else{
 			clearInterval(interval);
-			 Emit("login"," ","loginConfirmed","logueado",context);
+			 Emit("login"," ","loginConfirmed","getStats",context);
 		}
 	},1000);
      /* while (!done) {
@@ -279,11 +279,17 @@ var Splash = function () {};
   test:function(){
 	  console.log("test entra");
   },
+  
+  getStats:function(msg){
+	  usuario=msg;
+	  console.log(msg);
+	   Emit("getStats",usuario["id"],"getStats","logueado",this);
+  },
 
   logueado: function(msg){
 		game.state.start("GameMenu");
 	  console.log("logueado");
-	  usuario=msg;
+	  
 	  console.log(msg);
 	  this.test();
 
