@@ -29,6 +29,7 @@ socket.on("*",function(event,data) {
 
 socket.on('loginConfirmed', function(msg){
   console.log(msg);
+  
   //ResponseCallBack(msg);
 });
 
@@ -562,9 +563,11 @@ function login(msg){
 		CheckEvent('loginConfirmed',  JSON.stringify(datos));
 		console.log("log confirmed");
 		SendStats();*/
+		//SuscribeServerEvent("loginConfirmed","setUser",this,true);
 		
 		requestSoap("?code=getSession"," ","loginConfirmed");
 }
+
 	
 function requestStats(msg){
 	

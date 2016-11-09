@@ -130,7 +130,7 @@ var Splash = function () {};
     game.add.existing(this.loadingBar);
     game.add.existing(this.status);
    // this.load.setPreloadSprite(this.loadingBar);
-	// Whacking it all into a single function keeps things tidy - the parameters for 'to' are properties, time, ease, auto start, delay and times to repeat (Infinity will keep it repeating forever) and yoyo (not used, makes the tween go backwards every other repeat) 
+	
 	this.loadingBar.pivot.x=33;
 	this.loadingBar.pivot.y=33;
 	this.add.tween(this.loadingBar)  .to({angle: -359}, 1000, null, true, 0, Infinity);
@@ -215,16 +215,18 @@ var Splash = function () {};
 
     var cargado;
     var done=false;
+	var context=this;
    $(document).ready(function(){
 
      fuentes=['CondensedRegular','CondensedBold','CondensedLight', 'BitterBold', 'RobotoBold', 'RobotoRegular'];
 
-
+	
 	var interval=setInterval(function(){
 		if(!done){
 			chechFuentes(fuentes);
 		}else{
 			clearInterval(interval);
+			 Emit("login"," ","loginConfirmed","logueado",context);
 		}
 	},1000);
      /* while (!done) {
@@ -253,7 +255,6 @@ var Splash = function () {};
 
            if(cargado==fuentes.length){
              console.log("FUENTES CARGADAS")
-             game.state.start("GameMenu");
              done=true;
 
            }else{
@@ -280,7 +281,7 @@ var Splash = function () {};
   },
 
   logueado: function(msg){
-
+		game.state.start("GameMenu");
 	  console.log("logueado");
 	  usuario=msg;
 	  console.log(msg);

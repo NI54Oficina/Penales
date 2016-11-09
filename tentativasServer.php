@@ -136,7 +136,7 @@ function UpdateUser($idUser,$pateador,$arquero,$modo){
 				$stats['rachaConvertidosHistorica']=$stats['rachaConvertidos'];
 			}
 		}else{
-			$auxP-=5;
+			$auxP-=1;
 			$stats['errados']++;
 			$stats['rachaConvertidos']=0;
 			$stats['rachaErrados']++;
@@ -151,7 +151,7 @@ function UpdateUser($idUser,$pateador,$arquero,$modo){
 	$auxArquero=0;
 	foreach($arquero as $a){
 		if($a==1){
-			$auxP+=5;
+			$auxP+=1;
 			$auxArquero++;
 			$stats['atajados']++;
 			$stats['rachaNoAtajados']=0;
@@ -160,7 +160,7 @@ function UpdateUser($idUser,$pateador,$arquero,$modo){
 				$stats['rachaAtajadosHistorica']= $stats['rachaAtajados'];
 			}
 		}else{
-			$auxP-=1;
+			$auxP-=0;
 			$stats['noAtajados']++;
 			$stats['rachaAtajados']=0;
 			$stats['rachaNoAtajados']++;
@@ -169,20 +169,23 @@ function UpdateUser($idUser,$pateador,$arquero,$modo){
 			}
 		}
 	}
+	
 	$puntosDiscriminados["Tiros atajados "]=$auxP ;
 	$puntos+=$auxP;
 	$auxP=0;
 	
 	if($auxPateador==count($pateador)){
 		$puntos+=5;
-		$puntosDiscriminados["Delantera"]=5;
+		$puntosDiscriminados["Delantera Letal"]=5;
 	}
 	if($auxArquero==count($arquero)){
-		$puntos+=10;
-		$puntosDiscriminados["Valla invicta"]=10;
+		$puntos+=20;
+		$puntosDiscriminados["Valla invicta"]=20;
 	}
 	
 	if($auxPateador>=$auxArquero){
+		$puntosDiscriminados["Victoria"]=10;
+		$puntos+=10;
 		$stats['ganados']++;
 		$stats['rachaGanados']++;
 		$stats['rachaPerdidos']=0;
