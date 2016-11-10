@@ -69,10 +69,16 @@ Game.prototype = {
 	this.createButtons();
 
 	this.cambiarRopa(self);
-
+	
+	
+	
 	if(Phaser.Math.isEven(modo)){
 		triesA=1;
 		triesP=0;
+		pateadorLocal="pateador-local";
+		pateadorVisitante= "pateador-visitante";
+		arqueroLocal= "arquero-local";
+		arqueroVisitante= "arquero-visitante";
 		self.setBotonesRiesgo(self);
 	}else{
 		triesA=0;
@@ -130,7 +136,7 @@ drawBackground: function(){
 	arco3.animations.add("down",["d00.png"],velocidadArco,false);
 	arco3.animations.add("idle",["d00.png"],velocidadArco,false);
 
-  presicionText = game.add.text(60, 60, '0', { font: " 90px BitterBold", fill: "white", align: "center", stroke:'yellow' });
+  presicionText = game.add.text(60, 350, '0', { font: " 90px BitterBold", fill: "white", align: "center", stroke:'yellow' });
   presicionText.stroke='#ffc400';
   presicionText.strokeThickness = 5;
 	presicionText.visible=false;
@@ -472,7 +478,7 @@ updateCounter: function () {
 
   resetGui:function(){
 
-  	presicionText = game.add.text(60, 60, '0', { font: " 90px BitterBold", fill: "white", align: "center" });
+  	presicionText = game.add.text(60, 350, '0', { font: " 90px BitterBold", fill: "white", align: "center" });
     presicionText.stroke='#ffc400';
     presicionText.strokeThickness = 5;
   	presicionText.visible=false;
@@ -685,12 +691,15 @@ esEmpate: function(){
 },
 
 getRiesgo: function(){
-
-  if(Phaser.Math.isEven(modo)){
-    return this.perfil.tendencia[triesA-1];
-  }else{
-    return this.perfil.tendencia[triesP-1];
-  }
+	if(!enAlargue){
+	  if(Phaser.Math.isEven(modo)){
+		return this.perfil.tendencia[triesA-1];
+	  }else{
+		return this.perfil.tendencia[triesP-1];
+	  }
+	}else{
+		return [2,2,2,2,2,2];
+	}
 
 },
 

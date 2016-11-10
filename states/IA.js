@@ -154,6 +154,9 @@ var perfiles;
 var jugadasLocal= new Array();
 var jugadasVisitante= new Array();
 
+var auxGolesUser;
+var auxGolesComputer;
+
 
 function buscarPartida(msg){
 	//io.emit('buscandoPartida', "buscando partida...");
@@ -201,7 +204,7 @@ function buscarPartida(msg){
 	CheckEvent('inicioPartida', "start");
 	console.log("Iniciar Partida");
 
-	},2000);
+	},100);
 	
 }
 
@@ -244,6 +247,8 @@ function enviarJugada(msg){
 					if(golesUser == golesComputer && !enAlargue){
 						auxCont++;
 						enAlargue=true;
+						auxGolesComputer= golesComputer;
+						auxGolesUser=golesUser;
 						console.log("EMPATE");
 						InicioTurno();
 						console.log("Iniciar Turno");
@@ -258,12 +263,14 @@ function enviarJugada(msg){
 
 							console.log("GOLES USER: "+ golesUser +", GOLES COMPUTER: "+ golesComputer);
 							 if(golesUser == golesComputer){
+								golesUser=auxGolesUser;
+								golesComputer= auxGolesComputer;
 								auxCont=0;
 								console.log("EMPATE");
 								InicioTurno();
 								console.log("Iniciar Turno");
 							}else{
-
+								
 								console.log("TERMINA JUEGO EN EMPATE"); GetResultado();
 							}
 						};
@@ -279,7 +286,7 @@ function enviarJugada(msg){
 			}
 
 		},4500);
-	},1500);
+	},700);
 }
 
 function InicioTurno(){
@@ -486,6 +493,8 @@ function setPerfiles(){
 	id:1,
 	nombre: "San Mercado",
 	imagen: "img-1",
+	arquero: "arquero-visitante",
+	pateador: "pateador-visitante",
 	efectividadA:2,
 	efectividadP:2,
 	tendencia:[ [0,0,1,2,2,0],
@@ -499,6 +508,8 @@ function setPerfiles(){
 		id:2,
 		nombre: "Visitante",
 		imagen: "img-2",
+		arquero: "arquero-visitante",
+		pateador: "pateador-visitante",
 		efectividadA:5,
 		efectividadP:5,
 		tendencia:[ [0,1,1,1,2,0],
@@ -513,8 +524,10 @@ function setPerfiles(){
   id:3,
   nombre: "Riber",
   imagen: "img-3",
+arquero: "arquero-visitante",
+pateador: "pateador-visitante",
   efectividadA:10,
-efectividadP:10,
+  efectividadP:10,
   tendencia:[ [0,0,1,2,2,0],
 			  [0,2,1,1,2,0],
 			  [0,0,1,1,2,0],
@@ -526,6 +539,8 @@ efectividadP:10,
 	  id:4,
 	  nombre: "Mufa",
 	  imagen: "img-4",
+	  		arquero: "arquero-visitante",
+		pateador: "pateador-visitante",
 	  efectividadA:20,
 	  efectividadP:20,
 	  tendencia:[ [0,1,1,1,2,0],
@@ -539,6 +554,8 @@ efectividadP:10,
 	  id:5,
 	  nombre: "Indesingente",
 	  imagen: "img-5",
+	  		arquero: "arquero-visitante",
+		pateador: "pateador-visitante",
 	  efectividadA:20,
 	  efectividadP:20,
 	  tendencia:[ [0,1,1,1,2,0],
