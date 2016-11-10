@@ -278,7 +278,7 @@ function enviarJugada(msg){
 				console.log("Iniciar Turno");
 			}
 
-		},3000);
+		},4500);
 	},1500);
 }
 
@@ -308,8 +308,8 @@ function GetResultado(){
 	toSend=JSON.stringify(toSend);
 	//sucribir evento "stats actualizados" a la función del mismo nombre. One shot
 	SuscribeServerEvent("statsActualizados","StatsActualizados",this,true);	
-	//requestSoap("?code=UpdateStats&data="+toSend," ","statsActualizados");
-	requestSoap("/UpdateStats",toSend,"statsActualizados");
+	requestSoap("?code=UpdateStats&data="+toSend," ","statsActualizados");
+	//requestSoap("/UpdateStats",toSend,"statsActualizados");
 	
 }
 
@@ -566,15 +566,15 @@ function login(msg){
 		SendStats();*/
 		//SuscribeServerEvent("loginConfirmed","setUser",this,true);
 		
-		//requestSoap("?code=getSession"," ","loginConfirmed");
-		requestSoap("/getSession",msg,"loginConfirmed");
+		requestSoap("?code=getSession"," ","loginConfirmed");
+		//requestSoap("/getSession",msg,"loginConfirmed");
 }
 
 	
 function getStats(msg){
 	
-	//requestSoap("?code=getStats&data="+msg," ","getStats");
-	requestSoap("/getStats",msg,"getStats");
+	requestSoap("?code=getStats&data="+msg," ","getStats");
+	//requestSoap("/getStats",msg,"getStats");
 }
 
 function SendStats(msg){
@@ -583,8 +583,8 @@ function SendStats(msg){
 }
 
 function requestSoap(code,params,callback){
-	 //$.post (urlConnect+code, function (response) {
-	 $.post (urlConnect+code,params, function (response) {
+	 $.post (urlConnect+code, function (response) {
+	 //$.post (urlConnect+code,params, function (response) {
 		console.log("entra response");
 		console.log(response);
 		CheckEvent(callback,JSON.parse(response));

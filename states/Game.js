@@ -212,7 +212,7 @@ drawPlayer:function(){
 
 createBarra: function(){
 	// MODIFICAMOS NUEVA BARRA DE COLORES
-  barraPotencia = this.game.add.sprite(610,460, 'linea-potencia');
+	barraPotencia = this.game.add.sprite(610,460, 'linea-potencia');
 	var 	myBitmap = this.game.add.bitmapData(280, 15);
 	var  grd=myBitmap.context.createLinearGradient(280,0,0,0);
 
@@ -953,7 +953,17 @@ animarArco:function(self){
 Win: function(num){
 
   winner.setText(self.sortearFrase(num));
-
+   setTimeout(function(){
+  if(Phaser.Math.isEven(modo)){
+	  //arquero festejo, pateador depre
+	  arquero.play("festejo");
+	  player.play("derrota");
+  }else{
+	  //pateador festeja, arquero apena
+	  arquero.play("derrota");
+	  player.play("festejo");
+  }
+},1000);
   winner.position.x=game.world.width/2- winner.width/2;
 
   looser.visible=false;
@@ -964,6 +974,18 @@ Win: function(num){
 Looser: function(num){
 
   looser.setText(self.sortearFrase(num));
+  
+  setTimeout(function(){
+  if(Phaser.Math.isEven(modo)){
+	  //arquero depre, pateador festejo
+	  arquero.play("derrota");
+	  player.play("festejo");
+  }else{
+	  //pateador depre, arquero festejo
+	  arquero.play("festejo");
+	  player.play("derrota");
+  }
+  },1000);
 
   looser.position.x=game.world.width/2- looser.width/2;
 
