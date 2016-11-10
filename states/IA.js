@@ -467,15 +467,15 @@ function GetOponente(idOponente=-1){
 	}
 	
 	auxP= perfiles[auxP-1];
-	oponente["nombre"]=auxP["nombre"];
+	/*oponente["nombre"]=auxP["nombre"];
 	oponente["imagen"]=auxP["imagen"];
 	oponente["id"]=auxP["id"];
 	oponente["efectividadA"]=auxP["efectividadA"];
 	oponente["efectividadP"]=auxP["efectividadP"];
 	
 
-	oponente["tendencia"]= auxP["tendencia"];
-	return oponente;
+	oponente["tendencia"]= auxP["tendencia"];*/
+	return auxP;
 }
 
 function SetEnemy(){
@@ -539,8 +539,8 @@ pateador: "pateador-visitante",
 	  id:4,
 	  nombre: "Mufa",
 	  imagen: "img-4",
-	  		arquero: "arquero-visitante",
-		pateador: "pateador-visitante",
+		arquero: "arquero-mufa",
+		pateador: "pateador-mufa",
 	  efectividadA:20,
 	  efectividadP:20,
 	  tendencia:[ [0,1,1,1,2,0],
@@ -555,7 +555,7 @@ pateador: "pateador-visitante",
 	  nombre: "Indesingente",
 	  imagen: "img-5",
 	  		arquero: "arquero-visitante",
-		pateador: "pateador-visitante",
+		pateador: "pateador-ind",
 	  efectividadA:20,
 	  efectividadP:20,
 	  tendencia:[ [0,1,1,1,2,0],

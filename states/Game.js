@@ -48,8 +48,13 @@ Game.prototype = {
 	clicked =1;
 	presicion= 0;
 	velocidad=2000;
-
-
+	
+	console.log(perfilElegido);
+	
+	pateadorLocal="pateador-local";
+	pateadorVisitante= perfilElegido.pateador;
+	arqueroLocal= "arquero-local";
+	arqueroVisitante= perfilElegido.arquero;
 
     this.drawBackground();
 
@@ -75,10 +80,6 @@ Game.prototype = {
 	if(Phaser.Math.isEven(modo)){
 		triesA=1;
 		triesP=0;
-		pateadorLocal="pateador-local";
-		pateadorVisitante= "pateador-visitante";
-		arqueroLocal= "arquero-local";
-		arqueroVisitante= "arquero-visitante";
 		self.setBotonesRiesgo(self);
 	}else{
 		triesA=0;
@@ -392,18 +393,20 @@ updateCounter: function () {
     arquero.position.y =arqueroPiso;
   },
 
- cambiarRopa: function(){
+ cambiarRopa: function(self){
 
    console.log(self.sortearFrase(2));
-
-
+	console.log("test cambio");
+	console.log(self.pateadorVisitante);
+	console.log(pateadorVisitante);
+	console.log(this.pateadorVisitante);
 
      if(Phaser.Math.isEven(modo)){
-       player.loadTexture('pateador-visitante', 0, false);
-       arquero.loadTexture('arquero-visitante', 0, false);
+       player.loadTexture(pateadorVisitante, 0, false);
+       arquero.loadTexture(arqueroLocal, 0, false);
      }else{
-       player.loadTexture('pateador-local', 0, false);
-       arquero.loadTexture('arquero-local', 0, false);
+       player.loadTexture(pateadorLocal, 0, false);
+       arquero.loadTexture(arqueroVisitante, 0, false);
      }
  },
 
