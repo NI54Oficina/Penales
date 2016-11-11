@@ -68,9 +68,9 @@ Stadistics.prototype = {
     titleStyle2 = { font: '20pt CondensedLight', fill: 'white'};
 
 
-    var efiArq =(100/((parseInt(localStorage["TotalAtajados"]) || 0) + (parseInt(localStorage["TotalNoAtajados"]) || 0)))* (parseInt(localStorage["TotalAtajados"]) || 0);
-    var efiPat = (100/((parseInt(localStorage["TotalConvertidos"]) || 0) + (parseInt(localStorage["TotalErrados"]) || 0)))*(parseInt(localStorage["TotalConvertidos"]) || 0);
-    var efectividad = (parseInt(localStorage["PartidosGanados"]) || 0) /(parseInt(localStorage["PartidosPerdidos"]) || 0);
+    var efiArq =(100/((parseInt(localStorage["totalAtajados"]) || 0) + (parseInt(localStorage["totalNoAtajados"]) || 0)))* (parseInt(localStorage["totalAtajados"]) || 0);
+    var efiPat = (100/((parseInt(localStorage["totalConvertidos"]) || 0) + (parseInt(localStorage["totalErrados"]) || 0)))*(parseInt(localStorage["totalConvertidos"]) || 0);
+    var efectividad = (parseInt(localStorage["partidosGanados"]) || 0) /(parseInt(localStorage["partidosPerdidos"]) || 0);
 
     if (isNaN(efiArq))efiArq=0;
     if (isNaN(efiPat))efiPat=0;
@@ -90,28 +90,28 @@ Stadistics.prototype = {
 
 
   	stats=[
-    {key:"PartidosGanados",title:"PARTIDOS GANADOS"},
-    {key:"PartidosPerdidos",title:"PARTIDOS PERDIDOS"},
-    {key:"TotalAtajados",title:"PENALES ATAJADOS"},
-    {key:"TotalConvertidos",title:"PENALES CONVERTIDOS"},
-    {key:"TotalErrados",title:"PENALES ERRADOS"},
-  	{key:"TotalNoAtajados",title:"PENALES NO ATAJADOS"},
+    {key:"ganados",title:"PARTIDOS GANADOS"},
+    {key:"perdidos",title:"PARTIDOS PERDIDOS"},
+    {key:"atajados",title:"PENALES ATAJADOS"},
+    {key:"convertidos",title:"PENALES CONVERTIDOS"},
+    {key:"errados",title:"PENALES ERRADOS"},
+  	{key:"noAtajados",title:"PENALES NO ATAJADOS"},
 
-    {key:"RachaConvertidos",title:"RACHA ACTUAL DE PENALES PATEADOS"},
-    {key:"RachaErrados",title:"RACHA ACTUAL DE PENALES ERRADOS"},
-    {key:"MejorRachaConvertida",title:"MEJOR RACHA HISTÓRICA DE PENALES PATEADOS"},
-    {key:"PeorRachaErrados",title:"PEOR RACHA HISTÓRICA DE PENALES PATEADOS"},
-
-
-    {key:"RachaAtajados",title:"RACHA ACTUAL DE PENALES ATAJADOS"},
-    {key:"RachaNoAtajados",title:"RACHA ACTUAL DE PENALES NO ATAJADOS"},
-    {key:"MejorRachaAtajados",title:"MEJOR RACHA HISTÓRICA DE PENALES ATAJADOS"},
-    {key:"PeorRachaNoAtajados",title:"PEOR RACHA HISTÓRICA DE PENALES NO ATAJADOS"},
+    {key:"rachaConvertidos",title:"RACHA ACTUAL DE PENALES PATEADOS"},
+    {key:"rachaErrados",title:"RACHA ACTUAL DE PENALES ERRADOS"},
+    {key:"rachaConvertidaHistorica",title:"MEJOR RACHA HISTÓRICA DE PENALES PATEADOS"},
+    {key:"rachaErradosHistorica",title:"PEOR RACHA HISTÓRICA DE PENALES PATEADOS"},
 
 
+    {key:"rachaAtajados",title:"RACHA ACTUAL DE PENALES ATAJADOS"},
+    {key:"rachaNoAtajados",title:"RACHA ACTUAL DE PENALES NO ATAJADOS"},
+    {key:"rachaAtajadosHistorica",title:"MEJOR RACHA HISTÓRICA DE PENALES ATAJADOS"},
+    {key:"rachaNoAtajadosHistorica",title:"PEOR RACHA HISTÓRICA DE PENALES NO ATAJADOS"},
 
-    {key:"RachaGanados",title:"RACHA GANADOS"},
-    {key:"RachaPerdidos",title:"RACHA PERDIDOS"}
+
+
+    {key:"rachaGanados",title:"RACHA GANADOS"},
+    {key:"rachaPerdidos",title:"RACHA PERDIDOS"}
     //{key:"Efectividad",title:"EFECTIVIDAD"},
     //{key: efiArq +"%" ,title:"EFICIENCIA COMO ARQUERO"},
     //{key: efiPat +"%" ,title:"EFICIENCIA COMO PATEADOR"}

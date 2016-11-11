@@ -287,6 +287,7 @@ var Splash = function () {};
   },
 
   logueado: function(msg){
+	  SaveStats(msg);
 		game.state.start("GameMenu");
 	  console.log("logueado");
 

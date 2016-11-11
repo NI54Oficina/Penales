@@ -330,7 +330,7 @@ var resultadoPartida= "";
 
 function StatsActualizados(msg){
 	console.log("entra resultado update");
-
+	//SaveStats();
 
 	var auxArray={};
 	auxArray["golesUser"]= golesUser;
@@ -607,5 +607,12 @@ function requestSoap(code,params,callback){
 		console.log("entra response");
 		console.log(response);
 		CheckEvent(callback,JSON.parse(response));
+	});
+}
+
+
+function SaveStats(msg){
+	$.each(msg,function(index,value){
+		localStorage[index]=value;
 	});
 }
