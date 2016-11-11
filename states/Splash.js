@@ -91,7 +91,7 @@ var Splash = function () {};
     game.load.atlas('arco', urlBase+'assets/general/images/arcos-sprite.png', urlBase+'assets/general/images/arcos-sprite.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
     game.load.atlas('arquero-local', urlBase+'assets/general/images/out.png', urlBase+'assets/general/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
     game.load.atlas('pateador-local', urlBase+'assets/general/images/pateador-test.png', urlBase+'assets/general/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-	
+
 	game.load.atlas('pateador-ind', urlBase+'assets/singleplayer/images/pateador-ind.png', urlBase+'assets/singleplayer/images/pateador-ind.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
 	game.load.atlas('pateador-mufa', urlBase+'assets/singleplayer/images/pateador-mufa.png', urlBase+'assets/singleplayer/images/pateador-mufa.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
 	game.load.atlas('arquero-mufa', urlBase+'assets/singleplayer/images/arquero-mufa.png', urlBase+'assets/singleplayer/images/arquero-mufa.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
@@ -134,11 +134,9 @@ var Splash = function () {};
     game.add.existing(this.loadingBar);
     game.add.existing(this.status);
    // this.load.setPreloadSprite(this.loadingBar);
-<<<<<<< HEAD
+
 	// Whacking it all into a single function keeps things tidy - the parameters for 'to' are properties, time, ease, auto start, delay and times to repeat (Infinity will keep it repeating forever) and yoyo (not used, makes the tween go backwards every other repeat)
-=======
-	
->>>>>>> origin/master
+
 	this.loadingBar.pivot.x=33;
 	this.loadingBar.pivot.y=33;
 	this.add.tween(this.loadingBar)  .to({angle: -359}, 1000, null, true, 0, Infinity);
@@ -216,7 +214,7 @@ var Splash = function () {};
 
      fuentes=['CondensedRegular','CondensedBold','CondensedLight', 'BitterBold', 'RobotoBold', 'RobotoRegular'];
 
-	
+
 	var interval=setInterval(function(){
 		if(!done){
 			chechFuentes(fuentes);
@@ -275,7 +273,7 @@ var Splash = function () {};
   test:function(){
 	  console.log("test entra");
   },
-  
+
   getStats:function(msg){
 	  usuario=msg;
 	  console.log(msg);
@@ -285,7 +283,7 @@ var Splash = function () {};
   logueado: function(msg){
 		game.state.start("GameMenu");
 	  console.log("logueado");
-	  
+
 	  console.log(msg);
 	  this.test();
 
