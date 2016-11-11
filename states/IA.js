@@ -570,19 +570,7 @@ pateador: "pateador-visitante",
 }
 
 function login(msg){
-		//consigue datos de la db
-		
-		/*var datos={};
-		datos["nombre"]="Pepe";
-		datos["id"]= "2";
-		datos["avatar"]= "imagen.jpg";
-		datos["puntos"]= 1000;
-		datos["credits"]= 1000;
-		CheckEvent('loginConfirmed',  JSON.stringify(datos));
-		console.log("log confirmed");
-		SendStats();*/
-		//SuscribeServerEvent("loginConfirmed","setUser",this,true);
-		
+	
 		requestSoap("?code=getSession"," ","loginConfirmed");
 		//requestSoap("/getSession",msg,"loginConfirmed");
 }
