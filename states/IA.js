@@ -29,6 +29,7 @@ socket.on("*",function(event,data) {
 
 socket.on('loginConfirmed', function(msg){
   console.log(msg);
+  
   //ResponseCallBack(msg);
 });
 
@@ -153,6 +154,9 @@ var perfiles;
 var jugadasLocal= new Array();
 var jugadasVisitante= new Array();
 
+var auxGolesUser;
+var auxGolesComputer;
+
 
 function buscarPartida(msg){
 	//io.emit('buscandoPartida', "buscando partida...");
@@ -175,7 +179,7 @@ function buscarPartida(msg){
 	
 	partida["oponente"]=oponente;
 
-	partida["tiempomaximo"]= 10;
+	partida["tiempomaximo"]= 3;
 
 	if(mod==1){
 		partida["camiseta"]= "local";
@@ -200,7 +204,7 @@ function buscarPartida(msg){
 	CheckEvent('inicioPartida', "start");
 	console.log("Iniciar Partida");
 
-	},2000);
+	},100);
 	
 }
 
@@ -243,6 +247,8 @@ function enviarJugada(msg){
 					if(golesUser == golesComputer && !enAlargue){
 						auxCont++;
 						enAlargue=true;
+						auxGolesComputer= golesComputer;
+						auxGolesUser=golesUser;
 						console.log("EMPATE");
 						InicioTurno();
 						console.log("Iniciar Turno");
@@ -257,12 +263,14 @@ function enviarJugada(msg){
 
 							console.log("GOLES USER: "+ golesUser +", GOLES COMPUTER: "+ golesComputer);
 							 if(golesUser == golesComputer){
+								golesUser=auxGolesUser;
+								golesComputer= auxGolesComputer;
 								auxCont=0;
 								console.log("EMPATE");
 								InicioTurno();
 								console.log("Iniciar Turno");
 							}else{
-
+								
 								console.log("TERMINA JUEGO EN EMPATE"); GetResultado();
 							}
 						};
@@ -277,8 +285,8 @@ function enviarJugada(msg){
 				console.log("Iniciar Turno");
 			}
 
-		},3000);
-	},1500);
+		},4500);
+	},700);
 }
 
 function InicioTurno(){
@@ -301,13 +309,14 @@ function GetResultado(){
 	toSend["gameId"]=-1;
 	toSend["localId"]= 1;
 	toSend["visitanteId"]= -1;
-	toSend["jugadasLocal"]= jugadasLocal;
-	toSend["jugadasVisitante"]= jugadasVisitante;
+	toSend["jugadasLocal"]= jugadasVisitante;
+	toSend["jugadasVisitante"]= jugadasLocal;
 	console.log(JSON.stringify(toSend));
 	toSend=JSON.stringify(toSend);
 	//sucribir evento "stats actualizados" a la función del mismo nombre. One shot
 	SuscribeServerEvent("statsActualizados","StatsActualizados",this,true);	
 	requestSoap("?code=UpdateStats&data="+toSend," ","statsActualizados");
+	//requestSoap("/UpdateStats",toSend,"statsActualizados");
 	
 }
 
@@ -458,15 +467,15 @@ function GetOponente(idOponente=-1){
 	}
 	
 	auxP= perfiles[auxP-1];
-	oponente["nombre"]=auxP["nombre"];
+	/*oponente["nombre"]=auxP["nombre"];
 	oponente["imagen"]=auxP["imagen"];
 	oponente["id"]=auxP["id"];
 	oponente["efectividadA"]=auxP["efectividadA"];
 	oponente["efectividadP"]=auxP["efectividadP"];
 	
 
-	oponente["tendencia"]= auxP["tendencia"];
-	return oponente;
+	oponente["tendencia"]= auxP["tendencia"];*/
+	return auxP;
 }
 
 function SetEnemy(){
@@ -484,6 +493,8 @@ function setPerfiles(){
 	id:1,
 	nombre: "San Mercado",
 	imagen: "img-1",
+	arquero: "arquero-visitante",
+	pateador: "pateador-visitante",
 	efectividadA:2,
 	efectividadP:2,
 	tendencia:[ [0,0,1,2,2,0],
@@ -497,6 +508,8 @@ function setPerfiles(){
 		id:2,
 		nombre: "Visitante",
 		imagen: "img-2",
+		arquero: "arquero-visitante",
+		pateador: "pateador-visitante",
 		efectividadA:5,
 		efectividadP:5,
 		tendencia:[ [0,1,1,1,2,0],
@@ -511,8 +524,10 @@ function setPerfiles(){
   id:3,
   nombre: "Riber",
   imagen: "img-3",
+arquero: "arquero-visitante",
+pateador: "pateador-visitante",
   efectividadA:10,
-efectividadP:10,
+  efectividadP:10,
   tendencia:[ [0,0,1,2,2,0],
 			  [0,2,1,1,2,0],
 			  [0,0,1,1,2,0],
@@ -524,6 +539,8 @@ efectividadP:10,
 	  id:4,
 	  nombre: "Mufa",
 	  imagen: "img-4",
+		arquero: "arquero-mufa",
+		pateador: "pateador-mufa",
 	  efectividadA:20,
 	  efectividadP:20,
 	  tendencia:[ [0,1,1,1,2,0],
@@ -537,6 +554,8 @@ efectividadP:10,
 	  id:5,
 	  nombre: "Indesingente",
 	  imagen: "img-5",
+	  		arquero: "arquero-visitante",
+		pateador: "pateador-ind",
 	  efectividadA:20,
 	  efectividadP:20,
 	  tendencia:[ [0,1,1,1,2,0],
@@ -551,23 +570,16 @@ efectividadP:10,
 }
 
 function login(msg){
-		//consigue datos de la db
-		
-		/*var datos={};
-		datos["nombre"]="Pepe";
-		datos["id"]= "2";
-		datos["avatar"]= "imagen.jpg";
-		datos["puntos"]= 1000;
-		datos["credits"]= 1000;
-		CheckEvent('loginConfirmed',  JSON.stringify(datos));
-		console.log("log confirmed");
-		SendStats();*/
-		
+	
 		requestSoap("?code=getSession"," ","loginConfirmed");
+		//requestSoap("/getSession",msg,"loginConfirmed");
 }
+
 	
-function requestStats(msg){
+function getStats(msg){
 	
+	requestSoap("?code=getStats&data="+msg," ","getStats");
+	//requestSoap("/getStats",msg,"getStats");
 }
 
 function SendStats(msg){
@@ -577,7 +589,9 @@ function SendStats(msg){
 
 function requestSoap(code,params,callback){
 	 $.post (urlConnect+code, function (response) {
-		
+	 //$.post (urlConnect+code,params, function (response) {
+		console.log("entra response");
+		console.log(response);
 		CheckEvent(callback,JSON.parse(response));
 	});
 }

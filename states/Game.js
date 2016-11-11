@@ -48,8 +48,13 @@ Game.prototype = {
 	clicked =1;
 	presicion= 0;
 	velocidad=2000;
-
-
+	
+	console.log(perfilElegido);
+	
+	pateadorLocal="pateador-local";
+	pateadorVisitante= perfilElegido.pateador;
+	arqueroLocal= "arquero-local";
+	arqueroVisitante= perfilElegido.arquero;
 
     this.drawBackground();
 
@@ -69,7 +74,9 @@ Game.prototype = {
 	this.createButtons();
 
 	this.cambiarRopa(self);
-
+	
+	
+	
 	if(Phaser.Math.isEven(modo)){
 		triesA=1;
 		triesP=0;
@@ -130,7 +137,7 @@ drawBackground: function(){
 	arco3.animations.add("down",["d00.png"],velocidadArco,false);
 	arco3.animations.add("idle",["d00.png"],velocidadArco,false);
 
-  presicionText = game.add.text(60, 60, '0', { font: " 90px BitterBold", fill: "white", align: "center", stroke:'yellow' });
+  presicionText = game.add.text(60, 350, '0', { font: " 90px BitterBold", fill: "white", align: "center", stroke:'yellow' });
   presicionText.stroke='#ffc400';
   presicionText.strokeThickness = 5;
 	presicionText.visible=false;
@@ -202,7 +209,7 @@ drawPlayer:function(){
 	player.y=playerIPos.y;
 	player.frame = 0;
 	//animacion player
-	player.animations.add('right', [04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37], 16, false);
+	player.animations.add('right', [01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37], 16, false);
 	player.animations.add('idle', [00], 2 , true);
 	player.animations.add('derrota', [38,39,40,41,42,43], 12 , false);
 	player.animations.add('festejo', [44,45,46,47,48,49,50,51,52,53], 12 , false);
@@ -212,7 +219,7 @@ drawPlayer:function(){
 
 createBarra: function(){
 	// MODIFICAMOS NUEVA BARRA DE COLORES
-  barraPotencia = this.game.add.sprite(610,460, 'linea-potencia');
+	barraPotencia = this.game.add.sprite(610,460, 'linea-potencia');
 	var 	myBitmap = this.game.add.bitmapData(280, 15);
 	var  grd=myBitmap.context.createLinearGradient(280,0,0,0);
 
@@ -386,18 +393,20 @@ updateCounter: function () {
     arquero.position.y =arqueroPiso;
   },
 
- cambiarRopa: function(){
+ cambiarRopa: function(self){
 
    console.log(self.sortearFrase(2));
-
-
+	console.log("test cambio");
+	console.log(self.pateadorVisitante);
+	console.log(pateadorVisitante);
+	console.log(this.pateadorVisitante);
 
      if(Phaser.Math.isEven(modo)){
-       player.loadTexture('pateador-visitante', 0, false);
-       arquero.loadTexture('arquero-visitante', 0, false);
+       player.loadTexture(pateadorVisitante, 0, false);
+       arquero.loadTexture(arqueroLocal, 0, false);
      }else{
-       player.loadTexture('pateador-local', 0, false);
-       arquero.loadTexture('arquero-local', 0, false);
+       player.loadTexture(pateadorLocal, 0, false);
+       arquero.loadTexture(arqueroVisitante, 0, false);
      }
  },
 
@@ -472,7 +481,7 @@ updateCounter: function () {
 
   resetGui:function(){
 
-  	presicionText = game.add.text(60, 60, '0', { font: " 90px BitterBold", fill: "white", align: "center" });
+  	presicionText = game.add.text(60, 350, '0', { font: " 90px BitterBold", fill: "white", align: "center" });
     presicionText.stroke='#ffc400';
     presicionText.strokeThickness = 5;
   	presicionText.visible=false;
@@ -685,12 +694,15 @@ esEmpate: function(){
 },
 
 getRiesgo: function(){
-
-  if(Phaser.Math.isEven(modo)){
-    return this.perfil.tendencia[triesA-1];
-  }else{
-    return this.perfil.tendencia[triesP-1];
-  }
+	if(!enAlargue){
+	  if(Phaser.Math.isEven(modo)){
+		return this.perfil.tendencia[triesA-1];
+	  }else{
+		return this.perfil.tendencia[triesP-1];
+	  }
+	}else{
+		return [2,2,2,2,2,2];
+	}
 
 },
 
@@ -953,7 +965,17 @@ animarArco:function(self){
 Win: function(num){
 
   winner.setText(self.sortearFrase(num));
-
+   setTimeout(function(){
+  if(Phaser.Math.isEven(modo)){
+	  //arquero festejo, pateador depre
+	  arquero.play("festejo");
+	  player.play("derrota");
+  }else{
+	  //pateador festeja, arquero apena
+	  arquero.play("derrota");
+	  player.play("festejo");
+  }
+},1000);
   winner.position.x=game.world.width/2- winner.width/2;
 
   looser.visible=false;
@@ -964,6 +986,18 @@ Win: function(num){
 Looser: function(num){
 
   looser.setText(self.sortearFrase(num));
+  
+  setTimeout(function(){
+  if(Phaser.Math.isEven(modo)){
+	  //arquero depre, pateador festejo
+	  arquero.play("derrota");
+	  player.play("festejo");
+  }else{
+	  //pateador depre, arquero festejo
+	  arquero.play("festejo");
+	  player.play("derrota");
+  }
+  },1000);
 
   looser.position.x=game.world.width/2- looser.width/2;
 

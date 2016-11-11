@@ -88,11 +88,15 @@ var Splash = function () {};
     game.load.spritesheet('pelota', urlBase+'assets/general/images/pelota.png', 40, 40);
     game.load.spritesheet('pelota-sombra', urlBase+'assets/general/images/sombraPelota.png', 40, 40);
     game.load.image('arco-0', urlBase+'assets/general/images/arco-0.png');
-    game.load.atlas('arco', urlBase+'assets/general/images/arcos-sprite.png', 'assets/general/images/arcos-sprite.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-    game.load.atlas('arquero-local', urlBase+'assets/general/images/out.png', 'assets/general/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-    game.load.atlas('pateador-local', urlBase+'assets/general/images/pateador-test.png', 'assets/general/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-    game.load.atlas('arquero-visitante', urlBase+'assets/general/images/out2.png', 'assets/general/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-    game.load.atlas('pateador-visitante', urlBase+'assets/general/images/pateador-test2.png', 'assets/general/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+    game.load.atlas('arco', urlBase+'assets/general/images/arcos-sprite.png', urlBase+'assets/general/images/arcos-sprite.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+    game.load.atlas('arquero-local', urlBase+'assets/general/images/out.png', urlBase+'assets/general/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+    game.load.atlas('pateador-local', urlBase+'assets/general/images/pateador-test.png', urlBase+'assets/general/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+	
+	game.load.atlas('pateador-ind', urlBase+'assets/singleplayer/images/pateador-ind.png', urlBase+'assets/singleplayer/images/pateador-ind.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+	game.load.atlas('pateador-mufa', urlBase+'assets/singleplayer/images/pateador-mufa.png', urlBase+'assets/singleplayer/images/pateador-mufa.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+	game.load.atlas('arquero-mufa', urlBase+'assets/singleplayer/images/arquero-mufa.png', urlBase+'assets/singleplayer/images/arquero-mufa.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+    game.load.atlas('arquero-visitante', urlBase+'assets/general/images/out2.png', urlBase+'assets/general/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+    game.load.atlas('pateador-visitante', urlBase+'assets/general/images/pateador-test2.png', urlBase+'assets/general/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
     game.load.image('fondo1', urlBase+'assets/general/images/fondo-game1.png', 759, 150);
     game.load.image('fondo2', urlBase+'assets/general/images/fondo-game2.png', 378, 150);
     game.load.image('fondo3', urlBase+'assets/general/images/fondo-game3.png', 1136, 491);
@@ -130,7 +134,11 @@ var Splash = function () {};
     game.add.existing(this.loadingBar);
     game.add.existing(this.status);
    // this.load.setPreloadSprite(this.loadingBar);
+<<<<<<< HEAD
 	// Whacking it all into a single function keeps things tidy - the parameters for 'to' are properties, time, ease, auto start, delay and times to repeat (Infinity will keep it repeating forever) and yoyo (not used, makes the tween go backwards every other repeat)
+=======
+	
+>>>>>>> origin/master
 	this.loadingBar.pivot.x=33;
 	this.loadingBar.pivot.y=33;
 	this.add.tween(this.loadingBar)  .to({angle: -359}, 1000, null, true, 0, Infinity);
@@ -203,16 +211,18 @@ var Splash = function () {};
 
     var cargado;
     var done=false;
+	var context=this;
    $(document).ready(function(){
 
      fuentes=['CondensedRegular','CondensedBold','CondensedLight', 'BitterBold', 'RobotoBold', 'RobotoRegular'];
 
-
+	
 	var interval=setInterval(function(){
 		if(!done){
 			chechFuentes(fuentes);
 		}else{
 			clearInterval(interval);
+			 Emit("login"," ","loginConfirmed","getStats",context);
 		}
 	},1000);
      /* while (!done) {
@@ -241,7 +251,6 @@ var Splash = function () {};
 
            if(cargado==fuentes.length){
              console.log("FUENTES CARGADAS")
-             game.state.start("GameMenu");
              done=true;
 
            }else{
@@ -266,11 +275,17 @@ var Splash = function () {};
   test:function(){
 	  console.log("test entra");
   },
+  
+  getStats:function(msg){
+	  usuario=msg;
+	  console.log(msg);
+	   Emit("getStats",usuario["id"],"getStats","logueado",this);
+  },
 
   logueado: function(msg){
-
+		game.state.start("GameMenu");
 	  console.log("logueado");
-	  usuario=msg;
+	  
 	  console.log(msg);
 	  this.test();
 
