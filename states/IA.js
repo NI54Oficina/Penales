@@ -6,6 +6,7 @@ socket = io('http://localhost:3000');
 
 }
 var usuario;
+var testLocal=true;
 console.log("entra client");
 
 if(serverEnabled){
@@ -315,8 +316,12 @@ function GetResultado(){
 	toSend=JSON.stringify(toSend);
 	//sucribir evento "stats actualizados" a la función del mismo nombre. One shot
 	SuscribeServerEvent("statsActualizados","StatsActualizados",this,true);	
+	if(testLocal){
 	requestSoap("?code=UpdateStats&data="+toSend," ","statsActualizados");
-	//requestSoap("/UpdateStats",toSend,"statsActualizados");
+	}else{
+		requestSoap("/UpdateStats",toSend,"statsActualizados");
+	}
+	
 	
 }
 
@@ -570,16 +575,20 @@ pateador: "pateador-visitante",
 }
 
 function login(msg){
-	
+	if(testLocal){
 		requestSoap("?code=getSession"," ","loginConfirmed");
-		//requestSoap("/getSession",msg,"loginConfirmed");
+	}else{
+		requestSoap("/getSession",msg,"loginConfirmed");
+	}
 }
 
 	
 function getStats(msg){
-	
-	requestSoap("?code=getStats&data="+msg," ","getStats");
-	//requestSoap("/getStats",msg,"getStats");
+	if(testLocal){
+		requestSoap("?code=getStats&data="+msg," ","getStats");
+	}else{
+		requestSoap("/getStats",msg,"getStats");
+	}
 }
 
 function SendStats(msg){

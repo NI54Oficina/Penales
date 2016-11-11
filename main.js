@@ -2,6 +2,11 @@
 
  var urlBase="";
  var urlConnect="tentativasServer.php";
+ if(!testLocal){
+	 urlBase="http://dev.betest.com.ar/newgames/12pasos/";
+	urlConnect="http://dev.betest.com.ar/server";
+ }
+  
 
 var
   game = new Phaser.Game( 1136, 640, Phaser.AUTO, 'game',null,true),
@@ -11,10 +16,6 @@ var
     playMusic: true
   },
   musicPlayer;
-
-
-
-
 
 
 Main.prototype = {
