@@ -6,7 +6,7 @@ socket = io('http://localhost:3000');
 
 }
 var usuario;
-var testLocal=true;
+var testLocal=false;
 console.log("entra client");
 
 if(serverEnabled){
@@ -319,7 +319,8 @@ function GetResultado(){
 	if(testLocal){
 	requestSoap("?code=UpdateStats&data="+toSend," ","statsActualizados");
 	}else{
-		requestSoap("/UpdateStats",toSend,"statsActualizados");
+		requestSoap("/UpdateStats",{json: toSend},"statsActualizados");
+		//requestSoap("/UpdateStats",toSend,"statsActualizados");
 	}
 	
 	
@@ -587,7 +588,9 @@ function getStats(msg){
 	if(testLocal){
 		requestSoap("?code=getStats&data="+msg," ","getStats");
 	}else{
-		requestSoap("/getStats",msg,"getStats");
+		// var auxU= {id: usuario["id"]};
+		requestSoap("/getStats",{id: msg},"getStats");
+		// requestSoap("/getStats",JSON.stringify(auxU),"getStats");
 	}
 }
 
@@ -597,8 +600,10 @@ function SendStats(msg){
 }
 
 function requestSoap(code,params,callback){
-	 $.post (urlConnect+code, function (response) {
-	 //$.post (urlConnect+code,params, function (response) {
+	console.log("envia params");
+	console.log(params);
+	 //$.post (urlConnect+code, function (response) {
+	 $.post (urlConnect+code,params, function (response) {
 		console.log("entra response");
 		console.log(response);
 		CheckEvent(callback,JSON.parse(response));
