@@ -9,12 +9,7 @@ Stadistics.prototype = {
 
   preload: function () {
     this.optionCount = 1;
-    game.load.image('left-corner', 'assets/general/images/left-corner.png');
-    game.load.image('right-corner', 'assets/general/images/left-corner.png');
-    game.load.image('volver', 'assets/general/images/arrow-back.png');
-    game.load.image('menu', 'assets/general/images/menu.png');
-    game.load.image('puntitos', 'assets/general/images/fondo_trama.png');
-    game.load.image('line', 'assets/general/images/titulo_linea.png');
+    
   },
 
   // addMenuOption: function(text, callback) {
@@ -99,7 +94,7 @@ Stadistics.prototype = {
 
     {key:"rachaConvertidos",title:"RACHA ACTUAL DE PENALES PATEADOS"},
     {key:"rachaErrados",title:"RACHA ACTUAL DE PENALES ERRADOS"},
-    {key:"rachaConvertidaHistorica",title:"MEJOR RACHA HISTÓRICA DE PENALES PATEADOS"},
+    {key:"rachaConvertidosHistorica",title:"MEJOR RACHA HISTÓRICA DE PENALES PATEADOS"},
     {key:"rachaErradosHistorica",title:"PEOR RACHA HISTÓRICA DE PENALES PATEADOS"},
 
 
