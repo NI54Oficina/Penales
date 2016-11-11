@@ -248,8 +248,8 @@ function enviarJugada(msg){
 					if(golesUser == golesComputer && !enAlargue){
 						auxCont++;
 						enAlargue=true;
-						auxGolesComputer= golesComputer;
-						auxGolesUser=golesUser;
+						//auxGolesComputer= golesComputer;
+						//auxGolesUser=golesUser;
 						console.log("EMPATE");
 						InicioTurno();
 						console.log("Iniciar Turno");
@@ -264,8 +264,8 @@ function enviarJugada(msg){
 
 							console.log("GOLES USER: "+ golesUser +", GOLES COMPUTER: "+ golesComputer);
 							 if(golesUser == golesComputer){
-								golesUser=auxGolesUser;
-								golesComputer= auxGolesComputer;
+								//golesUser=auxGolesUser;
+								//golesComputer= auxGolesComputer;
 								auxCont=0;
 								console.log("EMPATE");
 								InicioTurno();
@@ -500,7 +500,7 @@ function setPerfiles(){
 	nombre: "San Mercado",
 	imagen: "img-1",
 	arquero: "arquero-visitante",
-	pateador: "pateador-visitante",
+	pateador: "pateador-mercado",
 	efectividadA:2,
 	efectividadP:2,
 	tendencia:[ [0,0,1,2,2,0],
@@ -515,7 +515,7 @@ function setPerfiles(){
 		nombre: "Visitante",
 		imagen: "img-2",
 		arquero: "arquero-visitante",
-		pateador: "pateador-visitante",
+		pateador: "pateador-svisitante",
 		efectividadA:5,
 		efectividadP:5,
 		tendencia:[ [0,1,1,1,2,0],
@@ -531,7 +531,7 @@ function setPerfiles(){
   nombre: "Riber",
   imagen: "img-3",
 arquero: "arquero-visitante",
-pateador: "pateador-visitante",
+pateador: "pateador-riber",
   efectividadA:10,
   efectividadP:10,
   tendencia:[ [0,0,1,2,2,0],
