@@ -57,7 +57,7 @@ GameMenu.prototype = {
     //
     // }).x=600;
 
-      instrucciones= game.add.text(790, 400, "INSTRUCCIONES", { font: 'bold 18pt RobotoBold', fill: '#ffc400'});
+      instrucciones= game.add.text(790, 490, "INSTRUCCIONES", { font: 'bold 18pt RobotoBold', fill: '#ffc400'});
       bottom=self.createLineGlobal(-80,instrucciones.height+10,270, false, 0xffc400);
 
       topLine=self.createLineGlobal(-80,-15, 270,false, 0xffc400);

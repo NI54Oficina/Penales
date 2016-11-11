@@ -71,8 +71,8 @@ var Splash = function () {};
 
     game.load.image('musica-on', urlBase+'assets/general/images/musica-on.png');
     game.load.image('musica-off', urlBase+'assets/general/images/musica-off.png');
-    game.load.image('sonido-on', urlBase+'assets/general/images/sonido-on.png');
-    game.load.image('sonido-off', urlBase+'assets/general/images/sonido-off.png');
+    game.load.image('musica-on-over', urlBase+'assets/general/images/musica-on-mousehover.png');
+    game.load.image('musica-off-over', urlBase+'assets/general/images/musica-off-mousehover.png');
 
 
 
@@ -98,8 +98,8 @@ var Splash = function () {};
 	game.load.atlas('pateador-mercado', urlBase+'assets/singleplayer/images/pateador-mercado.png', urlBase+'assets/singleplayer/images/pateador-mercado.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
 	game.load.atlas('pateador-riber', urlBase+'assets/singleplayer/images/pateador-riber.png', urlBase+'assets/singleplayer/images/pateador-riber.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
 	game.load.atlas('pateador-svisitante', urlBase+'assets/singleplayer/images/pateador-svisitante.png', urlBase+'assets/singleplayer/images/pateador-svisitante.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-	
-	
+
+
 	game.load.atlas('arquero-mufa', urlBase+'assets/singleplayer/images/arquero-mufa.png', urlBase+'assets/singleplayer/images/arquero-mufa.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
 	game.load.atlas('arquero-ind', urlBase+'assets/singleplayer/images/arquero-ind.png', urlBase+'assets/singleplayer/images/arquero-ind.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
 	game.load.atlas('arquero-mercado', urlBase+'assets/singleplayer/images/arquero-mercado.png', urlBase+'assets/singleplayer/images/arquero-mercado.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
@@ -131,26 +131,20 @@ var Splash = function () {};
   init: function () {
 
 
-    this.loadingBar = game.make.sprite(game.world.centerX, 400, "loading");
-    // this.logo       = game.make.sprite(game.world.centerX, 200, 'brand');
-    this.status     = game.make.text(game.world.centerX, 550, 'CARGANDO...', {font: '35px BitterBold' , fill: 'white'});
-    utils.centerGameObjects([ this.status]);
+    this.loadingBar = game.make.sprite(570, 400, "loading");
 
   },
 
   preload: function () {
 
     game.add.sprite(0, 0, 'background');
+    game.add.sprite(440,500, 'cargando');
 
     game.add.existing(this.loadingBar);
-    game.add.existing(this.status);
-   // this.load.setPreloadSprite(this.loadingBar);
-
-	// Whacking it all into a single function keeps things tidy - the parameters for 'to' are properties, time, ease, auto start, delay and times to repeat (Infinity will keep it repeating forever) and yoyo (not used, makes the tween go backwards every other repeat)
 
 	this.loadingBar.pivot.x=33;
 	this.loadingBar.pivot.y=33;
-	this.add.tween(this.loadingBar)  .to({angle: -359}, 1000, null, true, 0, Infinity);
+	this.add.tween(this.loadingBar)  .to({angle: -359}, 1500, null, true, 0, Infinity);
 
         this.loadScripts();
         this.loadImages();
@@ -211,8 +205,6 @@ var Splash = function () {};
   create: function () {
 
 
-
-    this.status.setText('CARGANDO');
     this.addGameStates();
     this.addGameMusic();
 

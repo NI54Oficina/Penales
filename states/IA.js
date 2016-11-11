@@ -497,7 +497,7 @@ function setPerfiles(){
 
 	perfil1 = {
 	id:1,
-	nombre: "San Mercado",
+	nombre: "SAN MERCADO",
 	imagen: "img-1",
 	arquero: "arquero-mercado",
 	pateador: "pateador-mercado",
@@ -512,7 +512,7 @@ function setPerfiles(){
 
 	perfil2 = {
 		id:2,
-		nombre: "Visitante",
+		nombre: "VISITANTE",
 		imagen: "img-2",
 		arquero: "arquero-svisitante",
 		pateador: "pateador-svisitante",
@@ -528,7 +528,7 @@ function setPerfiles(){
 
   perfil3 = {
   id:3,
-  nombre: "Riber",
+  nombre: "RIBER",
   imagen: "img-3",
 arquero: "arquero-riber",
 pateador: "pateador-riber",
@@ -543,7 +543,7 @@ pateador: "pateador-riber",
 
   perfil4 = {
 	  id:4,
-	  nombre: "Mufa",
+	  nombre: "MUFA",
 	  imagen: "img-4",
 		arquero: "arquero-mufa",
 		pateador: "pateador-mufa",
@@ -558,7 +558,7 @@ pateador: "pateador-riber",
 
 	perfil5 = {
 	  id:5,
-	  nombre: "Indesingente",
+	  nombre: "INDESINGENTE",
 	  imagen: "img-5",
 	  		arquero: "arquero-ind",
 		pateador: "pateador-ind",

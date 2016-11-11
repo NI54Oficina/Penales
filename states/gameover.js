@@ -57,7 +57,7 @@ GameOver.prototype = {
     ];
 
     //VARIABLES DE PRUEBA
-	
+
 	//Variable global resultadoPartida tiene los puntos ganados en esta partida (puntosNuevos), un array con los puntos detallados con key-->value (detalle), los puntos totales actualizados(puntosTotales).
 	console.log(resultadoPartida);
 
@@ -83,7 +83,7 @@ GameOver.prototype = {
     botones.position= {x:this.game.width/2 - botones.width/2-20, y:this.game.height-botones.height*2}
 
 
-    var puntajeStyle = { font: 'bold 16pt CondensedLight', fill: 'yellow'};
+    var puntajeStyle = { font: 'bold 16pt CondensedLight', fill: '#ffff56'};
     var partidaStyle = { font: 'bold 35pt CondensedLight', fill: 'white'};
 
 
@@ -175,7 +175,7 @@ GameOver.prototype = {
         self.createLineGlobal(150,xx,950, false, 0x797979);
 
       }
-	  
+
 	  n++;
 	   mm+=60;
       xx+=60;

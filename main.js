@@ -6,7 +6,7 @@
 	 urlBase="http://dev.betest.com.ar/newgames/12pasos/";
 	urlConnect="http://dev.betest.com.ar/server";
  }
-  
+
 
 var
   game = new Phaser.Game( 1136, 640, Phaser.AUTO, 'game',null,true),
@@ -19,7 +19,7 @@ var
 
 
 Main.prototype = {
-	
+
 	init: function () {
 		this.input.maxPointers = 1;
 		this.stage.disableVisibilityChange = true;
@@ -28,6 +28,7 @@ Main.prototype = {
 
   preload: function () {
     game.load.image('background',    urlBase+'assets/singleplayer/images/fondo-cargando.png');
+    game.load.image('cargando', urlBase+'assets/singleplayer/images/palabra-cargando.png');
     game.load.image('loading',  urlBase+'assets/general/images/loading.png');
     game.load.script('polyfill',   urlBase+'lib/polyfill.js');
     game.load.script('scrolls',   urlBase+'lib/scroll.js');
