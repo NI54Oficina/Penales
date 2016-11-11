@@ -213,7 +213,7 @@ var Splash = function () {};
 	var context=this;
    $(document).ready(function(){
 
-     fuentes=['CondensedRegular','CondensedBold','CondensedLight', 'BitterBold', 'RobotoBold', 'RobotoRegular'];
+     fuentes=['CondensedRegular','CondensedBold','CondensedLight', 'BitterBold', 'RobotoBold', 'RobotoRegular', 'BitterRegular', 'AlfaSlab', 'TheSansRegular'];
 
 
 	var interval=setInterval(function(){

@@ -15,6 +15,11 @@
 }
 
 @font-face {
+    font-family: 'BitterRegular';
+    src: url('../fonts/Bitter-Regular.ttf');
+}
+
+@font-face {
     font-family: 'CondensedLight';
     src: url('../fonts/RobotoCondensed-Light.ttf');
 }
@@ -27,4 +32,14 @@
 @font-face {
     font-family: 'CondensedRegular';
     src: url('../fonts/RobotoCondensed-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'TheSansRegular';
+    src: url('../fonts/TheSans-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'AlfaSlab';
+    src: url('../fonts/AlfaSlabOne-Regular.ttf');
 }
