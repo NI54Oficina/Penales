@@ -4,7 +4,7 @@
  var urlConnect="tentativasServer.php";
 
 var
-  game = new Phaser.Game( 1136, 640, Phaser.AUTO, 'game'),
+  game = new Phaser.Game( 1136, 640, Phaser.AUTO, 'game',null,true),
   Main = function () {},
   gameOptions = {
     playSound: true,
@@ -18,6 +18,12 @@ var
 
 
 Main.prototype = {
+	
+	init: function () {
+		this.input.maxPointers = 1;
+		this.stage.disableVisibilityChange = true;
+		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    },
 
   preload: function () {
     game.load.image('background',    urlBase+'assets/singleplayer/images/fondo-cargando.png');

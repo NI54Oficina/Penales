@@ -23,6 +23,26 @@
      }
 
      </style>
+	 
+	 <center id="game"></center>
+	 
+	 <script>
+	 var containerId="game";
+	 window.onload = function() {
+		//GetSession(SessionCallBack);
+		ResizeCanvas();
+	};
+
+	function ResizeCanvas(){
+		$("#"+containerId).css("max-width","100%");
+		var auxHeight= $(window).height()*90/100;	
+		$("#"+containerId).css("max-height",auxHeight+"px");
+	}
+
+	$(window).on("resize",function(){
+		ResizeCanvas();
+	});
+	 </script>
 
 </body>
 </html>
