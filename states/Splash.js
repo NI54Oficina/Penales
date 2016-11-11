@@ -88,6 +88,7 @@ var Splash = function () {};
     game.load.spritesheet('pelota', urlBase+'assets/general/images/pelota.png', 40, 40);
     game.load.spritesheet('pelota-sombra', urlBase+'assets/general/images/sombraPelota.png', 40, 40);
     game.load.image('arco-0', urlBase+'assets/general/images/arco-0.png');
+    game.load.image('arco-n', urlBase+'assets/general/images/test-arco.png');
     game.load.atlas('arco', urlBase+'assets/general/images/arcos-sprite.png', urlBase+'assets/general/images/arcos-sprite.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
     game.load.atlas('arquero-local', urlBase+'assets/general/images/out.png', urlBase+'assets/general/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
     game.load.atlas('pateador-local', urlBase+'assets/general/images/pateador-test.png', urlBase+'assets/general/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
