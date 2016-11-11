@@ -101,6 +101,11 @@ var Splash = function () {};
 	
 	
 	game.load.atlas('arquero-mufa', urlBase+'assets/singleplayer/images/arquero-mufa.png', urlBase+'assets/singleplayer/images/arquero-mufa.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+	game.load.atlas('arquero-ind', urlBase+'assets/singleplayer/images/arquero-ind.png', urlBase+'assets/singleplayer/images/arquero-ind.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+	game.load.atlas('arquero-mercado', urlBase+'assets/singleplayer/images/arquero-mercado.png', urlBase+'assets/singleplayer/images/arquero-mercado.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+	game.load.atlas('arquero-riber', urlBase+'assets/singleplayer/images/arquero-riber.png', urlBase+'assets/singleplayer/images/arquero-riber.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+	game.load.atlas('arquero-svisitante', urlBase+'assets/singleplayer/images/arquero-svisitante.png', urlBase+'assets/singleplayer/images/arquero-svisitante.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+	
     game.load.atlas('arquero-visitante', urlBase+'assets/general/images/out2.png', urlBase+'assets/general/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
     game.load.atlas('pateador-visitante', urlBase+'assets/general/images/pateador-test2.png', urlBase+'assets/general/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
     game.load.image('fondo1', urlBase+'assets/general/images/fondo-game1.png', 759, 150);
