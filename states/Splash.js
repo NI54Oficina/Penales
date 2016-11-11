@@ -105,7 +105,7 @@ var Splash = function () {};
 	game.load.atlas('arquero-mercado', urlBase+'assets/singleplayer/images/arquero-mercado.png', urlBase+'assets/singleplayer/images/arquero-mercado.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
 	game.load.atlas('arquero-riber', urlBase+'assets/singleplayer/images/arquero-riber.png', urlBase+'assets/singleplayer/images/arquero-riber.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
 	game.load.atlas('arquero-svisitante', urlBase+'assets/singleplayer/images/arquero-svisitante.png', urlBase+'assets/singleplayer/images/arquero-svisitante.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-	
+
     game.load.atlas('arquero-visitante', urlBase+'assets/general/images/out2.png', urlBase+'assets/general/images/out.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
     game.load.atlas('pateador-visitante', urlBase+'assets/general/images/pateador-test2.png', urlBase+'assets/general/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
     game.load.image('fondo1', urlBase+'assets/general/images/fondo-game1.png', 759, 150);
@@ -173,7 +173,7 @@ var Splash = function () {};
   addGameMusic: function () {
     fondoMusic = game.add.audio('musica');
     fondoMusic.loop = true;
-    fondoMusic.mute=true;
+    fondoMusic.mute=false;
     fondoMusic.volume = 0.80;
     fondoMusic.play();
 
@@ -197,7 +197,7 @@ var Splash = function () {};
     sonido_patada = game.add.audio('sonido_patada');
 
     fondoSonidoP=[sonido_patada];
-    activateSonido=false;
+    activateSonido=true;
 
 
   },
