@@ -6,7 +6,7 @@ socket = io('http://localhost:3000');
 
 }
 var usuario;
-var testLocal=false;
+var testLocal=true;
 console.log("entra client");
 
 if(serverEnabled){
@@ -30,7 +30,7 @@ socket.on("*",function(event,data) {
 
 socket.on('loginConfirmed', function(msg){
   console.log(msg);
-  
+
   //ResponseCallBack(msg);
 });
 
@@ -177,7 +177,7 @@ function buscarPartida(msg){
 	};
 
 	oponente= GetOponente(msg);
-	
+
 	partida["oponente"]=oponente;
 
 	partida["tiempomaximo"]= 3;
@@ -206,7 +206,7 @@ function buscarPartida(msg){
 	console.log("Iniciar Partida");
 
 	},100);
-	
+
 }
 
 function enviarJugada(msg){
@@ -223,7 +223,7 @@ function enviarJugada(msg){
 
 			counterVisitante++;
 		}else{
-			//entra con jugador en modo pateador	
+			//entra con jugador en modo pateador
 			console.log("jugador es pateador");
 			ubicacion = CalculateAtaje(msg);
 
@@ -271,7 +271,7 @@ function enviarJugada(msg){
 								InicioTurno();
 								console.log("Iniciar Turno");
 							}else{
-								
+
 								console.log("TERMINA JUEGO EN EMPATE"); GetResultado();
 							}
 						};
@@ -291,7 +291,7 @@ function enviarJugada(msg){
 }
 
 function InicioTurno(){
-	
+
 	var turnoArray={};
 	turnoArray["localGol"]=golesUser;
 	turnoArray["visitanteGol"]=golesComputer;
@@ -304,7 +304,7 @@ function InicioTurno(){
 function GetResultado(){
 	console.log("entra resultado");
 	//tendria que emitir el resultado, cliente lo recibe, setea y va a pantalla correspondiente segun comprobación.
-	
+
 	//aca debería de llamar UpdateStats;
 	var toSend={};
 	toSend["gameId"]=-1;
@@ -315,29 +315,29 @@ function GetResultado(){
 	console.log(JSON.stringify(toSend));
 	toSend=JSON.stringify(toSend);
 	//sucribir evento "stats actualizados" a la función del mismo nombre. One shot
-	SuscribeServerEvent("statsActualizados","StatsActualizados",this,true);	
+	SuscribeServerEvent("statsActualizados","StatsActualizados",this,true);
 	if(testLocal){
 	requestSoap("?code=UpdateStats&data="+toSend," ","statsActualizados");
 	}else{
 		requestSoap("/UpdateStats",{json: toSend},"statsActualizados");
 		//requestSoap("/UpdateStats",toSend,"statsActualizados");
 	}
-	
-	
+
+
 }
 
 var resultadoPartida= "";
 
 function StatsActualizados(msg){
 	console.log("entra resultado update");
-	
-	
+
+
 	var auxArray={};
 	auxArray["golesUser"]= golesUser;
 	auxArray["golesComputer"]= golesComputer;
 	resultadoPartida=msg["user1"];
-	
-	
+
+
 	CheckEvent('resultadoPartida', JSON.stringify(auxArray));
 	SendStats();
 	golesUser=0;
@@ -369,7 +369,7 @@ function calculoChancesAtajar(msg){
 
 function CalculateTiro(){
 	var errar=randomBetween(1,oponente['efectividadP']);
-	
+
 	if(errar==1){
 		return randomBetween(0,-4);
 	}
@@ -427,7 +427,7 @@ function randomBetween(min, max) {
 
 function calculatePuntaje(msg, generator){
 	console.log("entra puntaje");
-	
+
 	if(mod%2 == 0){
 		console.log("jugador es arquero");
 		if(generator>0 && msg!=generator){
@@ -438,7 +438,7 @@ function calculatePuntaje(msg, generator){
 		//entra en jugador modo pateador
 		if(msg>0 && msg!=generator){
 			golesUser++;
-		}	
+		}
 	}
 	return;
 }
@@ -462,7 +462,7 @@ function Reset(){
 function GetOponente(idOponente=-1){
 	console.log("entra oponente "+idOponente);
 	var oponente= {};
-	
+
 	oponente["session"]="token";
 	setPerfiles();
 	var auxP;
@@ -471,14 +471,14 @@ function GetOponente(idOponente=-1){
 	}else{
 		auxP= randomBetween(1,5);
 	}
-	
+
 	auxP= perfiles[auxP-1];
 	/*oponente["nombre"]=auxP["nombre"];
 	oponente["imagen"]=auxP["imagen"];
 	oponente["id"]=auxP["id"];
 	oponente["efectividadA"]=auxP["efectividadA"];
 	oponente["efectividadP"]=auxP["efectividadP"];
-	
+
 
 	oponente["tendencia"]= auxP["tendencia"];*/
 	return auxP;
@@ -494,7 +494,7 @@ function SetEnemy(){
 }
 
 function setPerfiles(){
-	
+
 	perfil1 = {
 	id:1,
 	nombre: "San Mercado",
@@ -555,7 +555,7 @@ pateador: "pateador-visitante",
 				  [0,0,1,1,2,0],
 				  [0,0,1,1,2,0] ]
 	};
-	
+
 	perfil5 = {
 	  id:5,
 	  nombre: "Indesingente",
@@ -583,7 +583,7 @@ function login(msg){
 	}
 }
 
-	
+
 function getStats(msg){
 	if(testLocal){
 		requestSoap("?code=getStats&data="+msg," ","getStats");
@@ -596,7 +596,7 @@ function getStats(msg){
 
 function SendStats(msg){
 	//console.log("terminalogin");
-	
+
 }
 
 function requestSoap(code,params,callback){
