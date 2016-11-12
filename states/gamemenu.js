@@ -52,10 +52,7 @@ GameMenu.prototype = {
       game.state.start("Stadistics");
     }).x=700;
 
-    // this.addMenuOption('INSTRUCCIONES', function () {
-    //   self.notification('INSTRUCCIONES', "asjanskjda aksjdnajksd askdkajsd asdaksjd asdakjsd asdaksjd asdkjajksd asdajksd aksdkajsnkd", [['Boton de Prueba', self.testGlobal],['Boton de Prueba', self.testGlobal],['Boton de Prueba', self.testGlobal]]);
-    //
-    // }).x=600;
+    //  self.generateButtonsInSplash([['Boton de Prueba', self.testGlobal]]);
 
       instrucciones= game.add.text(790, 490, "INSTRUCCIONES", { font: 'bold 18pt RobotoBold', fill: '#ffc400'});
       bottom=self.createLineGlobal(-80,instrucciones.height+10,270, false, 0xffc400);
