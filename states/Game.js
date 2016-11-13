@@ -597,7 +597,7 @@ updateCounter: function () {
 
     desempatar:function(){
       enAlargue=true;
-      desempateText= game.add.text(600, 10, 'Alargue. Desempate', { font: " 20px CondensedRegular", fill: "black", align: "right" });
+      desempateText= game.add.text(600, 15, 'Alargue. Desempate', { font: " 20pt CondensedRegular", fill: "white", align: "center", stroke:'yellow'  });
       points.removeAll(true);
 
       setTimeout(function(){
