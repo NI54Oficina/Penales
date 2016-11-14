@@ -180,7 +180,7 @@ function buscarPartida(msg){
 
 	partida["oponente"]=oponente;
 
-	partida["tiempomaximo"]= 3;
+	partida["tiempomaximo"]= 8;
 
 	if(mod==1){
 		partida["camiseta"]= "local";
