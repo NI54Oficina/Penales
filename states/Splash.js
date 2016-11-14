@@ -69,6 +69,8 @@ var Splash = function () {};
     game.load.image('instrucciones', urlBase+'assets/general/images/instrucciones.png');
     game.load.image('flechas-instrucciones', urlBase+'assets/general/images/flechas-instrucciones.png');
     game.load.image('sombra-instrucciones', urlBase+'assets/general/images/sombra-instrucciones.png');
+    game.load.image('next-instrucciones', urlBase+'assets/general/images/flecha-siguiente.png');
+    game.load.image('prev-instrucciones', urlBase+'assets/general/images/flecha-anterior.png');
 
 
     game.load.image('line', urlBase+'assets/general/images/titulo_linea.png');
