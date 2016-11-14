@@ -178,7 +178,7 @@ var Splash = function () {};
   addGameMusic: function () {
     fondoMusic = game.add.audio('musica');
     fondoMusic.loop = true;
-    fondoMusic.mute=false;
+    fondoMusic.mute=true;
     fondoMusic.volume = 0.80;
     fondoMusic.play();
 
@@ -202,7 +202,7 @@ var Splash = function () {};
     sonido_patada = game.add.audio('sonido_patada');
 
     fondoSonidoP=[sonido_patada];
-    activateSonido=true;
+    activateSonido=false;
 
 
   },
