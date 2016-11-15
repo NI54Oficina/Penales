@@ -240,9 +240,9 @@ function enviarJugada(msg){
 
 
 		CheckEvent('recibeJugada', JSON.stringify(jugadaActual));
-
+	
 		setTimeout(function(){
-
+			
 			if(counterVisitante >= 5 &&  counterLocal >= 5 ){
 
 					if(golesUser == golesComputer && !enAlargue){
@@ -594,6 +594,7 @@ function login(msg){
 
 
 function getStats(msg){
+	//SuscribeServerEvent("getStats","SaveStats",this,true);
 	if(testLocal){
 		requestSoap("?code=getStats&data="+msg," ","getStats");
 	}else{
