@@ -199,8 +199,8 @@ GameOver.prototype = {
        case "string":
        if(data.length!=0){
          console.log("es string");
-         this.game.add.sprite(x+10, y, 'estrella').scale.setTo(0.5,.5);
-         game.add.text(x+30, y+2, data, { font: " 15px CondensedLight", fill: "#fff03a", align: "center" })
+         this.game.add.sprite(x+15, y, 'estrella').scale.setTo(0.5,.5);
+         game.add.text(x+35, y+2, data, { font: " 15px CondensedLight", fill: "#fff03a", align: "center" })
        }
 
        break;
