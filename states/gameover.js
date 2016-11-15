@@ -199,21 +199,23 @@ GameOver.prototype = {
        case "string":
        if(data.length!=0){
          console.log("es string");
-         this.game.add.sprite(x, y, 'estrella').scale.setTo(0.5,.5);
-         game.add.text(x+20, y+2, data, { font: " 15px CondensedLight", fill: "#fff03a", align: "center" })
+         this.game.add.sprite(x+10, y, 'estrella').scale.setTo(0.5,.5);
+         game.add.text(x+30, y+2, data, { font: " 15px CondensedLight", fill: "#fff03a", align: "center" })
        }
 
        break;
        case "array":
-         console.log("es array");
+         console.log(data);
 
          for(var i=0; i<data.length;i++){
-           if(data[i]==1){
-             this.game.add.sprite(x, y, 'assert').scale.setTo(.9,.9);
+           if(data[i]=="0"){
+             this.game.add.sprite(x, y, 'noassert').scale.setTo(.9,.9);
+
             }else{
-              this.game.add.sprite(x, y, 'noassert').scale.setTo(.9,.9);
+              this.game.add.sprite(x, y, 'assert').scale.setTo(.9,.9);
+
             }
-           x=+10;
+              x+=20;
          }
 
        break;
