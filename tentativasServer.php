@@ -210,7 +210,8 @@ function UpdateUser($idUser,$pateador,$arquero,$modo){
 		}
 		$index++;
 	}
-	$puntosDiscriminados["Goles Convertidos"]=$puntosPateador;
+	//cambio
+	$puntosDiscriminados["Goles Convertidos"]=[$pateador,$puntosPateador];
 	$puntos+=$puntosPateador;
 	$auxP=0;
 	$auxArquero=0;
@@ -239,22 +240,25 @@ function UpdateUser($idUser,$pateador,$arquero,$modo){
 		}
 		$index++;
 	}
-	
-	$puntosDiscriminados["Tiros atajados "]=$puntosArquero ;
+	//cambio
+	$puntosDiscriminados["Tiros atajados"]=[$arquero,$puntosArquero] ;
 	$puntos+=$puntosArquero;
 	$auxP=0;
 	
 	if($puntosPateador==5){
 		$puntos+=5;
-		$puntosDiscriminados["Delantera Letal"]=5;
+		//cambio
+		$puntosDiscriminados["Delantera Letal"]=["Bonus",5];
 	}
 	if($puntosArquero==5){
 		$puntos+=20;
-		$puntosDiscriminados["Valla invicta"]=20;
+		//cambio
+		$puntosDiscriminados["Valla invicta"]=["Bonus",20];
 	}
 	
 	if($auxPateador>(count($arquero)-$auxArquero)){
-		$puntosDiscriminados["Victoria"]=10;
+		//cambio
+		$puntosDiscriminados["Victoria"]=["",10];
 		$puntos+=10;
 		$stats['ganados']++;
 		$stats['rachaGanados']++;
