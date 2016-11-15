@@ -310,8 +310,10 @@ function GetResultado(){
 	toSend["gameId"]=-1;
 	toSend["localId"]= 1;
 	toSend["visitanteId"]= -1;
-	toSend["jugadasLocal"]= jugadasVisitante;
+	//toSend["jugadasLocal"]= jugadasVisitante;
+	toSend["jugadasLocal"]= [1,1,1,1,1,1,1,1,1,1];
 	toSend["jugadasVisitante"]= jugadasLocal;
+	toSend["jugadasVisitante"]= [2,1,2,1,2,1,2,1,2,1];
 	console.log(JSON.stringify(toSend));
 	toSend=JSON.stringify(toSend);
 	//sucribir evento "stats actualizados" a la función del mismo nombre. One shot
@@ -481,6 +483,33 @@ function GetOponente(idOponente=-1){
 
 
 	oponente["tendencia"]= auxP["tendencia"];*/
+	
+	var auxTendencia= new Array();
+	console.log("lega");
+	console.log(auxP);
+	var secuencia= new Array();
+	$.each(auxP["tendencia"],function(index,value){
+		console.log("valor "+value);
+		
+		for(var a=0;a<value;a++){
+			secuencia.push(index);
+		}
+		
+	});
+	for(var a=0;a<6;a++){
+		var auxTurno= secuencia.slice();
+		for(var b=0;b<20;b++){
+			var i1= randomBetween(0,5);
+			var i2= randomBetween(0,5);
+			var auxContainer= auxTurno[i1];
+			auxTurno[i1]=auxTurno[i2];
+			auxTurno[i2]= auxContainer;
+		}
+		auxTendencia.push(auxTurno);
+	}
+	
+	auxP["tendencia"]= auxTendencia;
+	
 	return auxP;
 }
 
@@ -503,11 +532,7 @@ function setPerfiles(){
 	pateador: "pateador-mercado",
 	efectividadA:2,
 	efectividadP:2,
-	tendencia:[ [0,0,1,2,2,0],
-				[0,2,1,1,2,0],
-				[0,2,1,1,2,0],
-				[0,2,1,1,2,0],
-				[0,1,1,1,2,2] ]
+	tendencia:[2,2,2]
 	};
 
 	perfil2 = {
@@ -518,11 +543,7 @@ function setPerfiles(){
 		pateador: "pateador-svisitante",
 		efectividadA:5,
 		efectividadP:5,
-		tendencia:[ [0,1,1,1,2,0],
-					[0,1,1,1,2,0],
-					[2,1,1,1,2,0],
-					[0,0,1,1,2,0],
-					[0,2,1,1,2,0] ]
+		tendencia:[2,2,2]
 	};
 
 
@@ -534,11 +555,7 @@ arquero: "arquero-riber",
 pateador: "pateador-riber",
   efectividadA:10,
   efectividadP:10,
-  tendencia:[ [0,0,1,2,2,0],
-			  [0,2,1,1,2,0],
-			  [0,0,1,1,2,0],
-			  [0,2,1,1,2,0],
-			  [0,0,1,1,2,2] ]
+  tendencia:[2,2,2]
   };
 
   perfil4 = {
@@ -549,11 +566,7 @@ pateador: "pateador-riber",
 		pateador: "pateador-mufa",
 	  efectividadA:20,
 	  efectividadP:20,
-	  tendencia:[ [0,1,1,1,2,0],
-				  [0,1,1,1,2,0],
-				  [0,1,1,1,2,0],
-				  [0,0,1,1,2,0],
-				  [0,0,1,1,2,0] ]
+	  tendencia:[2,2,2]
 	};
 
 	perfil5 = {
@@ -564,11 +577,7 @@ pateador: "pateador-riber",
 		pateador: "pateador-ind",
 	  efectividadA:20,
 	  efectividadP:20,
-	  tendencia:[ [0,1,1,1,2,0],
-				  [0,1,1,1,2,0],
-				  [0,1,1,1,2,0],
-				  [0,0,1,1,2,0],
-				  [0,0,1,1,2,0] ]
+	  tendencia:[2,2,2]
 	};
 
 
