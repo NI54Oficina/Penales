@@ -153,7 +153,7 @@ drawBackground: function(){
   aliasUser= game.add.text(0, this.game.height-35, 'BOCA', { font: " 20px CondensedBold", fill: "white"});
   aliasUser.x=385-aliasUser.width;
   aliasUser.setShadow(0,3, 'rgba(0,0,0,0.5)', 0);
-  aliasComputer =game.add.text(741,this.game.height-35, perfilElegido.nombre, { font: " 20px CondensedBold", fill: "white"});
+  aliasComputer =game.add.text(745,this.game.height-35, perfilElegido.nombre, { font: " 20px CondensedBold", fill: "white"});
   aliasComputer.setShadow(0,3, 'rgba(0,0,0,0.5)', 0);
 
 },
@@ -598,8 +598,12 @@ updateCounter: function () {
 
     desempatar:function(){
       enAlargue=true;
-      desempateText= game.add.text(600, 15, 'Alargue. Desempate', { font: " 20pt CondensedRegular", fill: "white", align: "center", stroke:'yellow'  });
+      desempateText= game.add.text(50, 15, 'Alargue. Desempate', { font: " 20pt CondensedRegular", fill: "white", align: "center", stroke:'yellow'  });
+      desempateText.setShadow(0,0, 'rgba(0,0,0,1)', 20);
+      desempateText.stroke='#ffc400';
+      desempateText.strokeThickness = 3;
       points.removeAll(true);
+
 
       setTimeout(function(){
          self.restart(self);
