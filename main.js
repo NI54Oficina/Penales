@@ -2,7 +2,7 @@
 
  var urlBase="";
  var urlConnect="tentativasServer.php";
- var urlExit ="https://www.bocafan.net/home"
+ var urlExit ="http://dev.betest.com.ar/newgames/"
  if(!testLocal){
 	 urlBase="http://dev.betest.com.ar/newgames/12pasos/";
 	urlConnect="http://dev.betest.com.ar/server";
@@ -23,7 +23,7 @@ Main.prototype = {
 
 	init: function () {
 		this.input.maxPointers = 1;
-		this.stage.disableVisibilityChange = true;
+		this.stage.disableVisibilityChange = false;
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     },
 

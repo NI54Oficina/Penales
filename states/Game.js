@@ -244,15 +244,6 @@ createBarra: function(){
 					];
 
 	barra = this.game.add.sprite(630,435, myBitmap);
-  // top=self.createLineGlobal(0,0, barra.width, false, 0xcccccc);
-  // left=self.createLineGlobal(0,0, 0, false, 0xcccccc,barra.width);
-  // bottom=self.createLineGlobal(0,barra.height, barra.width, false, 0xcccccc);
-  // right=self.createLineGlobal(barra.width,0, barra.width, false, 0xcccccc, barra.height);
-  // 	barra.addChild(top);
-  //   barra.addChild(right);
-  //   barra.addChild(left);
-  //   barra.addChild(bottom);
-
 
 	focus = game.add.sprite(barra.position.x-100,400, 'triangle');
 	focus.scale.setTo(0.4,0.4);
