@@ -69,15 +69,6 @@ GameOver.prototype = {
     search.visible=false;
 
 
-    // this.addMenuOptionInner('Play Again', function (e) {
-    //   search.visible=true;
-    //   Emit("buscarPartida"," ","partidaEncontrada","listenerSearch",self);
-    // });
-
-    // this.addMenuOptionInner('Main Menu', function (e) {
-    //   this.game.state.start("GameMenu");
-    // })
-
     var botones=self.generateButtonsInSplash([ ['VOLVER A JUGAR', self.Restart],['MENU', self.MainMenu]]);
 
     botones.position= {x:this.game.width/2 - botones.width/2-20, y:this.game.height-botones.height*2}
@@ -133,46 +124,28 @@ GameOver.prototype = {
 
     // var word=game.add.text(x, y, stats[n].title, puntajeStyle2);
     // var number=game.add.text(group.width-70,y,localStorage[stats[n].key], puntajeStyle2);
-    mm=240;
-      xx=220;
-    /*for(var n=0; n< stats.length; n++){
+    mm=220;
+      xx=200;
 
-      if(n==0){
-        game.add.text(250, mm, stats[n].title, { font: 'bold 15pt CondensedLight', fill: 'white'});
-        game.add.text(850, mm,stats[n].point, { font: 'bold 15pt CondensedLight', fill: 'white'});
-        game.add.text(550, mm,localStorage[stats[n].key]+' pts.', { font: 'bold 15pt CondensedLight', fill: 'white'});
-
-
-      }else{
-        game.add.text(250, mm, stats[n].title, puntajeStyle);
-        game.add.text(550, mm,stats[n].point, puntajeStyle);
-        game.add.text(850, mm,localStorage[stats[n].key]+' pts.', puntajeStyle);
-        self.createLineGlobal(150,xx,950, false, 0x797979);
-
-      }
-
-      mm+=60;
-      xx+=60;
-
-    }*/
 	var n=1;
 	game.add.text(250, mm, "Total", { font: 'bold 15pt CondensedLight', fill: 'white'});
 	//game.add.text(850, mm,stats[n].point, { font: 'bold 15pt CondensedLight', fill: 'white'});
 	game.add.text(550, mm,resultadoPartida.puntosNuevos+' pts.', { font: 'bold 15pt CondensedLight', fill: 'white'});
-	mm+=60;
-      xx+=60;
+	mm+=40;
+      xx+=40;
 	$.each(resultadoPartida.detalle,function(index,value){
 		if(n==0){
         game.add.text(250, mm, index, { font: 'bold 15pt CondensedLight', fill: 'white'});
         //game.add.text(850, mm,stats[n].point, { font: 'bold 15pt CondensedLight', fill: 'white'});
         game.add.text(550, mm,value[1]+' pts.', { font: 'bold 15pt CondensedLight', fill: 'white'});
-
+         self.checkValue(value[0], 350, mm);
 
       }else{
         game.add.text(250, mm, index, puntajeStyle);
         //game.add.text(550, mm,stats[n].point, puntajeStyle);
         game.add.text(850, mm,value[1]+' pts.', puntajeStyle);
         self.createLineGlobal(150,xx,950, false, 0x797979);
+        self.checkValue(value[0], 350, mm);
 
       }
 
@@ -181,38 +154,6 @@ GameOver.prototype = {
       xx+=60;
 	});
 
-    //   game.add.text(300, 250, "PUNTOS BOCAFAN: 0 ", { font: 'bold 15pt CondensedLight', fill: 'white'});
-    //       game.add.text(300, 250,localStorage[stats[n].key], puntajeStyle);
-    //       self.createLineGlobal(200,280,900, false, 0x797979);
-    //  game.add.text(300, 310, "PENALES ATAJADOS: "+ localStorage["TotalAtajados"], puntajeStyle);
-    //       self.createLineGlobal(200,340,900, false, 0x797979);
-    //  game.add.text(300, 370, "PENALES CONVERTIDOS: "+ localStorage["TotalConvertidos"], puntajeStyle);
-    //       self.createLineGlobal(200,400,900, false, 0x797979);
-     //
-    //  game.add.text(300, 420, "PREMIOS ", puntajeStyle);
-
-    //  game.add.text(10, 280, "Total Errados: "+localStorage["TotalErrados"], puntajeStyle);
-    //  game.add.text(10, 300, "Total No Atajados: "+localStorage["TotalNoAtajados"], puntajeStyle);
-    //  game.add.text(10, 320, "Racha Ganados: "+localStorage["RachaGanados"], puntajeStyle);
-    //  game.add.text(10, 340, "Racha Perdidos: "+ localStorage["RachaPerdidos"], puntajeStyle);
-    //  game.add.text(10, 360, "Racha Atajados: "+localStorage["RachaAtajados"], puntajeStyle);
-    //  game.add.text(10, 380, "Racha Convertidos: "+localStorage["RachaConvertidos"], puntajeStyle);
-    //  game.add.text(10, 400, "Racha Errados: "+localStorage["RachaErrados"], puntajeStyle);
-    //  game.add.text(10, 420, "Racha No Atajados: "+localStorage["RachaNoAtajados"] , puntajeStyle);
-    //  game.add.text(10, 440, "Mejor Racha Atajados: "+localStorage["MejorRachaAtajados"], puntajeStyle);
-    //   game.add.text(10, 460, "Mejor Racha Convertida: "+localStorage["MejorRachaConvertida"], puntajeStyle);
-    //   game.add.text(700, 200, "Peor Racha Errados: "+localStorage["PeorRachaErrados"], puntajeStyle);
-    //   game.add.text(700, 220, "Peor Racha No Atajados: "+localStorage["PeorRachaNoAtajados"], puntajeStyle);
-    //   game.add.text(700, 240, "Efectividad: "+ efectividad , puntajeStyle);
-    //   game.add.text(700, 260, "Eficiencia como arquero: "+ efiArq +"%" , puntajeStyle);
-    //   game.add.text(700, 280, "Eficiencia como pateador: "+ efiPat +"%" , puntajeStyle);
-    //
-    // game.add.text(10, 480, "Total en partida no atajados: "+ localStorage["TotalPartidaNoAtajados"] , partidaStyle);
-    // game.add.text(10, 500, "Total en partida Errados: "+ localStorage["TotalPartidaErrados"] , partidaStyle);
-    // game.add.text(10, 520, "Total en partida convertidos "+localStorage["TotalPartidaConvertidos"], partidaStyle);
-    // game.add.text(10, 540, "Total en partida atajados: "+localStorage["TotalPartidaAtajados"] , partidaStyle);
-    // game.add.text(10, 560, "Eficiencia como arquero en partida: "+ efiParArq +"%" , partidaStyle);
-    // game.add.text(10, 580, "Eficiencia como pateador en partida: "+ efiParPat +"%" , partidaStyle);
 
     search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px CondensedLight", fill: "red", align: "center" });
     search.visible=false;
@@ -249,6 +190,19 @@ GameOver.prototype = {
 
   MainMenu: function(){
     this.game.state.start("GameMenu");
+  },
+
+  checkValue: function(data, x, y){
+     switch(data){
+       case $.type(data) === "string":
+       game.add.text(x, y, data, { font: " 15px CondensedLight", fill: "red", align: "center" })
+       break;
+       case $.type(data) ==="[object Array]":
+       game.add.text(x, y, 'array', { font: " 15px CondensedLight", fill: "red", align: "center" })
+       break;
+     }
+
+     return;
   },
 
 

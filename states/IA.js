@@ -483,18 +483,18 @@ function GetOponente(idOponente=-1){
 
 
 	oponente["tendencia"]= auxP["tendencia"];*/
-	
+
 	var auxTendencia= new Array();
 	console.log("lega");
 	console.log(auxP);
 	var secuencia= new Array();
 	$.each(auxP["tendencia"],function(index,value){
 		console.log("valor "+value);
-		
+
 		for(var a=0;a<value;a++){
 			secuencia.push(index);
 		}
-		
+
 	});
 	for(var a=0;a<6;a++){
 		var auxTurno= secuencia.slice();
@@ -507,9 +507,9 @@ function GetOponente(idOponente=-1){
 		}
 		auxTendencia.push(auxTurno);
 	}
-	
+
 	auxP["tendencia"]= auxTendencia;
-	
+
 	return auxP;
 }
 

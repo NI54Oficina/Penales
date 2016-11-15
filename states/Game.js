@@ -303,11 +303,11 @@ setClickArea:function(){
 drawGui:function(){
 	var display1="PERDISTE!";
   var display2="GANASTE!";
-	looser = game.add.text(0, 200, display1, { font: '40pt BitterBold',fill: '#fff03a' });
+	looser = game.add.text(0, 240, display1, { font: '30pt BitterBold',fill: '#fff03a' });
   looser.setShadow(0,3, 'rgba(0,0,0,0.5)', 5);
 	looser.visible=false;
   looser.position.x=game.world.width/2- looser.width/2;
-	winner = game.add.text(0, 200, display2, {  font: ' 40pt BitterBold',fill: '#fff03a' });
+	winner = game.add.text(0, 240, display2, {  font: ' 30pt BitterBold',fill: '#fff03a' });
   winner.setShadow(0,3, 'rgba(0,0,0,0.5)', 5)
   winner.visible=false;
   winner.position.x=game.world.width/2- winner.width/2;

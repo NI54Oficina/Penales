@@ -22,8 +22,8 @@ GameMenu.prototype = {
   },
 
   create: function () {
-	  
-	
+
+
 
     self=this;
 
@@ -54,7 +54,7 @@ GameMenu.prototype = {
       game.state.start("Stadistics");
     }).x=700;
 
-    //  self.generateButtonsInSplash([['Boton de Prueba', self.testGlobal]]);
+    // self.generateButtonsInSplash([['Boton de Prueba', function(){game.state.start("GameOver");}]]);
 
       instrucciones= game.add.text(790, 490, "INSTRUCCIONES", { font: 'bold 18pt RobotoBold', fill: '#ffc400'});
       bottom=self.createLineGlobal(-80,instrucciones.height+10,270, false, 0xffc400);
@@ -132,9 +132,9 @@ GameMenu.prototype = {
 	//game.world.setBounds(0, 0, 10000, 10000);
 	//this.game.camera.x=0;
 	//this.game.camera.y=0;
-	
+
 	/*$('<img src="'+ "http://i.imgur.com/e0g7nL6.png" +'">').load(function() {
-	
+
 		//game.load.image('test', 'http://i.imgur.com/e0g7nL6.png').onFileComplete(function(){console.log("carga imagen2")});
 		game.load.image('test', 'http://www.biogenesisbago.com/ar/site/thumbs?url=vademecums/632.png&height=272');
 		 game.load.onLoadComplete.add(function(){console.log("imagen cargada al completo");
