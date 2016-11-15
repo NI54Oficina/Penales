@@ -124,8 +124,8 @@ GameOver.prototype = {
 
     // var word=game.add.text(x, y, stats[n].title, puntajeStyle2);
     // var number=game.add.text(group.width-70,y,localStorage[stats[n].key], puntajeStyle2);
-    mm=220;
-      xx=200;
+    mm=240;
+      xx=230;
 
 	var n=1;
 	game.add.text(250, mm, "Total", { font: 'bold 15pt CondensedLight', fill: 'white'});
@@ -138,20 +138,20 @@ GameOver.prototype = {
         game.add.text(250, mm, index, { font: 'bold 15pt CondensedLight', fill: 'white'});
         //game.add.text(850, mm,stats[n].point, { font: 'bold 15pt CondensedLight', fill: 'white'});
         game.add.text(550, mm,value[1]+' pts.', { font: 'bold 15pt CondensedLight', fill: 'white'});
-         self.checkValue(value[0], 350, mm);
+         self.checkValue(value[0], 700, mm);
 
       }else{
         game.add.text(250, mm, index, puntajeStyle);
         //game.add.text(550, mm,stats[n].point, puntajeStyle);
         game.add.text(850, mm,value[1]+' pts.', puntajeStyle);
         self.createLineGlobal(150,xx,950, false, 0x797979);
-        self.checkValue(value[0], 350, mm);
+        self.checkValue(value[0], 700, mm);
 
       }
 
 	  n++;
-	   mm+=60;
-      xx+=60;
+	   mm+=40;
+      xx+=40;
 	});
 
 
@@ -193,12 +193,29 @@ GameOver.prototype = {
   },
 
   checkValue: function(data, x, y){
-     switch(data){
-       case $.type(data) === "string":
-       game.add.text(x, y, data, { font: " 15px CondensedLight", fill: "red", align: "center" })
+
+
+     switch($.type(data)){
+       case "string":
+       if(data.length!=0){
+         console.log("es string");
+         this.game.add.sprite(x, y, 'estrella').scale.setTo(0.5,.5);
+         game.add.text(x+20, y+2, data, { font: " 15px CondensedLight", fill: "#fff03a", align: "center" })
+       }
+
        break;
-       case $.type(data) ==="[object Array]":
-       game.add.text(x, y, 'array', { font: " 15px CondensedLight", fill: "red", align: "center" })
+       case "array":
+         console.log("es array");
+
+         for(var i=0; i<data.length;i++){
+           if(data[i]==1){
+             this.game.add.sprite(x, y, 'assert').scale.setTo(.9,.9);
+            }else{
+              this.game.add.sprite(x, y, 'noassert').scale.setTo(.9,.9);
+            }
+           x=+10;
+         }
+
        break;
      }
 

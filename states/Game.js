@@ -294,12 +294,16 @@ setClickArea:function(){
 drawGui:function(){
 	var display1="PERDISTE!";
   var display2="GANASTE!";
-	looser = game.add.text(0, 240, display1, { font: '30pt BitterBold',fill: '#fff03a' });
-  looser.setShadow(0,3, 'rgba(0,0,0,0.5)', 5);
+	looser = game.add.text(0, 240, display1, {  font: " 35pt BitterBold", fill: "white", align: "center", stroke:'yellow' });
+  looser.setShadow(0,0, 'rgba(0,0,0,1)', 20);
+  looser.stroke='#ffc400';
+  looser.strokeThickness = 5;
 	looser.visible=false;
   looser.position.x=game.world.width/2- looser.width/2;
-	winner = game.add.text(0, 240, display2, {  font: ' 30pt BitterBold',fill: '#fff03a' });
-  winner.setShadow(0,3, 'rgba(0,0,0,0.5)', 5)
+	winner = game.add.text(0, 240, display2, {   font: " 35pt BitterBold", fill: "white", align: "center", stroke:'yellow' });
+  winner.setShadow(0,0, 'rgba(0,0,0,1)', 20);
+  winner.stroke='#ffc400';
+  winner.strokeThickness = 5;
   winner.visible=false;
   winner.position.x=game.world.width/2- winner.width/2;
 	points= game.add.group();

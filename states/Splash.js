@@ -65,6 +65,7 @@ var Splash = function () {};
     game.load.image('brilloup', urlBase+'assets/general/images/brilloup.png');
     game.load.image('two', urlBase+'assets/general/images/dos-jugadores.png');
     game.load.image('one', urlBase+'assets/general/images/un-jugador.png');
+    game.load.image('estrella', urlBase+'assets/general/images/estrella.png');
 
     game.load.image('instrucciones', urlBase+'assets/general/images/instrucciones.png');
     game.load.image('flechas-instrucciones', urlBase+'assets/general/images/flechas-instrucciones.png');
@@ -298,7 +299,7 @@ var Splash = function () {};
 			  Emit("getStats",usuario["id"],"getStats","logueado",this);
 		 }, this);
 	game.load.start();
-	 
+
   },
 
   logueado: function(msg){
