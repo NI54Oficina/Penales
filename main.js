@@ -2,6 +2,7 @@
 
  var urlBase="";
  var urlConnect="tentativasServer.php";
+ var urlExit ="https://www.bocafan.net/home"
  if(!testLocal){
 	 urlBase="http://dev.betest.com.ar/newgames/12pasos/";
 	urlConnect="http://dev.betest.com.ar/server";

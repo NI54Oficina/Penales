@@ -81,6 +81,9 @@ var Splash = function () {};
     game.load.image('musica-on-over', urlBase+'assets/general/images/musica-on-mousehover.png');
     game.load.image('musica-off-over', urlBase+'assets/general/images/musica-off-mousehover.png');
 
+    game.load.image('exit', urlBase+'assets/general/images/boton-salir.png');
+    game.load.image('exit-hover', urlBase+'assets/general/images/boton-salir-mousehover.png');
+
 
 
 
