@@ -530,8 +530,8 @@ function setPerfiles(){
 	imagen: "img-1",
 	arquero: "arquero-mercado",
 	pateador: "pateador-mercado",
-	efectividadA:2,
-	efectividadP:2,
+	efectividadA:7,
+	efectividadP:3,
 	tendencia:[2,2,2]
 	};
 
@@ -541,9 +541,9 @@ function setPerfiles(){
 		imagen: "img-2",
 		arquero: "arquero-svisitante",
 		pateador: "pateador-svisitante",
-		efectividadA:5,
-		efectividadP:5,
-		tendencia:[2,2,2]
+		efectividadA:7,
+		efectividadP:3,
+		tendencia:[1,3,2]
 	};
 
 
@@ -553,9 +553,9 @@ function setPerfiles(){
   imagen: "img-3",
 arquero: "arquero-riber",
 pateador: "pateador-riber",
-  efectividadA:10,
+  efectividadA:5,
   efectividadP:10,
-  tendencia:[2,2,2]
+  tendencia:[1,2,3]
   };
 
   perfil4 = {
@@ -564,9 +564,9 @@ pateador: "pateador-riber",
 	  imagen: "img-4",
 		arquero: "arquero-mufa",
 		pateador: "pateador-mufa",
-	  efectividadA:20,
-	  efectividadP:20,
-	  tendencia:[2,2,2]
+	  efectividadA:8,
+	  efectividadP:4,
+	  tendencia:[2,1,3]
 	};
 
 	perfil5 = {
@@ -575,8 +575,8 @@ pateador: "pateador-riber",
 	  imagen: "img-5",
 	  		arquero: "arquero-ind",
 		pateador: "pateador-ind",
-	  efectividadA:20,
-	  efectividadP:20,
+	  efectividadA:7,
+	  efectividadP:6,
 	  tendencia:[2,2,2]
 	};
 
