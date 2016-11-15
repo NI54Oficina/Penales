@@ -165,13 +165,13 @@ GameOver.prototype = {
 		if(n==0){
         game.add.text(250, mm, index, { font: 'bold 15pt CondensedLight', fill: 'white'});
         //game.add.text(850, mm,stats[n].point, { font: 'bold 15pt CondensedLight', fill: 'white'});
-        game.add.text(550, mm,value+' pts.', { font: 'bold 15pt CondensedLight', fill: 'white'});
+        game.add.text(550, mm,value[1]+' pts.', { font: 'bold 15pt CondensedLight', fill: 'white'});
 
 
       }else{
         game.add.text(250, mm, index, puntajeStyle);
         //game.add.text(550, mm,stats[n].point, puntajeStyle);
-        game.add.text(850, mm,value+' pts.', puntajeStyle);
+        game.add.text(850, mm,value[1]+' pts.', puntajeStyle);
         self.createLineGlobal(150,xx,950, false, 0x797979);
 
       }
