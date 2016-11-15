@@ -290,7 +290,15 @@ var Splash = function () {};
   getStats:function(msg){
 	  usuario=msg;
 	  console.log(msg);
-	   Emit("getStats",usuario["id"],"getStats","logueado",this);
+	game.load.image('avatarUser', usuario["avatar"]);
+		 game.load.onLoadComplete.add(function(){
+			 console.log("imagen cargada al completo");
+			//game.add.sprite(0, 0, 'avatarUser').scale.setTo(.80,.80);
+			usuario["avatar"]="avatarUser";
+			  Emit("getStats",usuario["id"],"getStats","logueado",this);
+		 }, this);
+	game.load.start();
+	 
   },
 
   logueado: function(msg){
