@@ -87,35 +87,43 @@ Stadistics.prototype = {
   	stats=[
     {key:"ganados",title:"PARTIDOS GANADOS"},
     {key:"perdidos",title:"PARTIDOS PERDIDOS"},
-    {key:"atajados",title:"PENALES ATAJADOS"},
+	{key:"rachaGanados",title:"RACHA GANADOS"},
+    {key:"rachaPerdidos",title:"RACHA PERDIDOS"},
+	{key:"rachaGanadosHistorica",title:"MEJOR RACHA GANADOS"},
+    {key:"rachaPerdidosHistorica",title:"MEJOR RACHA PERDIDOS"},
+	
     {key:"convertidos",title:"PENALES CONVERTIDOS"},
     {key:"errados",title:"PENALES ERRADOS"},
-  	{key:"noAtajados",title:"PENALES NO ATAJADOS"},
+	{key:"rachaConvertidos",title:"RACHA ACTUAL DE PENALES CONVERTIDOS"},
+	{key:"rachaErrados",title:"RACHA ACTUAL DE PENALES ERRADOS"},
+	{key:"rachaConvertidosHistorica",title:"MEJOR RACHA DE PENALES PATEADOS"},
+    {key:"rachaErradosHistorica",title:"PEOR RACHA DE PENALES PATEADOS"},
+	
+	{key:"atajados",title:"PENALES ATAJADOS"},
+  	{key:"noAtajados",title:"PENALES ENCAJADOS"},
 
-    {key:"rachaConvertidos",title:"RACHA ACTUAL DE PENALES PATEADOS"},
-    {key:"rachaErrados",title:"RACHA ACTUAL DE PENALES ERRADOS"},
-    {key:"rachaConvertidosHistorica",title:"MEJOR RACHA HISTÓRICA DE PENALES PATEADOS"},
-    {key:"rachaErradosHistorica",title:"PEOR RACHA HISTÓRICA DE PENALES PATEADOS"},
+    
+    
+    
 
 
     {key:"rachaAtajados",title:"RACHA ACTUAL DE PENALES ATAJADOS"},
-    {key:"rachaNoAtajados",title:"RACHA ACTUAL DE PENALES NO ATAJADOS"},
-    {key:"rachaAtajadosHistorica",title:"MEJOR RACHA HISTÓRICA DE PENALES ATAJADOS"},
-    {key:"rachaNoAtajadosHistorica",title:"PEOR RACHA HISTÓRICA DE PENALES NO ATAJADOS"},
+    {key:"rachaNoAtajados",title:"RACHA ACTUAL DE PENALES ENCAJADOS"},
+    {key:"rachaAtajadosHistorica",title:"MEJOR RACHA DE PENALES ATAJADOS"},
+    {key:"rachaNoAtajadosHistorica",title:"PEOR RACHA DE PENALES ENCAJADOS"}
 
 
 
-    {key:"rachaGanados",title:"RACHA GANADOS"},
-    {key:"rachaPerdidos",title:"RACHA PERDIDOS"}
+    
     //{key:"Efectividad",title:"EFECTIVIDAD"},
     //{key: efiArq +"%" ,title:"EFICIENCIA COMO ARQUERO"},
     //{key: efiPat +"%" ,title:"EFICIENCIA COMO PATEADOR"}
 
   	];
-    self.createLayoutStats(self);
+    self.createLayoutStats(self,6);
     self.createLayoutStatsVariable('PENALES PATEADOS');
     self.createLayoutStatsVariable('PENALES ATAJADOS');
-    self.createLayoutStatsVariable('PARTIDOS');
+    //self.createLayoutStatsVariable('PARTIDOS');
 
 
      self.createHeader(this.GoBack,true);
@@ -137,7 +145,7 @@ Stadistics.prototype = {
     game.state.start("GameMenu");
   },
 
-  createLayoutStats: function(target){
+  createLayoutStats: function(target,cuantity){
 
     statsBack= this.game.add.bitmapData(700,320);
 
@@ -152,7 +160,7 @@ Stadistics.prototype = {
     group.add(statsBackground);
 
 
-    for(var a=0;a<6;a++){
+    for(var a=0;a<cuantity;a++){
 
         try{
             var word=game.add.text(x, y+20, stats[n].title, puntajeStyle);
@@ -176,7 +184,7 @@ Stadistics.prototype = {
 
 createLayoutStatsVariable: function(text){
 
-  statsBack= this.game.add.bitmapData(700,250);
+  statsBack= this.game.add.bitmapData(700,340);
 
   grd=statsBack.context.createLinearGradient(0,0,0,this.game.height);
   grd.addColorStop(0,"black");
@@ -205,12 +213,15 @@ createLayoutStatsVariable: function(text){
 
   difBackground=this.game.add.sprite(10,y+35 ,difBack);
   difBackground2=this.game.add.sprite(10,y+115 ,difBack);
+  difBackground3=this.game.add.sprite(10,y+195 ,difBack);
   difBackground.alpha=.5;
   difBackground2.alpha=.5;
+  difBackground3.alpha=.5;
   group.add(difBackground);
   group.add(difBackground2);
+  group.add(difBackground3);
 
-  for(var a=0;a<4;a++){
+  for(var a=0;a<6;a++){
 
       try{
 
@@ -231,7 +242,7 @@ createLayoutStatsVariable: function(text){
 
        }
   };
-y+=15;
+y+=25;
 
 },
 
