@@ -20,10 +20,24 @@ GameOver.prototype = {
     background.add(curva);
 
 	//reemplazar por imagen de boca
-    playerOne = curva=game.add.sprite(350,70, usuario["avatar"]);
-    playerOne.scale.setTo(.3, .3);
+    playerOne =game.add.sprite(350,70, usuario["avatar"]);
+    playerOne.scale.setTo(.4, .4);
+    console.log(playerOne.height+'  '+playerOne.width);
+
+
     playerTwo = curva=game.add.sprite(650,70, this.oponente.imagen);
     playerTwo.scale.setTo(.3, .3);
+    console.log(playerTwo.height +' '+ playerTwo.width);
+
+    // test
+    var testMask=game.add.graphics(0, 0);
+    testMask.beginFill(0x000000, 0.1);
+    testMask.drawRoundedRect(0, 0,playerTwo.width,playerTwo.height,5);
+    testMask.endFill();
+    playerOne.mask=testMask;
+    console.log(testMask);
+    // test
+
    //self.syncVariables();
    self = this;
    console.log(resultadoPartida);
@@ -130,7 +144,7 @@ GameOver.prototype = {
 	var n=1;
 	game.add.text(250, mm, "Total", { font: 'bold 15pt CondensedLight', fill: 'white'});
 	//game.add.text(850, mm,stats[n].point, { font: 'bold 15pt CondensedLight', fill: 'white'});
-	game.add.text(550, mm,resultadoPartida.puntosNuevos+' pts.', { font: 'bold 15pt CondensedLight', fill: 'white'});
+	game.add.text(850, mm,resultadoPartida.puntosNuevos+' pts.', { font: 'bold 15pt CondensedLight', fill: 'white'});
 	mm+=40;
       xx+=40;
 	$.each(resultadoPartida.detalle,function(index,value){
@@ -192,37 +206,6 @@ GameOver.prototype = {
     this.game.state.start("GameMenu");
   },
 
-  checkValue: function(data, x, y){
-
-
-     switch($.type(data)){
-       case "string":
-       if(data.length!=0){
-         console.log("es string");
-         this.game.add.sprite(x+15, y, 'estrella').scale.setTo(0.5,.5);
-         game.add.text(x+35, y+2, data, { font: " 15px CondensedLight", fill: "#fff03a", align: "center" })
-       }
-
-       break;
-       case "array":
-         console.log(data);
-
-         for(var i=0; i<data.length;i++){
-           if(data[i]=="0"){
-             this.game.add.sprite(x, y, 'noassert').scale.setTo(.9,.9);
-
-            }else{
-              this.game.add.sprite(x, y, 'assert').scale.setTo(.9,.9);
-
-            }
-              x+=20;
-         }
-
-       break;
-     }
-
-     return;
-  },
 
 
 };

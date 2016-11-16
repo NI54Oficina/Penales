@@ -148,7 +148,7 @@ drawBackground: function(){
   identificadorDerecho = this.game.add.sprite(930,this.game.height-40, 'ataja');
 
   puntosUserText = game.add.text(this.game.width/2-40, this.game.height-45, puntosUser+' - ', { font: " 40px BitterRegular", fill: "white"});
-  puntosComputerText = game.add.text(this.game.width/2+25, this.game.height-45, puntosComputer, { font: " 40px BitterRegular", fill: "white"});
+  puntosComputerText = game.add.text(this.game.width/2+23, this.game.height-45, puntosComputer, { font: " 40px BitterRegular", fill: "white"});
 
   aliasUser= game.add.text(0, this.game.height-35, 'BOCA', { font: " 20px CondensedBold", fill: "white"});
   aliasUser.x=385-aliasUser.width;
@@ -526,11 +526,11 @@ updateCounter: function () {
 
   NoAssertPoint: function(ubiPuntaje, tries){
     if(ubiPuntaje){
-      var point= game.add.sprite(138.5+tries*(-24),608, 'noassert');
+      var point= game.add.sprite(138.5+tries*(-23.8),610, 'noassert');
       // point.scale.setTo(0.10,0.10);
 
     }else{
-      var point= game.add.sprite(981.5+tries*24,608, 'noassert');
+      var point= game.add.sprite(981.5+tries*23.8,610, 'noassert');
       // point.scale.setTo(0.10,0.10);
 
     }
@@ -543,10 +543,10 @@ updateCounter: function () {
   AssertPoint: function(ubiPuntaje, tries){
 
     if(ubiPuntaje){
-      var point= game.add.sprite(138.5+tries*(-24), 608, 'assert');
+      var point= game.add.sprite(138.5+tries*(-23.8), 610, 'assert');
       // point.scale.setTo(0.10,0.10);
     }else{
-      var point= game.add.sprite(981.5+tries*24, 608, 'assert');
+      var point= game.add.sprite(981.5+tries*23.8, 610, 'assert');
       // point.scale.setTo(0.10,0.10);
     }
 
