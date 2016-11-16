@@ -47,7 +47,7 @@ Game.prototype = {
     enAlargue=false;
 	clicked =1;
 	presicion= 0;
-	velocidad=2000;
+	velocidad=1000;
 
 	console.log(perfilElegido);
 
