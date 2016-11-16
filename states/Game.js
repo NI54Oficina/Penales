@@ -1053,7 +1053,7 @@ acertarTiro: function(self){
           }else{
 
               self.NoAssertPoint(userPointY,triesP);
-              self.Looser(2);
+              self.pateadorID<=0?self.Looser(4):self.Looser(2);
               localStorage["TotalErrados"] = (parseInt(localStorage["TotalErrados"]) || 0) + 1;
               localStorage["TotalPartidaErrados"] = (parseInt(localStorage["TotalPartidaErrados"]) || 0) + 1;
               localStorage["RachaConvertidos"] = 0;
@@ -1072,7 +1072,7 @@ atajar: function(self){
               self.activateSound(sonido_gol_1);
 
               self.NoAssertPoint(enemyPointY,triesA);
-              self.Win(1);
+              self.pateadorID<=0?self.Win(4):self.Win(0);
               localStorage["TotalAtajados"] = (parseInt(localStorage["TotalAtajados"]) || 0) + 1;
               localStorage["RachaAtajados"] = (parseInt(localStorage["RachaAtajados"]) || 0) + 1;
               localStorage["TotalPartidaAtajados"] = (parseInt(localStorage["TotalPartidaAtajados"]) || 0) + 1;
