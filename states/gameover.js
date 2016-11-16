@@ -20,22 +20,41 @@ GameOver.prototype = {
     background.add(curva);
 
 	//reemplazar por imagen de boca
-    playerOne =game.add.sprite(350,70, usuario["avatar"]);
+   /*playerOne =game.add.sprite(350,70, usuario["avatar"]);
     playerOne.scale.setTo(.4, .4);
-    console.log(playerOne.height+'  '+playerOne.width);
+    console.log(playerOne.height+'  '+playerOne.width);*/
 
 
-    playerTwo = curva=game.add.sprite(650,70, this.oponente.imagen);
+    playerTwo = curva=game.add.sprite(650,70, "img-5");
     playerTwo.scale.setTo(.3, .3);
     console.log(playerTwo.height +' '+ playerTwo.width);
 
     // test
+<<<<<<< HEAD
     // var testMask=game.add.graphics(0, 0);
     // testMask.beginFill(0x000000, 0.1);
     // testMask.drawRoundedRect(0, 0,playerTwo.width,playerTwo.height,5);
     // testMask.endFill();
     // playerOne.mask=testMask;
     // console.log(testMask);
+=======
+    /*var testMask=game.add.sprite(350,70, "player");
+    
+	testMask.cacheAsBitmap=true;
+	testMask.dirty=true 
+    playerOne.mask=testMask;
+    console.log(testMask);*/
+	
+	var bmd = game.make.bitmapData(367, 482);
+
+	//	And create an alpha mask image by combining pic and mask from the cache
+	bmd.alphaMask(usuario["avatar"], 'player');
+
+	//	A BitmapData is just a texture. You need to apply it to a sprite or image
+	//	to actually display it:
+	var auxImg= game.add.image(350, 70, bmd);
+	auxImg.scale.setTo(.3,.3);
+>>>>>>> origin/master
     // test
 
    //self.syncVariables();
