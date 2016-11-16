@@ -108,12 +108,12 @@ GameOver.prototype = {
 
        self.Restart();
 
-     },270, 70, 1);
+     },270, 60, 1);
      this.addMenuOptionInnerPrueba('MENU', function () {
 
       self.MainMenu();
 
-    },270, 70, 1);
+    },270, 60, 1);
 
     // botones.position= {x:this.game.width/2 - botones.width/2-20, y:this.game.height-botones.height*2}
 
