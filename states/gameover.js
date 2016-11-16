@@ -30,21 +30,21 @@ GameOver.prototype = {
     console.log(playerTwo.height +' '+ playerTwo.width);
 
     // test
-<<<<<<< HEAD
+
     // var testMask=game.add.graphics(0, 0);
     // testMask.beginFill(0x000000, 0.1);
     // testMask.drawRoundedRect(0, 0,playerTwo.width,playerTwo.height,5);
     // testMask.endFill();
     // playerOne.mask=testMask;
     // console.log(testMask);
-=======
+
     /*var testMask=game.add.sprite(350,70, "player");
-    
+
 	testMask.cacheAsBitmap=true;
-	testMask.dirty=true 
+	testMask.dirty=true
     playerOne.mask=testMask;
     console.log(testMask);*/
-	
+
 	var bmd = game.make.bitmapData(367, 482);
 
 	//	And create an alpha mask image by combining pic and mask from the cache
@@ -54,7 +54,7 @@ GameOver.prototype = {
 	//	to actually display it:
 	var auxImg= game.add.image(350, 70, bmd);
 	auxImg.scale.setTo(.3,.3);
->>>>>>> origin/master
+
     // test
 
    //self.syncVariables();
@@ -108,12 +108,12 @@ GameOver.prototype = {
 
        self.Restart();
 
-     },300, 70, 1);
+     },270, 70, 1);
      this.addMenuOptionInnerPrueba('MENU', function () {
 
       self.MainMenu();
 
-    },300, 70, 1);
+    },270, 70, 1);
 
     // botones.position= {x:this.game.width/2 - botones.width/2-20, y:this.game.height-botones.height*2}
 
