@@ -180,7 +180,7 @@ function buscarPartida(msg){
 
 	partida["oponente"]=oponente;
 
-	partida["tiempomaximo"]= 8;
+	partida["tiempomaximo"]= 0;
 
 	if(mod==1){
 		partida["camiseta"]= "local";
@@ -240,9 +240,9 @@ function enviarJugada(msg){
 
 
 		CheckEvent('recibeJugada', JSON.stringify(jugadaActual));
-	
+
 		setTimeout(function(){
-			
+
 			if(counterVisitante >= 5 &&  counterLocal >= 5 ){
 
 					if(golesUser == golesComputer && !enAlargue){

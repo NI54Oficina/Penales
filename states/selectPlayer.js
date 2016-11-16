@@ -102,6 +102,13 @@ Selectplayer.prototype = {
 
       });
 
+
+      // this.addMenuOptionInnerPrueba('JUGAR2', function () {
+      //
+      //   self.testGlobal();
+      //
+      // },300,80, 1);
+
       // game.world.bringToTop(search);
 
 
