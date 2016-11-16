@@ -555,7 +555,7 @@ updateCounter: function () {
   },
 
   seMueveArquero: function(self){
-
+	setTimeout(function(){
       tweenArquero = game.add.tween(arquero);
 	    var auxVar=self.posArquero;
 
@@ -593,7 +593,7 @@ updateCounter: function () {
           break;
 
         }
-
+		},100);
     },
 
     desempatar:function(){
@@ -645,7 +645,7 @@ updateCounter: function () {
 
 
       this.game.state.start("GameOver");
-    },4000);
+    },2000);
 
 
 
@@ -1072,7 +1072,7 @@ atajar: function(self){
               self.activateSound(sonido_gol_1);
 
               self.NoAssertPoint(enemyPointY,triesA);
-              self.pateadorID<=0?self.Win(4):self.Win(0);
+              self.pateadorID<=0?self.Win(4):self.Win(1);
               localStorage["TotalAtajados"] = (parseInt(localStorage["TotalAtajados"]) || 0) + 1;
               localStorage["RachaAtajados"] = (parseInt(localStorage["RachaAtajados"]) || 0) + 1;
               localStorage["TotalPartidaAtajados"] = (parseInt(localStorage["TotalPartidaAtajados"]) || 0) + 1;
