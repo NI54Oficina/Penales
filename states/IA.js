@@ -310,10 +310,10 @@ function GetResultado(){
 	toSend["gameId"]=-1;
 	toSend["localId"]= 1;
 	toSend["visitanteId"]= -1;
-	//toSend["jugadasLocal"]= jugadasVisitante;
-	toSend["jugadasLocal"]= [1,1,1,1,1,1,1,1,1,1];
+	toSend["jugadasLocal"]= jugadasVisitante;
+	//toSend["jugadasLocal"]= [1,1,1,1,1,1,1,1,1,1];
 	toSend["jugadasVisitante"]= jugadasLocal;
-	toSend["jugadasVisitante"]= [2,1,2,1,2,1,2,1,2,1];
+	//toSend["jugadasVisitante"]= [2,1,2,1,2,1,2,1,2,1];
 	console.log(JSON.stringify(toSend));
 	toSend=JSON.stringify(toSend);
 	//sucribir evento "stats actualizados" a la función del mismo nombre. One shot
