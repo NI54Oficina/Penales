@@ -26,6 +26,9 @@ GameMenu.prototype = {
 
 
     self=this;
+	
+	
+	
 
 
     game.add.sprite(0, 0, 'menu-bg').scale.setTo(.80,.80);
@@ -143,6 +146,8 @@ GameMenu.prototype = {
 		 game.load.start();
 		//game.add.sprite(0, 0, 'test').scale.setTo(.80,.80);
 	});*/
+	
+	
   },
 
   update:function(){
