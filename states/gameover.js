@@ -181,15 +181,20 @@ GameOver.prototype = {
 		if(n==0){
         game.add.text(250, mm, index, { font: 'bold 15pt CondensedLight', fill: 'white'});
         //game.add.text(850, mm,stats[n].point, { font: 'bold 15pt CondensedLight', fill: 'white'});
-        game.add.text(550, mm,value[1]+' pts.', { font: 'bold 15pt CondensedLight', fill: 'white'});
+        //game.add.text(550, mm,value[1]+' pts.', { font: 'bold 15pt CondensedLight', fill: 'white'}).align="right";
+		 var auxT=game.add.text(900, mm,value[1]+' pts.', puntajeStyle);
+		auxT.anchor.set(1,0);
+		auxT.align="right";
          self.checkValue(value[0], 700, mm);
 
       }else{
-        game.add.text(250, mm, index, puntajeStyle);
+        game.add.text(250, mm-3, index, puntajeStyle);
         //game.add.text(550, mm,stats[n].point, puntajeStyle);
-        game.add.text(850, mm,value[1]+' pts.', puntajeStyle);
-        self.createLineGlobal(150,xx,950, false, 0x797979);
-        self.checkValue(value[0], 700, mm);
+        var auxT=game.add.text(900, mm-3,value[1]+' pts.', puntajeStyle);
+		auxT.anchor.set(1,0);
+		auxT.align="right";
+        self.createLineGlobal(200,xx,950, false, 0x797979);
+        self.checkValue(value[0], 700, mm+4);
 
       }
 
