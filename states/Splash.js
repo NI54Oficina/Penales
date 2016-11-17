@@ -42,6 +42,7 @@ var Splash = function () {};
   loadImages: function () {
 
     game.load.image('menu-bg', urlBase+'assets/singleplayer/images/bg-menu.png');
+    game.load.image('menu-bg-multi', urlBase+'assets/multiplayer/images/bg-menu.png');
     game.load.image('img-1', urlBase+'assets/singleplayer/images/bt_escudo.png');
     game.load.image('img-2', urlBase+'assets/singleplayer/images/bt_escudos_02.png');
     game.load.image('img-3', urlBase+'assets/singleplayer/images/bt_escudos_03.png');

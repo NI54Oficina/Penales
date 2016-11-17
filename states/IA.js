@@ -199,7 +199,7 @@ function buscarPartida(msg){
 
 	console.log("Partida encontrada");
 	console.log("Goles USER "+golesUser);
-	console.log("Goles COMPUTE "+golesComputer);
+	console.log("Goles COMPUTER "+golesComputer);
 
 	setTimeout(function(){
 	CheckEvent('inicioPartida', "start");
