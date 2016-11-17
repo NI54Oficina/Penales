@@ -8,6 +8,8 @@
 	urlConnect="http://dev.betest.com.ar/server";
  }
 
+ var modoMultiplayer=true;
+
 
 var
   game = new Phaser.Game( 1136, 640, Phaser.AUTO, 'game',null,true),
@@ -28,7 +30,7 @@ Main.prototype = {
     },
 
   preload: function () {
-    game.load.image('background',    urlBase+'assets/singleplayer/images/fondo-cargando.png');
+    game.load.image('background',    urlBase+'assets/multiplayer/images/fondo-cargando.png');
     game.load.image('cargando', urlBase+'assets/singleplayer/images/palabra-cargando.png');
     game.load.image('loading',  urlBase+'assets/general/images/loading.png');
     game.load.script('polyfill',   urlBase+'lib/polyfill.js');

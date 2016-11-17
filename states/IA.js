@@ -1,4 +1,5 @@
 var serverEnabled=false;
+var modoMultiplayer=true; 
 var socket;
 if(serverEnabled){
 socket = io('http://localhost:3000');

@@ -606,7 +606,7 @@ updateCounter: function () {
 
     desempatar:function(){
       enAlargue=true;
-      desempateText= game.add.text(50, 15, 'Alargue. Desempate', { font: " 20pt CondensedRegular", fill: "white", align: "center", stroke:'yellow'  });
+      desempateText= game.add.text(50, 40, 'Alargue. Desempate', { font: " 20pt CondensedRegular", fill: "white", align: "center", stroke:'yellow'  });
       desempateText.setShadow(0,0, 'rgba(0,0,0,1)', 20);
       desempateText.stroke='#ffc400';
       desempateText.strokeThickness = 3;
@@ -648,7 +648,7 @@ updateCounter: function () {
 		  player.play("derrota");
 	  }
 	}
-  
+
     setTimeout(function(){
 
 

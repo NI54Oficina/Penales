@@ -1,22 +1,38 @@
 
+
+
 var Splash = function () {};
 
     Splash.prototype = {
 
     loadScripts: function () {
-    game.load.script('style', urlBase+'lib/style.js');
-    game.load.script('mixins', urlBase+'lib/mixins.js');
-    game.load.script('WebFont', urlBase+'vendor/webfontloader.js');
-    game.load.script('gamemenu',urlBase+'states/GameMenu.js');
-    game.load.script('game', urlBase+'states/Game.js');
-    game.load.script('gameover',urlBase+'states/GameOver.js');
-    //  game.load.script('options', 'states/Options.js');
-    game.load.script('Versus', urlBase+'states/versus.js');
-    game.load.script('Stadistics', urlBase+'states/stadistics.js');
-    game.load.script('Selectplayer_2',urlBase+'states/selectPlayer_2.js' );
-    game.load.script('Selectplayer_3',urlBase+'states/selectPlayer_3.js' );
-    game.load.script('Selectplayer',urlBase+'states/selectPlayer.js' );
-    game.load.script('Anims',urlBase+'states/AnimTests.js' );
+      game.load.script('style', urlBase+'lib/style.js');
+      game.load.script('mixins', urlBase+'lib/mixins.js');
+      game.load.script('WebFont', urlBase+'vendor/webfontloader.js');
+      game.load.script('game', urlBase+'states/Game.js');
+      game.load.script('Stadistics', urlBase+'states/stadistics.js');
+
+
+      if(modoMultiplayer){
+        game.load.script('gamemenu',urlBase+'states/GameMenuMultiplayer.js');
+        game.load.script('Selectsala',urlBase+'states/selectSala.js' );
+
+      }else{
+
+        game.load.script('gamemenu',urlBase+'states/gamemenu.js');
+
+        game.load.script('gameover',urlBase+'states/gameover.js');
+        //  game.load.script('options', 'states/Options.js');
+        game.load.script('Versus', urlBase+'states/versus.js');
+
+        game.load.script('Selectplayer_2',urlBase+'states/selectPlayer_2.js' );
+        game.load.script('Selectplayer_3',urlBase+'states/selectPlayer_3.js' );
+        game.load.script('Selectplayer',urlBase+'states/selectPlayer.js' );
+        game.load.script('Anims',urlBase+'states/AnimTests.js' );
+      }
+
+
+
   },
 
   loadSound: function () {
@@ -41,13 +57,20 @@ var Splash = function () {};
 
   loadImages: function () {
 
+
+  if(modoMultiplayer){
+    game.load.image('menu-bg', urlBase+'assets/multiplayer/images/bg-menu.png');
+  }else{
     game.load.image('menu-bg', urlBase+'assets/singleplayer/images/bg-menu.png');
-    game.load.image('menu-bg-multi', urlBase+'assets/multiplayer/images/bg-menu.png');
     game.load.image('img-1', urlBase+'assets/singleplayer/images/bt_escudo.png');
     game.load.image('img-2', urlBase+'assets/singleplayer/images/bt_escudos_02.png');
     game.load.image('img-3', urlBase+'assets/singleplayer/images/bt_escudos_03.png');
     game.load.image('img-4', urlBase+'assets/singleplayer/images/bt_escudos_04.png');
     game.load.image('img-5', urlBase+'assets/singleplayer/images/bt_escudos_05.png');
+  }
+
+
+    //contorno imagenes
     game.load.image('golden', urlBase+'assets/general/images/bt_golden.png');
     game.load.image('shadow', urlBase+'assets/general/images/bt_reflex.png');
     game.load.image('selected', urlBase+'assets/general/images/bt_seleccion.png');
@@ -64,8 +87,8 @@ var Splash = function () {};
 
     game.load.image('brillodown', urlBase+'assets/general/images/brillodown.png');
     game.load.image('brilloup', urlBase+'assets/general/images/brilloup.png');
-    game.load.image('two', urlBase+'assets/general/images/dos-jugadores.png');
-    game.load.image('one', urlBase+'assets/general/images/un-jugador.png');
+    // game.load.image('two', urlBase+'assets/general/images/dos-jugadores.png');
+    // game.load.image('one', urlBase+'assets/general/images/un-jugador.png');
     game.load.image('estrella', urlBase+'assets/general/images/estrella.png');
 
     game.load.image('instrucciones', urlBase+'assets/general/images/instrucciones.png');
@@ -150,6 +173,7 @@ var Splash = function () {};
   preload: function () {
 
     game.add.sprite(0, 0, 'background');
+    console.log("cargando background");
     game.add.sprite(440,500, 'cargando');
 
     game.add.existing(this.loadingBar);
@@ -169,17 +193,26 @@ var Splash = function () {};
   },
 
   addGameStates: function () {
-
     game.state.add("GameMenu",GameMenu);
     game.state.add("Game",Game);
-    game.state.add("GameOver",GameOver);
-  //  game.state.add("Options",Options);
     game.state.add("Stadistics",Stadistics);
-    game.state.add("Versus",Versus);
-    game.state.add("Selectplayer",Selectplayer);
-    game.state.add("Selectplayer_3",Selectplayer_3);
-    game.state.add("Selectplayer_2",Selectplayer_2);
-    game.state.add("Anims",Anims);
+
+    if(modoMultiplayer){
+      game.state.add("Selectsala",Selectsala);
+
+    }else{
+      game.state.add("GameOver",GameOver);
+    //  game.state.add("Options",Options);
+
+      game.state.add("Versus",Versus);
+      game.state.add("Selectplayer",Selectplayer);
+      game.state.add("Selectplayer_3",Selectplayer_3);
+      game.state.add("Selectplayer_2",Selectplayer_2);
+      game.state.add("Anims",Anims);
+    }
+
+
+
   },
 
   addGameMusic: function () {
@@ -188,14 +221,6 @@ var Splash = function () {};
     fondoMusic.mute=true;
     fondoMusic.volume = 0.80;
     fondoMusic.play();
-
-
-    // fondoSonido = game.add.audio('musica_2');
-    // fondoSonido.loop = true;
-    // fondoSonido.mute = true;
-    // fondoSonido.volume = 0.05;
-    // fondoSonido.play();
-
 
     musica_2= game.add.audio('musica_2');
     musica_sin_canto= game.add.audio('musica_sin_canto');
