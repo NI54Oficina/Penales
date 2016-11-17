@@ -2,6 +2,10 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+var testLocal=true;
+
+var urlConnect="http://localhost/Penales/tentativasServer.php";
+
 var oponente={};
 
 var partida={};
@@ -28,7 +32,9 @@ var finished=true;
 
 var perfiles;
 
-
+var request = require('request');
+	
+	
 	io.on('connection', function(socket){
 		console.log("user conected");
 		socket.on('chat message', function(msg){
@@ -45,7 +51,7 @@ var perfiles;
 		datos["puntos"]= 1000;
 		io.emit('loginConfirmed',  JSON.stringify(datos));
 		console.log("log confirmed");
-		SendStats();
+		SendStats(datos["id"]);
 	});
 	
 	
@@ -56,6 +62,21 @@ var perfiles;
 
 
 	socket.on('requestStats', function(msg){
+		//debería solicitar datos a la db sobre las estadisticas, de momento se simulan localmente
+		if(msg){
+			var fs = require('fs');
+			fs.writeFile("./stats.txt",  msg, function(err) {
+				if(err) {
+					return console.log(err);
+				}
+				SendStats();
+			});
+		}else{
+			SendStats();
+		}
+	});
+	
+	socket.on('getStats', function(msg){
 		//debería solicitar datos a la db sobre las estadisticas, de momento se simulan localmente
 		if(msg){
 			var fs = require('fs');
@@ -213,7 +234,31 @@ function InicioTurno(){
 	io.emit('inicioTurno', JSON.stringify(turnoArray));
 }
 
-function SendStats(){
+function SendStats(msg){
+	//setear variable resultados
+	
+	if(testLocal){
+		requestSoap("?code=getStats&data="+msg," ","getStats");
+	}else{
+		// var auxU= {id: usuario["id"]};
+		requestSoap("/getStats",{id: msg},"getStats");
+		// requestSoap("/getStats",JSON.stringify(auxU),"getStats");
+	}
+}
+
+function requestSoap(code,params,callback){
+	console.log("envia params");
+	console.log(params);
+	 //$.post (urlConnect+code, function (response) {
+	 request.post(urlConnect+code,params, function (error, response, body) {
+		console.log("entra response");
+		console.log(body);
+		//io.emit(code,);
+		//CheckEvent(callback,JSON.parse(response));
+	});
+}
+
+function SendStats2(){
 	//setear variable resultados
 	var stats;
 	var fs = require('fs');
@@ -224,7 +269,7 @@ function SendStats(){
 		}
 		stats=data;
 		console.log("Stats enviados");
-		io.emit('statsRecived', data);
+		io.emit('getStats', data);
 	});
 }
 

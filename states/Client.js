@@ -1,5 +1,6 @@
-var serverEnabled=false;
+var serverEnabled=true;
 var socket;
+var testLocal =true;
 if(serverEnabled){
 socket = io('http://localhost:3000');
 }else{
@@ -121,3 +122,11 @@ dummys["partidaEncontrada"]='{"oponente":{"nombre":"Pepita","session":"token","e
 dummys["recibeJugada"]='{"user":5,"computer":5}';
 dummys["inicioTurno"]='{"localGol":0,"visitanteGol":0,"localTurno":0,"visitanteTurno":2}';
 dummys["resultadoPartida"]='{"golesUser":3,"golesComputer":2}';
+
+
+function SaveStats(msg){
+	msg= JSON.parse(msg);
+	$.each(msg,function(index,value){
+		localStorage[index]=value;
+	});
+}
