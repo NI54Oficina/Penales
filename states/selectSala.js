@@ -16,9 +16,16 @@ Selectsala.prototype = {
       self.createBackground(false);
       self.createHeader(self.GoBack,false);
       self.createSoundGraphics();
-
-
       self.createGeneralTitle("SALAS", true);
+
+      var graphics = game.add.graphics(200, 200);
+      graphics.lineStyle(5, 0xcea428, 1);
+      graphics.drawRoundedRect(0, 0, 300, 100,5);
+      window.graphics = graphics;
+      graphics.inputEnabled=true;
+
+
+
 
 },
 
