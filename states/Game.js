@@ -175,7 +175,7 @@ drawArquero:function(){
 	arquero.animations.add('festejo', [32,33,34,35,34,33], 8, false);
 	arquero.animations.add('festejo2', [36,37,38], 8, false);
 
-  arquero.visible=false;
+  arquero.alpha=0.001;
 },
 
 
@@ -268,7 +268,14 @@ createButtons:function(){
 
     			auxButton = game.add.button((j*190)+330, (i*90)+100, 'yellow-button', function(self){}, this, 50, 50, 0);
     			auxButton.id=auxID++;
-
+				var rect=game.add.graphics(0, 0);
+				rect.beginFill(0xFFFF0B, 0.5);
+				rect.drawRect(-45, -10, 120, 55);
+				rect.endFill();
+				rect.alpha=0;
+				console.log(auxButton);
+				console.log(rect);
+				auxButton.addChild(rect);
 
     			auxButton.events.onInputDown.add(this.actionOnClick,auxButton);
 
@@ -388,6 +395,7 @@ updateCounter: function () {
 
   setArquero: function(){
     arquero.visible=true;
+    arquero.alpha=1;
     arquero.frame=0;
 	   arqueroPiso=75;
     arquero.position.x =320;
