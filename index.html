@@ -35,7 +35,7 @@
 
 	function ResizeCanvas(){
 		$("#"+containerId).css("max-width","100%");
-		var auxHeight= $(window).height()*90/100;	
+		var auxHeight= ($(window).height()+$("#pre-menu").height()+$("#main-menu").height())*90/100;	
 		$("#"+containerId).css("max-height",auxHeight+"px");
 	}
 
