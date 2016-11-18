@@ -37,15 +37,16 @@ Selectsala.prototype = {
             grd.addColorStop(0,"#01447d");
             gameBack.context.fillStyle = grd;
             gameBack.context.fillRect(0,0,this.game.width,this.game.height);
-            console.log(gameBack.getPixelRGB(10, 10));
+
 
       //primer bloque
 
       back=this.game.add.sprite(x1+1,y1+1,gameBack);
       back.inputEnabled=true;
       back.events.onInputDown.add(self.ReplaceColor, back);
-      back.addChild(game.add.text(15,20, 'CLÁSICO', {font:'35px TheSansRegular', fill:'#cea428'}));
-      back.addChild(game.add.text(15,60, 'CANTIDAD DE USUARIOS', {font:'20px TheSansRegular', fill:'#fff03a'}));
+      back.input.useHandCursor = true;
+      back.addChild(game.add.text(15,20, 'CLÁSICO', {font:'35px CondensedRegular', fill:'#cea428'}));
+      back.addChild(game.add.text(15,60, 'CANTIDAD DE USUARIOS', {font:'20px CondensedRegular', fill:'#fff03a'}));
       back.addChild(this.game.add.sprite(245,55,'sala-yellow'));
 
 
@@ -60,8 +61,9 @@ Selectsala.prototype = {
       back2=this.game.add.sprite(x2+1,y2+1,gameBack);
       back2.inputEnabled=true;
       back2.events.onInputDown.add(self.ReplaceColor, back2);
-      back2.addChild(game.add.text(15,20, '300 pts.', {font:'35px TheSansRegular', fill:'#cea428'}));
-      back2.addChild(game.add.text(15,60, 'CANTIDAD DE USUARIOS', {font:'20px TheSansRegular', fill:'#fff03a'}));
+      back2.input.useHandCursor = true;
+      back2.addChild(game.add.text(15,20, '300 pts.', {font:'35px CondensedRegular', fill:'#cea428'}));
+      back2.addChild(game.add.text(15,60, 'CANTIDAD DE USUARIOS', {font:'20px CondensedRegular', fill:'#fff03a'}));
       back2.addChild(this.game.add.sprite(245,55,'sala-yellow'));
 
       var graphics2 = game.add.graphics(x2, y2);
@@ -76,8 +78,9 @@ Selectsala.prototype = {
       back3=this.game.add.sprite(x3+1,y3+1,gameBack);
       back3.inputEnabled=true;
       back3.events.onInputDown.add(self.ReplaceColor, back3);
-      back3.addChild(game.add.text(15,20, '500 pts.', {font:'35px TheSansRegular', fill:'#cea428'}));
-      back3.addChild(game.add.text(15,60, 'CANTIDAD DE USUARIOS', {font:'20px TheSansRegular', fill:'#fff03a'}));
+      back3.input.useHandCursor = true;
+      back3.addChild(game.add.text(15,20, '500 pts.', {font:'35px CondensedRegular', fill:'#cea428'}));
+      back3.addChild(game.add.text(15,60, 'CANTIDAD DE USUARIOS', {font:'20px CondensedRegular', fill:'#fff03a'}));
       back3.addChild(this.game.add.sprite(245,55,'sala-yellow'));
 
 
@@ -92,8 +95,9 @@ Selectsala.prototype = {
       back4=this.game.add.sprite(x4+1,y4+1,gameBack);
       back4.inputEnabled=true;
       back4.events.onInputDown.add(self.ReplaceColor, back4);
-      back4.addChild(game.add.text(15,20, '1000 pts.', {font:'35px TheSansRegular', fill:'#cea428'}));
-      back4.addChild(game.add.text(15,60, 'CANTIDAD DE USUARIOS', {font:'20px TheSansRegular', fill:'#fff03a'}));
+      back4.input.useHandCursor = true;
+      back4.addChild(game.add.text(15,20, '1000 pts.', {font:'35px CondensedRegular', fill:'#cea428'}));
+      back4.addChild(game.add.text(15,60, 'CANTIDAD DE USUARIOS', {font:'20px CondensedRegular', fill:'#fff03a'}));
       back4.addChild(this.game.add.sprite(245,55,'sala-yellow'));
 
       var graphics = game.add.graphics(x4, y4);
@@ -108,12 +112,12 @@ Selectsala.prototype = {
 
       this.addMenuOptionInnerPrueba('CANCELAR', function () {
 
-         self.testGlobal();
+         game.state.start('GameMenu');
 
        },270,70, 1).x=290;
        this.addMenuOptionInnerPrueba('JUGAR', function () {
 
-        self.testGlobal();
+        game.state.start('Versus');
 
       },270, 70, 1).x=580;
 
@@ -137,11 +141,11 @@ ReplaceColor: function(target){
    gameBack.context.fillRect(0,0,this.game.width,this.game.height);
    arrayBlock[i].loadTexture(gameBack, 0, false);
 
-   try{
+
      arrayBlock[i].children[0].fill='#cea428';
      arrayBlock[i].children[1].fill='#fff03a';
      arrayBlock[i].children[2].loadTexture('sala-yellow', 0, false);
-   }catch(error){}
+
 
 
 
@@ -161,7 +165,6 @@ ReplaceColor: function(target){
     }
 
     target.children[i].loadTexture('sala-blue', 0, false);
-
 
 },
 

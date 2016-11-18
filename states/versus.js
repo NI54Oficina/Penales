@@ -2,43 +2,38 @@ var Versus = function(game) {};
 
 Versus.prototype = {
 
-
-
-  init: function () {
-
-  },
-
   create: function () {
+
     self = this;
 
     //fondo
 
-    screenOponente= game.add.group();
-    screenOponente.width = this.game.width;
-    screenOponente.height = this.game.height;
+    this.createBackground(true);
+    this.createSoundGraphics();
+
+    timer = game.time.create();
+    timerEvent = timer.add(Phaser.Timer.MINUTE * 0+ Phaser.Timer.SECOND * 5, this.endTimer, this);
+    timer.start();
 
 
-    background=this.createBackground(true);
 
-
-    //fin fondo
-
-    volver= game.add.sprite(40, 30, 'volver');
-    volver.inputEnabled = true;
-    volver.events.onInputDown.add(this.GoBack,volver);
+    tiempo = game.add.text(0, 350, '5:00', { font: "30px BitterBold", fill: "white", align: "center", stroke:'yellow' });
+    tiempo.stroke='#ffc400';
+    tiempo.strokeThickness = 5;
+    tiempo.position.x= this.game.width/2 - tiempo.width/2;
 
     //pantalla de seleccion
-    leftPlayer=game.add.sprite(-50,130, 'player');
+    leftPlayer=game.add.sprite(-50,180, 'player');
     leftPlayer.scale.setTo(.8);
     leftPlayer.alpha=0;
 
 
 
-    rightPlayer=game.add.sprite(this.game.width+50, 130, 'player');
+    rightPlayer=game.add.sprite(this.game.width+50, 180, 'player');
     rightPlayer.scale.setTo(.8);
     rightPlayer.alpha=0;
 
-    var textTitle = game.add.text(0, 250, "VS",{ font: '60px BitterBold', fill: 'white', align: 'center'});
+    var textTitle = game.add.text(0, 250, "VS",{ font: '60px CondensedRegular', fill: 'white', align: 'center'});
     textTitle.position.x= this.game.width/2 - textTitle.width/2;
     textTitle.setShadow(-5, -5, 'rgba(0,0,0,0.5)', 15);
 
@@ -52,81 +47,59 @@ Versus.prototype = {
     tweenC.start();
     tweenD.start();
 
-    var usuarios= self.generateDemoUsers(self);
 
-    datos=game.add.group();
-    datos.width=800;
-    datos.height=200;
+    console.log(rightPlayer.position);
 
-    puntajeStyle = { font: '15pt CondensedLight', fill: 'yellow'};
-    var nombreDatos1 = game.add.text(330, 0, "RACHA ACTUAL",puntajeStyle);
+    tweenD.onComplete.add(
+      function(){
 
-    var numberDatos1 = game.add.text(130, 0,usuarios[1].racha,puntajeStyle);
-    var datos1 = game.add.text(650, 0,usuarios[2].racha,puntajeStyle);
-    var line1=self.createLineGlobal(0,30,800, true);
+        load=game.add.sprite(820, 325, 'loading');
+        load.pivot.x=33;
+        load.pivot.y=33;
+        tweenE=game.add.tween(load).to({angle: -359}, 1500, null, true, 0, Infinity);
+        tweenE.start();
 
-    var nombreDatos2 = game.add.text(320, 50, "PARTIDOS GANADOS",puntajeStyle);
-    var numberDatos2 = game.add.text(130, 50, usuarios[1].ganados,puntajeStyle);
-    var datos2 = game.add.text(650, 50,usuarios[2].ganados,puntajeStyle);
-    var line2=self.createLineGlobal(0,80,800, true);
+      }, this);
 
 
-    var nombreDatos3 = game.add.text(320, 100, "PARTIDOS PERDIDOS",puntajeStyle);
-    var numberDatos3 = game.add.text(130, 100, usuarios[1].perdidos,puntajeStyle);
-    var datos3 = game.add.text(650, 100,usuarios[2].perdidos,puntajeStyle);
-    var line3=self.createLineGlobal(0,130,800, true);
 
-    // nombreDatos1.position.x= datos.width/2 - nombreDatos1.width/2;
-    // nombreDatos2.position.x= datos.width/2 - nombreDatos2.width/2;
-    // nombreDatos3.position.x= datos.width/2 - nombreDatos3.width/2;
+    this.addMenuOptionInnerPrueba('CANCELAR', function () {
 
-    datos.add(nombreDatos1);
-    datos.add(nombreDatos2);
-    datos.add(nombreDatos3);
+       game.state.start('Selectsala');
 
-    datos.add(numberDatos1);
-    datos.add(numberDatos2);
-    datos.add(numberDatos3);
+     },270,70, 1).x=175;
 
-    datos.add(datos1);
-    datos.add(datos2);
-    datos.add(datos3);
+     //
+    var graphics = game.add.graphics(690, 525);
+    graphics.beginFill(0x000000, 0.3);
+    graphics.drawRoundedRect(0, 0, 270, 60,5);
+    window.graphics = graphics;
 
-    datos.add(line1);
-    datos.add(line2);
-    datos.add(line3);
+    graphics.addChild(game.add.text(40, 20, "Esperando confirmación",{ font: '20px CondensedLight', fill: 'white', align: 'center'}));
 
+},
 
-    datos.position={x: this.game.width/2 - datos.width/2, y: 450 };
+render: function () {
+    // If our timer is running, show the time in a nicely formatted way, else show 'Done!'
+    if (timer.running) {
+        tiempo.setText(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)));
+  } else {
 
-    screenOponente.add(background);
-    screenOponente.add(leftPlayer);
-    screenOponente.add(rightPlayer);
-    screenOponente.add(textTitle);
-    screenOponente.add(datos);
+      tiempo.kill();
+      tweenE.pause();
+      load.kill();
+    }
+},
+endTimer: function() {
 
+    timer.stop();
+},
+formatTime: function(s) {
+    var minutes = ''+Math.floor(s / 60);
+    var seconds = "0" + (s - minutes * 60);
+    return minutes.substr(-2) + ":" + seconds.substr(-2);
+},
 
-return screenOponente;
-
-
-  },
-
-  createLine: function(a, b,c){
-
-    var graphics = game.add.graphics(0, 00);
-    graphics.beginFill(0x797979);
-    graphics.lineStyle(2, 0x797979, 1);
-    graphics.moveTo(a,b);
-    graphics.lineTo(c, b);
-    graphics.endFill();
-
-    return graphics;
-
-  },
-
-  GoBack: function(target){
-    game.state.start("GameMenu");
-  },
 
 };
 

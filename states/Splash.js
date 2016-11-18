@@ -14,8 +14,10 @@ var Splash = function () {};
 
 
       if(modoMultiplayer){
+
         game.load.script('gamemenu',urlBase+'states/GameMenuMultiplayer.js');
         game.load.script('Selectsala',urlBase+'states/selectSala.js' );
+        game.load.script('Versus', urlBase+'states/versus.js');
 
       }else{
 
@@ -23,7 +25,7 @@ var Splash = function () {};
 
         game.load.script('gameover',urlBase+'states/gameover.js');
         //  game.load.script('options', 'states/Options.js');
-        game.load.script('Versus', urlBase+'states/versus.js');
+
 
         game.load.script('Selectplayer_2',urlBase+'states/selectPlayer_2.js' );
         game.load.script('Selectplayer_3',urlBase+'states/selectPlayer_3.js' );
@@ -175,7 +177,7 @@ var Splash = function () {};
   preload: function () {
 
     game.add.sprite(0, 0, 'background');
-    console.log("cargando background");
+
     game.add.sprite(440,500, 'cargando');
 
     game.add.existing(this.loadingBar);
@@ -201,12 +203,13 @@ var Splash = function () {};
 
     if(modoMultiplayer){
       game.state.add("Selectsala",Selectsala);
+      game.state.add("Versus",Versus);
 
     }else{
       game.state.add("GameOver",GameOver);
     //  game.state.add("Options",Options);
 
-      game.state.add("Versus",Versus);
+
       game.state.add("Selectplayer",Selectplayer);
       game.state.add("Selectplayer_3",Selectplayer_3);
       game.state.add("Selectplayer_2",Selectplayer_2);
