@@ -253,7 +253,7 @@ function requestSoap(code,params,callback){
 	 request.post(urlConnect+code,params, function (error, response, body) {
 		console.log("entra response");
 		console.log(body);
-		//io.emit(code,);
+		io.emit(code,callback);
 		//CheckEvent(callback,JSON.parse(response));
 	});
 }
