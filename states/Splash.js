@@ -60,6 +60,9 @@ var Splash = function () {};
 
   if(modoMultiplayer){
     game.load.image('menu-bg', urlBase+'assets/multiplayer/images/bg-menu.png');
+    game.load.image('creditos', urlBase+'assets/multiplayer/images/mis-creditos.png');
+    game.load.image('sala-yellow', urlBase+'assets/multiplayer/images/cant-selec.png');
+    game.load.image('sala-blue', urlBase+'assets/multiplayer/images/cant-noselec.png');
   }else{
     game.load.image('menu-bg', urlBase+'assets/singleplayer/images/bg-menu.png');
     game.load.image('img-1', urlBase+'assets/singleplayer/images/bt_escudo.png');
@@ -87,8 +90,6 @@ var Splash = function () {};
 
     game.load.image('brillodown', urlBase+'assets/general/images/brillodown.png');
     game.load.image('brilloup', urlBase+'assets/general/images/brilloup.png');
-    // game.load.image('two', urlBase+'assets/general/images/dos-jugadores.png');
-    // game.load.image('one', urlBase+'assets/general/images/un-jugador.png');
     game.load.image('estrella', urlBase+'assets/general/images/estrella.png');
 
     game.load.image('instrucciones', urlBase+'assets/general/images/instrucciones.png');
