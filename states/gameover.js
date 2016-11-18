@@ -45,6 +45,7 @@ GameOver.prototype = {
     playerOne.mask=testMask;
     console.log(testMask);*/
 
+	 if(modoMultiplayer){
 	var bmd = game.make.bitmapData(367, 482);
 
 	//	And create an alpha mask image by combining pic and mask from the cache
@@ -54,6 +55,11 @@ GameOver.prototype = {
 	//	to actually display it:
 	var auxImg= game.add.image(350, 70, bmd);
 	auxImg.scale.setTo(.3,.3);
+	
+	}else{
+		playerTwo = game.add.sprite(350,70, usuario["avatar"]);
+		playerTwo.scale.setTo(.3, .3);
+	}
 
     // test
 

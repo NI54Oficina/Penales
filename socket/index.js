@@ -51,7 +51,7 @@ var request = require('request');
 		datos["puntos"]= 1000;
 		io.emit('loginConfirmed',  JSON.stringify(datos));
 		console.log("log confirmed");
-		SendStats(datos["id"]);
+		//SendStats(datos["id"]);
 	});
 	
 	
@@ -253,7 +253,7 @@ function requestSoap(code,params,callback){
 	 request.post(urlConnect+code,params, function (error, response, body) {
 		console.log("entra response");
 		console.log(body);
-		io.emit(code,callback);
+		io.emit(callback,body);
 		//CheckEvent(callback,JSON.parse(response));
 	});
 }
