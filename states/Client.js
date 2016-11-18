@@ -1,4 +1,4 @@
-var serverEnabled=true;
+var serverEnabled=false;
 var socket;
 var testLocal =true;
 if(serverEnabled){
@@ -122,6 +122,7 @@ dummys["partidaEncontrada"]='{"oponente":{"nombre":"Pepita","session":"token","e
 dummys["recibeJugada"]='{"user":5,"computer":5}';
 dummys["inicioTurno"]='{"localGol":0,"visitanteGol":0,"localTurno":0,"visitanteTurno":2}';
 dummys["resultadoPartida"]='{"golesUser":3,"golesComputer":2}';
+dummys["getStats"]='{"ganados":6,"perdidos":16,"rachaGanados":0,"rachaPerdidos":1,"atajados":27,"convertidos":57,"errados":54,"noAtajados":84,"rachaAtajados":0,"rachaConvertidos":0,"rachaErrados":2,"rachaErradosHistorica":6,"rachaConvertidosHistorica":9,"rachaNoAtajados":2,"rachaNoAtajadosHistorica":11,"rachaAtajadosHistorica":3,"rachaPerdidosHistorica":7,"rachaGanadosHistorica":3}';
 
 
 function SaveStats(msg){
