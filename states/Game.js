@@ -332,6 +332,8 @@ updateCounter: function () {
 	}else{
 		presicionText.visible=false;
 	}
+	player.x=playerIPos.x;
+	player.y=playerIPos.y;
 
   if (counter==-1) {
 		this.pause=true;

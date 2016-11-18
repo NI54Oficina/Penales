@@ -23,7 +23,7 @@ Main.prototype = {
 
 	init: function () {
 		this.input.maxPointers = 1;
-		this.stage.disableVisibilityChange = false;
+		this.stage.disableVisibilityChange = true;
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     },
 
