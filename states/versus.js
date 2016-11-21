@@ -76,8 +76,8 @@ Versus.prototype = {
 
      comenzar=this.addMenuOptionInnerPrueba('COMENZAR', function (){
 
-        rightPlayer.addChild(game.add.sprite(rightPlayer.width-10, rightPlayer.height-60, 'accepted'));
-        leftPlayer.addChild(game.add.sprite(leftPlayer.width-10, leftPlayer.height-60, 'accepted'));
+        rightPlayer.addChild(game.add.sprite(rightPlayer.width-10, rightPlayer.height-65, 'accepted'));
+        leftPlayer.addChild(game.add.sprite(leftPlayer.width-10, leftPlayer.height-65, 'accepted'));
         comenzar.visible=false;
         graphics.visible=false;
 

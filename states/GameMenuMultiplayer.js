@@ -86,7 +86,7 @@ GameMenu.prototype = {
 
       instrucciones.inputEnabled = true;
       instrucciones.input.useHandCursor = true;
-      instrucciones.events.onInputDown.add(function(){self.notification('INSTRUCCIONES',false);});
+      instrucciones.events.onInputDown.add(function(){self.notification('INSTRUCCIONES',true);});
 
       instrucciones.events.onInputOver.add(onOver,self);
       instrucciones.events.onInputOut.add(onOut,self);
