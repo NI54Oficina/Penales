@@ -6,36 +6,21 @@ var testLocal=true;
 
 var urlConnect="http://localhost/Penales/tentativasServer.php";
 
-var oponente={};
-
-var partida={};
-
-var jugadaActual={};
-
-var counterPartida=0;
-
-var counterLocal=0;
-
-var counterVisitante=0;
-
-var golesUser;
-
-var golesComputer;
-
-var auxCont=0;
-
-var modStart=-1;
-
-var enAlargue=false;
-
-var finished=true;
-
 var perfiles;
+
+var partidas={};
+
+var listaEspera={0:new Array(),1:new Array(),2:new Array(),3:new Array()};
+
+var online= {};
+
 
 var request = require('request');
 	
 	
 	io.on('connection', function(socket){
+		console.log(socket.id);
+		io.sockets.socket(socket.id).emit("poyo")
 		console.log("user conected");
 		socket.on('chat message', function(msg){
 		io.emit('chat message', msg);
@@ -43,15 +28,7 @@ var request = require('request');
 	});
 
 	socket.on('login', function(msg){
-		//consigue datos de la db
-		/*var datos={};
-		datos["nombre"]="Pepe";
-		datos["id"]= "2";
-		datos["avatar"]= "imagen.jpg";
-		datos["puntos"]= 1000;
-		io.emit('loginConfirmed',  JSON.stringify(datos));
-		console.log("log confirmed");
-		//SendStats(datos["id"]);*/
+		
 		if(testLocal){
 			requestSoap("?code=getSession"," ","loginConfirmed");
 		}else{
@@ -60,25 +37,10 @@ var request = require('request');
 	});
 	
 	
-	socket.on('disconnect', function(){
+	socket.on('disconnect', function(data){
 		console.log('user disconnected');
+		console.log(data);
 		Reset();
-	});
-
-
-	socket.on('requestStats', function(msg){
-		//debería solicitar datos a la db sobre las estadisticas, de momento se simulan localmente
-		if(msg){
-			var fs = require('fs');
-			fs.writeFile("./stats.txt",  msg, function(err) {
-				if(err) {
-					return console.log(err);
-				}
-				SendStats();
-			});
-		}else{
-			SendStats();
-		}
 	});
 	
 	socket.on('getStats', function(msg){
@@ -98,7 +60,10 @@ var request = require('request');
 	
 	socket.on('buscarPartida', function(msg){
 		io.emit('buscandoPartida', "buscando partida...");
-		setTimeout(function(){
+		var ops= JSON.parse(msg);
+		//console.log(msg);
+		//listaEspera[ops.tipo].push(ops.id);
+	/*	setTimeout(function(){
 			Reset();
 			finished=false;
 			mod=randomBetween(0,1);
@@ -142,7 +107,7 @@ var request = require('request');
 			console.log("Iniciar Partida");
 
 			},2000);
-		},2000);
+		},2000);*/
 	});
 
 	socket.on('enviarJugada', function(msg){
@@ -277,11 +242,13 @@ function requestSoap(code,params,callback){
 
 
 global.loginConfirmed= function(msg){
-		io.emit('loginConfirmed',  JSON.stringify(msg));
+	var connectedUser= JSON.parse(msg);
+	//online.[connectedUser.id](connectedUser);
+		io.emit('loginConfirmed',  msg);
 }
 
 global.getStats= function(msg){
-	io.emit("getStats",JSON.stringify(msg));
+	io.emit("getStats",msg);
 }
 
 function SendStats2(){
@@ -498,3 +465,38 @@ efectividadP:10,
 
 	perfiles=[perfil1,perfil2, perfil3, perfil4];
 }
+
+
+function Partida (tipo) {
+    this.local={};
+    this.visitante={};
+	
+	this.tipo=tipo;
+
+	this.jugadas={};
+
+	this.jugadaActual={};
+
+	this.counterPartida=0;
+
+	this.counterLocal=0;
+
+	this.counterVisitante=0;
+
+	this.golesVisitante=0;
+
+	this.golesLocal=0;
+
+	this.auxCont=0;
+
+	this.modStart=-1;
+
+	this.enAlargue=false;
+
+	this.finished=false;
+}
+
+/*function Usuario(auxU){
+	this.id=auxU.id;
+	this.avatar=avatar;
+}*/

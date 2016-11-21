@@ -1,1 +1,1 @@
-{"TotalConvertidos":10,"PartidosGanados":5,"PartidosPerdidos":3,"TotalErrados":3,"TotalAtajados":5,"TotalNoAtajados":3,"RachaGanados":3,"RachaPerdidos":3,"RachaConvertidos":3,"RachaErrados":3,"RachaAtajados":3,"RachaNoAtajados":3,"MejorRachaAtajados":3,"MejorRachaConvertida":3,"PeorRachaNoAtajados":3,"PeorRachaErrados":3,"TotalPartidaAtajados":3,"TotalPartidaConvertidos":3,"TotalPartidaNoAtajados":3,"TotalPartidaErrados":3}
+2

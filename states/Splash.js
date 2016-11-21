@@ -322,6 +322,9 @@ var Splash = function () {};
   },
 
   getStats:function(msg){
+	  
+		  
+	  
 	  usuario=msg;
 	  console.log(msg);
 	/*game.load.image('avatarUser', usuario["avatar"]);
