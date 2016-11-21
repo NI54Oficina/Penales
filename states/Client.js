@@ -128,7 +128,9 @@ dummys["getStats"]='{"ganados":6,"perdidos":16,"rachaGanados":0,"rachaPerdidos":
 function SaveStats(msg){
 	console.log("entra save");
 	msg= JSON.parse(msg);
-	msg=JSON.parse(msg);
+	if(serverEnabled){
+		msg=JSON.parse(msg);
+	}
 	//console.log(JSON.parse(msg));
 	
 	$.each(msg,function(index,value){
