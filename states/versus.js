@@ -16,7 +16,6 @@ Versus.prototype = {
     timer.start();
 
 
-
     tiempo = game.add.text(0, 350, '5:00', { font: "30px BitterBold", fill: "white", align: "center", stroke:'yellow' });
     tiempo.stroke='#ffc400';
     tiempo.strokeThickness = 5;
@@ -47,9 +46,6 @@ Versus.prototype = {
     tweenC.start();
     tweenD.start();
 
-
-    console.log(rightPlayer.position);
-
     tweenD.onComplete.add(
       function(){
 
@@ -61,21 +57,45 @@ Versus.prototype = {
 
       }, this);
 
+      var graphics = game.add.graphics(690, 525);
+      graphics.beginFill(0x000000, 0.3);
+      graphics.drawRoundedRect(0, 0, 270, 60,5);
+      window.graphics = graphics;
+
+      graphics.addChild(game.add.text(40, 20, "Esperando confirmación",{ font: '20px CondensedLight', fill: 'white', align: 'center'}));
 
 
-    this.addMenuOptionInnerPrueba('CANCELAR', function () {
+
+    cancelar=this.addMenuOptionInnerPrueba('CANCELAR', function () {
 
        game.state.start('Selectsala');
 
-     },270,70, 1).x=175;
+     },270,70, 1);
+
+     cancelar.x=175;
+
+     comenzar=this.addMenuOptionInnerPrueba('COMENZAR', function (){
+
+        rightPlayer.addChild(game.add.sprite(rightPlayer.width-10, rightPlayer.height-60, 'accepted'));
+        leftPlayer.addChild(game.add.sprite(leftPlayer.width-10, leftPlayer.height-60, 'accepted'));
+        comenzar.visible=false;
+        graphics.visible=false;
+
+      },270,70, 1);
+      comenzar.x=175;
+      comenzar.visible=false;
+
+      pruebaFuncional=game.add.sprite(50, 50, 'accepted');
+      pruebaFuncional.inputEnabled=true;
+      pruebaFuncional.events.onInputDown.add(function(){
+        timer.stop();
+        comenzar.visible=true;
+        cancelar.visible=false;
+
+      });
+      pruebaFuncional.input.useHandCursor = true;
 
      //
-    var graphics = game.add.graphics(690, 525);
-    graphics.beginFill(0x000000, 0.3);
-    graphics.drawRoundedRect(0, 0, 270, 60,5);
-    window.graphics = graphics;
-
-    graphics.addChild(game.add.text(40, 20, "Esperando confirmación",{ font: '20px CondensedLight', fill: 'white', align: 'center'}));
 
 },
 
@@ -88,11 +108,14 @@ render: function () {
       tiempo.kill();
       tweenE.pause();
       load.kill();
+
+
     }
 },
 endTimer: function() {
 
     timer.stop();
+    self.endScreen();
 },
 formatTime: function(s) {
     var minutes = ''+Math.floor(s / 60);
@@ -100,6 +123,13 @@ formatTime: function(s) {
     return minutes.substr(-2) + ":" + seconds.substr(-2);
 },
 
+endScreen: function(){
+  modal=self.notificationDinamic("UPS !","El tiempo de espera se ha agotado !", false);
+  modal.onComplete.addOnce(function(){
+
+    setTimeout(function(){game.state.start('Selectsala');},1500);
+  });
+},
 
 };
 

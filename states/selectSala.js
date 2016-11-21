@@ -11,6 +11,7 @@ Selectsala.prototype = {
       indiceC=0;
       i=0;
       muttex=0;
+      salaSelected=0;
 
 
       self.createBackground(false);
@@ -48,6 +49,7 @@ Selectsala.prototype = {
       back.addChild(game.add.text(15,20, 'CLÁSICO', {font:'35px CondensedRegular', fill:'#cea428'}));
       back.addChild(game.add.text(15,60, 'CANTIDAD DE USUARIOS', {font:'20px CondensedRegular', fill:'#fff03a'}));
       back.addChild(this.game.add.sprite(245,55,'sala-yellow'));
+      back.id=1;
 
 
       var graphics = game.add.graphics(x1, y1);
@@ -65,6 +67,7 @@ Selectsala.prototype = {
       back2.addChild(game.add.text(15,20, '300 pts.', {font:'35px CondensedRegular', fill:'#cea428'}));
       back2.addChild(game.add.text(15,60, 'CANTIDAD DE USUARIOS', {font:'20px CondensedRegular', fill:'#fff03a'}));
       back2.addChild(this.game.add.sprite(245,55,'sala-yellow'));
+      back2.id=2;
 
       var graphics2 = game.add.graphics(x2, y2);
       graphics2.lineStyle(5, 0xcea428, 1);
@@ -82,6 +85,7 @@ Selectsala.prototype = {
       back3.addChild(game.add.text(15,20, '500 pts.', {font:'35px CondensedRegular', fill:'#cea428'}));
       back3.addChild(game.add.text(15,60, 'CANTIDAD DE USUARIOS', {font:'20px CondensedRegular', fill:'#fff03a'}));
       back3.addChild(this.game.add.sprite(245,55,'sala-yellow'));
+      back3.id=3;
 
 
       var graphics3 = game.add.graphics(x3, y3);
@@ -99,6 +103,7 @@ Selectsala.prototype = {
       back4.addChild(game.add.text(15,20, '1000 pts.', {font:'35px CondensedRegular', fill:'#cea428'}));
       back4.addChild(game.add.text(15,60, 'CANTIDAD DE USUARIOS', {font:'20px CondensedRegular', fill:'#fff03a'}));
       back4.addChild(this.game.add.sprite(245,55,'sala-yellow'));
+      back4.id=4;
 
       var graphics = game.add.graphics(x4, y4);
       graphics.lineStyle(5, 0xcea428, 1);
@@ -117,6 +122,9 @@ Selectsala.prototype = {
        },270,70, 1).x=290;
        this.addMenuOptionInnerPrueba('JUGAR', function () {
 
+         //aca hacer el envio de mensajes con el server para poder jugar.
+         // las salas son 1,2,3,4, si recibe 0 es porque no selecciono ninguna sala.
+         console.log(salaSelected);
         game.state.start('Versus');
 
       },270, 70, 1).x=580;
@@ -128,10 +136,12 @@ Selectsala.prototype = {
 },
 
 GoBack: function(target){
+
   game.state.start("GameMenu");
 },
 
 ReplaceColor: function(target){
+    salaSelected=target.id;
 
   for(var i=0; i< arrayBlock.length; i++){
     gameBack = this.game.add.bitmapData(300,100);
@@ -166,6 +176,10 @@ ReplaceColor: function(target){
 
     target.children[i].loadTexture('sala-blue', 0, false);
 
+},
+
+mandarWarning: function(){
+   self.notificationDinamic("UPS !", "No has selecionado ninguna sala!", true)
 },
 
 
