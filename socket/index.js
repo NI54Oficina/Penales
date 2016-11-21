@@ -44,14 +44,19 @@ var request = require('request');
 
 	socket.on('login', function(msg){
 		//consigue datos de la db
-		var datos={};
+		/*var datos={};
 		datos["nombre"]="Pepe";
 		datos["id"]= "2";
 		datos["avatar"]= "imagen.jpg";
 		datos["puntos"]= 1000;
 		io.emit('loginConfirmed',  JSON.stringify(datos));
 		console.log("log confirmed");
-		//SendStats(datos["id"]);
+		//SendStats(datos["id"]);*/
+		if(testLocal){
+			requestSoap("?code=getSession"," ","loginConfirmed");
+		}else{
+			requestSoap("/getSession",msg,"loginConfirmed");
+		}
 	});
 	
 	
@@ -217,6 +222,9 @@ var request = require('request');
 
 });
 
+
+	
+
 function InicioTurno(){
 	
 	var turnoArray={};
@@ -246,16 +254,34 @@ function SendStats(msg){
 	}
 }
 
+
 function requestSoap(code,params,callback){
 	console.log("envia params");
 	console.log(params);
+	console.log(callback);
+	//console.log(context);
+	console.log("-------------------------------------------------");
 	 //$.post (urlConnect+code, function (response) {
 	 request.post(urlConnect+code,params, function (error, response, body) {
-		console.log("entra response");
+		/*console.log("entra response");
 		console.log(body);
-		io.emit(callback,body);
+		io.emit(callback,body);*/
+		//console.log(context);
+		console.log(callback);
+		//console.log(context);
+		console.log("-------------------------------------------------");
+		global[callback](body);
 		//CheckEvent(callback,JSON.parse(response));
 	});
+}
+
+
+global.loginConfirmed= function(msg){
+		io.emit('loginConfirmed',  JSON.stringify(msg));
+}
+
+global.getStats= function(msg){
+	io.emit("getStats",JSON.stringify(msg));
 }
 
 function SendStats2(){
