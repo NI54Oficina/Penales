@@ -11,12 +11,20 @@ Versus.prototype = {
     this.createBackground(true);
     this.createSoundGraphics();
 
+    var tableroPuntos = game.add.graphics(this.game.width/2-165, 0);
+    tableroPuntos.beginFill(0x000065,1);
+    tableroPuntos.drawRoundedRect(0, 0,330,65,5);
+    window.graphics = tableroPuntos;
+    puntaje=game.add.text(70,10, '300 PUNTOS', { font: "35px CondensedRegular", fill: "#ffc418", align: "center"});
+    puntaje.x= tableroPuntos.width/2-puntaje.width/2;
+    tableroPuntos.addChild(puntaje);
+
     timer = game.time.create();
     timerEvent = timer.add(Phaser.Timer.MINUTE * 0+ Phaser.Timer.SECOND * 5, this.endTimer, this);
     timer.start();
 
 
-    tiempo = game.add.text(0, 350, '5:00', { font: "30px BitterBold", fill: "white", align: "center", stroke:'yellow' });
+    tiempo = game.add.text(0, 540, '5:00', { font: "30px BitterBold", fill: "white", align: "center", stroke:'yellow' });
     tiempo.stroke='#ffc400';
     tiempo.strokeThickness = 5;
     tiempo.position.x= this.game.width/2 - tiempo.width/2;
@@ -80,6 +88,8 @@ Versus.prototype = {
         leftPlayer.addChild(game.add.sprite(leftPlayer.width-10, leftPlayer.height-65, 'accepted'));
         comenzar.visible=false;
         graphics.visible=false;
+        console.log("sortearMone");
+        self.sortearMoneda();
 
       },270,70, 1);
       comenzar.x=175;
@@ -95,12 +105,11 @@ Versus.prototype = {
       });
       pruebaFuncional.input.useHandCursor = true;
 
-     //
+
 
 },
 
 render: function () {
-    // If our timer is running, show the time in a nicely formatted way, else show 'Done!'
     if (timer.running) {
         tiempo.setText(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)));
   } else {
@@ -109,14 +118,15 @@ render: function () {
       tweenE.pause();
       load.kill();
 
-
     }
 },
+
 endTimer: function() {
 
     timer.stop();
     self.endScreen();
 },
+
 formatTime: function(s) {
     var minutes = ''+Math.floor(s / 60);
     var seconds = "0" + (s - minutes * 60);
@@ -130,6 +140,119 @@ endScreen: function(){
     setTimeout(function(){game.state.start('Selectsala');},1500);
   });
 },
+
+sortearMoneda:function(){
+
+  monedaRight=game.add.sprite(this.game.width/2-171/2, 300, 'moneda-right');
+  monedaRight.pivot.x=171/2;
+  monedaRight.y=171/2;
+  monedaRight.alpha=1;
+  monedaRight.render=0;
+  monedaLeft=game.add.sprite(this.game.width/2-171/2, 300, 'moneda-left');
+  monedaLeft.scale.setTo(-1,1);
+  monedaLeft.pivot.x=171/2;
+  monedaLeft.y=171/2;
+  monedaLeft.alpha=0;
+  monedaLeft.render=0;
+
+  // self.rotarMonedaIzquierda(monedaLeft, monedaRight);
+  // self.rotarMonedaDerecha(monedaRight, monedaLeft);
+
+  self.rotarMonedaDerecha(monedaRight);
+
+  console.log("girar");
+},
+
+rotarMonedaDerecha(target1, target2){
+
+  // if(target1.reder==1){
+  t1=target1;
+  t2=target1;
+    if(t1.render==0){
+    t1.render=1;
+    t2.render=0;
+  }else{
+    t1.render=0;
+    t2.render=1;
+  }
+
+
+    // monedaRightTween.start();
+    if(t1.render==1){
+      // monedaRightTween2=game.add.tween(t1).to( {alpha:1}, 1000, 'Linear');
+      monedaRightTween=game.add.tween(t1.scale).to( {x:0}, 1000, 'Linear');
+    }else{
+      // monedaRightTween2=game.add.tween(t1).to( {alpha:0}, 200, 'Linear');
+      monedaRightTween=game.add.tween(t1.scale).to( {x:0}, 1000, 'Linear');
+    }
+
+    monedaRightTween.start();
+    // monedaRightTween2.start();
+    monedaRightTween.onComplete.addOnce(function(){
+    self.rotarMonedaIzquierda(t2, t1);
+     });
+  // }
+
+  console.log('1');
+
+},
+
+rotarMonedaIzquierda(target1, target2){
+
+  t1=target1;
+  t2=target2;
+  if(t1.render==0){
+  t1.render=1;
+  t2.render=0;
+}else{
+  t1.render=0;
+  t2.render=1;
+}
+
+
+    if(t1.render==1){
+      // monedaLeftTween2=game.add.tween(t1).to( {alpha:1}, 200, 'Linear');
+      monedaLeftTween=game.add.tween(t1.scale).to( {x:1}, 1000, 'Linear');
+    }else{
+      // monedaLeftTween2=game.add.tween(t1).to( {alpha:0}, 1000, 'Linear');
+      monedaLeftTween=game.add.tween(t1.scale).to( {x:-1}, 1000, 'Linear');
+    }
+
+    monedaLeftTween.start();
+    // monedaLeftTween2.start();
+    // t2.alpha=0;
+
+    monedaLeftTween.onComplete.addOnce(function(){
+    self.rotarMonedaDerecha(t2, t1);
+     });
+     console.log('2');
+},
+
+rotarMonedaUnica: function(target){
+  t=target;
+
+  if(target.render==0){
+    target.render=1;
+    monedaTween=game.add.tween(t1.scale).to( {x:0}, 1000, 'Linear');
+    console.log("en 0");
+
+  }else if(target.render==1){
+    target.render=2;
+    monedaTween=game.add.tween(t1.scale).to( {x:-1}, 1000, 'Linear');
+    console.log("en -1");
+  }else{
+    target.render=0;
+    monedaTween=game.add.tween(t1.scale).to( {x:1}, 1000, 'Linear');
+    console.log("en 1");
+  }
+
+  monedaTween.start()
+
+  monedaTween.onComplete(function(){
+    self.rotarMonedaUnica(t);
+  });
+
+}
 
 };
 

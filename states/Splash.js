@@ -66,6 +66,8 @@ var Splash = function () {};
     game.load.image('sala-yellow', urlBase+'assets/multiplayer/images/cant-selec.png');
     game.load.image('sala-blue', urlBase+'assets/multiplayer/images/cant-noselec.png');
     game.load.image('accepted', urlBase+'assets/multiplayer/images/tilde-comenzar.png');
+    game.load.image('moneda-left', urlBase+'assets/multiplayer/images/moneda-1.png');
+    game.load.image('moneda-right', urlBase+'assets/multiplayer/images/moneda-2.png');
 
   }else{
     game.load.image('menu-bg', urlBase+'assets/singleplayer/images/bg-menu.png');
