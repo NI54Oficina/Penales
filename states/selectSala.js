@@ -13,7 +13,6 @@ Selectsala.prototype = {
       muttex=0;
       salaSelected=0;
 
-	tipoSala=1;
       self.createBackground(false);
       self.createHeader(self.GoBack,false);
       self.createSoundGraphics();
@@ -124,12 +123,16 @@ Selectsala.prototype = {
 
          //aca hacer el envio de mensajes con el server para poder jugar.
          // las salas son 1,2,3,4, si recibe 0 es porque no selecciono ninguna sala.
-         console.log(salaSelected);
-        //game.state.start('Versus');
+        if(salaSelected!=0){
+          game.state.start('Versus');
+        }
+
         var solicitud= {};
+
 		//solicitud.id= usuario["id"];
-		solicitud.tipo= tipoSala;
-		Emit("buscarPartida",JSON.stringify(solicitud));
+		solicitud.tipo= salaSelected;
+		// Emit("buscarPartida",JSON.stringify(solicitud));
+
 
       },270, 70, 1).x=580;
 
