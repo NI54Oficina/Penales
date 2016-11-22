@@ -55,7 +55,7 @@ GameOver.prototype = {
 	//	to actually display it:
 	var auxImg= game.add.image(350, 70, bmd);
 	auxImg.scale.setTo(.3,.3);
-	
+
 	}else{
 		playerTwo = game.add.sprite(350,70, usuario["avatar"]);
 		playerTwo.scale.setTo(.3, .3);
@@ -109,12 +109,23 @@ GameOver.prototype = {
 
 
     // var botones=self.generateButtonsInSplash([ ['VOLVER A JUGAR', self.Restart],['MENU', self.MainMenu]]);
+  if(!modoMultiplayer){
+    this.addMenuOptionInnerPrueba('REVANCHA 20', function () {
 
+       console.log("Quiero revancha");
+
+     },270,70, 1);
+
+     self.notificationDinamic("ACABAN DE PEDIR REVANCHA", "Te animás?", true)
+     
+  }else{
     this.addMenuOptionInnerPrueba('VOLVER A JUGAR', function () {
 
        self.Restart();
 
      },270,70, 1);
+  }
+
      this.addMenuOptionInnerPrueba('MENU', function () {
 
       self.MainMenu();
@@ -168,26 +179,19 @@ GameOver.prototype = {
      game.add.text(520, 100, localStorage["TotalPartidaUser"], partidaStyle);
      game.add.text(550, 100, "- "+localStorage["TotalPartidaComputer"], partidaStyle);
 
-    //  game.add.text(10, 200, "Partidos Ganados: "+ localStorage["PartidosGanados"], puntajeStyle);
-    //  game.add.text(10, 220, "Partidos Perdidos: "+ localStorage["PartidosPerdidos"], puntajeStyle);
 
-
-    // var word=game.add.text(x, y, stats[n].title, puntajeStyle2);
-    // var number=game.add.text(group.width-70,y,localStorage[stats[n].key], puntajeStyle2);
     mm=240;
       xx=230;
 
 	var n=1;
 	game.add.text(250, mm, "Total", { font: 'bold 15pt CondensedLight', fill: 'white'});
-	//game.add.text(850, mm,stats[n].point, { font: 'bold 15pt CondensedLight', fill: 'white'});
+
 	game.add.text(850, mm,resultadoPartida.puntosNuevos+' pts.', { font: 'bold 15pt CondensedLight', fill: 'white'});
 	mm+=40;
       xx+=40;
 	$.each(resultadoPartida.detalle,function(index,value){
 		if(n==0){
         game.add.text(250, mm, index, { font: 'bold 15pt CondensedLight', fill: 'white'});
-        //game.add.text(850, mm,stats[n].point, { font: 'bold 15pt CondensedLight', fill: 'white'});
-        //game.add.text(550, mm,value[1]+' pts.', { font: 'bold 15pt CondensedLight', fill: 'white'}).align="right";
 		 var auxT=game.add.text(900, mm,value[1]+' pts.', puntajeStyle);
 		auxT.anchor.set(1,0);
 		auxT.align="right";
@@ -195,7 +199,7 @@ GameOver.prototype = {
 
       }else{
         game.add.text(250, mm-3, index, puntajeStyle);
-        //game.add.text(550, mm,stats[n].point, puntajeStyle);
+
         var auxT=game.add.text(900, mm-3,value[1]+' pts.', puntajeStyle);
 		auxT.anchor.set(1,0);
 		auxT.align="right";
@@ -212,6 +216,8 @@ GameOver.prototype = {
 
     search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px CondensedLight", fill: "red", align: "center" });
     search.visible=false;
+
+
 
 
 

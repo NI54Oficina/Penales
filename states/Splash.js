@@ -66,21 +66,20 @@ var Splash = function () {};
     game.load.image('sala-yellow', urlBase+'assets/multiplayer/images/cant-selec.png');
     game.load.image('sala-blue', urlBase+'assets/multiplayer/images/cant-noselec.png');
     game.load.image('accepted', urlBase+'assets/multiplayer/images/tilde-comenzar.png');
-    game.load.image('moneda-left', urlBase+'assets/multiplayer/images/moneda-1.png');
     game.load.image('moneda-right', urlBase+'assets/multiplayer/images/moneda-2.png');
 
   }else{
     game.load.image('menu-bg', urlBase+'assets/singleplayer/images/bg-menu.png');
+
+	game.load.image('escudo-boca', urlBase+'assets/singleplayer/images/escudo-boca.png');
+  }
+
+
     game.load.image('img-1', urlBase+'assets/singleplayer/images/bt_escudo.png');
     game.load.image('img-2', urlBase+'assets/singleplayer/images/bt_escudos_02.png');
     game.load.image('img-3', urlBase+'assets/singleplayer/images/bt_escudos_03.png');
     game.load.image('img-4', urlBase+'assets/singleplayer/images/bt_escudos_04.png');
     game.load.image('img-5', urlBase+'assets/singleplayer/images/bt_escudos_05.png');
-	game.load.image('escudo-boca', urlBase+'assets/singleplayer/images/escudo-boca.png');
-  }
-
-
-    //contorno imagenes
     game.load.image('golden', urlBase+'assets/general/images/bt_golden.png');
     game.load.image('shadow', urlBase+'assets/general/images/bt_reflex.png');
     game.load.image('selected', urlBase+'assets/general/images/bt_seleccion.png');
@@ -153,7 +152,7 @@ var Splash = function () {};
     game.load.atlas('pateador-visitante', urlBase+'assets/general/images/pateador-test2.png', urlBase+'assets/general/images/pateador-test.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
     game.load.image('fondo1', urlBase+'assets/general/images/fondo-game1.png', 759, 150);
     game.load.image('fondo2', urlBase+'assets/general/images/fondo-game2.png', 378, 150);
-    game.load.image('fondo3', urlBase+'assets/general/images/fondo-game3.png', 1136, 491);
+    game.load.image('fondo3', urlBase+'assets/general/images/fondo-game3.jpg', 1136, 491);
     game.load.image('tablero', urlBase+'assets/general/images/tablero.png');
     game.load.image('ataja', urlBase+'assets/general/images/quien-ataja.png');
     game.load.image('patea', urlBase+'assets/general/images/quien-patea.png');
@@ -321,9 +320,9 @@ var Splash = function () {};
   },
 
   getStats:function(msg){
-	  
-		  
-	  
+
+
+
 	  usuario=msg;
 	  console.log(msg);
 	/*game.load.image('avatarUser', usuario["avatar"]);

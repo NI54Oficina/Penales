@@ -137,6 +137,22 @@ drawBackground: function(){
 	arco3.animations.add("down",["d00.png"],velocidadArco,false);
 	arco3.animations.add("idle",["d00.png"],velocidadArco,false);
 
+ if(modoMultiplayer){
+
+   var tableroPuntos = game.add.graphics(this.game.width/2-165, 0);
+   tableroPuntos.beginFill(0x000065,.6);
+   tableroPuntos.drawRoundedRect(0, 0,330,65,5);
+   window.graphics = tableroPuntos;
+   puntaje=game.add.text(70,10, usuario['puntos']+' PUNTOS', { font: "35px CondensedRegular", fill: "#ffc418", align: "center"});
+   puntaje.x= tableroPuntos.width/2-puntaje.width/2;
+   tableroPuntos.addChild(puntaje);
+   brilloTablero=game.add.sprite(130,50, 'brilloup');
+   brilloTablero.scale.setTo(.3,.3);
+   brilloTablero.alpha=.5;
+   tableroPuntos.addChild(brilloTablero);
+
+ }
+
   presicionText = game.add.text(60, 350, '0', { font: " 90px BitterBold", fill: "white", align: "center", stroke:'yellow' });
   presicionText.stroke='#ffc400';
   presicionText.strokeThickness = 5;
@@ -145,7 +161,9 @@ drawBackground: function(){
   tablero = this.game.add.sprite(0,0, 'tablero');
   tablero.y= this.game.height-tablero.height;
   identificadorIzquierdo = this.game.add.sprite(170,this.game.height-40, 'patea');
+  identificadorIzquierdo.scale.setTo(.5,.5);
   identificadorDerecho = this.game.add.sprite(930,this.game.height-40, 'ataja');
+  identificadorDerecho.scale.setTo(.5,.5);
 
   puntosUserText = game.add.text(this.game.width/2-40, this.game.height-45, puntosUser+' - ', { font: " 40px BitterRegular", fill: "white"});
   puntosComputerText = game.add.text(this.game.width/2+23, this.game.height-45, puntosComputer, { font: " 40px BitterRegular", fill: "white"});
