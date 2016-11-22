@@ -1,5 +1,5 @@
 var serverEnabled=false;
-var modoMultiplayer=false; 
+var modoMultiplayer=false;
 var socket;
 if(serverEnabled){
 socket = io('http://localhost:3000');
@@ -181,7 +181,7 @@ function buscarPartida(msg){
 
 	partida["oponente"]=oponente;
 
-	partida["tiempomaximo"]= 8;
+	partida["tiempomaximo"]= 0;
 
 	if(mod==1){
 		partida["camiseta"]= "local";

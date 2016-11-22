@@ -70,16 +70,16 @@ var Splash = function () {};
 
   }else{
     game.load.image('menu-bg', urlBase+'assets/singleplayer/images/bg-menu.png');
+
+	game.load.image('escudo-boca', urlBase+'assets/singleplayer/images/escudo-boca.png');
+  }
+
+
     game.load.image('img-1', urlBase+'assets/singleplayer/images/bt_escudo.png');
     game.load.image('img-2', urlBase+'assets/singleplayer/images/bt_escudos_02.png');
     game.load.image('img-3', urlBase+'assets/singleplayer/images/bt_escudos_03.png');
     game.load.image('img-4', urlBase+'assets/singleplayer/images/bt_escudos_04.png');
     game.load.image('img-5', urlBase+'assets/singleplayer/images/bt_escudos_05.png');
-	game.load.image('escudo-boca', urlBase+'assets/singleplayer/images/escudo-boca.png');
-  }
-
-
-    //contorno imagenes
     game.load.image('golden', urlBase+'assets/general/images/bt_golden.png');
     game.load.image('shadow', urlBase+'assets/general/images/bt_reflex.png');
     game.load.image('selected', urlBase+'assets/general/images/bt_seleccion.png');

@@ -53,6 +53,11 @@ Versus.prototype = {
     var tweenC =game.add.tween(leftPlayer).to( {alpha:1}, 200, 'Linear');
     var tweenD =game.add.tween(rightPlayer).to( {alpha:1}, 200, 'Linear');
 
+
+
+
+
+
     tweenA.start();
     tweenB.start();
     tweenC.start();
@@ -60,6 +65,14 @@ Versus.prototype = {
 
     tweenD.onComplete.add(
       function(){
+
+        goldenB=game.add.sprite(leftPlayer.x-10,leftPlayer.y-5, 'selector');
+        goldenB.scale.setTo(.8,.8);
+        goldenB.addChild(  game.add.sprite(goldenB.width, goldenB.height-50, 'accepted'));
+
+        goldenA=game.add.sprite(rightPlayer.x-10,rightPlayer.y-5, 'selector');
+        goldenA.scale.setTo(.8,.8);
+        goldenA.addChild(game.add.sprite(goldenA.width, goldenA.height-50, 'accepted'));
 
         load=game.add.sprite(820, 325, 'loading');
         load.pivot.x=33;
@@ -88,8 +101,8 @@ Versus.prototype = {
 
      comenzar=this.addMenuOptionInnerPrueba('COMENZAR', function (){
 
-        rightPlayer.addChild(game.add.sprite(rightPlayer.width-10, rightPlayer.height-65, 'accepted'));
-        leftPlayer.addChild(game.add.sprite(leftPlayer.width-10, leftPlayer.height-65, 'accepted'));
+
+      //  game.add.sprite(500, 450, 'accepted');
         comenzar.visible=false;
         graphics.visible=false;
         textTitle.visible=false;
