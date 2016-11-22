@@ -209,6 +209,7 @@ rotarMoneda(target){
 
 
 identificarPuestos: function(scale){
+
    if(scale==1){
      game.add.sprite(this.game.width/2-90, 420, 'ataja').scale.setTo(.75,.75);
      game.add.sprite(this.game.width/2+50, 420, 'patea').scale.setTo(.75,.75);
