@@ -127,7 +127,7 @@ Selectsala.prototype = {
          console.log(salaSelected);
         //game.state.start('Versus');
         var solicitud= {};
-		solicitud.id= usuario["id"];
+		//solicitud.id= usuario["id"];
 		solicitud.tipo= tipoSala;
 		Emit("buscarPartida",JSON.stringify(solicitud));
 

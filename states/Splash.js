@@ -269,7 +269,11 @@ var Splash = function () {};
 			chechFuentes(fuentes);
 		}else{
 			clearInterval(interval);
-			 Emit("login"," ","loginConfirmed","getStats",context);
+			console.log("entra login");
+			console.log(session);
+			
+			
+			Emit("login"," ","loginConfirmed","getStats",context);
 		}
 	},1000);
      /* while (!done) {
@@ -295,7 +299,6 @@ var Splash = function () {};
 
      }
 
-
            if(cargado==fuentes.length){
              console.log("FUENTES CARGADAS")
              done=true;
@@ -308,12 +311,6 @@ var Splash = function () {};
            }
 
    };
-
-
-
-
-
-
 
 
   },

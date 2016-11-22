@@ -27,11 +27,14 @@ socket.on("*",function(event,data) {
 	CheckEvent(event,data);
 });
 
+var session="";
 
-socket.on('loginConfirmed', function(msg){
-  console.log(msg);
+socket.on('session', function(msg){
+  session= msg;
+  Emit("checkSession",session,"checkSession","checkSession",this);
   //ResponseCallBack(msg);
 });
+
 
 socket.on('statsRecived', function(msg){
 	console.log(msg);
@@ -64,7 +67,8 @@ function Emit(toEmit,params,eventListen="",callback="",context="",oneshot=true){
 		SuscribeServerEvent(eventListen,callback,context,oneshot);
 	}
 	if(serverEnabled){
-		socket.emit(toEmit, params);
+		var auxParams= {session:session,msg: params};
+		socket.emit(toEmit, JSON.stringify(auxParams));
 	}else{
 		CheckEvent(eventListen,GetDummy(eventListen));
 	}
@@ -137,4 +141,19 @@ function SaveStats(msg){
 	$.each(msg,function(index,value){
 		localStorage[index]=value;
 	});
+}
+
+function Online(){
+	Emit("online");
+}
+
+function Listas(msg){
+	Emit("listaEspera",msg);
+}
+
+function Pause(msg){
+	Emit("pause",msg);
+}
+function Resume(msg){
+	Emit("resume",msg);
 }

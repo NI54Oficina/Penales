@@ -10,29 +10,49 @@ var perfiles;
 
 var partidas={};
 
-var listaEspera={0:new Array(),1:new Array(),2:new Array(),3:new Array()};
+var listaEspera=[{},{},{},{}];
 
 var online= {};
 
+var pause=false;
 
 var request = require('request');
 	
 	
-	io.on('connection', function(socket){
+io.on('connection', function(socket){
 		console.log(socket.id);
-		io.sockets.socket(socket.id).emit("poyo")
+		//io.sockets.socket(socket.id).emit("poyo")
+		var connectedUser={};
+		connectedUser.socket= socket;
+		connectedUser.usuaio= "poyo";
+		online[socket.id]= connectedUser;
 		console.log("user conected");
-		socket.on('chat message', function(msg){
-		io.emit('chat message', msg);
+		socket.emit("session",socket.id);
+	
+	
+	socket.on('chat message', function(msg){
+		socket.emit('chat message', msg);
+		
 		console.log(msg);
+	});
+		
+	socket.on('checkSession', function(msg){
+		console.log(msg);
+		var auxMsg= JSON.parse(msg);
+		console.log(online[msg.session]);
 	});
 
 	socket.on('login', function(msg){
-		
+		console.log("-----------------------------------");
+		console.log(msg);
+		console.log("-----------------------------------");
+		msg= JSON.parse(msg);
+		console.log(msg);
+		console.log("-----------------------------------");
 		if(testLocal){
-			requestSoap("?code=getSession"," ","loginConfirmed");
+			requestSoap("?code=getSession"," ","loginConfirmed",msg.session);
 		}else{
-			requestSoap("/getSession",msg,"loginConfirmed");
+			requestSoap("/getSession",msg.msg.id,"loginConfirmed",msg.session);
 		}
 	});
 	
@@ -43,9 +63,44 @@ var request = require('request');
 		Reset();
 	});
 	
+	socket.on('online', function(data){
+		console.log(online);
+	});
+	socket.on('listaEspera', function(data){
+		console.log("entra lista espera");
+		/*if(data&&data!=""){
+			console.log(listaEspera[data]);
+		}else{
+			console.log(listaEspera);
+		}*/
+		console.log(listaEspera);
+	});
+	
+	socket.on('pause', function(data){
+		pause=true;
+		console.log("entra lista espera");
+		/*if(data&&data!=""){
+			console.log(listaEspera[data]);
+		}else{
+			console.log(listaEspera);
+		}*/
+		console.log(listaEspera);
+	});
+	
+	socket.on('resume', function(data){
+		pause=false;
+		console.log("entra lista espera");
+		/*if(data&&data!=""){
+			console.log(listaEspera[data]);
+		}else{
+			console.log(listaEspera);
+		}*/
+		console.log(listaEspera);
+	});
+	
 	socket.on('getStats', function(msg){
 		//debería solicitar datos a la db sobre las estadisticas, de momento se simulan localmente
-		if(msg){
+		/*if(msg){
 			var fs = require('fs');
 			fs.writeFile("./stats.txt",  msg, function(err) {
 				if(err) {
@@ -55,14 +110,17 @@ var request = require('request');
 			});
 		}else{
 			SendStats();
-		}
+		}*/
+		SendStats(msg);
 	});
 	
-	socket.on('buscarPartida', function(msg){
-		io.emit('buscandoPartida', "buscando partida...");
+	socket.on('buscarPartida', function(msg,session){
+		socket.emit('buscandoPartida', "buscando partida...");
 		var ops= JSON.parse(msg);
+		ops.msg= JSON.parse(ops.msg);
+		console.log(ops);
 		//console.log(msg);
-		//listaEspera[ops.tipo].push(ops.id);
+		listaEspera[ops.msg.tipo][ops.session]=1;
 	/*	setTimeout(function(){
 			Reset();
 			finished=false;
@@ -138,7 +196,7 @@ var request = require('request');
 			console.log("PUNTOS COMPUTER: "+ golesComputer);
 
 
-			io.emit('recibeJugada', JSON.stringify(jugadaActual));
+			socket.emit('recibeJugada', JSON.stringify(jugadaActual));
 
 			setTimeout(function(){
 
@@ -209,21 +267,22 @@ function InicioTurno(){
 
 function SendStats(msg){
 	//setear variable resultados
-	
+	msg= JSON.parse(msg);
 	if(testLocal){
-		requestSoap("?code=getStats&data="+msg," ","getStats");
+		requestSoap("?code=getStats&data="+msg.msg," ","getStats",msg.session);
 	}else{
 		// var auxU= {id: usuario["id"]};
-		requestSoap("/getStats",{id: msg},"getStats");
+		requestSoap("/getStats",{id: msg.smg},"getStats",msg.session);
 		// requestSoap("/getStats",JSON.stringify(auxU),"getStats");
 	}
 }
 
 
-function requestSoap(code,params,callback){
+function requestSoap(code,params,callback,session){
 	console.log("envia params");
 	console.log(params);
 	console.log(callback);
+	console.log(session);
 	//console.log(context);
 	console.log("-------------------------------------------------");
 	 //$.post (urlConnect+code, function (response) {
@@ -233,22 +292,30 @@ function requestSoap(code,params,callback){
 		io.emit(callback,body);*/
 		//console.log(context);
 		console.log(callback);
+		console.log(session);
 		//console.log(context);
 		console.log("-------------------------------------------------");
-		global[callback](body);
+		global[callback](body,session);
 		//CheckEvent(callback,JSON.parse(response));
 	});
 }
 
 
-global.loginConfirmed= function(msg){
+global.loginConfirmed= function(msg,session){
 	var connectedUser= JSON.parse(msg);
+	console.log(session);
+	online[session].usuario= connectedUser;
+	console.log(online[session]);
+	console.log("------------------------");
 	//online.[connectedUser.id](connectedUser);
-		io.emit('loginConfirmed',  msg);
+	online[session].socket.emit('loginConfirmed',  msg);
 }
 
-global.getStats= function(msg){
-	io.emit("getStats",msg);
+global.getStats= function(msg,session){
+	console.log("entra session");
+	console.log(session);
+	console.log("----------------------------------------------------");
+	online[session].socket.emit("getStats",msg);
 }
 
 function SendStats2(){
@@ -262,7 +329,7 @@ function SendStats2(){
 		}
 		stats=data;
 		console.log("Stats enviados");
-		io.emit('getStats', data);
+		online[session].socket.emit('getStats', data);
 	});
 }
 
@@ -494,9 +561,115 @@ function Partida (tipo) {
 	this.enAlargue=false;
 
 	this.finished=false;
+	
+	this.state="pending";
 }
 
 /*function Usuario(auxU){
 	this.id=auxU.id;
 	this.avatar=avatar;
 }*/
+
+
+/**Loop**/
+//var tickLengthMs = 1000 / 2
+var tickLengthMs = 5000 / 1
+
+/* gameLoop related variables */
+// timestamp of each loop
+var previousTick = Date.now()
+// number of times gameLoop gets called
+var actualTicks = 0
+
+var gameLoop = function () {
+  var now = Date.now()
+
+  actualTicks++
+  if (previousTick + tickLengthMs <= now) {
+    var delta = (now - previousTick) / 1000
+    previousTick = now
+
+    update(delta)
+
+    //console.log('delta', delta, '(target: ' + tickLengthMs +' ms)', 'node ticks', actualTicks)
+    actualTicks = 0
+  }
+
+  if (Date.now() - previousTick < tickLengthMs - 16) {
+    setTimeout(gameLoop)
+  } else {
+    setImmediate(gameLoop)
+  }
+}
+
+
+/**
+Update is normally where all of the logic would go. In this case we simply call
+a function that takes 10 milliseconds to complete thus simulating that our game
+had a very busy time.
+*/
+var update = function(delta) {
+	if(pause){
+		return;
+	}
+ console.log("entra Update "+Date.now());
+ MatchMaking();
+ UpdateMatches();
+ console.log("----------------------------------------");
+}
+
+/**
+A function that wastes time, and occupies 100% CPU while doing so.
+Suggested use: simulating that a complex calculation took time to complete.
+*/
+var aVerySlowFunction = function(milliseconds) {
+  // waste time
+  var start = Date.now()
+  while (Date.now() < start + milliseconds) { }  
+}
+
+// begin the loop !
+gameLoop();
+
+/**End Loop**/
+
+function MatchMaking(){
+	console.log(listaEspera);
+	for(var a=0;a<listaEspera.length;a++){
+		//console.log("entra "+a);
+		try{
+			var inWait="";
+			for (var key in listaEspera[a]) {
+				if(inWait==""){
+					inWait= key;
+				}else{
+					CreateMatch([inWait,key],a);
+					inWait="";
+				}
+				//console.log(key);
+				//console.log(listaEspera[a][key]);
+			}
+		}catch(error){
+			console.log(error);
+		}
+	}
+	
+}
+
+function CreateMatch(users,tipo){
+	
+	var auxPartida= new Partida(tipo);
+	auxPartida.local= online[users[0]];
+	auxPartida.visitante= online[users[1]];
+	console.log("match creado");
+	console.log(users);
+	console.log(auxPartida);
+	partidas["idPartida"]= auxPartida;
+	//aca habría que hacer el soap para pedir el id de partida al server
+	delete listaEspera[tipo][users[0]];
+	delete listaEspera[tipo][users[1]];
+}
+
+function UpdateMatches(){
+	
+}
