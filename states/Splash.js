@@ -270,8 +270,8 @@ var Splash = function () {};
 			clearInterval(interval);
 			console.log("entra login");
 			console.log(session);
-			
-			
+
+
 			Emit("login"," ","loginConfirmed","getStats",context);
 		}
 	},1000);

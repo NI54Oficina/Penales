@@ -68,11 +68,11 @@ Versus.prototype = {
 
         goldenB=game.add.sprite(leftPlayer.x-10,leftPlayer.y-5, 'selector');
         goldenB.scale.setTo(.8,.8);
-        goldenB.addChild(  game.add.sprite(goldenB.width, goldenB.height-50, 'accepted'));
+
 
         goldenA=game.add.sprite(rightPlayer.x-10,rightPlayer.y-5, 'selector');
         goldenA.scale.setTo(.8,.8);
-        goldenA.addChild(game.add.sprite(goldenA.width, goldenA.height-50, 'accepted'));
+
 
         load=game.add.sprite(820, 325, 'loading');
         load.pivot.x=33;
@@ -102,7 +102,9 @@ Versus.prototype = {
      comenzar=this.addMenuOptionInnerPrueba('COMENZAR', function (){
 
 
-      //  game.add.sprite(500, 450, 'accepted');
+        // timer.stop();
+        goldenA.addChild(game.add.sprite(goldenA.width, goldenA.height-50, 'accepted'));
+        goldenB.addChild(  game.add.sprite(goldenB.width, goldenB.height-50, 'accepted'));
         comenzar.visible=false;
         graphics.visible=false;
         textTitle.visible=false;
@@ -111,6 +113,8 @@ Versus.prototype = {
       },270,70, 1);
       comenzar.x=175;
       comenzar.visible=false;
+
+      //borrarBoton
 
       pruebaFuncional=game.add.sprite(50, 50, 'accepted');
       pruebaFuncional.inputEnabled=true;
@@ -121,9 +125,21 @@ Versus.prototype = {
 
       });
       pruebaFuncional.input.useHandCursor = true;
+      
+      //BorrarBoton
+
+      // Emit("getOponente",usuario["id"],"getOponente","empezarConteo",this);
 
 
 
+
+},
+
+empezarConteo: function(){
+  timer.start();
+  tiempo.visible=true;
+  comenzar.visible=true;
+  cancelar.visible=false;
 },
 
 render: function () {
@@ -218,7 +234,10 @@ identificarPuestos: function(scale){
      game.add.sprite(this.game.width/2+50, 420, 'ataja').scale.setTo(.75,.75);
    }
 
-    //  setTimeout(function(){  game.state.start('Game')},1000);
+     setTimeout(function(){
+        Emit("buscarPartida",JSON.stringify(solicitud));
+        game.state.start('Game')
+      },1000);
 },
 
 };

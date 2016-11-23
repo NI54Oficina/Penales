@@ -27,10 +27,6 @@ GameMenu.prototype = {
 
     self=this;
 
-
-
-
-
     game.add.sprite(0, 0, 'menu-bg').scale.setTo(.80,.80);
 
     var graphics = game.add.graphics(100, 100);
@@ -90,6 +86,8 @@ GameMenu.prototype = {
 
       instrucciones.events.onInputOver.add(onOver,self);
       instrucciones.events.onInputOut.add(onOut,self);
+
+      // self.createButton('FUNCION',self.testGlobal, );
 
 
     // this.addMenuOption('GAMEOVER', function () {
