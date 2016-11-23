@@ -25,7 +25,7 @@ GameOver.prototype = {
     console.log(playerOne.height+'  '+playerOne.width);*/
 
 
-    playerTwo = curva=game.add.sprite(650,70, "img-5");
+    playerTwo =game.add.sprite(650,70, "img-5");
     playerTwo.scale.setTo(.3, .3);
     console.log(playerTwo.height +' '+ playerTwo.width);
 
@@ -115,9 +115,14 @@ GameOver.prototype = {
        console.log("Quiero revancha");
 
      },270,70, 1);
+  
+     notif=self.notificationDinamic("ACABAN DE PEDIR REVANCHA", "Te animás?", true,true)
+    //  notif.addChild(self.createButton('RECHAZAR', function () {}).position={x:290,y:350});
+    //  notif.addChild(self.createButton('ACEPTAR', function () {}).position={x:580,y:350});
+    //
+     //
+    //  ;
 
-     self.notificationDinamic("ACABAN DE PEDIR REVANCHA", "Te animás?", true)
-     
   }else{
     this.addMenuOptionInnerPrueba('VOLVER A JUGAR', function () {
 

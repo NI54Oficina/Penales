@@ -87,13 +87,7 @@ GameMenu.prototype = {
       instrucciones.events.onInputOver.add(onOver,self);
       instrucciones.events.onInputOut.add(onOut,self);
 
-      // self.createButton('FUNCION',self.testGlobal, );
-
-
-    // this.addMenuOption('GAMEOVER', function () {
-    //   game.state.start("GameOver");
-    // });
-
+  // self.createButton('FUNCION',self.testGlobal,500,100 ,'50pt RobotoBold');
 
     //Creacion variables en localStorage
 

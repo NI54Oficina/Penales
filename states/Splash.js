@@ -269,7 +269,7 @@ var Splash = function () {};
 		}else{
 			clearInterval(interval);
 			console.log("entra login");
-			console.log(session);
+			// console.log(session);
 
 
 			Emit("login"," ","loginConfirmed","getStats",context);

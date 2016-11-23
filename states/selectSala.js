@@ -114,12 +114,14 @@ Selectsala.prototype = {
 
       arrayBlock=[back, back2, back3, back4];
 
-      this.addMenuOptionInnerPrueba('CANCELAR', function () {
+      self.createButton('CANCELAR', function () {
 
          game.state.start('GameMenu');
 
-       },270,70, 1).x=290;
-       this.addMenuOptionInnerPrueba('JUGAR', function () {
+       }).position={x:290,y:530};
+
+
+      self.createButton('JUGAR',function () {
 
          //aca hacer el envio de mensajes con el server para poder jugar.
          // las salas son 1,2,3,4, si recibe 0 es porque no selecciono ninguna sala.
@@ -135,7 +137,31 @@ Selectsala.prototype = {
       
 
 
-      },270, 70, 1).x=580;
+  }).position={x:580,y:530};
+
+
+
+
+
+    //    this.addMenuOptionInnerPrueba('JUGAR', function () {
+    //
+    //      //aca hacer el envio de mensajes con el server para poder jugar.
+    //      // las salas son 1,2,3,4, si recibe 0 es porque no selecciono ninguna sala.
+    //
+    //     if(salaSelected!=0){
+    //       Emit("buscarPartida",JSON.stringify(solicitud));
+    //       game.state.start('Versus');
+    //     }
+    //
+    //     var solicitud= {};
+    //
+		// //solicitud.id= usuario["id"];
+		// solicitud.tipo= salaSelected;
+    //
+    //
+    //   },270, 70, 1).x=580;
+
+
 
 
 

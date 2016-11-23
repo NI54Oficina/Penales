@@ -12,6 +12,8 @@ Versus.prototype = {
 
     velocidadMoneda=50;
 
+      act=false;
+
     var tableroPuntos = game.add.graphics(this.game.width/2-165, 0);
     tableroPuntos.beginFill(0x000065,1);
     tableroPuntos.drawRoundedRect(0, 0,330,65,5);
@@ -24,15 +26,14 @@ Versus.prototype = {
     brilloTablero.alpha=.5;
     tableroPuntos.addChild(brilloTablero);
 
-    timer = game.time.create();
-    timerEvent = timer.add(Phaser.Timer.MINUTE * 0+ Phaser.Timer.SECOND * 5, this.endTimer, this);
-    timer.start();
+
 
 
     tiempo = game.add.text(0, 540, '5:00', { font: "30px BitterBold", fill: "white", align: "center", stroke:'yellow' });
     tiempo.stroke='#ffc400';
     tiempo.strokeThickness = 5;
     tiempo.position.x= this.game.width/2 - tiempo.width/2;
+    tiempo.visible=false;
 
     leftPlayer=game.add.sprite(-50,180, 'player');
     leftPlayer.scale.setTo(.8);
@@ -91,15 +92,21 @@ Versus.prototype = {
 
 
 
-    cancelar=this.addMenuOptionInnerPrueba('CANCELAR', function () {
+    cancelar=self.createButton('CANCELAR', function () {
 
-       game.state.start('Selectsala');
+        game.state.start('Selectsala');
 
-     },270,70, 1);
+      });
 
-     cancelar.x=175;
+     cancelar.position={x:175,y:530};
 
-     comenzar=this.addMenuOptionInnerPrueba('COMENZAR', function (){
+
+
+
+
+
+
+     comenzar=self.createButton('COMENZAR', function (){
 
 
         // timer.stop();
@@ -110,8 +117,8 @@ Versus.prototype = {
         textTitle.visible=false;
         self.sortearMoneda();
 
-      },270,70, 1);
-      comenzar.x=175;
+      });
+      comenzar.position={x:175,y:530};
       comenzar.visible=false;
 
       //borrarBoton
@@ -119,13 +126,13 @@ Versus.prototype = {
       pruebaFuncional=game.add.sprite(50, 50, 'accepted');
       pruebaFuncional.inputEnabled=true;
       pruebaFuncional.events.onInputDown.add(function(){
-        timer.stop();
+        // timer.stop();
         comenzar.visible=true;
         cancelar.visible=false;
 
       });
       pruebaFuncional.input.useHandCursor = true;
-      
+
       //BorrarBoton
 
       // Emit("getOponente",usuario["id"],"getOponente","empezarConteo",this);
@@ -136,6 +143,9 @@ Versus.prototype = {
 },
 
 empezarConteo: function(){
+  timer = game.time.create();
+  timerEvent = timer.add(Phaser.Timer.MINUTE * 0+ Phaser.Timer.SECOND * 5, this.endTimer, this);
+  act=true;
   timer.start();
   tiempo.visible=true;
   comenzar.visible=true;
@@ -143,6 +153,8 @@ empezarConteo: function(){
 },
 
 render: function () {
+
+  if(act){
     if (timer.running) {
         tiempo.setText(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)));
   } else {
@@ -152,7 +164,9 @@ render: function () {
       load.kill();
 
     }
-},
+}
+  },
+
 
 endTimer: function() {
 
@@ -168,10 +182,16 @@ formatTime: function(s) {
 
 endScreen: function(){
   modal=self.notificationDinamic("UPS !","El tiempo de espera se ha agotado !", false);
+
+
+
+
   modal.onComplete.addOnce(function(){
 
-    setTimeout(function(){game.state.start('Selectsala');},1500);
+      setTimeout(function(){game.state.start('Selectsala');},1500);
   });
+
+
 },
 
 sortearMoneda:function(){

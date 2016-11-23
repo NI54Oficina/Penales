@@ -80,12 +80,6 @@ Selectplayer.prototype = {
       img5.idk=5;
 
 
-      //
-      // golden=game.add.sprite(this.game.width/2- wd/2, 150, 'golden');
-      // golden.scale.setTo(0.9,0.9);
-      // golden.alpha=0;
-
-
 
 
       self.setTo5(img2);
@@ -95,21 +89,12 @@ Selectplayer.prototype = {
       self.setTo1(img3);
 
 
+      jugar=self.createButton('JUGAR', function () {
+       Emit("buscarPartida",s1.idk,"partidaEncontrada","listenerSearch",self);
+     },400,75 ,'30pt RobotoBold');
 
-     jugar= this.addMenuOptionInner('JUGAR', function () {
+     jugar.position={x:365,y:530};
 
-        Emit("buscarPartida",s1.idk,"partidaEncontrada","listenerSearch",self);
-
-      });
-
-
-      // this.addMenuOptionInnerPrueba('JUGAR2', function () {
-      //
-      //   self.testGlobal();
-      //
-      // },300,80, 1);
-
-      // game.world.bringToTop(search);
 
 
   },

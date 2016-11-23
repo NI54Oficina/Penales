@@ -23,13 +23,7 @@ GameMenu.prototype = {
 
   create: function () {
 
-
-
     self=this;
-
-
-
-
 
     game.add.sprite(0, 0, 'menu-bg').scale.setTo(.80,.80);
 
@@ -39,25 +33,16 @@ GameMenu.prototype = {
 
 
 
-    // this.addMenuOption('Selectplayer_2', function () {
-    //   game.state.start("Selectplayer_2");
-    // });
-
      this.addMenuOption('JUGAR', function () {
       game.state.start("Selectplayer");
     }).x=700;
 
 
-    /*this.addMenuOption('DESAFÍO \ntwo', function () {
-
-      game.state.start("Selectplayer_2");
-    }).x=600;*/
 
     this.addMenuOption('ESTADÍSTICAS', function () {
       game.state.start("Stadistics");
     }).x=700;
 
-    // self.generateButtonsInSplash([['Boton de Prueba', function(){game.state.start("GameOver");}]]);
 
       instrucciones= game.add.text(790, 490, "INSTRUCCIONES", { font: 'bold 18pt RobotoBold', fill: '#ffc400'});
       bottom=self.createLineGlobal(-80,instrucciones.height+10,270, false, 0xffc400);
@@ -92,10 +77,6 @@ GameMenu.prototype = {
       instrucciones.events.onInputOver.add(onOver,self);
       instrucciones.events.onInputOut.add(onOut,self);
 
-
-    // this.addMenuOption('GAMEOVER', function () {
-    //   game.state.start("GameOver");
-    // });
 
 
     //Creacion variables en localStorage
