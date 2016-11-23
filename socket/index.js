@@ -109,6 +109,7 @@ io.on('connection', function(socket){
 		ops.msg= JSON.parse(ops.msg);
 		console.log(ops);
 		//console.log(msg);
+		online[ops.session].estado="cola";
 		listaEspera[ops.msg.tipo-1][ops.session]=1;
 	/*	setTimeout(function(){
 			Reset();
@@ -287,6 +288,7 @@ function requestSoap(code,params,callback,session){
 
 global.loginConfirmed= function(msg,session){
 	var connectedUser= JSON.parse(msg);
+	connectedUser.estado="online";
 	console.log(session);
 	online[session].usuario= connectedUser;
 	console.log(online[session]);
@@ -551,6 +553,8 @@ function Partida (tipo) {
 	
 	this.tick= function(){
 		console.log("tick "+this.id);
+		console.log("user1 "+this.local.estado);
+		console.log("user2 "+this.visitante.estado);
 	};
 }
 
@@ -668,10 +672,15 @@ function CreateMatch(users,tipo){
 		console.log(body);
 		console.log("---------------------------");
 		auxPartida.id= body;
+		auxPartida.local.estado="espera";
+		auxPartida.visitante.estado="espera";
 		delete listaEspera[tipo][users[0]];
 		delete listaEspera[tipo][users[1]];
 		console.log(auxPartida);
 		partidas[body]= auxPartida;
+		auxPartida.local.socket.emit("oponente",JSON.stringify(auxPartida.visitante));
+		auxPartida.visitante.socket.emit("oponente",JSON.stringify(auxPartida.local));
+		//enviar datos del oponente a cada jugador
 		//pause=true;
 	});
 	
