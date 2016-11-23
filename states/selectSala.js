@@ -123,7 +123,9 @@ Selectsala.prototype = {
 
          //aca hacer el envio de mensajes con el server para poder jugar.
          // las salas son 1,2,3,4, si recibe 0 es porque no selecciono ninguna sala.
+
         if(salaSelected!=0){
+          Emit("buscarPartida",JSON.stringify(solicitud));
           game.state.start('Versus');
         }
 
@@ -131,7 +133,6 @@ Selectsala.prototype = {
 
 		//solicitud.id= usuario["id"];
 		solicitud.tipo= salaSelected;
-		// Emit("buscarPartida",JSON.stringify(solicitud));
 
 
       },270, 70, 1).x=580;
