@@ -78,24 +78,13 @@ io.on('connection', function(socket){
 	
 	socket.on('pause', function(data){
 		pause=true;
-		console.log("entra lista espera");
-		/*if(data&&data!=""){
-			console.log(listaEspera[data]);
-		}else{
-			console.log(listaEspera);
-		}*/
-		console.log(listaEspera);
+		console.log("pause update");
 	});
 	
 	socket.on('resume', function(data){
 		pause=false;
-		console.log("entra lista espera");
-		/*if(data&&data!=""){
-			console.log(listaEspera[data]);
-		}else{
-			console.log(listaEspera);
-		}*/
-		console.log(listaEspera);
+		console.log("play update");
+		
 	});
 	
 	socket.on('getStats', function(msg){
@@ -120,7 +109,7 @@ io.on('connection', function(socket){
 		ops.msg= JSON.parse(ops.msg);
 		console.log(ops);
 		//console.log(msg);
-		listaEspera[ops.msg.tipo][ops.session]=1;
+		listaEspera[ops.msg.tipo-1][ops.session]=1;
 	/*	setTimeout(function(){
 			Reset();
 			finished=false;
@@ -283,20 +272,15 @@ function requestSoap(code,params,callback,session){
 	console.log(params);
 	console.log(callback);
 	console.log(session);
-	//console.log(context);
+	
 	console.log("-------------------------------------------------");
-	 //$.post (urlConnect+code, function (response) {
+	 
 	 request.post(urlConnect+code,params, function (error, response, body) {
-		/*console.log("entra response");
-		console.log(body);
-		io.emit(callback,body);*/
-		//console.log(context);
+		
 		console.log(callback);
 		console.log(session);
-		//console.log(context);
 		console.log("-------------------------------------------------");
 		global[callback](body,session);
-		//CheckEvent(callback,JSON.parse(response));
 	});
 }
 
@@ -666,8 +650,22 @@ function CreateMatch(users,tipo){
 	console.log(auxPartida);
 	partidas["idPartida"]= auxPartida;
 	//aca habría que hacer el soap para pedir el id de partida al server
-	delete listaEspera[tipo][users[0]];
-	delete listaEspera[tipo][users[1]];
+	var code="";
+	var auxParam={modo:tipo,usuarios:users};
+	console.log(auxParam);
+	if(testLocal){
+		code="?code=createMatch";
+	}else{
+		code="/createMatch";
+	}
+	request.post(urlConnect+code,{form:{data:JSON.stringify(auxParam)}}, function (error, response, body) {
+		console.log("---------------------------");
+		console.log(body);
+		console.log("---------------------------");
+		delete listaEspera[tipo][users[0]];
+		delete listaEspera[tipo][users[1]];
+	});
+	
 }
 
 function UpdateMatches(){

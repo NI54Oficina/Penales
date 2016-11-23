@@ -14,6 +14,19 @@ if(isset($_GET)){
 		
 		UpdateStats($data->gameId,$data->localId,$data->visitanteId,$data->jugadasLocal,$data->jugadasVisitante);
 	}
+	if(isset($_GET['code'])&&$_GET["code"]=="createMatch"){
+		/*foreach($_POST as $k=>$v){
+			echo $k;
+			echo "---";
+			echo $v;
+			echo "---";
+		}*/
+		
+		$data= json_decode($_POST["data"]);
+		//echo "entra";
+		//echo $data;
+		CreateMatch($data->usuarios,$data->modo);
+	}
 }else{
 	$data= $_POST["data"];
 }
@@ -111,6 +124,13 @@ function GetStats($userId, $tendencia=null){
 	
 	/*Fin get variables*/
 	echo  json_encode($stats);
+}
+
+function CreateMatch($users,$modo){
+	//aca crea la partida
+	//users es un array con el id de ambos jugadores
+	$partidaId= rand (0,9999);
+	echo $partidaId;
 }
 
 //quizas recibir el fin de partida?
