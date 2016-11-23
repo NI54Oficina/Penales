@@ -519,6 +519,7 @@ efectividadP:10,
 
 
 function Partida (tipo) {
+	this.id=-1;
     this.local={};
     this.visitante={};
 	
@@ -547,6 +548,10 @@ function Partida (tipo) {
 	this.finished=false;
 	
 	this.state="pending";
+	
+	this.tick= function(){
+		console.log("tick "+this.id);
+	};
 }
 
 /*function Usuario(auxU){
@@ -648,7 +653,7 @@ function CreateMatch(users,tipo){
 	console.log("match creado");
 	console.log(users);
 	console.log(auxPartida);
-	partidas["idPartida"]= auxPartida;
+	
 	//aca habría que hacer el soap para pedir el id de partida al server
 	var code="";
 	var auxParam={modo:tipo,usuarios:users};
@@ -662,12 +667,18 @@ function CreateMatch(users,tipo){
 		console.log("---------------------------");
 		console.log(body);
 		console.log("---------------------------");
+		auxPartida.id= body;
 		delete listaEspera[tipo][users[0]];
 		delete listaEspera[tipo][users[1]];
+		console.log(auxPartida);
+		partidas[body]= auxPartida;
+		//pause=true;
 	});
 	
 }
 
 function UpdateMatches(){
-	
+	for (var id in partidas) {
+		partidas[id].tick();
+	}
 }

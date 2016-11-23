@@ -1,4 +1,4 @@
-var serverEnabled=true;
+var serverEnabled=false;
 var socket;
 var testLocal =true;
 if(serverEnabled){
