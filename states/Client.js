@@ -1,6 +1,8 @@
 var serverEnabled=false;
 var socket;
 var testLocal =true;
+var oponente={};
+
 if(serverEnabled){
 socket = io('http://localhost:3000');
 }else{
@@ -157,3 +159,4 @@ function Pause(msg){
 function Resume(msg){
 	Emit("resume",msg);
 }
+
