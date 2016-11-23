@@ -39,6 +39,7 @@ function getSession(){
 	$datos= array();
 	$datos["id"]=2;
 	$datos["avatar"]="assets/general/images/test-avatar.jpg";
+	$datos["nickname"]="Pepito";
 	$datos["puntos"]= "10000";
 	$datos["credits"]= 23232;
 	echo json_encode($datos);

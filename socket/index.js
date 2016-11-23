@@ -24,7 +24,7 @@ io.on('connection', function(socket){
 		//io.sockets.socket(socket.id).emit("poyo")
 		var connectedUser={};
 		connectedUser.socket= socket;
-		connectedUser.usuaio= "poyo";
+		connectedUser.usuario= "poyo";
 		online[socket.id]= connectedUser;
 		console.log("user conected");
 		socket.emit("session",socket.id);
@@ -103,7 +103,7 @@ io.on('connection', function(socket){
 		SendStats(msg);
 	});
 	
-	socket.on('buscarPartida', function(msg,session){
+	socket.on('buscarPartida', function(msg){
 		socket.emit('buscandoPartida', "buscando partida...");
 		var ops= JSON.parse(msg);
 		ops.msg= JSON.parse(ops.msg);
@@ -156,6 +156,17 @@ io.on('connection', function(socket){
 
 			},2000);
 		},2000);*/
+	});
+	
+	socket.on('ready', function(msg){
+		console.log(msg);
+		var ops= JSON.parse(msg);
+		console.log(ops);
+		console.log("----------------------------------");
+		online[ops.session].estado="listo";
+		var auxPartida= partidas[online[ops.session].partida];
+		var oponente= auxPartida.oponente(ops.session);
+		oponente.socket.emit("oponenteListo",JSON.stringify({status:1}));
 	});
 
 	socket.on('enviarJugada', function(msg){
@@ -288,9 +299,9 @@ function requestSoap(code,params,callback,session){
 
 global.loginConfirmed= function(msg,session){
 	var connectedUser= JSON.parse(msg);
-	connectedUser.estado="online";
 	console.log(session);
 	online[session].usuario= connectedUser;
+	online[session].estado="online";
 	console.log(online[session]);
 	console.log("------------------------");
 	//online.[connectedUser.id](connectedUser);
@@ -555,6 +566,17 @@ function Partida (tipo) {
 		console.log("tick "+this.id);
 		console.log("user1 "+this.local.estado);
 		console.log("user2 "+this.visitante.estado);
+		if(this.local.estado=="listo"&&this.visitante.estado=="listo"){
+			console.log("partida lista!");
+		}
+	};
+	
+	this.oponente=function(player){
+		if(this.local.socket.id==player){
+			return this.visitante;
+		}else{
+			return this.local;
+		}
 	};
 }
 
@@ -673,13 +695,25 @@ function CreateMatch(users,tipo){
 		console.log("---------------------------");
 		auxPartida.id= body;
 		auxPartida.local.estado="espera";
+		auxPartida.local.partida=body;
 		auxPartida.visitante.estado="espera";
+		auxPartida.visitante.partida=body;
 		delete listaEspera[tipo][users[0]];
 		delete listaEspera[tipo][users[1]];
 		console.log(auxPartida);
 		partidas[body]= auxPartida;
-		auxPartida.local.socket.emit("oponente",JSON.stringify(auxPartida.visitante));
-		auxPartida.visitante.socket.emit("oponente",JSON.stringify(auxPartida.local));
+		var auxVisitante= JSON.parse(JSON.stringify(auxPartida.visitante.usuario));
+		delete auxVisitante["puntos"];
+		delete auxVisitante["credits"];
+		delete auxVisitante["estado"];
+		delete auxVisitante["id"];
+		var auxLocal= JSON.parse(JSON.stringify(auxPartida.local.usuario));;
+		delete auxLocal["puntos"];
+		delete auxLocal["credits"];
+		delete auxLocal["estado"];
+		delete auxLocal["id"];
+		auxPartida.local.socket.emit("oponente",JSON.stringify(auxVisitante));
+		auxPartida.visitante.socket.emit("oponente",JSON.stringify(auxLocal));
 		//enviar datos del oponente a cada jugador
 		//pause=true;
 	});

@@ -108,14 +108,15 @@ Versus.prototype = {
 
      comenzar=self.createButton('COMENZAR', function (){
 
-
+		Emit("ready","");
         // timer.stop();
-        goldenA.addChild(game.add.sprite(goldenA.width, goldenA.height-50, 'accepted'));
-        goldenB.addChild(  game.add.sprite(goldenB.width, goldenB.height-50, 'accepted'));
+        //goldenA.addChild(game.add.sprite(goldenA.width, goldenA.height-50, 'accepted'));
+		goldenB.addChild(  game.add.sprite(goldenB.width, goldenB.height-50, 'accepted'));
+        /*
         comenzar.visible=false;
         graphics.visible=false;
         textTitle.visible=false;
-        self.sortearMoneda();
+        self.sortearMoneda();*/
 
       });
       comenzar.position={x:175,y:530};
@@ -133,18 +134,17 @@ Versus.prototype = {
       });
       pruebaFuncional.input.useHandCursor = true;
 
-      //BorrarBoton
-
-      // Emit("getOponente",usuario["id"],"getOponente","empezarConteo",this);
-
-
-
-
+    //BorrarBoton
+	SuscribeServerEvent("oponente","empezarConteo",this,true);
+	SuscribeServerEvent("oponenteListo","oponenteListo",this,true);
+	
 },
 
-empezarConteo: function(){
+empezarConteo: function(msg){
+	oponente= msg;
+	console.log("empezar Conteooooooo");
   timer = game.time.create();
-  timerEvent = timer.add(Phaser.Timer.MINUTE * 0+ Phaser.Timer.SECOND * 5, this.endTimer, this);
+  timerEvent = timer.add(Phaser.Timer.MINUTE * 0+ Phaser.Timer.SECOND * 40, this.endTimer, this);
   act=true;
   timer.start();
   tiempo.visible=true;
@@ -152,11 +152,15 @@ empezarConteo: function(){
   cancelar.visible=false;
 },
 
+oponenteListo:function(msg){
+	goldenA.addChild(game.add.sprite(goldenA.width, goldenA.height-50, 'accepted'));
+},
+
 render: function () {
 
   if(act){
     if (timer.running) {
-        tiempo.setText(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)));
+		tiempo.setText(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)));
   } else {
 
       tiempo.kill();
@@ -183,11 +187,8 @@ formatTime: function(s) {
 endScreen: function(){
   modal=self.notificationDinamic("UPS !","El tiempo de espera se ha agotado !", false);
 
-
-
-
   modal.onComplete.addOnce(function(){
-
+		
       setTimeout(function(){game.state.start('Selectsala');},1500);
   });
 
