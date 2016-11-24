@@ -26,14 +26,15 @@ Versus.prototype = {
     tableroPuntos.addChild(brilloTablero);
 
     timer = game.time.create();
-    timerEvent = timer.add(Phaser.Timer.MINUTE * 0+ Phaser.Timer.SECOND * 5, this.endTimer, this);
-    timer.start();
+    timerEvent = timer.add(Phaser.Timer.MINUTE * 0+ Phaser.Timer.SECOND * 60, this.endTimer, this);
+    //timer.start();
 
 
     tiempo = game.add.text(0, 540, '5:00', { font: "30px BitterBold", fill: "white", align: "center", stroke:'yellow' });
     tiempo.stroke='#ffc400';
     tiempo.strokeThickness = 5;
     tiempo.position.x= this.game.width/2 - tiempo.width/2;
+	tiempo.visible=false;
 
     leftPlayer=game.add.sprite(-50,180, 'player');
     leftPlayer.scale.setTo(.8);
@@ -45,7 +46,7 @@ Versus.prototype = {
     rightPlayer.scale.setTo(.8);
     rightPlayer.alpha=0;
 
-    var textTitle = game.add.text(0, 250, "VS",{ font: '60px BitterBold', fill: 'white', align: 'center'});
+    textTitle = game.add.text(0, 250, "VS",{ font: '60px BitterBold', fill: 'white', align: 'center'});
     textTitle.position.x= this.game.width/2 - textTitle.width/2;
     textTitle.setShadow(-5, -5, 'rgba(0,0,0,0.5)', 15);
 
@@ -58,6 +59,8 @@ Versus.prototype = {
     tweenB.start();
     tweenC.start();
     tweenD.start();
+	
+	listos=0;
 
     tweenD.onComplete.add(
       function(){
@@ -97,15 +100,16 @@ Versus.prototype = {
 
 
      comenzar=self.createButton('COMENZAR', function (){
-
-
+		listos+=1;
+		Emit("ready","");
         // timer.stop();
-        goldenA.addChild(game.add.sprite(goldenA.width, goldenA.height-50, 'accepted'));
+        //goldenA.addChild(game.add.sprite(goldenA.width, goldenA.height-50, 'accepted'));
         goldenB.addChild(  game.add.sprite(goldenB.width, goldenB.height-50, 'accepted'));
-        comenzar.visible=false;
+        /*comenzar.visible=false;
         graphics.visible=false;
         textTitle.visible=false;
-        self.sortearMoneda();
+        self.sortearMoneda();*/
+		self.ambosListos();
 
       });
       comenzar.position={x:175,y:530};
@@ -125,28 +129,51 @@ Versus.prototype = {
 
       //BorrarBoton
 
-      // Emit("getOponente",usuario["id"],"getOponente","empezarConteo",this);
-
-
-
+    SuscribeServerEvent("oponente","empezarConteo",this,true);
+	SuscribeServerEvent("oponenteListo","oponenteListo",this,true);
+	SuscribeServerEvent("recibirLado","recibirLado",this,true);
+	
 
 },
 
-empezarConteo: function(){
+oponenteListo:function(msg){
+	listos+=1;
+	goldenA.addChild(game.add.sprite(goldenA.width, goldenA.height-50, 'accepted'));
+	this.ambosListos();
+},
+
+empezarConteo: function(msg){
+	//oponente es un objeto global
+	oponente= msg;
+	//renderear aca avatar del oponente (cargarlo y mostrarlo)
   timer.start();
   tiempo.visible=true;
   comenzar.visible=true;
   cancelar.visible=false;
+  
 },
+
+ambosListos:function(){
+	if(listos<2)return;
+	timer.stop();
+	graphics.visible=false;
+  textTitle.visible=false;
+  
+},
+
+recibirLado:function(msg){
+	self.sortearMoneda(msg);
+},
+
 
 render: function () {
     if (timer.running) {
         tiempo.setText(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)));
   } else {
-
-      tiempo.kill();
-      tweenE.pause();
-      load.kill();
+	
+      //tiempo.kill();
+      //tweenE.pause();
+      //load.kill();
 
     }
 },
@@ -177,21 +204,21 @@ endScreen: function(){
 
 },
 
-sortearMoneda:function(){
+sortearMoneda:function(msg){
 
   monedaRight=game.add.sprite(this.game.width/2, this.game.height/2-171/2, 'moneda-right');
   monedaRight.pivot.x=171/2;
 
-  self.rotarMoneda(monedaRight);
+  self.rotarMoneda(monedaRight,msg);
 
 
 },
 
-rotarMoneda(target){
+rotarMoneda(target,msg){
 
   t1=target;
 
-  if(1){ //chekeo de lo que el servidor eligio
+  if(msg==1){ //chekeo de lo que el servidor eligio
     velocidadMoneda+=25;
   }else{
     velocidadMoneda+=20;
@@ -219,7 +246,7 @@ rotarMoneda(target){
         self.identificarPuestos(target.scale.x);
 
       }else{
-        self.rotarMoneda(t1);
+        self.rotarMoneda(t1,msg);
       }
 
      });
@@ -250,7 +277,7 @@ identificarPuestos: function(scale){
 
      tt2.start();
      tt1.start();
-
+	setTimeout(function(){game.state.start('Game');},5000)
     //  setTimeout(function(){
     //     Emit("buscarPartida",JSON.stringify(solicitud));
     //     game.state.start('Game')
