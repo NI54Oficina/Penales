@@ -99,7 +99,7 @@ Game.prototype = {
   }else{
 	  screenOponente.visible=true;
   }*/
-
+	//emitear un ready aca al server
 
 },
 
