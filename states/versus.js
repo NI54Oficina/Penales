@@ -12,7 +12,6 @@ Versus.prototype = {
 
     velocidadMoneda=50;
 
-      act=false;
 
     var tableroPuntos = game.add.graphics(this.game.width/2-165, 0);
     tableroPuntos.beginFill(0x000065,1);
@@ -26,14 +25,15 @@ Versus.prototype = {
     brilloTablero.alpha=.5;
     tableroPuntos.addChild(brilloTablero);
 
-
+    timer = game.time.create();
+    timerEvent = timer.add(Phaser.Timer.MINUTE * 0+ Phaser.Timer.SECOND * 5, this.endTimer, this);
+    timer.start();
 
 
     tiempo = game.add.text(0, 540, '5:00', { font: "30px BitterBold", fill: "white", align: "center", stroke:'yellow' });
     tiempo.stroke='#ffc400';
     tiempo.strokeThickness = 5;
     tiempo.position.x= this.game.width/2 - tiempo.width/2;
-    tiempo.visible=false;
 
     leftPlayer=game.add.sprite(-50,180, 'player');
     leftPlayer.scale.setTo(.8);
@@ -45,7 +45,7 @@ Versus.prototype = {
     rightPlayer.scale.setTo(.8);
     rightPlayer.alpha=0;
 
-    var textTitle = game.add.text(0, 250, "VS",{ font: '60px CondensedRegular', fill: 'white', align: 'center'});
+    var textTitle = game.add.text(0, 250, "VS",{ font: '60px BitterBold', fill: 'white', align: 'center'});
     textTitle.position.x= this.game.width/2 - textTitle.width/2;
     textTitle.setShadow(-5, -5, 'rgba(0,0,0,0.5)', 15);
 
@@ -53,11 +53,6 @@ Versus.prototype = {
     var tweenB= game.add.tween(leftPlayer).to({x:this.game.width/2 - leftPlayer.width-100}, 200, 'Linear');
     var tweenC =game.add.tween(leftPlayer).to( {alpha:1}, 200, 'Linear');
     var tweenD =game.add.tween(rightPlayer).to( {alpha:1}, 200, 'Linear');
-
-
-
-
-
 
     tweenA.start();
     tweenB.start();
@@ -101,22 +96,16 @@ Versus.prototype = {
      cancelar.position={x:175,y:530};
 
 
-
-
-
-
-
      comenzar=self.createButton('COMENZAR', function (){
 
-		Emit("ready","");
+
         // timer.stop();
-        //goldenA.addChild(game.add.sprite(goldenA.width, goldenA.height-50, 'accepted'));
-		goldenB.addChild(  game.add.sprite(goldenB.width, goldenB.height-50, 'accepted'));
-        /*
+        goldenA.addChild(game.add.sprite(goldenA.width, goldenA.height-50, 'accepted'));
+        goldenB.addChild(  game.add.sprite(goldenB.width, goldenB.height-50, 'accepted'));
         comenzar.visible=false;
         graphics.visible=false;
         textTitle.visible=false;
-        self.sortearMoneda();*/
+        self.sortearMoneda();
 
       });
       comenzar.position={x:175,y:530};
@@ -127,40 +116,32 @@ Versus.prototype = {
       pruebaFuncional=game.add.sprite(50, 50, 'accepted');
       pruebaFuncional.inputEnabled=true;
       pruebaFuncional.events.onInputDown.add(function(){
-        // timer.stop();
+        timer.stop();
         comenzar.visible=true;
         cancelar.visible=false;
 
       });
       pruebaFuncional.input.useHandCursor = true;
 
-    //BorrarBoton
-	SuscribeServerEvent("oponente","empezarConteo",this,true);
-	SuscribeServerEvent("oponenteListo","oponenteListo",this,true);
-	
+      //BorrarBoton
+
+      // Emit("getOponente",usuario["id"],"getOponente","empezarConteo",this);
+
+
+
+
 },
 
-empezarConteo: function(msg){
-	oponente= msg;
-	console.log("empezar Conteooooooo");
-  timer = game.time.create();
-  timerEvent = timer.add(Phaser.Timer.MINUTE * 0+ Phaser.Timer.SECOND * 40, this.endTimer, this);
-  act=true;
+empezarConteo: function(){
   timer.start();
   tiempo.visible=true;
   comenzar.visible=true;
   cancelar.visible=false;
 },
 
-oponenteListo:function(msg){
-	goldenA.addChild(game.add.sprite(goldenA.width, goldenA.height-50, 'accepted'));
-},
-
 render: function () {
-
-  if(act){
     if (timer.running) {
-		tiempo.setText(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)));
+        tiempo.setText(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)));
   } else {
 
       tiempo.kill();
@@ -168,9 +149,7 @@ render: function () {
       load.kill();
 
     }
-}
-  },
-
+},
 
 endTimer: function() {
 
@@ -187,8 +166,11 @@ formatTime: function(s) {
 endScreen: function(){
   modal=self.notificationDinamic("UPS !","El tiempo de espera se ha agotado !", false);
 
+
+
+
   modal.onComplete.addOnce(function(){
-		
+
       setTimeout(function(){game.state.start('Selectsala');},1500);
   });
 
@@ -248,17 +230,31 @@ rotarMoneda(target){
 identificarPuestos: function(scale){
 
    if(scale==1){
-     game.add.sprite(this.game.width/2-90, 420, 'ataja').scale.setTo(.75,.75);
-     game.add.sprite(this.game.width/2+50, 420, 'patea').scale.setTo(.75,.75);
+     var t1= game.add.sprite(this.game.width/2-70, 420, 'ataja');
+     var t2= game.add.sprite(this.game.width/2+70, 420, 'patea');
    }else{
-     game.add.sprite(this.game.width/2-90, 420, 'patea').scale.setTo(.75,.75);
-     game.add.sprite(this.game.width/2+50, 420, 'ataja').scale.setTo(.75,.75);
+     var t1=game.add.sprite(this.game.width/2-70, 420, 'patea');
+     var t2=game.add.sprite(this.game.width/2+70, 420, 'ataja');
    }
 
-     setTimeout(function(){
-        Emit("buscarPartida",JSON.stringify(solicitud));
-        game.state.start('Game')
-      },1000);
+   t1.pivot.x=t1.width/2;
+   t2.pivot.x=t2.width/2;
+   t1.pivot.y=t1.height/2;
+   t2.pivot.y=t2.height/2;
+   t1.scale.setTo(.1,.1);
+   t2.scale.setTo(.1,.1);
+
+
+     var tt1=game.add.tween(t1.scale).to( {x:.75,y:.75}, 500,'Linear');
+     var tt2=game.add.tween(t2.scale).to( {x:.75,y:.75}, 500,'Linear');
+
+     tt2.start();
+     tt1.start();
+
+    //  setTimeout(function(){
+    //     Emit("buscarPartida",JSON.stringify(solicitud));
+    //     game.state.start('Game')
+    //   },2000);
 },
 
 };

@@ -52,40 +52,46 @@ GameMenu.prototype = {
 
     estadisticas.position={x:700, y:370};
 
+
+    this.addMenuOption('INSTRUCCIONES', function () {
+     self.instrucciones('INSTRUCCIONES',true);
+   }).position={x:700, y:480};
+
+
     // self.generateButtonsInSplash([['Boton de Prueba', function(){game.state.start("GameOver");}]]);
 
-      instrucciones= game.add.text(790, 495, "INSTRUCCIONES", { font: 'bold 18pt RobotoBold', fill: '#ffc400'});
-      bottom=self.createLineGlobal(-80,instrucciones.height+10,270, false, 0xffc400);
-
-      topLine=self.createLineGlobal(-80,-15, 270,false, 0xffc400);
-      left=self.createLineGlobal(-80,-15,-80, false, 0xffc400,instrucciones.height+10 );
-      right=self.createLineGlobal(270,-15,270, false, 0xffc400,instrucciones.height+10 );
-
-      instrucciones.addChild(bottom);
-      instrucciones.addChild(topLine);
-      instrucciones.addChild(left);
-      instrucciones.addChild(right);
-
-
-
-      var onOver = function (target) {
-
-      target.alpha=.4;
-
-
-      };
-
-      var onOut = function (target) {
-        target.alpha=1;
-
-      };
-
-      instrucciones.inputEnabled = true;
-      instrucciones.input.useHandCursor = true;
-      instrucciones.events.onInputDown.add(function(){self.notification('INSTRUCCIONES',true);});
-
-      instrucciones.events.onInputOver.add(onOver,self);
-      instrucciones.events.onInputOut.add(onOut,self);
+      // instrucciones= game.add.text(790, 495, "INSTRUCCIONES", { font: 'bold 18pt RobotoBold', fill: '#ffc400'});
+      // bottom=self.createLineGlobal(-80,instrucciones.height+10,270, false, 0xffc400);
+      //
+      // topLine=self.createLineGlobal(-80,-15, 270,false, 0xffc400);
+      // left=self.createLineGlobal(-80,-15,-80, false, 0xffc400,instrucciones.height+10 );
+      // right=self.createLineGlobal(270,-15,270, false, 0xffc400,instrucciones.height+10 );
+      //
+      // instrucciones.addChild(bottom);
+      // instrucciones.addChild(topLine);
+      // instrucciones.addChild(left);
+      // instrucciones.addChild(right);
+      //
+      //
+      //
+      // var onOver = function (target) {
+      //
+      // target.alpha=.4;
+      //
+      //
+      // };
+      //
+      // var onOut = function (target) {
+      //   target.alpha=1;
+      //
+      // };
+      //
+      // instrucciones.inputEnabled = true;
+      // instrucciones.input.useHandCursor = true;
+      // instrucciones.events.onInputDown.add(function(){self. instrucciones('INSTRUCCIONES',true);});
+      //
+      // instrucciones.events.onInputOver.add(onOver,self);
+      // instrucciones.events.onInputOut.add(onOut,self);
 
   // self.createButton('FUNCION',self.testGlobal,500,100 ,'50pt RobotoBold');
 

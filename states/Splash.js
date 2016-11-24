@@ -68,6 +68,13 @@ var Splash = function () {};
     game.load.image('accepted', urlBase+'assets/multiplayer/images/tilde-comenzar.png');
     game.load.image('moneda-right', urlBase+'assets/multiplayer/images/moneda-2.png');
 
+    game.load.image('btn-a-1', urlBase+'assets/multiplayer/images/btn-yellow-1.png');
+    game.load.image('btn-a-2', urlBase+'assets/multiplayer/images/btn-yellow-2.png');
+    game.load.image('btn-a-3', urlBase+'assets/multiplayer/images/btn-yellow-3.png');
+    game.load.image('btn-b-1', urlBase+'assets/multiplayer/images/btn-blue-1.png');
+    game.load.image('btn-b-2', urlBase+'assets/multiplayer/images/btn-blue-2.png');
+    game.load.image('btn-b-3', urlBase+'assets/multiplayer/images/btn-blue-3.png');
+
   }else{
     game.load.image('menu-bg', urlBase+'assets/singleplayer/images/bg-menu.png');
 

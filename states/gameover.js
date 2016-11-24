@@ -108,20 +108,20 @@ GameOver.prototype = {
     search.visible=false;
 
 
-    // var botones=self.generateButtonsInSplash([ ['VOLVER A JUGAR', self.Restart],['MENU', self.MainMenu]]);
+    this.addMenuOptionInnerPrueba('MENU', function () {
+
+     self.MainMenu();
+
+   },270, 70, 1);
+
   if(!modoMultiplayer){
     this.addMenuOptionInnerPrueba('REVANCHA 20', function () {
 
        console.log("Quiero revancha");
 
      },270,70, 1);
-  
-     notif=self.notificationDinamic("ACABAN DE PEDIR REVANCHA", "Te animás?", true,true)
-    //  notif.addChild(self.createButton('RECHAZAR', function () {}).position={x:290,y:350});
-    //  notif.addChild(self.createButton('ACEPTAR', function () {}).position={x:580,y:350});
-    //
-     //
-    //  ;
+
+
 
   }else{
     this.addMenuOptionInnerPrueba('VOLVER A JUGAR', function () {
@@ -131,11 +131,7 @@ GameOver.prototype = {
      },270,70, 1);
   }
 
-     this.addMenuOptionInnerPrueba('MENU', function () {
 
-      self.MainMenu();
-
-    },270, 70, 1);
 
     // botones.position= {x:this.game.width/2 - botones.width/2-20, y:this.game.height-botones.height*2}
 
@@ -224,6 +220,11 @@ GameOver.prototype = {
 
 
 
+         notif=self.notificationDinamic("ACABAN DE PEDIR REVANCHA", "Te animás?", false,true);
+          a= self.createButton('RECHAZAR', function () { });
+          a.position={x:290,y:350};
+          b=self.createButton('ACEPTAR', function () {});
+          b.position={x:580,y:350};
 
 
   },
