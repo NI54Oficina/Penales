@@ -167,6 +167,7 @@ io.on('connection', function(socket){
 		var auxPartida= partidas[online[ops.session].partida];
 		var oponente= auxPartida.oponente(ops.session);
 		oponente.socket.emit("oponenteListo",JSON.stringify({status:1}));
+		auxPartida.tick();
 	});
 
 	socket.on('enviarJugada', function(msg){
@@ -564,10 +565,15 @@ function Partida (tipo) {
 	
 	this.tick= function(){
 		console.log("tick "+this.id);
-		console.log("user1 "+this.local.estado);
-		console.log("user2 "+this.visitante.estado);
-		if(this.local.estado=="listo"&&this.visitante.estado=="listo"){
-			console.log("partida lista!");
+		if(this.state=="pending"){
+			console.log("user1 "+this.local.estado);
+			console.log("user2 "+this.visitante.estado);
+			if(this.local.estado=="listo"&&this.visitante.estado=="listo"){
+				console.log("partida lista!");
+				this.state="starting";
+			}
+		}else if(this.state=""){
+			
 		}
 	};
 	
