@@ -572,8 +572,8 @@ function Partida (tipo) {
 				console.log("partida lista!");
 				this.state="starting";
 			}
-		}else if(this.state=""){
-			
+		}else if(this.state="starting"){
+			//this.local.emit();
 		}
 	};
 	
