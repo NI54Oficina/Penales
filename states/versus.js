@@ -237,7 +237,7 @@ rotarMoneda(target,msg){
 
       monedaTween=game.add.tween(t1.scale).to( {x:-1}, velocidadMoneda,'Linear');
     }
-    console.log(velocidadMoneda);
+    // console.log(velocidadMoneda);
     monedaTween.start();
 
     monedaTween.onComplete.addOnce(function(){

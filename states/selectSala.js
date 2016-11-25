@@ -293,7 +293,7 @@ ReplaceColor: function(target){
             for(var j=0; j<2;j++){
 
               target.children[i].loadTexture(levelsBlue[k], 0, false);
-              console.log(levelsBlue[k]);
+              // console.log(levelsBlue[k]);
             }
 
         }
