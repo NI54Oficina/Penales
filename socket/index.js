@@ -170,8 +170,16 @@ io.on('connection', function(socket){
 		auxPartida.tick();
 	});
 
-	socket.on('enviarJugada', function(msg){
-		if(finished){
+	socket.on('enviarJugada', function(msg,session){
+		console.log(msg);
+		var ops= JSON.parse(msg);
+		console.log(ops);
+		console.log("----------------------------------");
+		online[ops.session].estado="listo";
+		online[ops.session].jugadas.push(ops.msg);
+		var auxPartida= partidas[online[ops.session].partida];
+		auxPartida.tick();
+		/*if(finished){
 			return;
 		}
 		setTimeout(function(){
@@ -242,7 +250,7 @@ io.on('connection', function(socket){
 				}
 
 			},3000);
-		},2000);
+		},2000);*/
 	});
 
 });
@@ -543,8 +551,6 @@ function Partida (tipo) {
 
 	this.jugadas={};
 
-	this.jugadaActual={};
-
 	this.counterPartida=0;
 
 	this.counterLocal=0;
@@ -580,13 +586,24 @@ function Partida (tipo) {
 				this.visitante.estado="empezando";
 				this.state="starting";
 			}
-		}else if(this.state="starting"){
+		}else if(this.state=="starting"){
 			if(this.local.estado=="listo"&&this.visitante.estado=="listo"){
+				this.local.estado="esperando";
+				this.visitante.estado="esperando";
+				this.state="game";	
 				this.local.socket.emit("inicioPartida",JSON.stringify({id:1}));
 				this.visitante.socket.emit("inicioPartida",JSON.stringify({id:1}));
 			}
-		}else if(this.state="game"){
-			
+		}else if(this.state=="game"){
+			if(this.local.estado=="listo"&&this.visitante.estado=="listo"){
+				this.local.estado="esperando";
+				this.visitante.estado="esperando";
+				this.state="animando";
+				console.log(this.local);
+				console.log(this.visitante);
+				this.local.socket.emit("recibeJugada",JSON.stringify({user:this.local.jugadas[this.local.jugadas.length-1],computer:this.visitante.jugadas[this.visitante.jugadas.length-1]}));
+				this.visitante.socket.emit("recibeJugada",JSON.stringify({user:this.visitante.jugadas[this.visitante.jugadas.length-1],computer:this.local.jugadas[this.local.jugadas.length-1]}));
+			}
 		}
 	};
 	
@@ -693,6 +710,8 @@ function MatchMaking(){
 function CreateMatch(users,tipo){
 	
 	var auxPartida= new Partida(tipo);
+	users[0].jugadas=new Array();
+	users[1].jugadas=new Array();
 	auxPartida.local= online[users[0]];
 	auxPartida.visitante= online[users[1]];
 	console.log("match creado");
