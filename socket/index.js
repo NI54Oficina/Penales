@@ -437,12 +437,12 @@ function randomBetween(min, max) {
 function calculatePuntaje(msg, generator){
 	if(mod%2 == 0){
 		if(generator>0 && msg!=generator){
-			golesComputer++;
+			golesVisitante++;
 		};
 	}else{
 		//entra en jugador modo pateador
 		if(msg>0 && msg!=generator){
-			golesUser++;
+			golesLocal++;
 		}	
 	}
 	return;
@@ -564,6 +564,8 @@ function Partida (tipo) {
 	this.auxCont=0;
 
 	this.modStart=-1;
+	
+	this.modo=-1;
 
 	this.enAlargue=false;
 
@@ -591,6 +593,7 @@ function Partida (tipo) {
 				this.local.estado="esperando";
 				this.visitante.estado="esperando";
 				this.state="game";	
+				this.modo=0;
 				this.local.socket.emit("inicioPartida",JSON.stringify({id:1}));
 				this.visitante.socket.emit("inicioPartida",JSON.stringify({id:1}));
 			}
@@ -604,9 +607,99 @@ function Partida (tipo) {
 				this.local.socket.emit("recibeJugada",JSON.stringify({user:this.local.jugadas[this.local.jugadas.length-1],computer:this.visitante.jugadas[this.visitante.jugadas.length-1]}));
 				this.visitante.socket.emit("recibeJugada",JSON.stringify({user:this.visitante.jugadas[this.visitante.jugadas.length-1],computer:this.local.jugadas[this.local.jugadas.length-1]}));
 			}
+		}else if(this.state=="animando"){
+			if(this.local.estado=="listo"&&this.visitante.estado=="listo"){
+				this.local.estado="esperando";
+				this.visitante.estado="esperando";
+				this.state="game";
+				this.checkResult();
+			}
 		}
 	};
 	
+	this.checkResult=function(){
+		this.calculatePuntaje();
+		
+		this.modo++;
+		this.checkPuntaje();
+	},
+	
+	this.InicioTurno=function(){
+		this.local.socket.emit("inicioTurno",JSON.stringify({id:1}));
+		this.visitante.socket.emit("inicioTurno",JSON.stringify({id:1}));
+	},
+	
+	this.calculatePuntaje= function(){
+		var localIndex= this.local.jugadas[this.local.jugadas.length-1];
+		var visitanteIndex= this.visitante.jugadas[this.visitante.jugadas.length-1];
+		if(this.modo%2 == 0){
+			this.counterVisitante++;
+			if(visitanteIndex>0 && visitanteIndex!=localIndex){
+				this.golesVisitante++;
+			};
+		}else{
+			this.counterLocal++;
+			//entra en jugador modo pateador
+			if(localIndex>0 && localIndex!=visitanteIndex){
+				this.golesLocal++;
+			}	
+		}
+	},
+	
+	this.checkPuntaje=function(){
+		if(this.counterVisitante >= 5 &&  this.counterLocal >= 5 ){
+				if(this.golesVisitante == this.golesLocal && !this.enAlargue){
+					this.auxCont++;
+					this.enAlargue=true;
+					console.log("EMPATE");
+					this.InicioTurno();
+					console.log("Iniciar Turno");
+
+				}else if(this.enAlargue){
+					if(this.auxCont!=2){
+						this.auxCont++;
+						console.log("EMPATE");
+						this.InicioTurno();
+						console.log("Iniciar Turno");
+					}else{
+
+						console.log("GOLES LOCAL: "+ this.golesLocal +", GOLES VISITANTE: "+ this.golesVisitante);
+						 if(this.golesUser == this.golesComputer){
+							this.auxCont=0;
+							console.log("EMPATE");
+							this.InicioTurno();
+							console.log("Iniciar Turno");
+						}else{
+
+							console.log("TERMINA JUEGO EN EMPATE"); this.GetResultado();
+						}
+					};
+				}else{
+					console.log("TERMINA JUEGO");
+					this.finished=true;
+					this.GetResultado();
+				};
+		}else{
+			console.log("NUEVO TURNO");
+			this.InicioTurno();
+			console.log("Iniciar Turno");
+		}
+	},
+	
+	this.GetResultado=function(){
+		//tendria que emitir el resultado, cliente lo recibe, setea y va a pantalla correspondiente segun comprobación.
+		var auxArray={};
+		//cambiar por local y visitante segun corresponda
+		this.local.socket.emit("resultadoPartida",JSON.stringify({golesUser:this.golesLocal,golesComputer:this.golesVisitante}));
+		this.visitante.socket.emit("resultadoPartida",JSON.stringify({golesUser:this.golesVisitante,golesComputer:this.golesLocal}));
+		//auxArray["golesUser"]= golesUser;
+		//auxArray["golesComputer"]= golesComputer;
+		//io.emit('resultadoPartida', JSON.stringify(auxArray));
+		//SendStats();
+		
+
+	},
+		
 	this.oponente=function(player){
 		if(this.local.socket.id==player){
 			return this.visitante;
@@ -710,10 +803,11 @@ function MatchMaking(){
 function CreateMatch(users,tipo){
 	
 	var auxPartida= new Partida(tipo);
-	users[0].jugadas=new Array();
-	users[1].jugadas=new Array();
+	
 	auxPartida.local= online[users[0]];
+	auxPartida.local.jugadas= new Array();
 	auxPartida.visitante= online[users[1]];
+	auxPartida.visitante.jugadas= new Array();
 	console.log("match creado");
 	console.log(users);
 	console.log(auxPartida);

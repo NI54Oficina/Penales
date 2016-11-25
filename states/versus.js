@@ -147,12 +147,13 @@ empezarConteo: function(msg){
     var bmd = game.make.bitmapData(367, 482);
 
     bmd.alphaMask('avatarOponente', 'golden');
+	rightPlayer= game.add.image(this.game.width/2 + 120, 180, bmd);
 
   }, this);
 
 
 
-  rightPlayer= game.add.image(this.game.width/2 + 120, 180, bmd);
+
 
 
 

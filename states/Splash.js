@@ -12,7 +12,7 @@ var Splash = function () {};
       game.load.script('game', urlBase+'states/Game.js');
       game.load.script('Stadistics', urlBase+'states/stadistics.js');
 
-
+		game.load.script('gameover',urlBase+'states/gameover.js');
       if(modoMultiplayer){
 
         game.load.script('gamemenu',urlBase+'states/GameMenuMultiplayer.js');
@@ -23,7 +23,7 @@ var Splash = function () {};
 
         game.load.script('gamemenu',urlBase+'states/gamemenu.js');
 
-        game.load.script('gameover',urlBase+'states/gameover.js');
+       
         //  game.load.script('options', 'states/Options.js');
 
 
@@ -212,13 +212,13 @@ var Splash = function () {};
     game.state.add("GameMenu",GameMenu);
     game.state.add("Game",Game);
     game.state.add("Stadistics",Stadistics);
-
+	game.state.add("GameOver",GameOver);
     if(modoMultiplayer){
       game.state.add("Selectsala",Selectsala);
       game.state.add("Versus",Versus);
-
+	
     }else{
-      game.state.add("GameOver",GameOver);
+      //game.state.add("GameOver",GameOver);
     //  game.state.add("Options",Options);
 
 

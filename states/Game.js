@@ -698,15 +698,26 @@ updateCounter: function () {
   },
 
 	setearResultado: function(msg){
-		 var resultadoArray=JSON.parse(msg);
+		var resultadoArray;
+		if(modoMultiplayer){
+			resultadoArray=msg;
+		}else{
+			var resultadoArray=JSON.parse(msg);
+		}
+		 
 		 puntosUser = resultadoArray["golesUser"];
 		 puntosComputer = resultadoArray["golesComputer"];
 	    this.checkIntentos(msg);
    },
 
   checkIntentos: function(data){
-
-		var auxArray=JSON.parse(data);
+		var auxArray;
+		if(!modoMultiplayer){
+			auxArray=JSON.parse(data);
+		}else{
+			auxArray=data;
+		}
+		
 		if(serverEnabled){
 			if(modo==1){
 				golesUser= auxArray["localGol"];
@@ -905,8 +916,12 @@ EnviarJugadaServer: function(self){
 
 //Respuesta server: resolver jugada
 resolverJugada: function(msg){
-
-	var datosServer=JSON.parse(msg)
+	var datosServer;
+	if(!modoMultiplayer){
+		datosServer=JSON.parse(msg);
+	}else{
+		datosServer=msg;
+	}
 	self.pelotaEntra=false;
 
 
@@ -989,6 +1004,9 @@ animarJugada:function(self,datosServer){
 			    self.atajar(self);
 			}else{
 				self.acertarTiro(self);
+			}
+			if(modoMultiplayer){
+				setTimeout(function(){Emit("ready","");},2000)
 			}
 		});
 	},delayPelota);
