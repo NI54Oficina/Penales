@@ -139,6 +139,23 @@ empezarConteo: function(msg){
 	//oponente es un objeto global
 	oponente= msg;
 	//renderear aca avatar del oponente (cargarlo y mostrarlo)
+
+  game.load.image('avatarOponente', oponente["avatar"]);
+
+  game.load.onLoadComplete.add(function(){
+
+    var bmd = game.make.bitmapData(367, 482);
+
+    bmd.alphaMask('avatarOponente', 'golden');
+
+  }, this);
+
+
+
+  rightPlayer= game.add.image(this.game.width/2 + 120, 180, bmd);
+
+
+
   timer.start();
   tiempo.visible=true;
   comenzar.visible=true;
@@ -177,13 +194,7 @@ recibirLado:function(msg){
 render: function () {
     if (timer.running) {
         tiempo.setText(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)));
-  } else {
-
-      //tiempo.kill();
-      //tweenE.pause();
-      //load.kill();
-
-    }
+  }
 },
 
 endTimer: function() {
@@ -238,7 +249,7 @@ rotarMoneda(target,msg){
     velocidadMoneda=900;
   }
 
-      if(target.scale.x==-1){	
+      if(target.scale.x==-1){
 
       monedaTween=game.add.tween(t1.scale).to( {x:1}, velocidadMoneda,'Linear');
     }else{
@@ -286,10 +297,7 @@ identificarPuestos: function(scale){
      tt2.start();
      tt1.start();
 	setTimeout(function(){game.state.start('Game');},5000)
-    //  setTimeout(function(){
-    //     Emit("buscarPartida",JSON.stringify(solicitud));
-    //     game.state.start('Game')
-    //   },2000);
+
 },
 
 };
