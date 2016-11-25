@@ -155,6 +155,21 @@ ambosListos:function(){
 },
 
 recibirLado:function(msg){
+	if(msg==1){ //chekeo de lo que el servidor eligio
+		oponente["lado"]="local";
+		oponente["pateador"]="pateador-local";
+		oponente["arquero"]="arquero-local";
+		usuario["lado"]="visitante";
+		usuario["arquero"]="arquero-visitante";
+		usuario["pateador"]="pateador-visitante";
+	  }else{
+		oponente["lado"]="visitante";
+		oponente["pateador"]="pateador-visitante";
+		oponente["arquero"]="arquero-visitante";
+		usuario["lado"]="local";
+		usuario["arquero"]="arquero-local";
+		usuario["pateador"]="pateador-local";
+	  }
 	self.sortearMoneda(msg);
 },
 
@@ -223,7 +238,7 @@ rotarMoneda(target,msg){
     velocidadMoneda=900;
   }
 
-      if(target.scale.x==-1){
+      if(target.scale.x==-1){	
 
       monedaTween=game.add.tween(t1.scale).to( {x:1}, velocidadMoneda,'Linear');
     }else{

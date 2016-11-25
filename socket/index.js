@@ -271,10 +271,10 @@ function SendStats(msg){
 	//setear variable resultados
 	msg= JSON.parse(msg);
 	if(testLocal){
-		requestSoap("?code=getStats&data="+msg.msg," ","getStats",msg.session);
+		requestSoap("?code=getStats&data="+msg.msg+"&tendencia="+1," ","getStats",msg.session);
 	}else{
 		// var auxU= {id: usuario["id"]};
-		requestSoap("/getStats",{id: msg.smg},"getStats",msg.session);
+		requestSoap("/getStats",{id: msg.msg,tendencia:1},"getStats",msg.session);
 		// requestSoap("/getStats",JSON.stringify(auxU),"getStats");
 	}
 }
@@ -312,7 +312,9 @@ global.loginConfirmed= function(msg,session){
 global.getStats= function(msg,session){
 	console.log("entra session");
 	console.log(session);
+	console.log(msg);
 	console.log("----------------------------------------------------");
+	online[session].stats= JSON.parse(msg);
 	online[session].socket.emit("getStats",msg);
 }
 
@@ -570,8 +572,8 @@ function Partida (tipo) {
 			console.log("user2 "+this.visitante.estado);
 			if(this.local.estado=="listo"&&this.visitante.estado=="listo"){
 				console.log("partida lista!");
-				this.local.socket.emit("recibirLado",1);
-				this.visitante.socket.emit("recibirLado",2);
+				this.local.socket.emit("recibirLado",2);
+				this.visitante.socket.emit("recibirLado",1);
 				this.state="starting";
 			}
 		}else if(this.state="starting"){
@@ -717,11 +719,15 @@ function CreateMatch(users,tipo){
 		delete auxVisitante["credits"];
 		delete auxVisitante["estado"];
 		delete auxVisitante["id"];
+		auxVisitante["tendencia"]= auxPartida.visitante["stats"]['tendencia'];
+		delete auxVisitante["stats"];
 		var auxLocal= JSON.parse(JSON.stringify(auxPartida.local.usuario));;
 		delete auxLocal["puntos"];
 		delete auxLocal["credits"];
 		delete auxLocal["estado"];
 		delete auxLocal["id"];
+		auxLocal["tendencia"]= auxPartida.local["stats"]['tendencia'];
+		delete auxLocal["stats"];
 		auxPartida.local.socket.emit("oponente",JSON.stringify(auxVisitante));
 		auxPartida.visitante.socket.emit("oponente",JSON.stringify(auxLocal));
 		//enviar datos del oponente a cada jugador

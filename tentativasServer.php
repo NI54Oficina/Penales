@@ -7,7 +7,12 @@ if(isset($_GET)){
 		getSession();
 	}
 	if(isset($_GET['code'])&&$_GET["code"]=="getStats"){
-		GetStats($_GET["data"]);
+		if(isset($_GET["tendencia"])){
+			GetStats($_GET["data"],$_GET["tendencia"]);
+		}else{
+			GetStats($_GET["data"]);
+		}
+		
 	}
 	if(isset($_GET['code'])&&$_GET["code"]=="UpdateStats"){
 		$data= json_decode($_GET["data"]);

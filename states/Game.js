@@ -37,8 +37,22 @@ Game.prototype = {
 	rangoDePresicion=40;
     counter=this.tiempoMaximo;
 	console.log("enemigo ");
-
-	perfilElegido= this.perfil;
+	
+	if(modoMultiplayer){
+		this.perfil=oponente;
+		perfilElegido= oponente;
+		pateadorLocal=usuario["pateador"];
+		pateadorVisitante= perfilElegido.pateador;
+		arqueroLocal= usuario["arquero"];
+		arqueroVisitante= perfilElegido.arquero;
+	}else{
+		perfilElegido= this.perfil;
+		pateadorLocal="pateador-local";
+		pateadorVisitante= perfilElegido.pateador;
+		arqueroLocal= "arquero-local";
+		arqueroVisitante= perfilElegido.arquero;
+	}
+	
 
     modo=this.modo;
 
@@ -51,10 +65,7 @@ Game.prototype = {
 
 	console.log(perfilElegido);
 
-	pateadorLocal="pateador-local";
-	pateadorVisitante= perfilElegido.pateador;
-	arqueroLocal= "arquero-local";
-	arqueroVisitante= perfilElegido.arquero;
+	
 
     this.drawBackground();
 
