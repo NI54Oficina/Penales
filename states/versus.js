@@ -34,9 +34,15 @@ Versus.prototype = {
     tiempo.stroke='#ffc400';
     tiempo.strokeThickness = 5;
     tiempo.position.x= this.game.width/2 - tiempo.width/2;
-	tiempo.visible=false;
+	  tiempo.visible=false;
 
-    leftPlayer=game.add.sprite(-50,180, 'player');
+
+    var bmd = game.make.bitmapData(367, 482);
+
+  	bmd.alphaMask(usuario["avatar"], 'player');
+
+  	leftPlayer= game.add.image(-50, 180, bmd);
+
     leftPlayer.scale.setTo(.8);
     leftPlayer.alpha=0;
 
@@ -59,7 +65,7 @@ Versus.prototype = {
     tweenB.start();
     tweenC.start();
     tweenD.start();
-	
+
 	listos=0;
 
     tweenD.onComplete.add(
@@ -115,24 +121,11 @@ Versus.prototype = {
       comenzar.position={x:175,y:530};
       comenzar.visible=false;
 
-      //borrarBoton
-
-      pruebaFuncional=game.add.sprite(50, 50, 'accepted');
-      pruebaFuncional.inputEnabled=true;
-      pruebaFuncional.events.onInputDown.add(function(){
-        timer.stop();
-        comenzar.visible=true;
-        cancelar.visible=false;
-
-      });
-      pruebaFuncional.input.useHandCursor = true;
-
-      //BorrarBoton
 
     SuscribeServerEvent("oponente","empezarConteo",this,true);
 	SuscribeServerEvent("oponenteListo","oponenteListo",this,true);
 	SuscribeServerEvent("recibirLado","recibirLado",this,true);
-	
+
 
 },
 
@@ -150,7 +143,7 @@ empezarConteo: function(msg){
   tiempo.visible=true;
   comenzar.visible=true;
   cancelar.visible=false;
-  
+
 },
 
 ambosListos:function(){
@@ -158,7 +151,7 @@ ambosListos:function(){
 	timer.stop();
 	graphics.visible=false;
   textTitle.visible=false;
-  
+
 },
 
 recibirLado:function(msg){
@@ -170,7 +163,7 @@ render: function () {
     if (timer.running) {
         tiempo.setText(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)));
   } else {
-	
+
       //tiempo.kill();
       //tweenE.pause();
       //load.kill();

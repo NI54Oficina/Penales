@@ -332,16 +332,24 @@ var Splash = function () {};
 
 	  usuario=msg;
 	  console.log(msg);
-	/*game.load.image('avatarUser', usuario["avatar"]);
-		 game.load.onLoadComplete.add(function(){
-			 console.log("imagen cargada al completo");
-			//game.add.sprite(0, 0, 'avatarUser').scale.setTo(.80,.80);
-			usuario["avatar"]="avatarUser";
-			  Emit("getStats",usuario["id"],"getStats","logueado",this);
-		 }, this);
-	game.load.start();*/
-	usuario["avatar"]="escudo-boca";
-	Emit("getStats",usuario["id"],"getStats","logueado",this);
+
+    if(modoMultiplayer){
+      game.load.image('avatarUser', usuario["avatar"]);
+         game.load.onLoadComplete.add(function(){
+           console.log("imagen cargada al completo");
+          //game.add.sprite(0, 0, 'avatarUser').scale.setTo(.80,.80);
+          usuario["avatar"]="avatarUser";
+            Emit("getStats",usuario["id"],"getStats","logueado",this);
+         }, this);
+
+    }else{
+      usuario["avatar"]="escudo-boca";
+      Emit("getStats",usuario["id"],"getStats","logueado",this);
+    }
+
+
+	game.load.start();
+
 
   },
 
