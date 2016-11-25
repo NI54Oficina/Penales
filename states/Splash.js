@@ -107,6 +107,8 @@ var Splash = function () {};
 
     game.load.image('instrucciones', urlBase+'assets/general/images/instrucciones.png');
     game.load.image('flechas-instrucciones', urlBase+'assets/general/images/flechas-instrucciones.png');
+    game.load.image('flechas-instrucciones-a', urlBase+'assets/general/images/flechas-instrucciones-02.png');
+    game.load.image('flechas-instrucciones-r', urlBase+'assets/general/images/flechas-instrucciones-03.png');
     game.load.image('sombra-instrucciones', urlBase+'assets/general/images/sombra-instrucciones.png');
     game.load.image('next-instrucciones', urlBase+'assets/general/images/flecha-siguiente.png');
     game.load.image('prev-instrucciones', urlBase+'assets/general/images/flecha-anterior.png');
