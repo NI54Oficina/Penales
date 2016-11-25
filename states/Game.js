@@ -53,8 +53,15 @@ Game.prototype = {
 		arqueroVisitante= perfilElegido.arquero;
 	}
 	
-
-    modo=this.modo;
+	if(!modoMultiplayer){
+		modo=this.modo;
+	}else{
+		if(perfilElegido['lado']=='local'){
+			modo=1;
+		}else{
+			modo=0;
+		}
+	}
 
     puntosComputer=0;
     puntosUser=0;
@@ -111,7 +118,7 @@ Game.prototype = {
 	  screenOponente.visible=true;
   }*/
 	//emitear un ready aca al server
-
+	Emit("ready","");
 },
 
 drawBackground: function(){

@@ -567,6 +567,8 @@ function Partida (tipo) {
 	
 	this.tick= function(){
 		console.log("tick "+this.id+" "+this.state);
+		console.log("user1 "+this.local.estado);
+		console.log("user2 "+this.visitante.estado);
 		if(this.state=="pending"){
 			console.log("user1 "+this.local.estado);
 			console.log("user2 "+this.visitante.estado);
@@ -574,10 +576,15 @@ function Partida (tipo) {
 				console.log("partida lista!");
 				this.local.socket.emit("recibirLado",2);
 				this.visitante.socket.emit("recibirLado",1);
+				this.local.estado="empezando";
+				this.visitante.estado="empezando";
 				this.state="starting";
 			}
 		}else if(this.state="starting"){
-			//this.local.emit();
+			if(this.local.estado=="listo"&&this.visitante.estado=="listo"){
+				this.local.socket.emit("inicioPartida",JSON.stringify({id:1}));
+				this.visitante.socket.emit("inicioPartida",JSON.stringify({id:1}));
+			}
 		}else if(this.state="game"){
 			
 		}
