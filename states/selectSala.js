@@ -19,29 +19,30 @@ Selectsala.prototype = {
       self.createGeneralTitle("SALAS", true);
 
       //valor que me deberia devolver el servidor para saber el nivel de la sala
-      levelSala=2;
+      levelSala=[3,2,2,1];
+
+
 
       levelsBlue=['btn-b-1','btn-b-2','btn-b-3'];
       levelsYelow=['btn-a-1','btn-a-2','btn-a-3'];
       //generales
-            x1=245;
+            x1=230;
             y1=200;
 
-            x2=595;
+            x2=610;
             y2=200;
 
-            x3=245;
-            y3=350;
+            x3=230;
+            y3=365;
 
-            x4=595;
-            y4=350;
+            x4=610;
+            y4=365;
 
-            gameBack = this.game.add.bitmapData(300,100);
-            grd = gameBack.context.createLinearGradient(0,0,0,100);
+            gameBack = this.game.add.bitmapData(310,110);
+            grd = gameBack.context.createLinearGradient(0,0,0,110);
             grd.addColorStop(0,"#01447d");
             gameBack.context.fillStyle = grd;
             gameBack.context.fillRect(0,0,this.game.width,this.game.height);
-
 
       //primer bloque
 
@@ -50,15 +51,17 @@ Selectsala.prototype = {
       back.events.onInputDown.add(self.ReplaceColor, back);
       back.input.useHandCursor = true;
       back.addChild(game.add.text(15,20, 'CLÁSICO', {font:'35px CondensedRegular', fill:'#cea428'}));
-      back.addChild(game.add.text(15,60, 'CANTIDAD DE JUGADORES', {font:'20px CondensedRegular', fill:'#fff03a'}));
-      back.addChild(this.game.add.sprite(245,55,'sala-yellow'));
+      back.addChild(game.add.text(15,75, 'CANTIDAD DE JUGADORES', {font:'20px CondensedRegular', fill:'#fff03a'}));
+      back.addChild(this.game.add.sprite(245,70,'sala-yellow'));
 
-      n=40
+      n=60
 
-      for(var j=0; j< levelSala; j++){
+      for(var j=0; j< levelSala[0]; j++){
 
         for(var i=0; i<2;i++){
-          back.addChild(this.game.add.sprite(250,n,levelsYelow[j]));
+          var lvl=this.game.add.sprite(265,n,levelsYelow[j]);
+          lvl.scale.setTo(.8);
+          back.addChild(lvl);
           n=n-10;
         }
       }
@@ -68,7 +71,7 @@ Selectsala.prototype = {
 
       var graphics = game.add.graphics(x1, y1);
       graphics.lineStyle(5, 0xcea428, 1);
-      graphics.drawRoundedRect(0, 0, 300, 100,5);
+      graphics.drawRoundedRect(0, 0, 310, 110,5);
       window.graphics = graphics;
       graphics.inputEnabled=true;
 
@@ -79,15 +82,17 @@ Selectsala.prototype = {
       back2.events.onInputDown.add(self.ReplaceColor, back2);
       back2.input.useHandCursor = true;
       back2.addChild(game.add.text(15,20, '300 pts.', {font:'35px CondensedRegular', fill:'#cea428'}));
-      back2.addChild(game.add.text(15,60, 'CANTIDAD DE JUGADORES', {font:'20px CondensedRegular', fill:'#fff03a'}));
-      back2.addChild(this.game.add.sprite(245,55,'sala-yellow'));
+      back2.addChild(game.add.text(15,75, 'CANTIDAD DE JUGADORES', {font:'20px CondensedRegular', fill:'#fff03a'}));
+      back2.addChild(this.game.add.sprite(245,70,'sala-yellow'));
 
-      n=40
+      n=60
 
-      for(var j=0; j< levelSala; j++){
+      for(var j=0; j< levelSala[1]; j++){
 
         for(var i=0; i<2;i++){
-          back2.addChild(this.game.add.sprite(250,n,levelsYelow[j]));
+          var lvl=this.game.add.sprite(265,n,levelsYelow[j]);
+          lvl.scale.setTo(.8);
+          back2.addChild(lvl);
           n=n-10;
         }
       }
@@ -96,7 +101,7 @@ Selectsala.prototype = {
 
       var graphics2 = game.add.graphics(x2, y2);
       graphics2.lineStyle(5, 0xcea428, 1);
-      graphics2.drawRoundedRect(0, 0, 300, 100,5);
+      graphics2.drawRoundedRect(0, 0, 310, 110,5);
       window.graphics = graphics2;
       graphics2.inputEnabled=true;
 
@@ -108,15 +113,17 @@ Selectsala.prototype = {
       back3.events.onInputDown.add(self.ReplaceColor, back3);
       back3.input.useHandCursor = true;
       back3.addChild(game.add.text(15,20, '500 pts.', {font:'35px CondensedRegular', fill:'#cea428'}));
-      back3.addChild(game.add.text(15,60, 'CANTIDAD DE JUGADORES', {font:'20px CondensedRegular', fill:'#fff03a'}));
-      back3.addChild(this.game.add.sprite(245,55,'sala-yellow'));
+      back3.addChild(game.add.text(15,75, 'CANTIDAD DE JUGADORES', {font:'20px CondensedRegular', fill:'#fff03a'}));
+      back3.addChild(this.game.add.sprite(245,70,'sala-yellow'));
 
-      n=40
+      n=60
 
-      for(var j=0; j< levelSala; j++){
+      for(var j=0; j< levelSala[2]; j++){
 
         for(var i=0; i<2;i++){
-          back3.addChild(this.game.add.sprite(250,n,levelsYelow[j]));
+          var lvl=this.game.add.sprite(265,n,levelsYelow[j]);
+          lvl.scale.setTo(.8);
+          back3.addChild(lvl);
           n=n-10;
         }
       }
@@ -127,7 +134,7 @@ Selectsala.prototype = {
 
       var graphics3 = game.add.graphics(x3, y3);
       graphics3.lineStyle(5, 0xcea428, 1);
-      graphics3.drawRoundedRect(0, 0, 300, 100,5);
+      graphics3.drawRoundedRect(0, 0, 310, 110,5);
       window.graphics = graphics3;
       graphics3.inputEnabled=true;
 
@@ -138,15 +145,17 @@ Selectsala.prototype = {
       back4.events.onInputDown.add(self.ReplaceColor, back4);
       back4.input.useHandCursor = true;
       back4.addChild(game.add.text(15,20, '1000 pts.', {font:'35px CondensedRegular', fill:'#cea428'}));
-      back4.addChild(game.add.text(15,60, 'CANTIDAD DE JUGADORES', {font:'20px CondensedRegular', fill:'#fff03a'}));
-      back4.addChild(this.game.add.sprite(245,55,'sala-yellow'));
+      back4.addChild(game.add.text(15,75, 'CANTIDAD DE JUGADORES', {font:'20px CondensedRegular', fill:'#fff03a'}));
+      back4.addChild(this.game.add.sprite(245,70,'sala-yellow'));
 
-      n=40
+      n=60
 
-      for(var j=0; j< levelSala; j++){
+      for(var j=0; j< levelSala[3]; j++){
 
         for(var i=0; i<2;i++){
-          back4.addChild(this.game.add.sprite(250,n,levelsYelow[j]));
+          var lvl=this.game.add.sprite(265,n,levelsYelow[j]);
+          lvl.scale.setTo(.8);
+          back4.addChild(lvl);
           n=n-10;
         }
       }
@@ -155,7 +164,7 @@ Selectsala.prototype = {
 
       var graphics = game.add.graphics(x4, y4);
       graphics.lineStyle(5, 0xcea428, 1);
-      graphics.drawRoundedRect(0, 0, 300, 100,5);
+      graphics.drawRoundedRect(0, 0, 310, 110,5);
       window.graphics = graphics;
       graphics.inputEnabled=true;
 
@@ -236,33 +245,29 @@ ReplaceColor: function(target){
     salaSelected=target.id;
 
   for(var i=0; i< arrayBlock.length; i++){
-    gameBack = this.game.add.bitmapData(300,100);
-   grd = gameBack.context.createLinearGradient(0,0,0,100);
+    gameBack = this.game.add.bitmapData(310,110);
+   grd = gameBack.context.createLinearGradient(0,0,0,110);
    grd.addColorStop(0,"#01447d");
    gameBack.context.fillStyle = grd;
    gameBack.context.fillRect(0,0,this.game.width,this.game.height);
    arrayBlock[i].loadTexture(gameBack, 0, false);
 
 
-     arrayBlock[i].children[0].fill='#cea428';
-     arrayBlock[i].children[1].fill='#fff03a';
-     arrayBlock[i].children[2].loadTexture('sala-yellow', 0, false);
+   arrayBlock[i].children[0].fill='#cea428';
+   arrayBlock[i].children[1].fill='#fff03a';
+   arrayBlock[i].children[2].loadTexture('sala-yellow', 0, false);
 
-     y
+   y=3;
 
-     for(var y=3; y< arrayBlock[i].children.length; y++){
 
-       for(var k=0; k<levelSala ; k++){
 
-             for(var j=0; j<2;j++){
+     for(var k=0; k<levelSala[i] ; k++){
 
-               arrayBlock[i].children[y].loadTexture(levelsYelow[k], 0, false);
-              //  console.log(levelsYelow[k]);
+           for(var j=0; j<2;j++){
+             arrayBlock[i].children[y++].loadTexture(levelsYelow[k], 0, false);
+           }
+       };
 
-             }
-
-         }
-     }
 
 
 
@@ -270,8 +275,8 @@ ReplaceColor: function(target){
   }
 
 
-    gameBack = this.game.add.bitmapData(300,100);
-    grd = gameBack.context.createLinearGradient(0,0,0,100);
+    gameBack = this.game.add.bitmapData(310,110);
+    grd = gameBack.context.createLinearGradient(0,0,0,110);
     grd.addColorStop(0,"#fff03a");
     gameBack.context.fillStyle = grd;
     gameBack.context.fillRect(0,0,this.game.width,this.game.height);
@@ -286,18 +291,12 @@ ReplaceColor: function(target){
 
     i++;
 
-    for(i; i< target.children.length; i++){
-
-      for(var k=0; k<levelSala ; k++){
+    for(var k =0; k< levelSala[target.id-1]; k++){
 
             for(var j=0; j<2;j++){
-
-              target.children[i].loadTexture(levelsBlue[k], 0, false);
-              // console.log(levelsBlue[k]);
+              target.children[i++].loadTexture(levelsBlue[k], 0, false);
             }
-
-        }
-    }
+    };
 
     back.visible=false;
     jugar.visible=true;
