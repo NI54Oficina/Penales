@@ -704,6 +704,8 @@ updateCounter: function () {
 		var resultadoArray;
 		if(modoMultiplayer){
 			resultadoArray=msg;
+			triesA=5;
+			triesP=5;
 		}else{
 			var resultadoArray=JSON.parse(msg);
 		}

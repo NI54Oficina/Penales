@@ -35,7 +35,7 @@ var session="";
 
 socket.on('session', function(msg){
   session= msg;
-  Emit("checkSession",session,"checkSession","checkSession",this);
+  //Emit("checkSession",session,"checkSession","checkSession",this);
   //ResponseCallBack(msg);
 });
 

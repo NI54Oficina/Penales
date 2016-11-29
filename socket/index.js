@@ -50,23 +50,30 @@ io.on('connection', function(socket){
 		console.log(msg);
 		console.log("-----------------------------------");
 		if(testLocal){
-			requestSoap("?code=getSession"," ","loginConfirmed",msg.session);
+			requestSoap("?code=getSession"," ","loginConfirmed",socket.id);
 		}else{
-			requestSoap("/getSession",msg.msg.id,"loginConfirmed",msg.session);
+			requestSoap("/getSession",msg.msg.id,"loginConfirmed",socket.id);
 		}
 	});
 	
 	
 	socket.on('disconnect', function(data){
 		console.log('user disconnected '+socket.id);
-		delete online[socket.id];
+		
 		console.log(online);
 		delete listaEspera[0][socket.id];
 		delete listaEspera[1][socket.id];
 		delete listaEspera[2][socket.id];
 		delete listaEspera[3][socket.id];
-		
+		if(online[socket.id].partida!=""&&!(partidas[online[socket.id].partida]===null)){
+			partidas[online[socket.id].partida].disconected(socket.id);
+		}else{
+			console.log("partida es null");
+			console.log(partidas[online[socket.id].partida]);
+			
+		}
 		console.log(listaEspera);
+		delete online[socket.id];
 		//console.log(data);
 		//pause=true;
 		Reset();
@@ -728,6 +735,7 @@ function Partida (tipo) {
 			var auxRes= JSON.parse(body);
 			auxThis.local.socket.emit("resultadoPartida",JSON.stringify({golesUser:auxThis.golesLocal,golesComputer:auxThis.golesVisitante,detalle:auxRes["user1"]}));
 			auxThis.visitante.socket.emit("resultadoPartida",JSON.stringify({golesUser:auxThis.golesVisitante,golesComputer:auxThis.golesLocal,detalle:auxRes["user2"]}));
+			
 		});
 
 		
@@ -740,6 +748,39 @@ function Partida (tipo) {
 		//SendStats();
 		
 
+	},
+	
+	this.disconected= function(uId){
+		
+		if(this.local.socket.id==uId){
+			console.log("pierde el local");
+			this.local.jugadas=[0,0,0,0,0,0,0,0,0,0];
+			if(this.visitante.jugadas.length<10){
+				for(var a=0;this.visitante.jugadas.length<10;a++){
+					this.visitante.jugadas.push(1);
+				}
+			}else if(this.visitante.jugadas.length>10){
+				this.visitante.jugadas= this.visitante.jugadas.slice(0,9);
+			}
+			this.golesLocal=0;
+			this.golesVisitante=5;
+		}else{
+			console.log("pierde el visitante");
+			this.visitante.jugadas=[0,0,0,0,0,0,0,0,0,0];
+			if(this.local.jugadas.length<10){
+				for(var a=0;this.local.jugadas.length<10;a++){
+					this.local.jugadas.push(1);
+				}
+			}else if(this.local.jugadas.length>10){
+				this.local.jugadas= this.local.jugadas.slice(0,9);
+			}
+			this.golesLocal=5;
+			this.golesVisitante=0;
+		}
+		console.log(this.local.jugadas);
+		console.log(this.visitante.jugadas);
+		
+		this.GetResultado();
 	},
 		
 	this.oponente=function(player){
