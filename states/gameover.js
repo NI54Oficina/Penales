@@ -114,7 +114,7 @@ GameOver.prototype = {
 
    },270, 70, 1);
 
-  if(!modoMultiplayer){
+  if(modoMultiplayer){
     this.addMenuOptionInnerPrueba('REVANCHA 20', function () {
 
        console.log("Quiero revancha");
