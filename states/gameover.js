@@ -131,7 +131,7 @@ GameOver.prototype = {
      },270,70, 1);
   }
 
-
+console.log("entra 1");
 
     // botones.position= {x:this.game.width/2 - botones.width/2-20, y:this.game.height-botones.height*2}
 
@@ -158,14 +158,14 @@ GameOver.prototype = {
 
     };
 
-
+console.log("entra 2");
     var efiParArq = (100/((parseInt(localStorage["TotalPartidaAtajados"]) || 0) + (parseInt(localStorage["TotalPartidaNoAtajados"]) || 0)))*(parseInt(localStorage["TotalPartidaAtajados"]) || 0);
     var efiParPat = (100/((parseInt(localStorage["TotalPartidaConvertidos"]) || 0) + (parseInt(localStorage["TotalPartidaErrados"]) || 0)))*(parseInt(localStorage["TotalPartidaConvertidos"]) || 0);
     var efiArq = (100/((parseInt(localStorage["TotalAtajados"]) || 0) + (parseInt(localStorage["TotalNoAtajados"]) || 0)))* (parseInt(localStorage["TotalAtajados"]) || 0);
     var efiPat = (100/((parseInt(localStorage["TotalConvertidos"]) || 0) + (parseInt(localStorage["TotalErrados"]) || 0)))*(parseInt(localStorage["TotalConvertidos"]) || 0);
     var efectividad = (parseInt(localStorage["PartidosGanados"]) || 0) /(parseInt(localStorage["PartidosPerdidos"]) || 0);
 
-
+console.log("entra 3");
      if (isNaN(efiArq))efiArq=0;
      if (isNaN(efiPat))efiPat=0;
      if (isNaN(efectividad))efectividad=0;
@@ -180,7 +180,7 @@ GameOver.prototype = {
      game.add.text(520, 100, localStorage["TotalPartidaUser"], partidaStyle);
      game.add.text(550, 100, "- "+localStorage["TotalPartidaComputer"], partidaStyle);
 
-
+console.log("entra 4");
     mm=240;
       xx=230;
 
@@ -214,7 +214,7 @@ GameOver.prototype = {
       xx+=40;
 	});
 
-
+console.log("entra 5");
     search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px CondensedLight", fill: "red", align: "center" });
     search.visible=false;
 

@@ -3,6 +3,8 @@ var socket;
 var testLocal =true;
 var oponente={};
 
+var resultadoPartida="";
+
 if(serverEnabled){
 socket = io('http://localhost:3000');
 }else{

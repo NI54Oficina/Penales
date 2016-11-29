@@ -706,6 +706,7 @@ updateCounter: function () {
 		}else{
 			var resultadoArray=JSON.parse(msg);
 		}
+		resultadoPartida= resultadoArray;
 		 
 		 puntosUser = resultadoArray["golesUser"];
 		 puntosComputer = resultadoArray["golesComputer"];
