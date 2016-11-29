@@ -219,14 +219,6 @@ console.log("entra 5");
     search.visible=false;
 
 
-
-         notif=self.notificationDinamic("ACABAN DE PEDIR REVANCHA", "Te animás?", false,true);
-          a= self.createButton('RECHAZAR', function () { });
-          a.position={x:290,y:350};
-          b=self.createButton('ACEPTAR', function () {});
-          b.position={x:580,y:350};
-
-
   },
 
   isFloat: function(n,self) {
@@ -259,7 +251,28 @@ console.log("entra 5");
     this.game.state.start("GameMenu");
   },
 
+  solicitud: function(){
 
+              group= game.add.group();
+
+              group.add(self.notificationDinamic("ACABAN DE PEDIR REVANCHA", "Te animás?", false,true));
+
+          //   notif=self.notificationDinamic("ACABAN DE PEDIR REVANCHA", "Te animás?", false,true);
+
+              a= self.createButton('RECHAZAR', function () { group.destroy();});
+              a.position={x:290,y:350};
+
+              group.add(a);
+              b=self.createButton('ACEPTAR', function () {});
+              b.position={x:580,y:350};
+
+              group.add(b);
+
+
+
+
+
+  },
 
 };
 
