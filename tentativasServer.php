@@ -15,7 +15,16 @@ if(isset($_GET)){
 		
 	}
 	if(isset($_GET['code'])&&$_GET["code"]=="UpdateStats"){
-		$data= json_decode($_GET["data"]);
+		if(isset($_POST["data"])){
+			$data= json_decode($_POST["data"]);
+		}else{
+			$data= json_decode($_GET["data"]);
+		}
+		/*foreach($data as $key->$value){
+			echo $key; 
+			echo $value;
+		}
+		exit();*/
 		
 		UpdateStats($data->gameId,$data->localId,$data->visitanteId,$data->jugadasLocal,$data->jugadasVisitante);
 	}
@@ -142,11 +151,12 @@ function CreateMatch($users,$modo){
 //quizas recibir el fin de partida?
 function UpdateStats($gameId,$localId,$visitanteId,$jugadasLocal,$jugadasVisitante){
 	
-	if($gameId=-1){
+	if($gameId==-1){
 		//crea la partida, 
 		$modo= 1;
 	}else{
 		//$modo= Obtener partida por el id---> modo;
+		$modo=3;
 	}
 	
 	$arqueroLocal= array();

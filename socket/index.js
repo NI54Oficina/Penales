@@ -58,8 +58,17 @@ io.on('connection', function(socket){
 	
 	
 	socket.on('disconnect', function(data){
-		console.log('user disconnected');
-		console.log(data);
+		console.log('user disconnected '+socket.id);
+		delete online[socket.id];
+		console.log(online);
+		delete listaEspera[0][socket.id];
+		delete listaEspera[1][socket.id];
+		delete listaEspera[2][socket.id];
+		delete listaEspera[3][socket.id];
+		
+		console.log(listaEspera);
+		//console.log(data);
+		//pause=true;
 		Reset();
 	});
 	
@@ -688,10 +697,42 @@ function Partida (tipo) {
 	
 	this.GetResultado=function(){
 		//tendria que emitir el resultado, cliente lo recibe, setea y va a pantalla correspondiente segun comprobación.
+		
+		var toSend={};
+		toSend["gameId"]=this.id;
+		toSend["localId"]= this.local.usuario.id;
+		toSend["visitanteId"]= this.visitante.usuario.id;
+		toSend["jugadasLocal"]= this.local.jugadas;
+		//toSend["jugadasLocal"]= [1,1,1,1,1,1,1,1,1,1];
+		toSend["jugadasVisitante"]= this.visitante.jugadas;
+		//toSend["jugadasVisitante"]= [2,1,2,1,2,1,2,1,2,1];
+		console.log(JSON.stringify(toSend));
+		toSend=JSON.stringify(toSend);
+		//sucribir evento "stats actualizados" a la función del mismo nombre. One shot
+		/*SuscribeServerEvent("statsActualizados","StatsActualizados",this,true);
+		if(testLocal){
+			requestSoap("?code=UpdateStats&data="+toSend," ","statsActualizados");
+		}else{
+			requestSoap("/UpdateStats",{json: toSend},"statsActualizados");
+			//requestSoap("/UpdateStats",toSend,"statsActualizados");
+		}*/
+		if(testLocal){
+			code="?code=UpdateStats";
+		}else{
+			code="/UpdateStats";
+		}
+		var auxThis=this;
+		request.post(urlConnect+code,{form:{data:toSend}}, function (error, response, body) {
+			console.log(body);
+			var auxRes= JSON.parse(body);
+			auxThis.local.socket.emit("resultadoPartida",JSON.stringify({golesUser:auxThis.golesLocal,golesComputer:auxThis.golesVisitante,detalle:auxRes["user1"]}));
+			auxThis.visitante.socket.emit("resultadoPartida",JSON.stringify({golesUser:auxThis.golesVisitante,golesComputer:auxThis.golesLocal,detalle:auxRes["user2"]}));
+		});
+
+		
 		var auxArray={};
 		//cambiar por local y visitante segun corresponda
-		this.local.socket.emit("resultadoPartida",JSON.stringify({golesUser:this.golesLocal,golesComputer:this.golesVisitante}));
-		this.visitante.socket.emit("resultadoPartida",JSON.stringify({golesUser:this.golesVisitante,golesComputer:this.golesLocal}));
+		
 		//auxArray["golesUser"]= golesUser;
 		//auxArray["golesComputer"]= golesComputer;
 		//io.emit('resultadoPartida', JSON.stringify(auxArray));
