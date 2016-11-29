@@ -81,8 +81,8 @@ Versus.prototype = {
         goldenA=game.add.sprite(rightPlayer.x-10,rightPlayer.y-5, 'selector');
         goldenA.scale.setTo(.8,.8);
 
-        game.add.text(250,380, usuario.nickname, { font: '27px CondensedBold', fill: 'white', align: 'center',wordWrap: true, wordWrapWidth:20});
-
+        var nikUser=game.add.text(250,380, usuario.nickname, { font: '27px CondensedBold', fill: 'white', align: 'center',wordWrap: true, wordWrapWidth:20});
+        nikUser.x=leftPlayer.x+(leftPlayer.width/2)- nikUser.width/2;
         load=game.add.sprite(820, 325, 'loading');
         load.pivot.x=33;
         load.pivot.y=33;
@@ -98,11 +98,9 @@ Versus.prototype = {
 
       graphics.addChild(game.add.text(40, 20, "Esperando confirmación",{ font: '20px CondensedLight', fill: 'white', align: 'center'}));
 
+      cancelar=self.createButton('CANCELAR', function () {
 
-
-    cancelar=self.createButton('CANCELAR', function () {
-
-        game.state.start('Selectsala');
+      game.state.start('Selectsala');
 
       });
 
@@ -156,8 +154,8 @@ empezarConteo: function(msg){
 
   }, this);
 
-  game.add.text(770,380, oponente.nickname, { font: '27px CondensedBold', fill: 'white', align: 'center',wordWrap: true, wordWrapWidth:20});
-
+  var nikOpon=game.add.text(770,380, oponente.nickname, { font: '27px CondensedBold', fill: 'white', align: 'center',wordWrap: true, wordWrapWidth:20});
+  nikOpon.x=rightPlayer.x+(rightPlayer.width/2)- nikOpon.width/2;
 
   timer.start();
   tiempo.visible=true;
