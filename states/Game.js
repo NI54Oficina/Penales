@@ -118,7 +118,9 @@ Game.prototype = {
 	  screenOponente.visible=true;
   }*/
 	//emitear un ready aca al server
-	Emit("ready","");
+	if(modoMultiplayer){
+		Emit("ready","");
+	}
 },
 
 drawBackground: function(){
