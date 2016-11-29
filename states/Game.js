@@ -23,7 +23,8 @@ Game.prototype = {
 
     triesP=this.triesP;
 
-	counterBarra=0;
+	   counterBarra=0;
+    NombreSala;
 
 	SuscribeServerEvent("inicioPartida","Clicked",this,false);
 	SuscribeServerEvent("inicioTurno","checkIntentos",this,false);
@@ -37,7 +38,7 @@ Game.prototype = {
 	rangoDePresicion=40;
     counter=this.tiempoMaximo;
 	console.log("enemigo ");
-	
+
 	if(modoMultiplayer){
 		this.perfil=oponente;
 		perfilElegido= oponente;
@@ -52,7 +53,7 @@ Game.prototype = {
 		arqueroLocal= "arquero-local";
 		arqueroVisitante= perfilElegido.arquero;
 	}
-	
+
 	if(!modoMultiplayer){
 		modo=this.modo;
 	}else{
@@ -72,7 +73,7 @@ Game.prototype = {
 
 	console.log(perfilElegido);
 
-	
+
 
     this.drawBackground();
 
@@ -163,7 +164,7 @@ drawBackground: function(){
    tableroPuntos.beginFill(0x000065,.6);
    tableroPuntos.drawRoundedRect(0, 0,330,65,5);
    window.graphics = tableroPuntos;
-   puntaje=game.add.text(70,10, usuario['puntos']+' PUNTOS', { font: "35px CondensedRegular", fill: "#ffc418", align: "center"});
+   puntaje=game.add.text(70,10, NombreSala, { font: "35px CondensedRegular", fill: "#ffc418", align: "center"});
    puntaje.x= tableroPuntos.width/2-puntaje.width/2;
    tableroPuntos.addChild(puntaje);
    brilloTablero=game.add.sprite(130,50, 'brilloup');
@@ -707,7 +708,7 @@ updateCounter: function () {
 			var resultadoArray=JSON.parse(msg);
 		}
 		resultadoPartida= resultadoArray;
-		 
+
 		 puntosUser = resultadoArray["golesUser"];
 		 puntosComputer = resultadoArray["golesComputer"];
 	    this.checkIntentos(msg);
@@ -720,7 +721,7 @@ updateCounter: function () {
 		}else{
 			auxArray=data;
 		}
-		
+
 		if(serverEnabled){
 			if(modo==1){
 				golesUser= auxArray["localGol"];

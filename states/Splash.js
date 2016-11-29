@@ -23,7 +23,7 @@ var Splash = function () {};
 
         game.load.script('gamemenu',urlBase+'states/gamemenu.js');
 
-       
+
         //  game.load.script('options', 'states/Options.js');
 
 
@@ -216,7 +216,7 @@ var Splash = function () {};
     if(modoMultiplayer){
       game.state.add("Selectsala",Selectsala);
       game.state.add("Versus",Versus);
-	
+
     }else{
       //game.state.add("GameOver",GameOver);
     //  game.state.add("Options",Options);

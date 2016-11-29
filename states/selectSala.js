@@ -12,6 +12,7 @@ Selectsala.prototype = {
       i=0;
       muttex=0;
       salaSelected=0;
+      NombreSala=0;
 
       self.createBackground(false);
       self.createHeader(self.GoBack,false);
@@ -81,7 +82,7 @@ Selectsala.prototype = {
       back2.inputEnabled=true;
       back2.events.onInputDown.add(self.ReplaceColor, back2);
       back2.input.useHandCursor = true;
-      back2.addChild(game.add.text(15,20, '300 pts.', {font:'35px CondensedRegular', fill:'#cea428'}));
+      back2.addChild(game.add.text(15,20, '300 PUNTOS', {font:'35px CondensedRegular', fill:'#cea428'}));
       back2.addChild(game.add.text(15,75, 'CANTIDAD DE JUGADORES', {font:'20px CondensedRegular', fill:'#fff03a'}));
       back2.addChild(this.game.add.sprite(245,70,'sala-yellow'));
 
@@ -112,7 +113,7 @@ Selectsala.prototype = {
       back3.inputEnabled=true;
       back3.events.onInputDown.add(self.ReplaceColor, back3);
       back3.input.useHandCursor = true;
-      back3.addChild(game.add.text(15,20, '500 pts.', {font:'35px CondensedRegular', fill:'#cea428'}));
+      back3.addChild(game.add.text(15,20, '500 PUNTOS', {font:'35px CondensedRegular', fill:'#cea428'}));
       back3.addChild(game.add.text(15,75, 'CANTIDAD DE JUGADORES', {font:'20px CondensedRegular', fill:'#fff03a'}));
       back3.addChild(this.game.add.sprite(245,70,'sala-yellow'));
 
@@ -144,7 +145,7 @@ Selectsala.prototype = {
       back4.inputEnabled=true;
       back4.events.onInputDown.add(self.ReplaceColor, back4);
       back4.input.useHandCursor = true;
-      back4.addChild(game.add.text(15,20, '1000 pts.', {font:'35px CondensedRegular', fill:'#cea428'}));
+      back4.addChild(game.add.text(15,20, '1000 PUNTOS', {font:'35px CondensedRegular', fill:'#cea428'}));
       back4.addChild(game.add.text(15,75, 'CANTIDAD DE JUGADORES', {font:'20px CondensedRegular', fill:'#fff03a'}));
       back4.addChild(this.game.add.sprite(245,70,'sala-yellow'));
 
@@ -189,6 +190,8 @@ Selectsala.prototype = {
     			//solicitud.id= usuario["id"];
     			solicitud.tipo= salaSelected;
     			Emit("buscarPartida",JSON.stringify(solicitud));
+
+          this.game.state.states["Versus"].NombreSala = NombreSala;
     			game.state.start('Versus');
         }
 
@@ -243,6 +246,9 @@ GoBack: function(target){
 
 ReplaceColor: function(target){
     salaSelected=target.id;
+
+  //  console.log(target.children[0].text);
+   NombreSala=target.children[0].text
 
   for(var i=0; i< arrayBlock.length; i++){
     gameBack = this.game.add.bitmapData(310,110);

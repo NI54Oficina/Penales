@@ -12,12 +12,12 @@ Versus.prototype = {
 
     velocidadMoneda=50;
 
-
+    NombreSala;
     var tableroPuntos = game.add.graphics(this.game.width/2-165, 0);
     tableroPuntos.beginFill(0x000065,1);
     tableroPuntos.drawRoundedRect(0, 0,330,65,5);
     window.graphics = tableroPuntos;
-    puntaje=game.add.text(70,10, usuario['puntos']+' PUNTOS', { font: "35px CondensedRegular", fill: "#ffc418", align: "center"});
+    puntaje=game.add.text(70,10, NombreSala, { font: "35px CondensedRegular", fill: "#ffc418", align: "center"});
     puntaje.x= tableroPuntos.width/2-puntaje.width/2;
     tableroPuntos.addChild(puntaje);
     brilloTablero=game.add.sprite(130,50, 'brilloup');
@@ -131,7 +131,7 @@ Versus.prototype = {
 
 oponenteListo:function(msg){
 	listos+=1;
-	goldenA.addChild(game.add.sprite(goldenA.width, goldenA.height-50, 'accepted'));
+	goldenA.addChild(game.add.sprite(goldenA.width, goldenA.height-50, 'accepted '));
 	this.ambosListos();
 },
 
@@ -147,7 +147,8 @@ empezarConteo: function(msg){
     var bmd = game.make.bitmapData(367, 482);
 
     bmd.alphaMask('avatarOponente', 'golden');
-	rightPlayer= game.add.image(this.game.width/2 + 120, 180, bmd);
+
+    rightPlayer= game.add.image(this.game.width/2 + 120, 180, bmd);
 
   }, this);
 
@@ -297,7 +298,9 @@ identificarPuestos: function(scale){
 
      tt2.start();
      tt1.start();
-	setTimeout(function(){game.state.start('Game');},5000)
+	setTimeout(function(){
+    this.game.state.states["Game"].NombreSala = NombreSala;
+    game.state.start('Game');},5000)
 
 },
 
