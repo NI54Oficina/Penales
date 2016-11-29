@@ -317,6 +317,7 @@ function requestSoap(code,params,callback,session){
 
 global.loginConfirmed= function(msg,session){
 	var connectedUser= JSON.parse(msg);
+	console.log(msg);
 	console.log(session);
 	online[session].usuario= connectedUser;
 	online[session].estado="online";
