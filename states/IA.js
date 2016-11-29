@@ -320,7 +320,7 @@ function GetResultado(){
 	//sucribir evento "stats actualizados" a la función del mismo nombre. One shot
 	SuscribeServerEvent("statsActualizados","StatsActualizados",this,true);
 	if(testLocal){
-	requestSoap("?code=UpdateStats&data="+toSend," ","statsActualizados");
+		requestSoap("?code=UpdateStats&data="+toSend," ","statsActualizados");
 	}else{
 		requestSoap("/UpdateStats",{json: toSend},"statsActualizados");
 		//requestSoap("/UpdateStats",toSend,"statsActualizados");
