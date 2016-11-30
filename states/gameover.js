@@ -88,8 +88,8 @@ GameOver.prototype = {
 
     //Cuando Setermine la edicion volver a declarar sin inicializar.
 
-    localStorage["TotalPartidaUser"] = puntosUser;
-    localStorage["TotalPartidaComputer"] = puntosComputer;
+    localStorage["TotalPartidaUser"] = this.puntosUser;
+    localStorage["TotalPartidaComputer"] = this.puntosComputer;
 
     ganaste="Ganaste";
     perdiste="Perdiste";
@@ -154,7 +154,7 @@ console.log("entra 1");
 
 
 
-    if(puntosUser > puntosComputer){
+    if(this.puntosUser > this.puntosComputer){
 
       // resultado = game.add.text(420, 250, 'Ganaste', { font: " 60px TheMinion", fill: "white", align: "center" });
       localStorage["PartidosGanados"]=  (parseInt(localStorage["PartidosGanados"]) || 0) + 1;

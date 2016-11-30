@@ -591,6 +591,11 @@ function Partida (tipo) {
 	this.state="pending";
 	
 	this.tick= function(){
+		if(this.finished){
+			//función en finish?
+			this.state="finished";
+			return;
+		}
 		//console.log("tick "+this.id+" "+this.state);
 		//console.log("user1 "+this.local.estado);
 		//console.log("user2 "+this.visitante.estado);
@@ -642,6 +647,7 @@ function Partida (tipo) {
 	},
 	
 	this.InicioTurno=function(){
+		if(this.finished)return;
 		this.local.socket.emit("inicioTurno",JSON.stringify({id:1}));
 		this.visitante.socket.emit("inicioTurno",JSON.stringify({id:1}));
 	},
@@ -708,7 +714,8 @@ function Partida (tipo) {
 	
 	this.GetResultado=function(){
 		//tendria que emitir el resultado, cliente lo recibe, setea y va a pantalla correspondiente segun comprobación.
-		
+		this.finished=true;
+		this.state="finished";
 		var toSend={};
 		toSend["gameId"]=this.id;
 		toSend["localId"]= this.local.usuario.id;
@@ -746,9 +753,9 @@ function Partida (tipo) {
 			auxThis.visitante.socket.emit("resultadoPartida",JSON.stringify(auxRes["user2"]));
 			
 		});
-
 		
-		var auxArray={};
+		
+		//var auxArray={};
 		//cambiar por local y visitante segun corresponda
 		
 		//auxArray["golesUser"]= golesUser;

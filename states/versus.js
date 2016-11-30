@@ -124,14 +124,34 @@ Versus.prototype = {
       });
       comenzar.position={x:175,y:530};
       comenzar.visible=false;
-      tiempo.destroy();
+      
 
 
     SuscribeServerEvent("oponente","empezarConteo",this,true);
 	SuscribeServerEvent("oponenteListo","oponenteListo",this,true);
 	SuscribeServerEvent("recibirLado","recibirLado",this,true);
+	SuscribeServerEvent("resultadoPartida","setearResultado",this,true);
 
+},
 
+setearResultado: function(msg){
+		//var resultadoArray;
+	if(modoMultiplayer){
+		//resultadoArray=msg;
+		resultadoPartida=msg;
+		triesA=5;
+		triesP=5;
+	}else{
+		//var resultadoArray=JSON.parse(msg);
+	}
+	console.log("resultado array");
+	console.log(resultadoPartida);
+	//resultadoPartida= resultadoArray;
+	
+	this.game.state.states["GameOver"].puntosUser = resultadoPartida["golesUser"];
+    this.game.state.states["GameOver"].puntosComputer = resultadoPartida["golesComputer"];
+    this.game.state.states["GameOver"].oponente = oponente;
+	this.game.state.start("GameOver");
 },
 
 oponenteListo:function(msg){
@@ -188,7 +208,7 @@ ambosListos:function(){
 	timer.stop();
 	graphics.visible=false;
   textTitle.visible=false;
-
+	tiempo.destroy();
 },
 
 recibirLado:function(msg){
@@ -218,7 +238,6 @@ render: function () {
 },
 
 endTimer: function() {
-
     timer.stop();
     self.endScreen();
 },
