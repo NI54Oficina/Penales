@@ -41,6 +41,10 @@ if(isset($_GET)){
 		//echo $data;
 		CreateMatch($data->usuarios,$data->modo);
 	}
+	if(isset($_GET['code'])&&$_GET["code"]=="search"){
+		$data= json_decode($_POST["data"]);
+		Search($data->toSearch);
+	}
 }else{
 	$data= $_POST["data"];
 }
@@ -339,5 +343,6 @@ function UpdateUser($idUser,$pateador,$arquero,$modo){
 function GetTendencia(){
 		
 }
+
 
 ?>

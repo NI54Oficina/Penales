@@ -56,6 +56,45 @@ io.on('connection', function(socket){
 		}
 	});
 	
+	socket.on('buscar', function(msg){
+		msg= JSON.parse(msg);
+		console.log("entra buscar");
+		console.log("busca a..."+msg.msg);
+		
+		/*var code="";
+		var auxParam={toSearch:msg.msg};
+		console.log(auxParam);
+		if(testLocal){
+			code="?code=search";
+		}else{
+			code="/search";
+		}
+		request.post(urlConnect+code,{form:{data:JSON.stringify(auxParam)}}, function (error, response, body) {
+			console.log("responde search")
+			console.log(body);
+		});*/
+		var toSearch=msg.msg;
+		try{
+			var inWait="";
+			for (var key in online) {
+				
+				if(online[key].usuario.nickname==toSearch){
+					console.log("encontrado");
+					socket.emit("encontrado","encontradoooo!");
+					return;
+				}else{
+					console.log("no era");
+				}
+				//console.log(key);
+				//console.log(listaEspera[a][key]);
+			}
+		}catch(error){
+			console.log(error);
+			
+		}
+		socket.emit("encontrado","nop!");
+	});
+	
 	
 	socket.on('disconnect', function(data){
 		console.log('user disconnected '+socket.id);
