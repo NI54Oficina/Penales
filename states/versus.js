@@ -124,6 +124,7 @@ Versus.prototype = {
       });
       comenzar.position={x:175,y:530};
       comenzar.visible=false;
+      tiempo.destroy();
 
 
     SuscribeServerEvent("oponente","empezarConteo",this,true);
@@ -149,7 +150,7 @@ empezarConteo: function(msg){
   game.load.onLoadComplete.addOnce(function(){
 
     var bmd = game.make.bitmapData(367, 482);
-	
+
 	oponente["avatar"]= "avatarOponente";
 
     bmd.alphaMask('avatarOponente', 'player');
