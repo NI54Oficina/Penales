@@ -333,15 +333,16 @@ var resultadoPartida= "";
 
 function StatsActualizados(msg){
 	console.log("entra resultado update");
+	
 	//SaveStats();
 
-	var auxArray={};
-	auxArray["golesUser"]= golesUser;
-	auxArray["golesComputer"]= golesComputer;
+	
 	resultadoPartida=msg["user1"];
-
-
-	CheckEvent('resultadoPartida', JSON.stringify(auxArray));
+	resultadoPartida["golesUser"]=golesUser;
+	resultadoPartida["golesComputer"]=golesComputer;
+	console.log(resultadoPartida);
+	
+	CheckEvent('resultadoPartida', JSON.stringify(resultadoPartida));
 	SendStats();
 	golesUser=0;
 	golesComputer=0;
@@ -528,7 +529,7 @@ function setPerfiles(){
 	perfil1 = {
 	id:1,
 	nombre: "SAN BOEDO",
-	imagen: "img-1",
+	avatar: "img-1",
 	arquero: "arquero-mercado",
 	pateador: "pateador-mercado",
 	efectividadA:2,
@@ -539,7 +540,7 @@ function setPerfiles(){
 	perfil2 = {
 		id:2,
 		nombre: "A DEFINIR",
-		imagen: "img-2",
+		avatar: "img-2",
 		arquero: "arquero-svisitante",
 		pateador: "pateador-svisitante",
 		efectividadA:5,
@@ -551,7 +552,7 @@ function setPerfiles(){
   perfil3 = {
   id:3,
   nombre: "LA BANDA ROJA",
-  imagen: "img-3",
+  avatar: "img-3",
 arquero: "arquero-riber",
 pateador: "pateador-riber",
   efectividadA:10,
@@ -562,7 +563,7 @@ pateador: "pateador-riber",
   perfil4 = {
 	  id:4,
 	  nombre: "LA ACADÉ",
-	  imagen: "img-4",
+	  avatar: "img-4",
 		arquero: "arquero-mufa",
 		pateador: "pateador-mufa",
 	  efectividadA:20,
@@ -573,7 +574,7 @@ pateador: "pateador-riber",
 	perfil5 = {
 	  id:5,
 	  nombre: "LOS ROJOS",
-	  imagen: "img-5",
+	  avatar: "img-5",
 	  		arquero: "arquero-ind",
 		pateador: "pateador-ind",
 	  efectividadA:20,

@@ -733,8 +733,14 @@ function Partida (tipo) {
 		request.post(urlConnect+code,{form:{data:toSend}}, function (error, response, body) {
 			console.log(body);
 			var auxRes= JSON.parse(body);
-			auxThis.local.socket.emit("resultadoPartida",JSON.stringify({golesUser:auxThis.golesLocal,golesComputer:auxThis.golesVisitante,detalle:auxRes["user1"]}));
-			auxThis.visitante.socket.emit("resultadoPartida",JSON.stringify({golesUser:auxThis.golesVisitante,golesComputer:auxThis.golesLocal,detalle:auxRes["user2"]}));
+			auxRes["user1"].golesUser=auxThis.golesLocal;
+			auxRes["user1"].golesComputer=auxThis.golesVisitante;
+			
+			auxRes["user2"].golesUser=auxThis.golesVisitante;
+			auxRes["user2"].golesComputer=auxThis.golesLocal;
+			
+			auxThis.local.socket.emit("resultadoPartida",JSON.stringify(auxRes["user1"]));
+			auxThis.visitante.socket.emit("resultadoPartida",JSON.stringify(auxRes["user2"]));
 			
 		});
 

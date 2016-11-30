@@ -145,6 +145,8 @@ empezarConteo: function(msg){
   game.load.onLoadComplete.addOnce(function(){
 
     var bmd = game.make.bitmapData(367, 482);
+	
+	oponente["avatar"]= "avatarOponente";
 
     bmd.alphaMask('avatarOponente', 'player');
 

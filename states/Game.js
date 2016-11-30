@@ -24,7 +24,10 @@ Game.prototype = {
     triesP=this.triesP;
 
 	   counterBarra=0;
-    NombreSala;
+	   if(modoMultiplayer){
+		   NombreSala;
+	   }
+    
 
 	SuscribeServerEvent("inicioPartida","Clicked",this,false);
 	SuscribeServerEvent("inicioTurno","checkIntentos",this,false);
@@ -706,25 +709,28 @@ updateCounter: function () {
   },
 
 	setearResultado: function(msg){
-		var resultadoArray;
+		//var resultadoArray;
 		if(modoMultiplayer){
-			resultadoArray=msg;
+			//resultadoArray=msg;
+			resultadoPartida=msg;
 			triesA=5;
 			triesP=5;
 		}else{
-			var resultadoArray=JSON.parse(msg);
+			//var resultadoArray=JSON.parse(msg);
 		}
-		resultadoPartida= resultadoArray;
+		console.log("resultado array");
+		console.log(resultadoPartida);
+		//resultadoPartida= resultadoArray;
 
-		 puntosUser = resultadoArray["golesUser"];
-		 puntosComputer = resultadoArray["golesComputer"];
+		 puntosUser = resultadoPartida["golesUser"];
+		 puntosComputer = resultadoPartida["golesComputer"];
 	    this.checkIntentos(msg);
    },
 
   checkIntentos: function(data){
 		var auxArray;
 		if(!modoMultiplayer){
-			auxArray=JSON.parse(data);
+			//auxArray=JSON.parse(data);
 		}else{
 			auxArray=data;
 		}

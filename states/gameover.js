@@ -24,10 +24,22 @@ GameOver.prototype = {
     playerOne.scale.setTo(.4, .4);
     console.log(playerOne.height+'  '+playerOne.width);*/
 
-
-    playerTwo =game.add.sprite(650,70, "img-5");
+	if(!modoMultiplayer){
+    playerTwo =game.add.sprite(650,70, oponente["avatar"]);
     playerTwo.scale.setTo(.3, .3);
     console.log(playerTwo.height +' '+ playerTwo.width);
+	}else{
+		var bmd = game.make.bitmapData(367, 482);
+
+		//	And create an alpha mask image by combining pic and mask from the cache
+		console.log(oponente["avatar"]);
+		bmd.alphaMask(oponente["avatar"], 'player');
+
+		//	A BitmapData is just a texture. You need to apply it to a sprite or image
+		//	to actually display it:
+		playerTwo= game.add.image(650, 70, bmd);
+		playerTwo.scale.setTo(.3,.3);
+	}
 
     // test
 
@@ -65,6 +77,7 @@ GameOver.prototype = {
 
    //self.syncVariables();
    self = this;
+   
    console.log(resultadoPartida);
    localStorage["PartidosGanados"];
    localStorage["PartidosPerdidos"];
@@ -190,6 +203,8 @@ console.log("entra 4");
 	game.add.text(850, mm,resultadoPartida.puntosNuevos+' pts.', { font: 'bold 15pt CondensedLight', fill: 'white'});
 	mm+=40;
       xx+=40;
+	 var puntosObj;
+	 
 	$.each(resultadoPartida.detalle,function(index,value){
 		if(n==0){
         game.add.text(250, mm, index, { font: 'bold 15pt CondensedLight', fill: 'white'});
