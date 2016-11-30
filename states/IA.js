@@ -372,6 +372,7 @@ function calculoChancesAtajar(msg){
 }
 
 function CalculateTiro(){
+	
 	var errar=randomBetween(1,oponente['efectividadP']);
 
 	if(errar==1){

@@ -177,8 +177,8 @@ io.on('connection', function(socket){
 	socket.on('ready', function(msg){
 		console.log(msg);
 		var ops= JSON.parse(msg);
-		console.log(ops);
-		console.log("----------------------------------");
+		//console.log(ops);
+		//console.log("----------------------------------");
 		online[ops.session].estado="listo";
 		var auxPartida= partidas[online[ops.session].partida];
 		var oponente= auxPartida.oponente(ops.session);
@@ -187,10 +187,10 @@ io.on('connection', function(socket){
 	});
 
 	socket.on('enviarJugada', function(msg,session){
-		console.log(msg);
+		//console.log(msg);
 		var ops= JSON.parse(msg);
-		console.log(ops);
-		console.log("----------------------------------");
+		//console.log(ops);
+		//console.log("----------------------------------");
 		online[ops.session].estado="listo";
 		online[ops.session].jugadas.push(ops.msg);
 		var auxPartida= partidas[online[ops.session].partida];
@@ -305,18 +305,18 @@ function SendStats(msg){
 
 
 function requestSoap(code,params,callback,session){
-	console.log("envia params");
-	console.log(params);
-	console.log(callback);
-	console.log(session);
+	//console.log("envia params");
+	//console.log(params);
+	//console.log(callback);
+	//console.log(session);
 	
-	console.log("-------------------------------------------------");
+	//console.log("-------------------------------------------------");
 	 
 	 request.post(urlConnect+code,params, function (error, response, body) {
 		
-		console.log(callback);
-		console.log(session);
-		console.log("-------------------------------------------------");
+		//console.log(callback);
+		//console.log(session);
+		//console.log("-------------------------------------------------");
 		global[callback](body,session);
 	});
 }
@@ -591,12 +591,12 @@ function Partida (tipo) {
 	this.state="pending";
 	
 	this.tick= function(){
-		console.log("tick "+this.id+" "+this.state);
-		console.log("user1 "+this.local.estado);
-		console.log("user2 "+this.visitante.estado);
+		//console.log("tick "+this.id+" "+this.state);
+		//console.log("user1 "+this.local.estado);
+		//console.log("user2 "+this.visitante.estado);
 		if(this.state=="pending"){
-			console.log("user1 "+this.local.estado);
-			console.log("user2 "+this.visitante.estado);
+			//console.log("user1 "+this.local.estado);
+			//console.log("user2 "+this.visitante.estado);
 			if(this.local.estado=="listo"&&this.visitante.estado=="listo"){
 				console.log("partida lista!");
 				this.local.socket.emit("recibirLado",2);
@@ -619,13 +619,13 @@ function Partida (tipo) {
 				this.local.estado="esperando";
 				this.visitante.estado="esperando";
 				this.state="animando";
-				console.log(this.local);
-				console.log(this.visitante);
+				//console.log(this.local);
+				//console.log(this.visitante);
 				this.local.socket.emit("recibeJugada",JSON.stringify({user:this.local.jugadas[this.local.jugadas.length-1],computer:this.visitante.jugadas[this.visitante.jugadas.length-1]}));
 				this.visitante.socket.emit("recibeJugada",JSON.stringify({user:this.visitante.jugadas[this.visitante.jugadas.length-1],computer:this.local.jugadas[this.local.jugadas.length-1]}));
 			}
 		}else if(this.state=="animando"){
-			if(this.local.estado=="listo"&&this.visitante.estado=="listo"){
+			if(this.local.estado=="listo"&&this.visitante.estado=="listo"&&!this.finished){
 				this.local.estado="esperando";
 				this.visitante.estado="esperando";
 				this.state="game";
@@ -665,30 +665,33 @@ function Partida (tipo) {
 	
 	this.checkPuntaje=function(){
 		if(this.counterVisitante >= 5 &&  this.counterLocal >= 5 ){
+			console.log("GOLES LOCAL: "+ this.golesLocal +", GOLES VISITANTE: "+ this.golesVisitante);
 				if(this.golesVisitante == this.golesLocal && !this.enAlargue){
 					this.auxCont++;
 					this.enAlargue=true;
-					console.log("EMPATE");
+					console.log("EMPATE1");
 					this.InicioTurno();
 					console.log("Iniciar Turno");
 
 				}else if(this.enAlargue){
 					if(this.auxCont!=2){
 						this.auxCont++;
-						console.log("EMPATE");
+						console.log("EMPATE2");
 						this.InicioTurno();
 						console.log("Iniciar Turno");
 					}else{
 
 						console.log("GOLES LOCAL: "+ this.golesLocal +", GOLES VISITANTE: "+ this.golesVisitante);
-						 if(this.golesUser == this.golesComputer){
-							this.auxCont=0;
-							console.log("EMPATE");
+						 if(this.golesLocal == this.golesVisitante){
+							this.auxCont=1;
+							console.log("EMPATE3");
 							this.InicioTurno();
 							console.log("Iniciar Turno");
 						}else{
 
-							console.log("TERMINA JUEGO EN EMPATE"); this.GetResultado();
+							console.log("TERMINA JUEGO EN EMPATE");
+							this.finished=true;
+							this.GetResultado();
 						}
 					};
 				}else{
@@ -753,7 +756,7 @@ function Partida (tipo) {
 		//io.emit('resultadoPartida', JSON.stringify(auxArray));
 		//SendStats();
 		
-
+		//pause=true;
 	},
 	
 	this.disconected= function(uId){
@@ -845,10 +848,10 @@ var update = function(delta) {
 	if(pause){
 		return;
 	}
- console.log("entra Update "+Date.now());
+ //console.log("entra Update "+Date.now());
  MatchMaking();
  UpdateMatches();
- console.log("----------------------------------------");
+ //console.log("----------------------------------------");
 }
 
 /**
@@ -867,7 +870,7 @@ gameLoop();
 /**End Loop**/
 
 function MatchMaking(){
-	console.log(listaEspera);
+	//console.log(listaEspera);
 	for(var a=0;a<listaEspera.length;a++){
 		//console.log("entra "+a);
 		try{
