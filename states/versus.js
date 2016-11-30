@@ -96,7 +96,8 @@ Versus.prototype = {
       graphics.drawRoundedRect(0, 0, 270, 60,5);
       window.graphics = graphics;
 
-      graphics.addChild(game.add.text(40, 20, "Esperando confirmación",{ font: '20px CondensedLight', fill: 'white', align: 'center'}));
+      confirmacion=game.add.text(40, 20, "Buscando oponente...",{ font: '20px CondensedLight', fill: 'white', align: 'center'})
+      graphics.addChild(confirmacion);
 
       cancelar=self.createButton('CANCELAR', function () {
 
@@ -113,11 +114,8 @@ Versus.prototype = {
         // timer.stop();
         //goldenA.addChild(game.add.sprite(goldenA.width, goldenA.height-50, 'accepted'));
         goldenB.addChild(  game.add.sprite(goldenB.width, goldenB.height-50, 'accepted'));
-        /*comenzar.visible=false;
-        graphics.visible=false;
-        textTitle.visible=false;
-        self.sortearMoneda();*/
-		self.ambosListos();
+        comenzar.visible=false;
+    		self.ambosListos();
 
       });
       comenzar.position={x:175,y:530};
@@ -173,6 +171,7 @@ empezarConteo: function(msg){
   tiempo.visible=true;
   comenzar.visible=true;
   cancelar.visible=false;
+  confirmacion.setText("Esperando confirmación");
 
 },
 

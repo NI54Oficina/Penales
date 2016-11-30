@@ -188,11 +188,16 @@ drawBackground: function(){
 
   puntosUserText = game.add.text(this.game.width/2-40, this.game.height-45, puntosUser+' - ', { font: " 40px BitterRegular", fill: "white"});
   puntosComputerText = game.add.text(this.game.width/2+23, this.game.height-45, puntosComputer, { font: " 40px BitterRegular", fill: "white"});
+  if(modoMultiplayer){
+    aliasUser= game.add.text(0, this.game.height-35, usuario.nickname, { font: " 20px CondensedBold", fill: "white"});
+    aliasComputer =game.add.text(745,this.game.height-35, oponente.nickname, { font: " 20px CondensedBold", fill: "white"});
+  }else{
+    aliasUser= game.add.text(0, this.game.height-35, 'BOCA', { font: " 20px CondensedBold", fill: "white"});
+    aliasComputer =game.add.text(745,this.game.height-35, perfilElegido.nombre, { font: " 20px CondensedBold", fill: "white"});
+  }
 
-  aliasUser= game.add.text(0, this.game.height-35, 'BOCA', { font: " 20px CondensedBold", fill: "white"});
   aliasUser.x=385-aliasUser.width;
   aliasUser.setShadow(0,3, 'rgba(0,0,0,0.5)', 0);
-  aliasComputer =game.add.text(745,this.game.height-35, perfilElegido.nombre, { font: " 20px CondensedBold", fill: "white"});
   aliasComputer.setShadow(0,3, 'rgba(0,0,0,0.5)', 0);
 
 },
