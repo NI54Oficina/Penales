@@ -133,7 +133,7 @@ Versus.prototype = {
 
 oponenteListo:function(msg){
 	listos+=1;
-	goldenA.addChild(game.add.sprite(goldenA.width, goldenA.height-50, 'accepted '));
+	goldenA.addChild(game.add.sprite(goldenA.width, goldenA.height-50, 'accepted'));
 	this.ambosListos();
 },
 
@@ -148,11 +148,23 @@ empezarConteo: function(msg){
 
     var bmd = game.make.bitmapData(367, 482);
 
-    bmd.alphaMask('avatarOponente', 'golden');
+    bmd.alphaMask('avatarOponente', 'player');
 
     rightPlayer= game.add.image(this.game.width/2 + 120, 180, bmd);
+	
+	rightPlayer.scale.setTo(.8);
+	
+	goldenA=game.add.sprite(rightPlayer.x-10,rightPlayer.y-5, 'selector');
+        goldenA.scale.setTo(.8,.8);
+	
+	console.log("avatar cargado");
+	
+	 var nikOpon=game.add.text(770,380, oponente.nickname, { font: '27px CondensedBold', fill: 'white', align: 'center',wordWrap: true, wordWrapWidth:20});
+  nikOpon.x=rightPlayer.x+(rightPlayer.width/2)- nikOpon.width/2;
 
   }, this);
+  
+  game.load.start();
 
   var nikOpon=game.add.text(770,380, oponente.nickname, { font: '27px CondensedBold', fill: 'white', align: 'center',wordWrap: true, wordWrapWidth:20});
   nikOpon.x=rightPlayer.x+(rightPlayer.width/2)- nikOpon.width/2;

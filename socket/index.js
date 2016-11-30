@@ -65,7 +65,7 @@ io.on('connection', function(socket){
 		delete listaEspera[1][socket.id];
 		delete listaEspera[2][socket.id];
 		delete listaEspera[3][socket.id];
-		if(online[socket.id].partida!=""&&!(partidas[online[socket.id].partida]===null)){
+		if(online[socket.id].partida!=""&&!(partidas[online[socket.id].partida]==null)){
 			partidas[online[socket.id].partida].disconected(socket.id);
 		}else{
 			console.log("partida es null");

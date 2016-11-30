@@ -337,7 +337,7 @@ var Splash = function () {};
 
     if(modoMultiplayer){
       game.load.image('avatarUser', usuario["avatar"]);
-         game.load.onLoadComplete.add(function(){
+         game.load.onLoadComplete.addOnce(function(){
            console.log("imagen cargada al completo");
           //game.add.sprite(0, 0, 'avatarUser').scale.setTo(.80,.80);
           usuario["avatar"]="avatarUser";
