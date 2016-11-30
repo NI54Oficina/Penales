@@ -144,7 +144,7 @@ empezarConteo: function(msg){
 
   game.load.image('avatarOponente', oponente["avatar"]);
 
-  game.load.onLoadComplete.add(function(){
+  game.load.onLoadComplete.addOnce(function(){
 
     var bmd = game.make.bitmapData(367, 482);
 
