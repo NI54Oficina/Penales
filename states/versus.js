@@ -5,10 +5,13 @@ Versus.prototype = {
   create: function () {
 
     self = this;
-
+    this.modo;
 
     this.createBackground(true);
     this.createSoundGraphics();
+
+
+    modo=this.modo;
 
     velocidadMoneda=50;
 
@@ -96,12 +99,13 @@ Versus.prototype = {
       graphics.drawRoundedRect(0, 0, 270, 60,5);
       window.graphics = graphics;
 
-      confirmacion=game.add.text(40, 20, "Buscando oponente...",{ font: '20px CondensedLight', fill: 'white', align: 'center'})
+      confirmacion=game.add.text(40, 20, "Buscando oponente...",{ font: '20px CondensedLight', fill: 'white', align: 'center'});
+      confirmacion.x = graphics.width/2 - confirmacion.width/2;
       graphics.addChild(confirmacion);
 
       cancelar=self.createButton('CANCELAR', function () {
-
-      game.state.start('Selectsala');
+        console.log(modo);
+        modo==1?game.state.start('Selectsala'):game.state.start('SelectsalaPrivada');
 
       });
 
@@ -151,19 +155,19 @@ empezarConteo: function(msg){
     bmd.alphaMask('avatarOponente', 'player');
 
     rightPlayer= game.add.image(this.game.width/2 + 120, 180, bmd);
-	
+
 	rightPlayer.scale.setTo(.8);
-	
+
 	goldenA=game.add.sprite(rightPlayer.x-10,rightPlayer.y-5, 'selector');
         goldenA.scale.setTo(.8,.8);
-	
+
 	console.log("avatar cargado");
-	
+
 	 var nikOpon=game.add.text(770,380, oponente.nickname, { font: '27px CondensedBold', fill: 'white', align: 'center',wordWrap: true, wordWrapWidth:20});
   nikOpon.x=rightPlayer.x+(rightPlayer.width/2)- nikOpon.width/2;
 
   }, this);
-  
+
   game.load.start();
 
   var nikOpon=game.add.text(770,380, oponente.nickname, { font: '27px CondensedBold', fill: 'white', align: 'center',wordWrap: true, wordWrapWidth:20});
@@ -174,6 +178,7 @@ empezarConteo: function(msg){
   comenzar.visible=true;
   cancelar.visible=false;
   confirmacion.setText("Esperando confirmación");
+  confirmacion.x = graphics.width/2 - confirmacion.width/2;
 
 },
 

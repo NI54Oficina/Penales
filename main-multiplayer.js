@@ -44,6 +44,7 @@ Main.prototype = {
 			game.kineticScrolling.velocityWheelX=0;
 			game.kineticScrolling.endMove();
 			game.kineticScrolling.stop();
+      game.load.script('input', urlBase+'states/CanvasInput.js');
 		}catch(error){
 
 		};

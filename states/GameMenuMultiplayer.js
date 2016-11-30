@@ -42,7 +42,7 @@ GameMenu.prototype = {
 
     desafiar=this.addMenuOption('DESAFIAR AMIGO', function () {
 
-      // game.state.start("Selectplayer_2");
+      game.state.start("Selectfriend");
     });
     desafiar.position={x:700, y:260};
 

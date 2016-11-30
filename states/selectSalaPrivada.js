@@ -1,6 +1,6 @@
-var Selectsala = function(game) {};
+var SelectsalaPrivada = function(game) {};
 
-Selectsala.prototype = {
+SelectsalaPrivada.prototype = {
 
   preload: function () {
     this.optionCount = 1;
@@ -10,7 +10,6 @@ Selectsala.prototype = {
       self = this;
       indiceC=0;
       i=0;
-      muttex=0;
       salaSelected=0;
       NombreSala=0;
 
@@ -21,8 +20,6 @@ Selectsala.prototype = {
 
       //valor que me deberia devolver el servidor para saber el nivel de la sala
       levelSala=[3,2,2,1];
-
-
 
       levelsBlue=['btn-b-1','btn-b-2','btn-b-3'];
       levelsYelow=['btn-a-1','btn-a-2','btn-a-3'];
@@ -51,22 +48,7 @@ Selectsala.prototype = {
       back.inputEnabled=true;
       back.events.onInputDown.add(self.ReplaceColor, back);
       back.input.useHandCursor = true;
-      back.addChild(game.add.text(15,20, 'CLÁSICO', {font:'35px CondensedRegular', fill:'#cea428'}));
-      back.addChild(game.add.text(15,75, 'CANTIDAD DE JUGADORES', {font:'20px CondensedRegular', fill:'#fff03a'}));
-      back.addChild(this.game.add.sprite(245,70,'sala-yellow'));
-
-      n=60
-
-      for(var j=0; j< levelSala[0]; j++){
-
-        for(var i=0; i<2;i++){
-          var lvl=this.game.add.sprite(265,n,levelsYelow[j]);
-          lvl.scale.setTo(.8);
-          back.addChild(lvl);
-          n=n-10;
-        }
-      }
-
+      back.addChild(game.add.text(90,35, 'CLÁSICO', {font:'35px CondensedRegular', fill:'#cea428'}));
       back.id=1;
 
 
@@ -82,22 +64,7 @@ Selectsala.prototype = {
       back2.inputEnabled=true;
       back2.events.onInputDown.add(self.ReplaceColor, back2);
       back2.input.useHandCursor = true;
-      back2.addChild(game.add.text(15,20, '300 PUNTOS', {font:'35px CondensedRegular', fill:'#cea428'}));
-      back2.addChild(game.add.text(15,75, 'CANTIDAD DE JUGADORES', {font:'20px CondensedRegular', fill:'#fff03a'}));
-      back2.addChild(this.game.add.sprite(245,70,'sala-yellow'));
-
-      n=60
-
-      for(var j=0; j< levelSala[1]; j++){
-
-        for(var i=0; i<2;i++){
-          var lvl=this.game.add.sprite(265,n,levelsYelow[j]);
-          lvl.scale.setTo(.8);
-          back2.addChild(lvl);
-          n=n-10;
-        }
-      }
-
+      back2.addChild(game.add.text(60,35, '300 PUNTOS', {font:'35px CondensedRegular', fill:'#cea428'}));
       back2.id=2;
 
       var graphics2 = game.add.graphics(x2, y2);
@@ -113,23 +80,7 @@ Selectsala.prototype = {
       back3.inputEnabled=true;
       back3.events.onInputDown.add(self.ReplaceColor, back3);
       back3.input.useHandCursor = true;
-      back3.addChild(game.add.text(15,20, '500 PUNTOS', {font:'35px CondensedRegular', fill:'#cea428'}));
-      back3.addChild(game.add.text(15,75, 'CANTIDAD DE JUGADORES', {font:'20px CondensedRegular', fill:'#fff03a'}));
-      back3.addChild(this.game.add.sprite(245,70,'sala-yellow'));
-
-      n=60
-
-      for(var j=0; j< levelSala[2]; j++){
-
-        for(var i=0; i<2;i++){
-          var lvl=this.game.add.sprite(265,n,levelsYelow[j]);
-          lvl.scale.setTo(.8);
-          back3.addChild(lvl);
-          n=n-10;
-        }
-      }
-
-
+      back3.addChild(game.add.text(60,35, '500 PUNTOS', {font:'35px CondensedRegular', fill:'#cea428'}));
       back3.id=3;
 
 
@@ -145,22 +96,7 @@ Selectsala.prototype = {
       back4.inputEnabled=true;
       back4.events.onInputDown.add(self.ReplaceColor, back4);
       back4.input.useHandCursor = true;
-      back4.addChild(game.add.text(15,20, '1000 PUNTOS', {font:'35px CondensedRegular', fill:'#cea428'}));
-      back4.addChild(game.add.text(15,75, 'CANTIDAD DE JUGADORES', {font:'20px CondensedRegular', fill:'#fff03a'}));
-      back4.addChild(this.game.add.sprite(245,70,'sala-yellow'));
-
-      n=60
-
-      for(var j=0; j< levelSala[3]; j++){
-
-        for(var i=0; i<2;i++){
-          var lvl=this.game.add.sprite(265,n,levelsYelow[j]);
-          lvl.scale.setTo(.8);
-          back4.addChild(lvl);
-          n=n-10;
-        }
-      }
-
+      back4.addChild(game.add.text(55,35, '1000 PUNTOS', {font:'35px CondensedRegular', fill:'#cea428'}));
       back4.id=4;
 
       var graphics = game.add.graphics(x4, y4);
@@ -180,7 +116,7 @@ Selectsala.prototype = {
        }).position={x:290,y:530};
 
 
-      jugar=self.createButton('JUGAR',function () {
+      jugar=self.createButton('DESAFIAR',function () {
 
          //aca hacer el envio de mensajes con el server para poder jugar.
          // las salas son 1,2,3,4, si recibe 0 es porque no selecciono ninguna sala.
@@ -192,7 +128,7 @@ Selectsala.prototype = {
     			Emit("buscarPartida",JSON.stringify(solicitud));
 
           this.game.state.states["Versus"].NombreSala = NombreSala;
-          this.game.state.states["Versus"].modo =1;
+          this.game.state.states["Versus"].modo = 0;
     			game.state.start('Versus');
         }
 
@@ -213,7 +149,7 @@ Selectsala.prototype = {
   gameBack.context.fillRect(0,0,this.game.width,this.game.height);
   back=this.game.add.sprite(580,530,gameBack);
 
-  var txt = game.add.text(0, 0 , 'JUGAR', { font: '20pt RobotoBold', align: 'center',fill:'#1b1464' ,stroke: '#1b1464'});
+  var txt = game.add.text(0, 0 , 'DESAFIAR', { font: '20pt RobotoBold', align: 'center',fill:'#1b1464' ,stroke: '#1b1464'});
   txt.setShadow(0,2, '#ffffbd ', 0);
 
   txt.position.x=back.width/2 - txt.width/2;
@@ -261,23 +197,6 @@ ReplaceColor: function(target){
 
 
    arrayBlock[i].children[0].fill='#cea428';
-   arrayBlock[i].children[1].fill='#fff03a';
-   arrayBlock[i].children[2].loadTexture('sala-yellow', 0, false);
-
-   y=3;
-
-
-
-     for(var k=0; k<levelSala[i] ; k++){
-
-           for(var j=0; j<2;j++){
-             arrayBlock[i].children[y++].loadTexture(levelsYelow[k], 0, false);
-           }
-       };
-
-
-
-
 
   }
 
@@ -289,21 +208,7 @@ ReplaceColor: function(target){
     gameBack.context.fillRect(0,0,this.game.width,this.game.height);
     target.loadTexture(gameBack, 0, false);
 
-    var i=0
-    for(i; i < 2; i++){
-        target.children[i].fill='#01447d';
-    }
-
-    target.children[i].loadTexture('sala-blue', 0, false);
-
-    i++;
-
-    for(var k =0; k< levelSala[target.id-1]; k++){
-
-            for(var j=0; j<2;j++){
-              target.children[i++].loadTexture(levelsBlue[k], 0, false);
-            }
-    };
+    target.children[0].fill='#01447d';
 
     back.visible=false;
     jugar.visible=true;
@@ -320,4 +225,4 @@ mandarWarning: function(){
 
 }
 
-Phaser.Utils.mixinPrototype(Selectsala.prototype, mixins);
+Phaser.Utils.mixinPrototype(SelectsalaPrivada.prototype, mixins);
