@@ -1,4 +1,4 @@
-var serverEnabled=false;
+var serverEnabled=true;
 var socket;
 var testLocal =true;
 var oponente={};
