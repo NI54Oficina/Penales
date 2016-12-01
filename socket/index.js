@@ -44,6 +44,7 @@ io.on('connection', function(socket){
 		connectedUser.socket= socket;
 		//connectedUser.usuario= "poyo";
 		online[socket.id]= connectedUser;
+		online[socket.id].estado="menu";
 		console.log("user conected");
 		socket.emit("session",socket.id);
 	
@@ -98,7 +99,7 @@ io.on('connection', function(socket){
 				
 				if(online[key].usuario.nickname==toSearch){
 					console.log("encontrado");
-					socket.emit("encontrado","encontradoooo!");
+					socket.emit("rbusqueda","1");
 					return;
 				}else{
 					console.log("no era");
@@ -110,9 +111,32 @@ io.on('connection', function(socket){
 			console.log(error);
 			
 		}
-		socket.emit("encontrado","nop!");
+		socket.emit("rbusqueda","0");
 	});
 	
+	socket.on('desafiar', function(msg){
+		console.log("entra desafio");
+		msg= JSON.parse(msg);
+		console.log(msg);
+		var toSearch=msg.msg["oponente"];
+		console.log(toSearch);
+		var oponente="";
+		try{
+			for (var key in online) {
+				if(online[key].usuario.nickname==toSearch){
+					oponente= key;
+				}
+			}
+		}catch(error){
+			console.log(error);
+		}
+		winston.log("info",oponente);
+		if(oponente==""){
+			socket.emit("noEncontrado","");
+		}else{
+			CreateMatch([socket.id,oponente],msg.msg.tipo);
+		}
+	});
 	
 	socket.on('disconnect', function(data){
 		console.log('user disconnected '+socket.id);
@@ -962,7 +986,15 @@ function CreateMatch(users,tipo){
 	
 	auxPartida.local= online[users[0]];
 	auxPartida.local.jugadas= new Array();
+	auxPartida.privada=1;
 	auxPartida.visitante= online[users[1]];
+	console.log(auxPartida.visitante);
+	if(auxPartida.visitante.estado!="online"){
+		console.log("sorry no se puede matchear");
+		return;
+	}else{
+		console.log("manda desafio al oponente");
+	}
 	auxPartida.visitante.jugadas= new Array();
 	console.log("match creado");
 	console.log(users);
@@ -986,10 +1018,16 @@ function CreateMatch(users,tipo){
 		auxPartida.local.partida=body;
 		auxPartida.visitante.estado="espera";
 		auxPartida.visitante.partida=body;
+		try{
 		delete listaEspera[tipo][users[0]];
 		delete listaEspera[tipo][users[1]];
+		}catch(error){
+			
+		}
 		console.log(auxPartida);
+		console.log("test");
 		partidas[body]= auxPartida;
+		console.log("entraaaa0");
 		var auxVisitante= JSON.parse(JSON.stringify(auxPartida.visitante.usuario));
 		delete auxVisitante["puntos"];
 		delete auxVisitante["credits"];
@@ -1004,8 +1042,10 @@ function CreateMatch(users,tipo){
 		delete auxLocal["id"];
 		auxLocal["tendencia"]= auxPartida.local["stats"]['tendencia'];
 		delete auxLocal["stats"];
+		console.log("entraaaa1");
 		auxPartida.local.socket.emit("oponente",JSON.stringify(auxVisitante));
 		auxPartida.visitante.socket.emit("oponente",JSON.stringify(auxLocal));
+		console.log("entraaaa");
 		//enviar datos del oponente a cada jugador
 		//pause=true;
 	});

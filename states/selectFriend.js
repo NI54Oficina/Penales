@@ -21,7 +21,7 @@ Selectfriend.prototype = {
     window.graphics = graphics;
 
 
-    var input = game.add.inputField(170, 265,{
+    input = game.add.inputField(170, 265,{
     font: '25px CondensedRegular',
     fill: '#FFFFFF',
     fillAlpha:0,
@@ -37,9 +37,25 @@ Selectfriend.prototype = {
 
 
     self.createButton("CANCELAR", function(){game.state.start('GameMenu');}).position={x:280,y:450};
-    self.createButton("SIGUIENTE",function(){game.state.start('SelectsalaPrivada');}).position={x:580,y:450};
+	var auxThis=this;
+    self.createButton("SIGUIENTE",function(){
+		//game.state.start('SelectsalaPrivada');
+		
+			Emit("buscar",input.value,"rbusqueda","resultado",auxThis);
+		}
+		).position={x:580,y:450};
 
 
+},
+
+resultado:function(msg){
+	console.log("resultado "+msg);
+	if(msg==1){
+		console.log(input.value);
+		console.log("cambia de pantalla");
+		this.game.state.states["SelectsalaPrivada"].desafiado=input.value;
+		game.state.start('SelectsalaPrivada');
+	}
 },
 
 render: function(){

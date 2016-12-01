@@ -7,6 +7,7 @@ SelectsalaPrivada.prototype = {
   },
 
   create: function(){
+	  console.log("Desafia a"+this.desafiado);
       self = this;
       indiceC=0;
       i=0;
@@ -125,7 +126,8 @@ SelectsalaPrivada.prototype = {
     			var solicitud= {};
     			//solicitud.id= usuario["id"];
     			solicitud.tipo= salaSelected;
-    			Emit("buscarPartida",JSON.stringify(solicitud));
+				solicitud.oponente= self.desafiado;
+    			Emit("desafiar",solicitud);
 
           this.game.state.states["Versus"].NombreSala = NombreSala;
           this.game.state.states["Versus"].modo = 0;
