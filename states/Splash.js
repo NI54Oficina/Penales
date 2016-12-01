@@ -72,6 +72,10 @@ var Splash = function () {};
     game.load.image('btn-b-1', urlBase+'assets/multiplayer/images/btn-blue-1.png');
     game.load.image('btn-b-2', urlBase+'assets/multiplayer/images/btn-blue-2.png');
     game.load.image('btn-b-3', urlBase+'assets/multiplayer/images/btn-blue-3.png');
+    game.load.image('btn-instrucciones-1', urlBase+'assets/multiplayer/images/btn-instrucciones-01.png');
+    game.load.image('btn-instrucciones-2', urlBase+'assets/multiplayer/images/btn-instrucciones-02.png');
+    game.load.image('btn-instrucciones-3', urlBase+'assets/multiplayer/images/btn-instrucciones-03.png');
+    game.load.image('btn-instrucciones-4', urlBase+'assets/multiplayer/images/btn-instrucciones-04.png');
 
   }else{
     game.load.image('menu-bg', urlBase+'assets/singleplayer/images/bg-menu.png');
@@ -110,6 +114,8 @@ var Splash = function () {};
     game.load.image('sombra-instrucciones', urlBase+'assets/general/images/sombra-instrucciones.png');
     game.load.image('next-instrucciones', urlBase+'assets/general/images/flecha-siguiente.png');
     game.load.image('prev-instrucciones', urlBase+'assets/general/images/flecha-anterior.png');
+    game.load.image('cartel-1', urlBase+'assets/general/images/instrucciones-cartel.png');
+    game.load.image('cartel-2', urlBase+'assets/general/images/instrucciones-cartel-2.png');
 
 
     game.load.image('line', urlBase+'assets/general/images/titulo_linea.png');
