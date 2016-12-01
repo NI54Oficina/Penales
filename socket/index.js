@@ -17,10 +17,28 @@ var online= {};
 var pause=false;
 
 var request = require('request');
-	
+
+process.on('uncaughtException', function (err) {
+  winston.log("error",'Caught exception: ' + err);
+});
+
+var winston = require('winston');
+
+winston.level = 'debug';
+
+winston.add(winston.transports.File, { filename: 'somefile.log' });
+winston.add(winston.transports.File, {
+      name: 'error-file',
+      filename: 'filelog-error.log',
+      level: 'error'
+    });
+
+winston.log('info', 'Hello distributed log files!');
+
+
 	
 io.on('connection', function(socket){
-		console.log(socket.id);
+		winston.log("info",socket.id);
 		//io.sockets.socket(socket.id).emit("poyo")
 		var connectedUser={};
 		connectedUser.socket= socket;
@@ -29,7 +47,7 @@ io.on('connection', function(socket){
 		console.log("user conected");
 		socket.emit("session",socket.id);
 	
-	
+		console.log(poyo);
 	socket.on('chat message', function(msg){
 		socket.emit('chat message', msg);
 		
@@ -39,7 +57,7 @@ io.on('connection', function(socket){
 	socket.on('checkSession', function(msg){
 		console.log(msg);
 		var auxMsg= JSON.parse(msg);
-		console.log(online[msg.session]);
+		//console.log(online[socket.id]);
 	});
 
 	socket.on('login', function(msg){
@@ -155,7 +173,7 @@ io.on('connection', function(socket){
 		}else{
 			SendStats();
 		}*/
-		SendStats(msg);
+		SendStats(msg,socket.id);
 	});
 	
 	socket.on('buscarPartida', function(msg){
@@ -164,8 +182,8 @@ io.on('connection', function(socket){
 		ops.msg= JSON.parse(ops.msg);
 		console.log(ops);
 		//console.log(msg);
-		online[ops.session].estado="cola";
-		listaEspera[ops.msg.tipo-1][ops.session]=1;
+		online[socket.id].estado="cola";
+		listaEspera[ops.msg.tipo-1][socket.id]=1;
 	/*	setTimeout(function(){
 			Reset();
 			finished=false;
@@ -218,9 +236,9 @@ io.on('connection', function(socket){
 		var ops= JSON.parse(msg);
 		//console.log(ops);
 		//console.log("----------------------------------");
-		online[ops.session].estado="listo";
-		var auxPartida= partidas[online[ops.session].partida];
-		var oponente= auxPartida.oponente(ops.session);
+		online[socket.id].estado="listo";
+		var auxPartida= partidas[online[socket.id].partida];
+		var oponente= auxPartida.oponente(socket.id);
 		oponente.socket.emit("oponenteListo",JSON.stringify({status:1}));
 		auxPartida.tick();
 	});
@@ -230,9 +248,9 @@ io.on('connection', function(socket){
 		var ops= JSON.parse(msg);
 		//console.log(ops);
 		//console.log("----------------------------------");
-		online[ops.session].estado="listo";
-		online[ops.session].jugadas.push(ops.msg);
-		var auxPartida= partidas[online[ops.session].partida];
+		online[socket.id].estado="listo";
+		online[socket.id].jugadas.push(ops.msg);
+		var auxPartida= partidas[online[socket.id].partida];
 		auxPartida.tick();
 		/*if(finished){
 			return;
@@ -330,14 +348,14 @@ function InicioTurno(){
 	io.emit('inicioTurno', JSON.stringify(turnoArray));
 }
 
-function SendStats(msg){
+function SendStats(msg,idSocket){
 	//setear variable resultados
 	msg= JSON.parse(msg);
 	if(testLocal){
-		requestSoap("?code=getStats&data="+msg.msg+"&tendencia="+1," ","getStats",msg.session);
+		requestSoap("?code=getStats&data="+msg.msg+"&tendencia="+1," ","getStats",idSocket);
 	}else{
 		// var auxU= {id: usuario["id"]};
-		requestSoap("/getStats",{id: msg.msg,tendencia:1},"getStats",msg.session);
+		requestSoap("/getStats",{id: msg.msg,tendencia:1},"getStats",idSocket);
 		// requestSoap("/getStats",JSON.stringify(auxU),"getStats");
 	}
 }

@@ -1,0 +1,23 @@
+﻿{"level":"info","message":"Hello distributed log files!","timestamp":"2016-12-01T19:26:54.729Z"}
+{"level":"info","message":"/#HMwjjDr16eAWjH9aAAAA","timestamp":"2016-12-01T19:26:58.443Z"}
+{"level":"info","message":"Hello distributed log files!","timestamp":"2016-12-01T19:27:29.252Z"}
+{"level":"info","message":"/#pI9xEswOosGjoEUfAAAA","timestamp":"2016-12-01T19:27:30.992Z"}
+{"level":"info","message":"Hello distributed log files!","timestamp":"2016-12-01T19:28:08.377Z"}
+{"level":"info","message":"/#OwzyrGZypR8nPOBcAAAA","timestamp":"2016-12-01T19:28:09.083Z"}
+{"level":"info","message":"Hello distributed log files!","timestamp":"2016-12-01T19:28:26.555Z"}
+{"level":"info","message":"/#lh43FNUwGbdUXJX_AAAA","timestamp":"2016-12-01T19:28:27.634Z"}
+{"level":"info","message":"Hello distributed log files!","timestamp":"2016-12-01T19:28:52.059Z"}
+{"level":"info","message":"/#UIm5c2D1vHGQVCBZAAAA","timestamp":"2016-12-01T19:28:52.817Z"}
+{"level":"info","message":"Hello distributed log files!","timestamp":"2016-12-01T19:29:46.091Z"}
+{"level":"info","message":"/#9qYzlIJdumhMKm_6AAAA","timestamp":"2016-12-01T19:29:46.184Z"}
+{"level":"info","message":"Hello distributed log files!","timestamp":"2016-12-01T19:30:55.546Z"}
+{"level":"info","message":"Hello distributed log files!","timestamp":"2016-12-01T19:31:11.891Z"}
+{"level":"info","message":"/#e9DAWp3M0OCyw-tVAAAA","timestamp":"2016-12-01T19:31:17.333Z"}
+{"level":"info","message":"Hello distributed log files!","timestamp":"2016-12-01T19:31:37.943Z"}
+{"level":"info","message":"/#YPr_wO4iSq7R3bffAAAA","timestamp":"2016-12-01T19:31:44.114Z"}
+{"level":"error","message":"Caught exception: ReferenceError: poyo is not defined","timestamp":"2016-12-01T19:31:44.119Z"}
+{"level":"info","message":"Hello distributed log files!","timestamp":"2016-12-01T19:33:58.720Z"}
+{"level":"info","message":"/#YLcMYipGnoYWv84DAAAA","timestamp":"2016-12-01T19:34:00.709Z"}
+{"level":"error","message":"Caught exception: ReferenceError: poyo is not defined","timestamp":"2016-12-01T19:34:00.716Z"}
+{"level":"info","message":"Hello distributed log files!","timestamp":"2016-12-01T19:34:13.560Z"}
+{"level":"error","message":"Caught exception: Error: listen EADDRINUSE","timestamp":"2016-12-01T19:34:13.577Z"}
