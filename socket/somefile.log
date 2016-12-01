@@ -21,3 +21,4 @@
 {"level":"error","message":"Caught exception: ReferenceError: poyo is not defined","timestamp":"2016-12-01T19:34:00.716Z"}
 {"level":"info","message":"Hello distributed log files!","timestamp":"2016-12-01T19:34:13.560Z"}
 {"level":"error","message":"Caught exception: Error: listen EADDRINUSE","timestamp":"2016-12-01T19:34:13.577Z"}
+{"level":"info","message":"Hello distributed log files!","timestamp":"2016-12-01T19:46:40.561Z"}
