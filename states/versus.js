@@ -35,7 +35,7 @@ Versus.prototype = {
 
     tiempo = game.add.text(0, 540, '5:00', { font: "30px BitterBold", fill: "white", align: "center", stroke:'yellow' });
     tiempo.stroke='#ffc400';
-    tiempo.strokeThickness = 5;
+    tiempo.strokeThickness =3;
     tiempo.position.x= this.game.width/2 - tiempo.width/2;
 	  tiempo.visible=false;
 

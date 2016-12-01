@@ -19,10 +19,6 @@ GameOver.prototype = {
     curva.fixedToCamera=true;
     background.add(curva);
 
-	//reemplazar por imagen de boca
-   /*playerOne =game.add.sprite(350,70, usuario["avatar"]);
-    playerOne.scale.setTo(.4, .4);
-    console.log(playerOne.height+'  '+playerOne.width);*/
 
 	if(!modoMultiplayer){
     playerTwo =game.add.sprite(650,70, oponente["avatar"]);
@@ -35,36 +31,19 @@ GameOver.prototype = {
 		console.log(oponente["avatar"]);
 		bmd.alphaMask(oponente["avatar"], 'player');
 
-		//	A BitmapData is just a texture. You need to apply it to a sprite or image
-		//	to actually display it:
+
 		playerTwo= game.add.image(650, 70, bmd);
 		playerTwo.scale.setTo(.3,.3);
 	}
 
-    // test
-
-    // var testMask=game.add.graphics(0, 0);
-    // testMask.beginFill(0x000000, 0.1);
-    // testMask.drawRoundedRect(0, 0,playerTwo.width,playerTwo.height,5);
-    // testMask.endFill();
-    // playerOne.mask=testMask;
-    // console.log(testMask);
-
-    /*var testMask=game.add.sprite(350,70, "player");
-
-	testMask.cacheAsBitmap=true;
-	testMask.dirty=true
-    playerOne.mask=testMask;
-    console.log(testMask);*/
 
 	 if(modoMultiplayer){
 	var bmd = game.make.bitmapData(367, 482);
 
-	//	And create an alpha mask image by combining pic and mask from the cache
+
 	bmd.alphaMask(usuario["avatar"], 'player');
 
-	//	A BitmapData is just a texture. You need to apply it to a sprite or image
-	//	to actually display it:
+
 	var auxImg= game.add.image(350, 70, bmd);
 	auxImg.scale.setTo(.3,.3);
 
@@ -77,16 +56,12 @@ GameOver.prototype = {
 
    //self.syncVariables();
    self = this;
-   
+
    console.log(resultadoPartida);
    localStorage["PartidosGanados"];
    localStorage["PartidosPerdidos"];
 
-    //seteadas en cero por el momento;
-    //puntosUser=0;
-    //puntosComputer=0;
 
-    //Cuando Setermine la edicion volver a declarar sin inicializar.
 
     localStorage["TotalPartidaUser"] = this.puntosUser;
     localStorage["TotalPartidaComputer"] = this.puntosComputer;
@@ -128,14 +103,23 @@ GameOver.prototype = {
    },270, 70, 1);
 
   if(modoMultiplayer){
-    this.addMenuOptionInnerPrueba('REVANCHA 20', function () {
+    melania=this.addMenuOptionInnerPrueba('REVANCHA    ', function () {
 
        console.log("Quiero revancha");
 
      },270,70, 1);
 
 
+     timer = game.time.create();
+     timerEvent = timer.add(Phaser.Timer.MINUTE * 0+ Phaser.Timer.SECOND * 20, this.endTimer, this);
+     timer.start();
 
+     tiempo = game.add.text(790,545, '20', { font: '20pt RobotoBold', align: 'center',fill:'#1b1464' ,stroke: '#1b1464' });
+     tiempo.setShadow(0,2, '#ffffbd ', 0);
+     tiempo.visible=true;
+
+
+ console.log(melania);
   }else{
     this.addMenuOptionInnerPrueba('VOLVER A JUGAR', function () {
 
@@ -204,7 +188,7 @@ console.log("entra 4");
 	mm+=40;
       xx+=40;
 	 var puntosObj;
-	 
+
 	$.each(resultadoPartida.detalle,function(index,value){
 		if(n==0){
         game.add.text(250, mm, index, { font: 'bold 15pt CondensedLight', fill: 'white'});
@@ -288,6 +272,24 @@ console.log("entra 5");
 
 
   },
+
+  render: function () {
+      if (timer.running) {
+          tiempo.setText(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)));
+    }
+  },
+
+  endTimer: function() {
+      timer.stop();
+      // self.endScreen();
+  },
+
+  formatTime: function(s) {
+      var minutes = ''+Math.floor(s / 60);
+      var seconds = (s - minutes * 60);
+      return seconds;
+  },
+
 
 };
 
