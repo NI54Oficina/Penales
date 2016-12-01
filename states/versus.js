@@ -124,7 +124,7 @@ Versus.prototype = {
       });
       comenzar.position={x:175,y:530};
       comenzar.visible=false;
-      
+
 
 
     SuscribeServerEvent("oponente","empezarConteo",this,true);
@@ -147,7 +147,7 @@ setearResultado: function(msg){
 	console.log("resultado array");
 	console.log(resultadoPartida);
 	//resultadoPartida= resultadoArray;
-	
+
 	this.game.state.states["GameOver"].puntosUser = resultadoPartida["golesUser"];
     this.game.state.states["GameOver"].puntosComputer = resultadoPartida["golesComputer"];
     this.game.state.states["GameOver"].oponente = oponente;
@@ -335,9 +335,23 @@ identificarPuestos: function(scale){
 
      tt2.start();
      tt1.start();
-	setTimeout(function(){
-    this.game.state.states["Game"].NombreSala = NombreSala;
-    game.state.start('Game');},5000)
+
+     tt1.onComplete.addOnce(function(){
+       setTimeout(function(){
+         self.splashEntreTiempo();
+
+
+         setTimeout(function(){
+           self.splashEntreTiempo();
+            this.game.state.states["Game"].NombreSala = NombreSala;
+            game.state.start('Game');},5000);
+
+       },1000);
+
+     });
+
+
+
 
 },
 
