@@ -42,12 +42,12 @@ io.on('connection', function(socket){
 		//io.sockets.socket(socket.id).emit("poyo")
 		var connectedUser={};
 		connectedUser.socket= socket;
-		connectedUser.usuario= "poyo";
+		//connectedUser.usuario= "poyo";
 		online[socket.id]= connectedUser;
 		console.log("user conected");
 		socket.emit("session",socket.id);
 	
-		console.log(poyo);
+		
 	socket.on('chat message', function(msg){
 		socket.emit('chat message', msg);
 		
