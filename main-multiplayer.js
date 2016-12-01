@@ -38,13 +38,15 @@ Main.prototype = {
     game.load.script('utils',   urlBase+'lib/utils.js');
     game.load.script('splash',  urlBase+'states/Splash.js');
     game.load.script('global',   urlBase+'lib/global.js');
+    game.load.script('input',   urlBase+'lib/phaser-input.js');
+
 	game.state.onStateChange.add(function(){
 		try{
 			game.kineticScrolling.velocityWheelY=0;
 			game.kineticScrolling.velocityWheelX=0;
 			game.kineticScrolling.endMove();
 			game.kineticScrolling.stop();
-      game.load.script('input', urlBase+'states/CanvasInput.js');
+
 		}catch(error){
 
 		};

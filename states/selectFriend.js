@@ -4,6 +4,8 @@ Selectfriend.prototype = {
 
   create: function () {
 
+    game.add.plugin(Fabrique.Plugins.InputField);
+
     self = this;
 
 
@@ -18,6 +20,19 @@ Selectfriend.prototype = {
     graphics.drawRoundedRect(0, 0, 800,70,5);
     window.graphics = graphics;
 
+
+    var input = game.add.inputField(170, 265,{
+    font: '25px CondensedRegular',
+    fill: '#FFFFFF',
+    fillAlpha:0,
+    width: 770,
+    padding: 8,
+    borderWidth: 1,
+    cursorColor:'#FFFFFF' ,
+    placeHolder:'#FFFFFF'  ,
+    borderRadius: 5,
+    placeHolder: 'Nombre de usuario'
+});
 
 
 
