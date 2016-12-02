@@ -26,10 +26,10 @@ var winston = require('winston');
 
 winston.level = 'debug';
 
-winston.add(winston.transports.File, { filename: 'somefile.log' });
+winston.add(winston.transports.File, { filename: 'somefile.test' });
 winston.add(winston.transports.File, {
       name: 'error-file',
-      filename: 'filelog-error.log',
+      filename: 'filelog-error.test',
       level: 'error'
     });
 
