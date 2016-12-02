@@ -48,7 +48,10 @@ Selectfriend.prototype = {
     //Funcion que llama a la revancha
 
    // self.solicitudRevancha();
-
+  self. notificationWithButton("TEST",'hola chau hola chau hola chau hola',[],1000);
+  // : function( title, text, lista, tiempoDeEspera){
+   //type Lista ::listaDeTuplasConNombreDeBotonYCallbackYparametros
+   //
 },
 
 resultado:function(msg){
@@ -62,7 +65,7 @@ resultado:function(msg){
 },
 
 
- 
+
 
 
 
