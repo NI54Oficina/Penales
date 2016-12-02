@@ -13,11 +13,6 @@ Game.prototype = {
 
   create: function () {
 
-  //  num 0 -> failArquero
-  //  num 1 -> goodArquero
-  //  num 2 -> failPateador
-  // num 3 ->  goodPateador
-
     self = this;
     triesA=this.triesA;
 
@@ -111,20 +106,11 @@ Game.prototype = {
 	this.drawGui();
 
 
-  // screenOponente=self.pantallaOponente(self);
-  //screenOponente.visible=true;
-
-  /*if(!serverEnabled){
-	  setTimeout(function(){
-		  CheckEvent("inicioPartida"," ");
-	  },300)
-  }else{
-	  screenOponente.visible=true;
-  }*/
-	//emitear un ready aca al server
 	if(modoMultiplayer){
 		Emit("ready","");
 	}
+
+  loadingStart=self.splashEntreTiempo();
 },
 
 drawBackground: function(){
@@ -202,6 +188,8 @@ drawBackground: function(){
   aliasUser.x=385-aliasUser.width;
   aliasUser.setShadow(0,3, 'rgba(0,0,0,0.5)', 0);
   aliasComputer.setShadow(0,3, 'rgba(0,0,0,0.5)', 0);
+
+
 
 },
 
@@ -1447,7 +1435,7 @@ Clicked: function(){
     self.activateSound(musica_start);
   },500);
 
-
+  loadingStart.destroy();
 },
 
 mouseUpPateador:function(){
