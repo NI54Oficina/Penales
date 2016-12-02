@@ -90,7 +90,10 @@ Versus.prototype = {
         goldenA=game.add.sprite(rightPlayer.x-10,rightPlayer.y-5, 'selector');
         goldenA.scale.setTo(.8,.8);
 
-        var nikUser=game.add.text(250,380, usuario.nickname.toUpperCase(), { font: '27px CondensedBold', fill: 'white', align: 'center',wordWrap: true, wordWrapWidth:20});
+        try{
+            var nikUser=game.add.text(250,380, usuario.nickname.toUpperCase(), { font: '27px CondensedBold', fill: 'white', align: 'center',wordWrap: true, wordWrapWidth:20});
+        }catch(e){}
+
         nikUser.x=leftPlayer.x+(leftPlayer.width/2)- nikUser.width/2;
         load=game.add.sprite(820, 325, 'loading');
         load.pivot.x=33;
@@ -133,7 +136,7 @@ Versus.prototype = {
 
 
 
-    SuscribeServerEvent("oponente","empezarConteo",this,true);
+  SuscribeServerEvent("oponente","empezarConteo",this,true);
 	SuscribeServerEvent("oponenteListo","oponenteListo",this,true);
 	SuscribeServerEvent("recibirLado","recibirLado",this,true);
 	SuscribeServerEvent("resultadoPartida","setearResultado",this,true);
@@ -255,7 +258,7 @@ formatTime: function(s) {
 },
 
 endScreen: function(){
-  modal=self.notificationDinamic("UPS !","El tiempo de espera se ha agotado !", false);
+  modal=self.notificationDinamic("UPS!!","El tiempo de espera se ha agotado !", false);
 
 
 
@@ -335,7 +338,6 @@ identificarPuestos: function(scale){
    t1.scale.setTo(.1,.1);
    t2.scale.setTo(.1,.1);
 
-
      var tt1=game.add.tween(t1.scale).to( {x:.75,y:.75}, 500,'Linear');
      var tt2=game.add.tween(t2.scale).to( {x:.75,y:.75}, 500,'Linear');
 
@@ -343,22 +345,21 @@ identificarPuestos: function(scale){
      tt1.start();
 	console.log(self.NombreSala);
      tt1.onComplete.addOnce(function(){
-       setTimeout(function(){
-         self.splashEntreTiempo();
-
 
          setTimeout(function(){
+<<<<<<< HEAD
            self.splashEntreTiempo();
 		   console.log(self.NombreSala);
             this.game.state.states["Game"].NombreSala = self.NombreSala;
             game.state.start('Game');},5000);
+=======
 
-       },1000);
+            this.game.state.states["Game"].NombreSala = NombreSala;
+            game.state.start('Game');},2000);
+>>>>>>> origin/master
+
 
      });
-
-
-
 
 },
 
