@@ -84,7 +84,7 @@ Versus.prototype = {
         goldenA=game.add.sprite(rightPlayer.x-10,rightPlayer.y-5, 'selector');
         goldenA.scale.setTo(.8,.8);
 
-        var nikUser=game.add.text(250,380, usuario.nickname, { font: '27px CondensedBold', fill: 'white', align: 'center',wordWrap: true, wordWrapWidth:20});
+        var nikUser=game.add.text(250,380, usuario.nickname.toUpperCase(), { font: '27px CondensedBold', fill: 'white', align: 'center',wordWrap: true, wordWrapWidth:20});
         nikUser.x=leftPlayer.x+(leftPlayer.width/2)- nikUser.width/2;
         load=game.add.sprite(820, 325, 'loading');
         load.pivot.x=33;
@@ -184,14 +184,14 @@ empezarConteo: function(msg){
 
 	console.log("avatar cargado");
 
-	 var nikOpon=game.add.text(770,380, oponente.nickname, { font: '27px CondensedBold', fill: 'white', align: 'center',wordWrap: true, wordWrapWidth:20});
+	 var nikOpon=game.add.text(770,380, oponente.nickname.toUpperCase(), { font: '27px CondensedBold', fill: 'white', align: 'center',wordWrap: true, wordWrapWidth:20});
   nikOpon.x=rightPlayer.x+(rightPlayer.width/2)- nikOpon.width/2;
 
   }, this);
 
   game.load.start();
 
-  var nikOpon=game.add.text(770,380, oponente.nickname, { font: '27px CondensedBold', fill: 'white', align: 'center',wordWrap: true, wordWrapWidth:20});
+  var nikOpon=game.add.text(770,380, oponente.nickname.toUpperCase(), { font: '27px CondensedBold', fill: 'white', align: 'center',wordWrap: true, wordWrapWidth:20});
   nikOpon.x=rightPlayer.x+(rightPlayer.width/2)- nikOpon.width/2;
 
   timer.start();
