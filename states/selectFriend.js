@@ -48,7 +48,8 @@ Selectfriend.prototype = {
     //Funcion que llama a la revancha
 
    // self.solicitudRevancha();
-  self. notificationWithButton("TEST",'hola chau hola chau hola chau hola',[],1000);
+  //self. notificationWithButton("TEST",'hola chau hola chau hola chau hola',[],5000);
+//  self. notificationWithButton("TEST",'hola chau hola chau hola chau hola',[{nombre:"aceptar",callback:function(){console.log("asdasdas")}}],-1);
   // : function( title, text, lista, tiempoDeEspera){
    //type Lista ::listaDeTuplasConNombreDeBotonYCallbackYparametros
    //

@@ -179,6 +179,8 @@ io.on('connection', function(socket){
 	});
 	
 	socket.on('pause', function(data){
+	
+		socket.emit("notification",JSON.stringify({titulo:"Server Pausado",texto:"se ha pausado el servidor",ops:{titulo:"Aceptar",callback:"destroy"},tiempo:"-1"}));
 		pause=true;
 		console.log("pause update");
 	});
@@ -904,6 +906,8 @@ function Partida (tipo) {
 			}
 			this.golesLocal=0;
 			this.golesVisitante=5;
+			
+			this.visitante.socket.emit("notification",JSON.stringify({titulo:"Oponente desconectado",texto:"Su oponente se ha retirado o perdido conexión con el servidor",tiempo:"3000"}));
 		}else{
 			console.log("pierde el visitante");
 			this.visitante.jugadas=[0,0,0,0,0,0,0,0,0,0];
@@ -916,6 +920,7 @@ function Partida (tipo) {
 			}
 			this.golesLocal=5;
 			this.golesVisitante=0;
+			this.local.socket.emit("notification",JSON.stringify({titulo:"Oponente desconectado",texto:"Su oponente se ha retirado o perdido conexión con el servidor",tiempo:"1500"}));
 		}
 		console.log(this.local.jugadas);
 		console.log(this.visitante.jugadas);
