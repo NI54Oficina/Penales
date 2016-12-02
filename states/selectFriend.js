@@ -29,10 +29,10 @@ Selectfriend.prototype = {
     padding: 8,
     borderWidth: 1,
     cursorColor:'#FFFFFF' ,
-    placeHolder:'#FFFFFF'  ,
+    placeHolderColor:'#FFFFFF'  ,
     borderRadius: 5,
     placeHolder: 'Nombre de usuario'
-});
+    });
 
 
 
@@ -40,11 +40,14 @@ Selectfriend.prototype = {
 	var auxThis=this;
     self.createButton("SIGUIENTE",function(){
 		//game.state.start('SelectsalaPrivada');
-		
+
 			Emit("buscar",input.value,"rbusqueda","resultado",auxThis);
 		}
 		).position={x:580,y:450};
 
+    ///Funcion que llama a la revancha
+
+    self.solicitudRevancha();
 
 },
 
@@ -58,36 +61,40 @@ resultado:function(msg){
 	}
 },
 
-render: function(){
+
+ solicitudRevancha: function(){
+
+     screen=game.add.group();
+     var notifBack = this.game.add.bitmapData(this.game.width,this.game.height);
+     var  grd = notifBack.context.createLinearGradient(0,0,0,this.game.height);
+     grd.addColorStop(0,"rgba(0,0,0,.5)");
+     notifBack.context.fillStyle = grd;
+     notifBack.context.fillRect(0,0,this.game.width,this.game.height);
+     back=this.game.add.sprite(0,0,notifBack);
+     back.inputEnabled=true;
+     screen.add(back);
+
+     animation=self.notificationDinamic("ACABAN DE PEDIR REVANCHA", "Te animás?", false,true);
+      screen.add(notificacionGroup);
+     animation.onComplete.addOnce(function(){
+
+
+          a= self.createButton('RECHAZAR', function () {screen.destroy()});
+          a.position={x:290,y:350};
+          screen.add(a);
+
+          b=self.createButton('ACEPTAR', function () {});
+          b.position={x:580,y:350};
+          screen.add(b);
+
+
+
+     })
 
  },
-inputFocus: function(sprite){
-   sprite.canvasInput.focus();
- },
- createInput: function(x, y){
-   var bmd = this.add.bitmapData(400, 50);
-   var myInput = this.game.add.sprite(x, y, bmd);
 
-   myInput.canvasInput = new CanvasInput({
-     canvas: document.getElementById('game'),
-     fontSize: 30,
-     fontFamily: 'Arial',
-     fontColor: '#FFFFFF',
-     width: 400,
-     padding: 8,
-     borderWidth: 1,
-     borderColor: '#000',
-     borderRadius: 3,
-     boxShadow: '1px 1px 0px #fff',
-     innerShadow: '0px 0px 5px rgba(0, 0, 0, 0.5)',
-     placeHolder: 'Enter message here...'
-   });
-   myInput.inputEnabled = true;
-   myInput.input.useHandCursor = true;
-   myInput.events.onInputUp.add(this.inputFocus, this);
 
-   return myInput;
- },
+
 
 
 
