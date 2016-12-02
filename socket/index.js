@@ -93,6 +93,11 @@ io.on('connection', function(socket){
 			console.log(body);
 		});*/
 		var toSearch=msg.msg;
+		if(toSearch==online[socket.id].usuario.nickname){
+			console.log("se busca a si mismo");
+			socket.emit("rbusqueda","0");
+			return;
+		}
 		try{
 			var inWait="";
 			for (var key in online) {
@@ -991,9 +996,11 @@ function CreateMatch(users,tipo){
 	console.log(auxPartida.visitante);
 	if(auxPartida.visitante.estado!="online"){
 		console.log("sorry no se puede matchear");
+		auxPartida.visitante.socket.emit("error","desafio no puede realizarse");
 		return;
 	}else{
 		console.log("manda desafio al oponente");
+		auxPartida.visitante.socket.emit("desafio",JSON.stringify({oponente:auxPartida.local.usuario.nickname}));
 	}
 	auxPartida.visitante.jugadas= new Array();
 	console.log("match creado");
