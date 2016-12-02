@@ -690,7 +690,7 @@ updateCounter: function () {
     setTimeout(function(){
 
 
-      this.game.state.start("gameover");
+      this.game.state.start("GameOver");
     },2000);
 
 
