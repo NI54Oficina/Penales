@@ -139,7 +139,7 @@ io.on('connection', function(socket){
 		if(oponente==""){
 			socket.emit("noEncontrado","");
 		}else{
-			CreateMatch([socket.id,oponente],msg.msg.tipo);
+			CreateMatch([socket.id,oponente],msg.msg.tipo,1);
 		}
 	});
 	
@@ -972,7 +972,7 @@ function MatchMaking(){
 				if(inWait==""){
 					inWait= key;
 				}else{
-					CreateMatch([inWait,key],a);
+					CreateMatch([inWait,key],a,0);
 					inWait="";
 				}
 				//console.log(key);
@@ -985,22 +985,27 @@ function MatchMaking(){
 	
 }
 
-function CreateMatch(users,tipo){
+function CreateMatch(users,tipo,privada){
 	
 	var auxPartida= new Partida(tipo);
 	
 	auxPartida.local= online[users[0]];
 	auxPartida.local.jugadas= new Array();
-	auxPartida.privada=1;
+	auxPartida.privada=privada;
 	auxPartida.visitante= online[users[1]];
 	console.log(auxPartida.visitante);
-	if(auxPartida.visitante.estado!="online"){
-		console.log("sorry no se puede matchear");
-		auxPartida.visitante.socket.emit("error","desafio no puede realizarse");
-		return;
-	}else{
-		console.log("manda desafio al oponente");
-		auxPartida.visitante.socket.emit("desafio",JSON.stringify({oponente:auxPartida.local.usuario.nickname}));
+	if(privada==1){
+		if(auxPartida.visitante.estado!="online"){
+			console.log("sorry no se puede matchear");
+			auxPartida.visitante.socket.emit("error","desafio no puede realizarse");
+			return;
+		}else{
+			console.log("manda desafio al oponente");
+			var auxTitulo=auxPartida.local.usuario.nickname.toUpperCase()+" TE DESAFÍA";
+			var op1={titulo:"Rechazar",callback:"destroy",params:""};
+			var op2={titulo:"Rechazar",callback:"change",params:"Versus"};
+			auxPartida.visitante.socket.emit("desafio",JSON.stringify({oponente:auxPartida.local.usuario.nickname,titulo:auxTitulo,texto:"Te animás?",ops:[op1,op2]}));
+		}
 	}
 	auxPartida.visitante.jugadas= new Array();
 	console.log("match creado");
