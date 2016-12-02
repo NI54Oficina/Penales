@@ -49,8 +49,6 @@ Selectfriend.prototype = {
 
     self.solicitudRevancha();
 
-    
-
 },
 
 resultado:function(msg){
@@ -66,6 +64,7 @@ resultado:function(msg){
 
  solicitudRevancha: function(){
 
+     screen=game.add.group();
      var notifBack = this.game.add.bitmapData(this.game.width,this.game.height);
      var  grd = notifBack.context.createLinearGradient(0,0,0,this.game.height);
      grd.addColorStop(0,"rgba(0,0,0,.5)");
@@ -73,19 +72,20 @@ resultado:function(msg){
      notifBack.context.fillRect(0,0,this.game.width,this.game.height);
      back=this.game.add.sprite(0,0,notifBack);
      back.inputEnabled=true;
-
+     screen.add(back);
 
      animation=self.notificationDinamic("ACABAN DE PEDIR REVANCHA", "Te animás?", false,true);
-
+      screen.add(notificacionGroup);
      animation.onComplete.addOnce(function(){
 
 
-          a= self.createButton('RECHAZAR', function () { group.destroy();});
+          a= self.createButton('RECHAZAR', function () {screen.destroy()});
           a.position={x:290,y:350};
-
+          screen.add(a);
 
           b=self.createButton('ACEPTAR', function () {});
           b.position={x:580,y:350};
+          screen.add(b);
 
 
 
