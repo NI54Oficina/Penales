@@ -175,7 +175,8 @@ drawBackground: function(){
   identificadorDerecho = this.game.add.sprite(930,this.game.height-40, 'ataja');
   identificadorDerecho.scale.setTo(.5,.5);
 
-  puntosUserText = game.add.text(this.game.width/2-40, this.game.height-45, puntosUser+' - ', { font: " 40px BitterRegular", fill: "white"});
+  puntosUserText = game.add.text(this.game.width/2-40, this.game.height-45, puntosUser, { font: " 40px BitterRegular", fill: "white"});
+  game.add.text(this.game.width/2-5, this.game.height-45, '-', { font: " 40px BitterRegular", fill: "white"});
   puntosComputerText = game.add.text(this.game.width/2+23, this.game.height-45, puntosComputer, { font: " 40px BitterRegular", fill: "white"});
   if(modoMultiplayer){
     aliasUser= game.add.text(0, this.game.height-35, usuario.nickname.toUpperCase(), { font: " 20px CondensedBold", fill: "white"});
@@ -689,7 +690,7 @@ updateCounter: function () {
     setTimeout(function(){
 
 
-      this.game.state.start("GameOver");
+      this.game.state.start("gameover");
     },2000);
 
 
@@ -1107,7 +1108,7 @@ acertarTiro: function(self){
           if(self.pelotaEntra){
               self.activateSound(sonido_gol_1);
               puntosUser++;
-              puntosUserText.setText(puntosUser+' - ');
+              puntosUserText.setText(puntosUser);
 
               self.AssertPoint(userPointY,triesP);
               self.Win(3);

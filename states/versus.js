@@ -84,7 +84,10 @@ Versus.prototype = {
         goldenA=game.add.sprite(rightPlayer.x-10,rightPlayer.y-5, 'selector');
         goldenA.scale.setTo(.8,.8);
 
-        var nikUser=game.add.text(250,380, usuario.nickname, { font: '27px CondensedBold', fill: 'white', align: 'center',wordWrap: true, wordWrapWidth:20});
+        try{
+            var nikUser=game.add.text(250,380, usuario.nickname.toUpperCase(), { font: '27px CondensedBold', fill: 'white', align: 'center',wordWrap: true, wordWrapWidth:20});
+        }catch(e){}
+
         nikUser.x=leftPlayer.x+(leftPlayer.width/2)- nikUser.width/2;
         load=game.add.sprite(820, 325, 'loading');
         load.pivot.x=33;

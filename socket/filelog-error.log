@@ -7,3 +7,4 @@
 {"level":"error","message":"Caught exception: TypeError: Cannot convert undefined or null to object","timestamp":"2016-12-01T20:32:33.413Z"}
 {"level":"error","message":"Caught exception: TypeError: Cannot convert undefined or null to object","timestamp":"2016-12-01T20:33:20.609Z"}
 {"level":"error","message":"Caught exception: TypeError: Cannot convert undefined or null to object","timestamp":"2016-12-01T20:33:54.489Z"}
+{"level":"error","message":"Caught exception: Error: listen EADDRINUSE :::3000","timestamp":"2016-12-02T14:23:48.983Z"}

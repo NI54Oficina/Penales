@@ -114,7 +114,7 @@ GameOver.prototype = {
      timerEvent = timer.add(Phaser.Timer.MINUTE * 0+ Phaser.Timer.SECOND * 20, this.endTimer, this);
      timer.start();
 
-     tiempo = game.add.text(790,545, '20', { font: '20pt RobotoBold', align: 'center',fill:'#1b1464' ,stroke: '#1b1464' });
+     tiempo = game.add.text(810,545, '20', { font: '20pt RobotoBold', align: 'center',fill:'#1b1464' ,stroke: '#1b1464' });
      tiempo.setShadow(0,2, '#ffffbd ', 0);
      tiempo.visible=true;
 
@@ -162,7 +162,6 @@ console.log("entra 2");
     var efiPat = (100/((parseInt(localStorage["TotalConvertidos"]) || 0) + (parseInt(localStorage["TotalErrados"]) || 0)))*(parseInt(localStorage["TotalConvertidos"]) || 0);
     var efectividad = (parseInt(localStorage["PartidosGanados"]) || 0) /(parseInt(localStorage["PartidosPerdidos"]) || 0);
 
-console.log("entra 3");
      if (isNaN(efiArq))efiArq=0;
      if (isNaN(efiPat))efiPat=0;
      if (isNaN(efectividad))efectividad=0;
@@ -177,7 +176,6 @@ console.log("entra 3");
      game.add.text(520, 100, localStorage["TotalPartidaUser"], partidaStyle);
      game.add.text(550, 100, "- "+localStorage["TotalPartidaComputer"], partidaStyle);
 
-console.log("entra 4");
     mm=240;
       xx=230;
 
@@ -213,10 +211,8 @@ console.log("entra 4");
       xx+=40;
 	});
 
-console.log("entra 5");
     search= game.add.text(200, 200, 'Buscando oponente', { font: " 60px CondensedLight", fill: "red", align: "center" });
     search.visible=false;
-
 
   },
 
@@ -258,7 +254,7 @@ console.log("entra 5");
 
   endTimer: function() {
       timer.stop();
-      // self.endScreen();
+      self.MainMenu();
   },
 
   formatTime: function(s) {
