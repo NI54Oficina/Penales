@@ -1003,7 +1003,7 @@ function CreateMatch(users,tipo,privada){
 			console.log("manda desafio al oponente");
 			var auxTitulo=auxPartida.local.usuario.nickname.toUpperCase()+" TE DESAFÍA";
 			var op1={titulo:"Rechazar",callback:"destroy",params:""};
-			var op2={titulo:"Rechazar",callback:"change",params:"Versus"};
+			var op2={titulo:"Aceptar",callback:"change",params:"Versus"};
 			auxPartida.visitante.socket.emit("desafio",JSON.stringify({oponente:auxPartida.local.usuario.nickname,titulo:auxTitulo,texto:"Te animás?",ops:[op1,op2]}));
 		}
 	}
