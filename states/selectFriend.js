@@ -45,7 +45,7 @@ Selectfriend.prototype = {
 		}
 		).position={x:580,y:450};
 
-    ///Funcion que llama a la revancha
+    //Funcion que llama a la revancha
 
     self.solicitudRevancha();
 
