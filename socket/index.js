@@ -139,7 +139,7 @@ io.on('connection', function(socket){
 		if(oponente==""){
 			socket.emit("noEncontrado","");
 		}else{
-			CreateMatch([socket.id,oponente],msg.msg.tipo);
+			CreateMatch([socket.id,oponente],msg.msg.tipo,1);
 		}
 	});
 	
@@ -211,8 +211,27 @@ io.on('connection', function(socket){
 		ops.msg= JSON.parse(ops.msg);
 		console.log(ops);
 		//console.log(msg);
+		console.log("entra buscar partida");
+		if(online[socket.id].estado=="desafiado"){
+			/*console.log("entra desafiado");
+			var auxPartida= partidas[online[socket.id].partida];
+			var auxLocal= auxPartida.oponente(socket.id).usuario;
+			delete auxLocal["puntos"];
+			delete auxLocal["credits"];
+			delete auxLocal["estado"];
+			delete auxLocal["id"];
+			auxLocal["tendencia"]= auxPartida.local["stats"]['tendencia'];
+			delete auxLocal["stats"];
+			auxPartida.visitante.socket.emit("oponente",JSON.stringify(auxLocal));*/
+			return;
+		}else{
+			online[socket.id].estado="cola";
+			listaEspera[ops.msg.tipo-1][socket.id]=1;
+		}
+		
 		online[socket.id].estado="cola";
-		listaEspera[ops.msg.tipo-1][socket.id]=1;
+			listaEspera[ops.msg.tipo-1][socket.id]=1;
+		
 	/*	setTimeout(function(){
 			Reset();
 			finished=false;
@@ -270,6 +289,25 @@ io.on('connection', function(socket){
 		var oponente= auxPartida.oponente(socket.id);
 		oponente.socket.emit("oponenteListo",JSON.stringify({status:1}));
 		auxPartida.tick();
+	});
+	
+	socket.on('aceptar', function(msg){
+		console.log(msg);
+		var ops= JSON.parse(msg);
+		//console.log(ops);
+		//console.log("----------------------------------");
+		online[socket.id].estado="listo";
+		var auxPartida= partidas[online[socket.id].partida];
+		var auxPartida= partidas[online[socket.id].partida];
+			var auxLocal= auxPartida.oponente(socket.id).usuario;
+			delete auxLocal["puntos"];
+			delete auxLocal["credits"];
+			delete auxLocal["estado"];
+			delete auxLocal["id"];
+			auxLocal["tendencia"]= auxPartida.local["stats"]['tendencia'];
+			delete auxLocal["stats"];
+			auxPartida.visitante.socket.emit("oponente",JSON.stringify(auxLocal));
+		
 	});
 
 	socket.on('enviarJugada', function(msg,session){
@@ -972,7 +1010,7 @@ function MatchMaking(){
 				if(inWait==""){
 					inWait= key;
 				}else{
-					CreateMatch([inWait,key],a);
+					CreateMatch([inWait,key],a,0);
 					inWait="";
 				}
 				//console.log(key);
@@ -985,22 +1023,23 @@ function MatchMaking(){
 	
 }
 
-function CreateMatch(users,tipo){
+function CreateMatch(users,tipo,privada){
 	
 	var auxPartida= new Partida(tipo);
 	
 	auxPartida.local= online[users[0]];
 	auxPartida.local.jugadas= new Array();
-	auxPartida.privada=1;
+	auxPartida.privada=privada;
 	auxPartida.visitante= online[users[1]];
 	console.log(auxPartida.visitante);
-	if(auxPartida.visitante.estado!="online"){
-		console.log("sorry no se puede matchear");
-		auxPartida.visitante.socket.emit("error","desafio no puede realizarse");
-		return;
-	}else{
-		console.log("manda desafio al oponente");
-		auxPartida.visitante.socket.emit("desafio",JSON.stringify({oponente:auxPartida.local.usuario.nickname}));
+	if(privada==1){
+		if(auxPartida.visitante.estado!="online"){
+			console.log("sorry no se puede matchear");
+			auxPartida.local.socket.emit("error","desafio no puede realizarse");
+			return;
+		}else{
+			
+		}
 	}
 	auxPartida.visitante.jugadas= new Array();
 	console.log("match creado");
@@ -1023,8 +1062,43 @@ function CreateMatch(users,tipo){
 		auxPartida.id= body;
 		auxPartida.local.estado="espera";
 		auxPartida.local.partida=body;
-		auxPartida.visitante.estado="espera";
-		auxPartida.visitante.partida=body;
+		if(privada==1){
+		if(auxPartida.visitante.estado!="online"){
+			console.log("sorry no se puede matchear");
+			auxPartida.visitante.socket.emit("error","desafio no puede realizarse");
+			return;
+		}else{
+			auxPartida.visitante.estado="desafiado";
+			auxPartida.visitante.partida=body;
+			console.log("manda desafio al oponente");
+			var auxTitulo=auxPartida.local.usuario.nickname.toUpperCase()+" TE DESAFÍA";
+			var op1={titulo:"Rechazar",callback:"destroy",params:""};
+			var auxTipo;
+			switch(tipo){
+				case 1:
+				auxTipo="clasico";
+				break;
+				case 2:
+				auxTipo="100 puntos";
+				break;
+				case 3:
+				auxTipo="300 puntos";
+				break;
+				case 4:
+				auxTipo="1000 puntos";
+				break;
+				default:
+				auxTipo="und";
+				break;
+			}
+			var op2={titulo:"Aceptar",callback:"change",params:{screen:"Versus",params:{NombreSala:auxTipo,privada:1}}};
+			//var op2={titulo:"Aceptar",callback:"emit",params:{code:"aceptar",params:{partida:1}}};
+			auxPartida.visitante.socket.emit("desafio",JSON.stringify({oponente:auxPartida.local.usuario.nickname,titulo:auxTitulo,texto:"Partida "+auxTipo+", Te animás?",ops:[op1,op2]}));
+		}
+		}else{
+			auxPartida.visitante.estado="espera";
+			auxPartida.visitante.partida=body;
+		}
 		try{
 		delete listaEspera[tipo][users[0]];
 		delete listaEspera[tipo][users[1]];
@@ -1035,23 +1109,28 @@ function CreateMatch(users,tipo){
 		console.log("test");
 		partidas[body]= auxPartida;
 		console.log("entraaaa0");
-		var auxVisitante= JSON.parse(JSON.stringify(auxPartida.visitante.usuario));
-		delete auxVisitante["puntos"];
-		delete auxVisitante["credits"];
-		delete auxVisitante["estado"];
-		delete auxVisitante["id"];
-		auxVisitante["tendencia"]= auxPartida.visitante["stats"]['tendencia'];
-		delete auxVisitante["stats"];
-		var auxLocal= JSON.parse(JSON.stringify(auxPartida.local.usuario));;
-		delete auxLocal["puntos"];
-		delete auxLocal["credits"];
-		delete auxLocal["estado"];
-		delete auxLocal["id"];
-		auxLocal["tendencia"]= auxPartida.local["stats"]['tendencia'];
-		delete auxLocal["stats"];
+			var auxVisitante= JSON.parse(JSON.stringify(auxPartida.visitante.usuario));
+			delete auxVisitante["puntos"];
+			delete auxVisitante["credits"];
+			delete auxVisitante["estado"];
+			delete auxVisitante["id"];
+			auxVisitante["tendencia"]= auxPartida.visitante["stats"]['tendencia'];
+			delete auxVisitante["stats"];
+			
+		if(privada!=1){
+			var auxLocal= JSON.parse(JSON.stringify(auxPartida.local.usuario));;
+			delete auxLocal["puntos"];
+			delete auxLocal["credits"];
+			delete auxLocal["estado"];
+			delete auxLocal["id"];
+			auxLocal["tendencia"]= auxPartida.local["stats"]['tendencia'];
+			delete auxLocal["stats"];
+			auxPartida.visitante.socket.emit("oponente",JSON.stringify(auxLocal));
+		}
 		console.log("entraaaa1");
+		
 		auxPartida.local.socket.emit("oponente",JSON.stringify(auxVisitante));
-		auxPartida.visitante.socket.emit("oponente",JSON.stringify(auxLocal));
+		
 		console.log("entraaaa");
 		//enviar datos del oponente a cada jugador
 		//pause=true;

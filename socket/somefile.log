@@ -36,7 +36,29 @@
 {"level":"info","message":"/#6sE-G578FaXzcs-IAAAi","timestamp":"2016-12-02T13:20:53.054Z"}
 {"level":"info","message":"/#QJegTmLcTgqjfV4IAAAj","timestamp":"2016-12-02T13:20:53.129Z"}
 {"level":"info","message":"/#tAFySkU3resO-3xMAAAk","timestamp":"2016-12-02T13:21:03.781Z"}
+<<<<<<< HEAD
 {"level":"info","message":"Hello distributed log files!","timestamp":"2016-12-02T16:32:06.917Z"}
 {"level":"info","message":"/#YLrR0nSqLOjmvR-bAAAA","timestamp":"2016-12-02T16:33:27.544Z"}
 {"level":"info","message":"/#NKUNIBQLPatadWGUAAAB","timestamp":"2016-12-02T16:33:35.374Z"}
 {"level":"info","message":"/#l7F1kL-4BYI1Z_zjAAAC","timestamp":"2016-12-02T16:34:01.859Z"}
+=======
+{"level":"info","message":"Hello distributed log files!","timestamp":"2016-12-02T13:52:08.878Z"}
+{"level":"info","message":"/#3NATJSDqazN7BVFnAAAA","timestamp":"2016-12-02T13:52:11.246Z"}
+{"level":"info","message":"/#m_LKWWz5V3QzyQrXAAAB","timestamp":"2016-12-02T13:52:11.270Z"}
+{"level":"info","message":"/#3NATJSDqazN7BVFnAAAA","timestamp":"2016-12-02T13:52:48.457Z"}
+{"level":"info","message":"Hello distributed log files!","timestamp":"2016-12-02T13:53:52.490Z"}
+{"level":"info","message":"/#IhMNISAJ1A9et2exAAAA","timestamp":"2016-12-02T13:53:55.102Z"}
+{"level":"info","message":"/#DSUpfZii1JSfAEuYAAAB","timestamp":"2016-12-02T13:53:57.528Z"}
+{"level":"info","message":"/#DSUpfZii1JSfAEuYAAAB","timestamp":"2016-12-02T13:54:35.136Z"}
+{"level":"info","message":"/#LaN0ios7S335bU32AAAC","timestamp":"2016-12-02T13:56:06.260Z"}
+{"level":"info","message":"/#9x09crR-mmvz_Qc0AAAD","timestamp":"2016-12-02T13:56:13.849Z"}
+{"level":"info","message":"/#9x09crR-mmvz_Qc0AAAD","timestamp":"2016-12-02T13:56:42.655Z"}
+{"level":"info","message":"Hello distributed log files!","timestamp":"2016-12-02T14:01:48.528Z"}
+{"level":"info","message":"/#X-sakCffgFBUUIJ3AAAA","timestamp":"2016-12-02T14:01:51.413Z"}
+{"level":"info","message":"/#mZG5wF8Wi7Tv1ZyWAAAB","timestamp":"2016-12-02T14:02:00.427Z"}
+{"level":"info","message":"/#mZG5wF8Wi7Tv1ZyWAAAB","timestamp":"2016-12-02T14:02:25.732Z"}
+{"level":"info","message":"/#cx6k6VDwduvrLuxRAAAC","timestamp":"2016-12-02T14:02:50.141Z"}
+{"level":"info","message":"Hello distributed log files!","timestamp":"2016-12-02T14:04:06.611Z"}
+{"level":"info","message":"/#tIDx6g9ewUgEBPxZAAAA","timestamp":"2016-12-02T14:04:09.127Z"}
+{"level":"info","message":"/#ZPeWJDacLaJ3Uu35AAAB","timestamp":"2016-12-02T14:04:17.393Z"}
+>>>>>>> 0acc42808c51f5d21fa0dd08f8d00edaa97e4e95

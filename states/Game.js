@@ -13,11 +13,6 @@ Game.prototype = {
 
   create: function () {
 
-  //  num 0 -> failArquero
-  //  num 1 -> goodArquero
-  //  num 2 -> failPateador
-  // num 3 ->  goodPateador
-
     self = this;
     triesA=this.triesA;
 
@@ -25,7 +20,7 @@ Game.prototype = {
 
 	   counterBarra=0;
 	   if(modoMultiplayer){
-		   NombreSala;
+		   self.NombreSala;
 	   }
 
 
@@ -111,20 +106,11 @@ Game.prototype = {
 	this.drawGui();
 
 
-  // screenOponente=self.pantallaOponente(self);
-  //screenOponente.visible=true;
-
-  /*if(!serverEnabled){
-	  setTimeout(function(){
-		  CheckEvent("inicioPartida"," ");
-	  },300)
-  }else{
-	  screenOponente.visible=true;
-  }*/
-	//emitear un ready aca al server
 	if(modoMultiplayer){
 		Emit("ready","");
 	}
+
+  loadingStart=self.splashEntreTiempo();
 },
 
 drawBackground: function(){
@@ -167,7 +153,7 @@ drawBackground: function(){
    tableroPuntos.beginFill(0x000065,.6);
    tableroPuntos.drawRoundedRect(0, 0,330,65,5);
    window.graphics = tableroPuntos;
-   puntaje=game.add.text(70,10, NombreSala, { font: "35px CondensedRegular", fill: "#ffc418", align: "center"});
+   puntaje=game.add.text(70,10, self.NombreSala, { font: "35px CondensedRegular", fill: "#ffc418", align: "center"});
    puntaje.x= tableroPuntos.width/2-puntaje.width/2;
    tableroPuntos.addChild(puntaje);
    brilloTablero=game.add.sprite(130,50, 'brilloup');
@@ -189,7 +175,8 @@ drawBackground: function(){
   identificadorDerecho = this.game.add.sprite(930,this.game.height-40, 'ataja');
   identificadorDerecho.scale.setTo(.5,.5);
 
-  puntosUserText = game.add.text(this.game.width/2-40, this.game.height-45, puntosUser+' - ', { font: " 40px BitterRegular", fill: "white"});
+  puntosUserText = game.add.text(this.game.width/2-40, this.game.height-45, puntosUser, { font: " 40px BitterRegular", fill: "white"});
+  game.add.text(this.game.width/2-5, this.game.height-45, '-', { font: " 40px BitterRegular", fill: "white"});
   puntosComputerText = game.add.text(this.game.width/2+23, this.game.height-45, puntosComputer, { font: " 40px BitterRegular", fill: "white"});
   if(modoMultiplayer){
     aliasUser= game.add.text(0, this.game.height-35, usuario.nickname.toUpperCase(), { font: " 20px CondensedBold", fill: "white"});
@@ -202,6 +189,8 @@ drawBackground: function(){
   aliasUser.x=385-aliasUser.width;
   aliasUser.setShadow(0,3, 'rgba(0,0,0,0.5)', 0);
   aliasComputer.setShadow(0,3, 'rgba(0,0,0,0.5)', 0);
+
+
 
 },
 
@@ -701,7 +690,7 @@ updateCounter: function () {
     setTimeout(function(){
 
 
-      this.game.state.start("GameOver");
+      this.game.state.start("gameover");
     },2000);
 
 
@@ -1119,7 +1108,7 @@ acertarTiro: function(self){
           if(self.pelotaEntra){
               self.activateSound(sonido_gol_1);
               puntosUser++;
-              puntosUserText.setText(puntosUser+' - ');
+              puntosUserText.setText(puntosUser);
 
               self.AssertPoint(userPointY,triesP);
               self.Win(3);
@@ -1447,7 +1436,7 @@ Clicked: function(){
     self.activateSound(musica_start);
   },500);
 
-
+  loadingStart.destroy();
 },
 
 mouseUpPateador:function(){

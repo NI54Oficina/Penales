@@ -177,7 +177,7 @@ var Splash = function () {};
   loadFonts: function () {
     WebFontConfig = {
       custom: {
-        families: ["BitterBold","CondensedLight","RobotoRegular","RobotoBold"],
+        families: ['CondensedRegular','CondensedBold','CondensedLight', 'BitterBold', 'RobotoBold', 'RobotoRegular', 'BitterRegular', 'AlfaSlab', 'TheSansRegular'],
         urls: [urlBase+'assets/general/style/stylesheet.css']
       }
     }
