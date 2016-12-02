@@ -50,3 +50,4 @@ Temporary Items
 *.log
 *.log
 socket/somefile.log
+*.log
