@@ -347,16 +347,12 @@ identificarPuestos: function(scale){
      tt1.onComplete.addOnce(function(){
 
          setTimeout(function(){
-<<<<<<< HEAD
+
            self.splashEntreTiempo();
 		   console.log(self.NombreSala);
             this.game.state.states["Game"].NombreSala = self.NombreSala;
             game.state.start('Game');},5000);
-=======
 
-            this.game.state.states["Game"].NombreSala = NombreSala;
-            game.state.start('Game');},2000);
->>>>>>> origin/master
 
 
      });
