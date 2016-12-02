@@ -1,0 +1,9 @@
+{"level":"error","message":"Caught exception: ReferenceError: poyo is not defined","timestamp":"2016-12-01T19:34:00.716Z"}
+{"level":"error","message":"Caught exception: Error: listen EADDRINUSE","timestamp":"2016-12-01T19:34:13.577Z"}
+{"level":"error","message":"Caught exception: TypeError: Cannot convert undefined or null to object","timestamp":"2016-12-01T20:25:32.073Z"}
+{"level":"error","message":"Caught exception: TypeError: Cannot convert undefined or null to object","timestamp":"2016-12-01T20:29:00.789Z"}
+{"level":"error","message":"Caught exception: TypeError: Cannot convert undefined or null to object","timestamp":"2016-12-01T20:30:42.160Z"}
+{"level":"error","message":"Caught exception: TypeError: Cannot convert undefined or null to object","timestamp":"2016-12-01T20:31:41.659Z"}
+{"level":"error","message":"Caught exception: TypeError: Cannot convert undefined or null to object","timestamp":"2016-12-01T20:32:33.413Z"}
+{"level":"error","message":"Caught exception: TypeError: Cannot convert undefined or null to object","timestamp":"2016-12-01T20:33:20.609Z"}
+{"level":"error","message":"Caught exception: TypeError: Cannot convert undefined or null to object","timestamp":"2016-12-01T20:33:54.489Z"}
