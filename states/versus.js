@@ -14,13 +14,19 @@ Versus.prototype = {
     modo=this.modo;
 
     velocidadMoneda=50;
+	
+	if(this.privada==1){
+		//var op2={titulo:"Aceptar",callback:"emit",params:{code:"aceptar",params:{partida:1}}};
+		Emit("aceptar",{privada:1});
+	}
 
-    NombreSala;
+    //NombreSala;
+	console.log(this.NombreSala);
     var tableroPuntos = game.add.graphics(this.game.width/2-165, 0);
     tableroPuntos.beginFill(0x000065,1);
     tableroPuntos.drawRoundedRect(0, 0,330,65,5);
     window.graphics = tableroPuntos;
-    puntaje=game.add.text(70,10, NombreSala, { font: "35px CondensedRegular", fill: "#ffc418", align: "center"});
+    puntaje=game.add.text(70,10, this.NombreSala, { font: "35px CondensedRegular", fill: "#ffc418", align: "center"});
     puntaje.x= tableroPuntos.width/2-puntaje.width/2;
     tableroPuntos.addChild(puntaje);
     brilloTablero=game.add.sprite(130,50, 'brilloup');
@@ -335,7 +341,7 @@ identificarPuestos: function(scale){
 
      tt2.start();
      tt1.start();
-
+	console.log(self.NombreSala);
      tt1.onComplete.addOnce(function(){
        setTimeout(function(){
          self.splashEntreTiempo();
@@ -343,7 +349,8 @@ identificarPuestos: function(scale){
 
          setTimeout(function(){
            self.splashEntreTiempo();
-            this.game.state.states["Game"].NombreSala = NombreSala;
+		   console.log(self.NombreSala);
+            this.game.state.states["Game"].NombreSala = self.NombreSala;
             game.state.start('Game');},5000);
 
        },1000);

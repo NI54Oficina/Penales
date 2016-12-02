@@ -25,7 +25,7 @@ Game.prototype = {
 
 	   counterBarra=0;
 	   if(modoMultiplayer){
-		   NombreSala;
+		   self.NombreSala;
 	   }
 
 
@@ -167,7 +167,7 @@ drawBackground: function(){
    tableroPuntos.beginFill(0x000065,.6);
    tableroPuntos.drawRoundedRect(0, 0,330,65,5);
    window.graphics = tableroPuntos;
-   puntaje=game.add.text(70,10, NombreSala, { font: "35px CondensedRegular", fill: "#ffc418", align: "center"});
+   puntaje=game.add.text(70,10, self.NombreSala, { font: "35px CondensedRegular", fill: "#ffc418", align: "center"});
    puntaje.x= tableroPuntos.width/2-puntaje.width/2;
    tableroPuntos.addChild(puntaje);
    brilloTablero=game.add.sprite(130,50, 'brilloup');
