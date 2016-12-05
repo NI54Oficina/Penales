@@ -9,7 +9,8 @@ Versus.prototype = {
 
     this.createBackground(true);
     this.createSoundGraphics();
-
+	
+	this.oponenteCargado=false;
 
     modo=this.modo;
 
@@ -95,11 +96,14 @@ Versus.prototype = {
         }catch(e){}
 
         nikUser.x=leftPlayer.x+(leftPlayer.width/2)- nikUser.width/2;
-        load=game.add.sprite(820, 325, 'loading');
-        load.pivot.x=33;
-        load.pivot.y=33;
-        tweenE=game.add.tween(load).to({angle: -359}, 1500, null, true, 0, Infinity);
+        self.load=game.add.sprite(820, 325, 'loading');
+        self.load.pivot.x=33;
+        self.load.pivot.y=33;
+        tweenE=game.add.tween(self.load).to({angle: -359}, 1500, null, true, 0, Infinity);
         tweenE.start();
+		if(self.oponenteCargado){
+			self.load.visible=false;
+		}
 
       }, this);
 
@@ -177,6 +181,8 @@ empezarConteo: function(msg){
   game.load.image('avatarOponente', oponente["avatar"]);
 
   game.load.onLoadComplete.addOnce(function(){
+	  
+	  self.oponenteCargado=true;
 
     var bmd = game.make.bitmapData(367, 482);
 
@@ -195,6 +201,8 @@ empezarConteo: function(msg){
 
 	 var nikOpon=game.add.text(770,380, oponente.nickname.toUpperCase(), { font: '27px CondensedBold', fill: 'white', align: 'center',wordWrap: true, wordWrapWidth:20});
   nikOpon.x=rightPlayer.x+(rightPlayer.width/2)- nikOpon.width/2;
+  
+  self.load.visible=false;
 
   }, this);
 

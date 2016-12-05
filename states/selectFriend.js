@@ -9,7 +9,6 @@ Selectfriend.prototype = {
     self = this;
 
 
-
     this.createBackground(false);
     this.createSoundGraphics();
     self.createGeneralTitle("BUSCAR AMIGO", true);
@@ -40,7 +39,7 @@ Selectfriend.prototype = {
 	var auxThis=this;
     self.createButton("SIGUIENTE",function(){
 		//game.state.start('SelectsalaPrivada');
-
+			self.showLoad();
 			Emit("buscar",input.value,"rbusqueda","resultado",auxThis);
 		}
 		).position={x:580,y:450};
@@ -53,6 +52,7 @@ Selectfriend.prototype = {
   // : function( title, text, lista, tiempoDeEspera){
    //type Lista ::listaDeTuplasConNombreDeBotonYCallbackYparametros
    //
+   
 },
 
 resultado:function(msg){

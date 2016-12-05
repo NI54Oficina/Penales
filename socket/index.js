@@ -39,12 +39,11 @@ winston.log('info', 'Hello distributed log files!');
 	
 io.on('connection', function(socket){
 		winston.log("info",socket.id);
-		//io.sockets.socket(socket.id).emit("poyo")
+		
 		var connectedUser={};
 		connectedUser.socket= socket;
-		//connectedUser.usuario= "poyo";
 		online[socket.id]= connectedUser;
-		online[socket.id].estado="menu";
+		online[socket.id].estado="online";
 		console.log("user conected");
 		socket.emit("session",socket.id);
 	
@@ -80,18 +79,6 @@ io.on('connection', function(socket){
 		console.log("entra buscar");
 		console.log("busca a..."+msg.msg);
 		
-		/*var code="";
-		var auxParam={toSearch:msg.msg};
-		console.log(auxParam);
-		if(testLocal){
-			code="?code=search";
-		}else{
-			code="/search";
-		}
-		request.post(urlConnect+code,{form:{data:JSON.stringify(auxParam)}}, function (error, response, body) {
-			console.log("responde search")
-			console.log(body);
-		});*/
 		var toSearch=msg.msg;
 		if(toSearch==online[socket.id].usuario.nickname){
 			console.log("se busca a si mismo");
@@ -116,7 +103,9 @@ io.on('connection', function(socket){
 			console.log(error);
 			
 		}
-		socket.emit("rbusqueda","0");
+		
+		socket.emit("notification",JSON.stringify({titulo:"Error",texto:"No existe el usuario que desea desafiar o no se encuentra conectado o disponible.",ops:{titulo:"Aceptar",callback:"destroy"},tiempo:"-1"}));
+	
 	});
 	
 	socket.on('desafiar', function(msg){
@@ -160,9 +149,7 @@ io.on('connection', function(socket){
 		}
 		console.log(listaEspera);
 		delete online[socket.id];
-		//console.log(data);
-		//pause=true;
-		Reset();
+		
 	});
 	
 	socket.on('online', function(data){
@@ -170,11 +157,7 @@ io.on('connection', function(socket){
 	});
 	socket.on('listaEspera', function(data){
 		console.log("entra lista espera");
-		/*if(data&&data!=""){
-			console.log(listaEspera[data]);
-		}else{
-			console.log(listaEspera);
-		}*/
+		
 		console.log(listaEspera);
 	});
 	
@@ -192,18 +175,7 @@ io.on('connection', function(socket){
 	});
 	
 	socket.on('getStats', function(msg){
-		//debería solicitar datos a la db sobre las estadisticas, de momento se simulan localmente
-		/*if(msg){
-			var fs = require('fs');
-			fs.writeFile("./stats.txt",  msg, function(err) {
-				if(err) {
-					return console.log(err);
-				}
-				SendStats();
-			});
-		}else{
-			SendStats();
-		}*/
+		
 		SendStats(msg,socket.id);
 	});
 	
@@ -212,73 +184,16 @@ io.on('connection', function(socket){
 		var ops= JSON.parse(msg);
 		ops.msg= JSON.parse(ops.msg);
 		console.log(ops);
-		//console.log(msg);
 		console.log("entra buscar partida");
 		if(online[socket.id].estado=="desafiado"){
-			/*console.log("entra desafiado");
-			var auxPartida= partidas[online[socket.id].partida];
-			var auxLocal= auxPartida.oponente(socket.id).usuario;
-			delete auxLocal["puntos"];
-			delete auxLocal["credits"];
-			delete auxLocal["estado"];
-			delete auxLocal["id"];
-			auxLocal["tendencia"]= auxPartida.local["stats"]['tendencia'];
-			delete auxLocal["stats"];
-			auxPartida.visitante.socket.emit("oponente",JSON.stringify(auxLocal));*/
+			
+			socket.emit("notification",JSON.stringify({titulo:"Error",texto:"Error de conexión, actualice la pagina y vuelva a interntarlo",ops:{titulo:"Aceptar",callback:"destroy"},tiempo:"-1"}));
 			return;
 		}else{
 			online[socket.id].estado="cola";
 			listaEspera[ops.msg.tipo-1][socket.id]=1;
 		}
 		
-		online[socket.id].estado="cola";
-			listaEspera[ops.msg.tipo-1][socket.id]=1;
-		
-	/*	setTimeout(function(){
-			Reset();
-			finished=false;
-			mod=randomBetween(0,1);
-			mod=1;
-			modStart=mod;
-			if(mod%2==0){
-				counterLocal=0;
-				counterVisitante=1;
-			}else{
-				counterLocal=1;
-				counterVisitante=0;
-			};
-
-			oponente= GetOponente();
-
-			partida["oponente"]=oponente;
-
-			partida["tiempomaximo"]= 10;
-
-			if(mod==1){
-				partida["camiseta"]= "local";
-				partida["rol-inicial"]= "Pateador";
-
-			}else{
-				partida["camiseta"]= "Visitante";
-				partida["rol-inicial"]= "Arquero";
-			}
-
-			partida["rol"]=mod;
-			partida["IntentosOponente"]=counterVisitante;
-			partida["Intentoslocal"]=counterLocal;
-
-			io.emit('partidaEncontrada', JSON.stringify(partida));
-
-			console.log("Partida encontrada");
-			console.log(golesUser);
-			console.log(golesComputer);
-
-			setTimeout(function(){
-			io.emit('inicioPartida', "start");
-			console.log("Iniciar Partida");
-
-			},2000);
-		},2000);*/
 	});
 	
 	socket.on('ready', function(msg){
@@ -298,10 +213,10 @@ io.on('connection', function(socket){
 		var ops= JSON.parse(msg);
 		//console.log(ops);
 		//console.log("----------------------------------");
-		online[socket.id].estado="listo";
+		online[socket.id].estado="esperando";
 		var auxPartida= partidas[online[socket.id].partida];
-		var auxPartida= partidas[online[socket.id].partida];
-			var auxLocal= auxPartida.oponente(socket.id).usuario;
+	
+			var auxLocal= JSON.parse(JSON.stringify(auxPartida.oponente(socket.id).usuario));
 			delete auxLocal["puntos"];
 			delete auxLocal["credits"];
 			delete auxLocal["estado"];
@@ -321,78 +236,7 @@ io.on('connection', function(socket){
 		online[socket.id].jugadas.push(ops.msg);
 		var auxPartida= partidas[online[socket.id].partida];
 		auxPartida.tick();
-		/*if(finished){
-			return;
-		}
-		setTimeout(function(){
-
-			if(mod%2 == 0){
-				//entra con jugador en modo arquero
-				console.log("jugador es arquero");
-				ubicacion =  CalculateTiro(msg);
-
-				counterVisitante++;
-			}else{
-				//entra con jugador en modo pateador	
-				console.log("jugador es pateador");
-				ubicacion = CalculateAtaje(msg);
-
-				counterLocal++;
-			}
-
-			calculatePuntaje(msg, ubicacion);
-			jugadaActual["user"]=msg;
-			jugadaActual["computer"]=ubicacion;
-			mod++;
-			console.log("PUNTOS USER: "+ golesUser);
-			console.log("PUNTOS COMPUTER: "+ golesComputer);
-
-
-			socket.emit('recibeJugada', JSON.stringify(jugadaActual));
-
-			setTimeout(function(){
-
-				if(counterVisitante >= 5 &&  counterLocal >= 5 ){
-
-						if(golesUser == golesComputer && !enAlargue){
-							auxCont++;
-							enAlargue=true;
-							console.log("EMPATE");
-							InicioTurno();
-							console.log("Iniciar Turno");
-
-						}else if(enAlargue){
-							if(auxCont!=2){
-								auxCont++;
-								console.log("EMPATE");
-								InicioTurno();
-								console.log("Iniciar Turno");
-							}else{
-
-								console.log("GOLES USER: "+ golesUser +", GOLES COMPUTER: "+ golesComputer);
-								 if(golesUser == golesComputer){
-									auxCont=0;
-									console.log("EMPATE");
-									InicioTurno();
-									console.log("Iniciar Turno");
-								}else{
-
-									console.log("TERMINA JUEGO EN EMPATE"); GetResultado();
-								}
-							};
-						}else{
-							console.log("TERMINA JUEGO");
-							finished=true;
-							GetResultado();
-						};
-				}else{
-					console.log("NUEVO TURNO");
-					InicioTurno();
-					console.log("Iniciar Turno");
-				}
-
-			},3000);
-		},2000);*/
+		
 	});
 
 });
@@ -469,220 +313,11 @@ global.getStats= function(msg,session){
 	online[session].socket.emit("getStats",msg);
 }
 
-function SendStats2(){
-	//setear variable resultados
-	var stats;
-	var fs = require('fs');
-	fs.readFile("./stats.txt",  "utf8", function(err,data) {
-		if(err) {
-			console.log("entra error");
-			return console.log(err);
-		}
-		stats=data;
-		console.log("Stats enviados");
-		online[session].socket.emit('getStats', data);
-	});
-}
-
-function GetResultado(){
-	//tendria que emitir el resultado, cliente lo recibe, setea y va a pantalla correspondiente segun comprobación.
-	var auxArray={};
-	//cambiar por local y visitante segun corresponda
-	auxArray["golesUser"]= golesUser;
-	auxArray["golesComputer"]= golesComputer;
-	io.emit('resultadoPartida', JSON.stringify(auxArray));
-	SendStats();
-	golesUser=0;
-	golesComputer=0;
-	counterLocal=0;
-	counterVisitante=0;
-}
-
-function CalculateAtaje(msg){
-
-	generator = calculoChancesAtajar(msg);
-	return generator;
-
-}
-
-function calculoChancesAtajar(msg){
-	/**borrar
-	return msg;
-	/**end borrar**/
-    var chanceAtajar = randomBetween(1,oponente["efectividadA"]);
-
-    if(chanceAtajar==1){
-		return msg;
-    }else {
-		var gen = randomBetween(1,6);
-		return gen;
-    }
-}
-
-function CalculateTiro(){
-	var errar=randomBetween(1,oponente['efectividadP']);
-	
-	if(errar==1){
-		return randomBetween(0,-4);
-	}
-	if(!enAlargue){
-		var a = getMaso();
-		var b= generarRiesgo(a);
-
-		return b;
-	}else{
-		return randomBetween(1,6);
-	}
-
-
-}
-
-function getMaso(){
-	return oponente["tendencia"][counterVisitante];
-}
-
-function generarRiesgo(arrai){
-	//a veces llega array vacio
-	if(!arrai){
-		return randomBetween(1,6);
-	}
-	var arrayNuevo = [];
-
-
-	for(var i =1 ; i<7; i++){
-		if(arrai[i-1] == 1){
-		  for (var j=1; j < 3; j++) {
-		  arrayNuevo.push(i);
-		  }
-
-		}else if(arrai[i-1]==2){
-		  for (var j=1; j < 4; j++) {
-			arrayNuevo.push(i);
-			}
-		}else{
-
-		  arrayNuevo.push(i);
-
-		};
-	}
-
-	var longitud = arrayNuevo.length;
-	var lon= longitud-1;
-	var pos = randomBetween(0,lon);
-	return arrayNuevo[pos];
-}
-
-function randomBetween(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-
-function calculatePuntaje(msg, generator){
-	if(mod%2 == 0){
-		if(generator>0 && msg!=generator){
-			golesVisitante++;
-		};
-	}else{
-		//entra en jugador modo pateador
-		if(msg>0 && msg!=generator){
-			golesLocal++;
-		}	
-	}
-	return;
-}
-
-function Reset(){
-	finished=true;
-	enAlargue=false;
-	modStart=-1;
-	auxCont=0;
-	golesComputer=0;
-	golesUser=0;
-	counterVisitante=0;
-	counterLocal=0;
-	oponente={};
-	jugada={};
-	jugadaActual={};
-}
 
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
 });
-
-function GetOponente(){
-	var oponente= {};
-	oponente["nombre"]="Pepita";
-	oponente["session"]="token";
-	setPerfiles();
-	var auxP= randomBetween(0,3);
-	auxP= perfiles[auxP];
-	oponente["efectividadA"]=auxP["efectividadA"];
-	oponente["efectividadP"]=auxP["efectividadP"];
-
-	oponente["tendencia"]= auxP["tendencia"];
-	return oponente;
-}
-
-function SetEnemy(){
-  var id= game.rnd.integerInRange(1,4);
-
-  array= perfiles[id-1].tendencia;
-
-  return perfiles[id-1];
-
-}
-
-function setPerfiles(){
-	
-	perfil1 = {
-	id:1,
-	efectividadA:2,
-	efectividadP:2,
-	tendencia:[ [0,0,1,2,2,0],
-				[0,2,1,1,2,0],
-				[0,2,1,1,2,0],
-				[0,2,1,1,2,0],
-				[0,1,1,1,2,2] ]
-	};
-
-	perfil2 = {
-		id:2,
-		efectividadA:5,
-		efectividadP:5,
-		tendencia:[ [0,1,1,1,2,0],
-					[0,1,1,1,2,0],
-					[2,1,1,1,2,0],
-					[0,0,1,1,2,0],
-					[0,2,1,1,2,0] ]
-	};
-
-
-  perfil3 = {
-  id:3,
-  efectividadA:10,
-efectividadP:10,
-  tendencia:[ [0,0,1,2,2,0],
-			  [0,2,1,1,2,0],
-			  [0,0,1,1,2,0],
-			  [0,2,1,1,2,0],
-			  [0,0,1,1,2,2] ]
-  };
-
-  perfil4 = {
-	  id:4,
-	  efectividadA:20,
-	  efectividadP:20,
-	  tendencia:[ [0,1,1,1,2,0],
-				  [0,1,1,1,2,0],
-				  [0,1,1,1,2,0],
-				  [0,0,1,1,2,0],
-				  [0,0,1,1,2,0] ]
-	};
-
-
-	perfiles=[perfil1,perfil2, perfil3, perfil4];
-}
 
 
 function Partida (tipo) {
@@ -847,19 +482,12 @@ function Partida (tipo) {
 		toSend["localId"]= this.local.usuario.id;
 		toSend["visitanteId"]= this.visitante.usuario.id;
 		toSend["jugadasLocal"]= this.local.jugadas;
-		//toSend["jugadasLocal"]= [1,1,1,1,1,1,1,1,1,1];
+		
 		toSend["jugadasVisitante"]= this.visitante.jugadas;
-		//toSend["jugadasVisitante"]= [2,1,2,1,2,1,2,1,2,1];
 		console.log(JSON.stringify(toSend));
 		toSend=JSON.stringify(toSend);
-		//sucribir evento "stats actualizados" a la función del mismo nombre. One shot
-		/*SuscribeServerEvent("statsActualizados","StatsActualizados",this,true);
-		if(testLocal){
-			requestSoap("?code=UpdateStats&data="+toSend," ","statsActualizados");
-		}else{
-			requestSoap("/UpdateStats",{json: toSend},"statsActualizados");
-			//requestSoap("/UpdateStats",toSend,"statsActualizados");
-		}*/
+		console.log(this.local);
+		
 		if(testLocal){
 			code="?code=UpdateStats";
 		}else{
@@ -875,25 +503,19 @@ function Partida (tipo) {
 			auxRes["user2"].golesUser=auxThis.golesVisitante;
 			auxRes["user2"].golesComputer=auxThis.golesLocal;
 			
+			auxThis.local.estado="online";
+			auxThis.visitante.estado="online";
+			
 			auxThis.local.socket.emit("resultadoPartida",JSON.stringify(auxRes["user1"]));
 			auxThis.visitante.socket.emit("resultadoPartida",JSON.stringify(auxRes["user2"]));
 			
 		});
 		
 		
-		//var auxArray={};
-		//cambiar por local y visitante segun corresponda
-		
-		//auxArray["golesUser"]= golesUser;
-		//auxArray["golesComputer"]= golesComputer;
-		//io.emit('resultadoPartida', JSON.stringify(auxArray));
-		//SendStats();
-		
-		//pause=true;
 	},
 	
 	this.disconected= function(uId){
-		
+		if(this.finished) return;
 		if(this.local.socket.id==uId){
 			console.log("pierde el local");
 			this.local.jugadas=[0,0,0,0,0,0,0,0,0,0];
@@ -906,7 +528,7 @@ function Partida (tipo) {
 			}
 			this.golesLocal=0;
 			this.golesVisitante=5;
-			
+			this.visitante.estado="online";
 			this.visitante.socket.emit("notification",JSON.stringify({titulo:"Oponente desconectado",texto:"Su oponente se ha retirado o perdido conexión con el servidor",tiempo:"3000"}));
 		}else{
 			console.log("pierde el visitante");
@@ -920,6 +542,7 @@ function Partida (tipo) {
 			}
 			this.golesLocal=5;
 			this.golesVisitante=0;
+			this.local.estado="online";
 			this.local.socket.emit("notification",JSON.stringify({titulo:"Oponente desconectado",texto:"Su oponente se ha retirado o perdido conexión con el servidor",tiempo:"1500"}));
 		}
 		console.log(this.local.jugadas);
@@ -936,11 +559,6 @@ function Partida (tipo) {
 		}
 	};
 }
-
-/*function Usuario(auxU){
-	this.id=auxU.id;
-	this.avatar=avatar;
-}*/
 
 
 /**Loop**/
@@ -990,17 +608,7 @@ var update = function(delta) {
  //console.log("----------------------------------------");
 }
 
-/**
-A function that wastes time, and occupies 100% CPU while doing so.
-Suggested use: simulating that a complex calculation took time to complete.
-*/
-var aVerySlowFunction = function(milliseconds) {
-  // waste time
-  var start = Date.now()
-  while (Date.now() < start + milliseconds) { }  
-}
 
-// begin the loop !
 gameLoop();
 
 /**End Loop**/
@@ -1040,7 +648,7 @@ function CreateMatch(users,tipo,privada){
 	if(privada==1){
 		if(auxPartida.visitante.estado!="online"){
 			console.log("sorry no se puede matchear");
-			socket.emit("notification",JSON.stringify({titulo:"Error",texto:"Desafío no se puede realizar. Intente nuevamente.",ops:{titulo:"Aceptar",callback:"destroy"},tiempo:"-1"}));
+			auxPartida.local.socket.emit("notification",JSON.stringify({titulo:"Error",texto:"Desafío no se puede realizar. Intente nuevamente.",ops:{titulo:"Aceptar",callback:"destroy"},tiempo:"-1"}));
 			//auxPartida.local.socket.emit("error","desafio no puede realizarse");
 			return;
 		}else{
@@ -1071,7 +679,7 @@ function CreateMatch(users,tipo,privada){
 		if(privada==1){
 		if(auxPartida.visitante.estado!="online"){
 			console.log("sorry no se puede matchear");
-			auxPartida.visitante.socket.emit("error","desafio no puede realizarse");
+			auxPartida.local.socket.emit("notification",JSON.stringify({titulo:"Error",texto:"Desafío no se puede realizar. Intente nuevamente.",ops:{titulo:"Aceptar",callback:"destroy"},tiempo:"-1"}));
 			return;
 		}else{
 			auxPartida.visitante.estado="desafiado";
@@ -1114,7 +722,7 @@ function CreateMatch(users,tipo,privada){
 		console.log(auxPartida);
 		console.log("test");
 		partidas[body]= auxPartida;
-		console.log("entraaaa0");
+		
 			var auxVisitante= JSON.parse(JSON.stringify(auxPartida.visitante.usuario));
 			delete auxVisitante["puntos"];
 			delete auxVisitante["credits"];
@@ -1133,11 +741,10 @@ function CreateMatch(users,tipo,privada){
 			delete auxLocal["stats"];
 			auxPartida.visitante.socket.emit("oponente",JSON.stringify(auxLocal));
 		}
-		console.log("entraaaa1");
 		
 		auxPartida.local.socket.emit("oponente",JSON.stringify(auxVisitante));
 		
-		console.log("entraaaa");
+		
 		//enviar datos del oponente a cada jugador
 		//pause=true;
 	});
