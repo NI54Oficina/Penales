@@ -1040,7 +1040,8 @@ function CreateMatch(users,tipo,privada){
 	if(privada==1){
 		if(auxPartida.visitante.estado!="online"){
 			console.log("sorry no se puede matchear");
-			auxPartida.local.socket.emit("error","desafio no puede realizarse");
+			socket.emit("notification",JSON.stringify({titulo:"Error",texto:"Desafío no se puede realizar. Intente nuevamente.",ops:{titulo:"Aceptar",callback:"destroy"},tiempo:"-1"}));
+			//auxPartida.local.socket.emit("error","desafio no puede realizarse");
 			return;
 		}else{
 			
