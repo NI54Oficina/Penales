@@ -14,7 +14,7 @@ Versus.prototype = {
     modo=this.modo;
 
     velocidadMoneda=50;
-	
+
 	if(this.privada==1){
 		//var op2={titulo:"Aceptar",callback:"emit",params:{code:"aceptar",params:{partida:1}}};
 		Emit("aceptar",{privada:1});
@@ -351,7 +351,7 @@ identificarPuestos: function(scale){
            self.splashEntreTiempo();
 		   console.log(self.NombreSala);
             this.game.state.states["Game"].NombreSala = self.NombreSala;
-            game.state.start('Game');},5000);
+            game.state.start('Game');},1000);
 
 
 
