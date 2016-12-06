@@ -192,7 +192,7 @@ Selectsala.prototype = {
     			Emit("buscarPartida",JSON.stringify(solicitud));
 
           this.game.state.states["Versus"].NombreSala = NombreSala;
-          this.game.state.states["Versus"].modo =1;
+          this.game.state.states["Versus"].modo =salaSelected;
     			game.state.start('Versus');
         }
 

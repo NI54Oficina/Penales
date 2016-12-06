@@ -103,7 +103,7 @@ GameOver.prototype = {
    },270, 70, 1);
 
   if(modoMultiplayer){
-    melania=this.addMenuOptionInnerPrueba('REVANCHA    ', function () {
+    this.btnRevancha=this.addMenuOptionInnerPrueba('REVANCHA    ', function () {
 
        console.log("Quiero revancha");
 
@@ -114,12 +114,12 @@ GameOver.prototype = {
      timerEvent = timer.add(Phaser.Timer.MINUTE * 0+ Phaser.Timer.SECOND * 20, this.endTimer, this);
      timer.start();
 
-     tiempo = game.add.text(810,545, '20', { font: '20pt RobotoBold', align: 'center',fill:'#1b1464' ,stroke: '#1b1464' });
-     tiempo.setShadow(0,2, '#ffffbd ', 0);
-     tiempo.visible=true;
+     this.tiempo = game.add.text(810,545, '20', { font: '20pt RobotoBold', align: 'center',fill:'#1b1464' ,stroke: '#1b1464' });
+     this.tiempo.setShadow(0,2, '#ffffbd ', 0);
+     this.tiempo.visible=true;
 
 
- console.log(melania);
+	
   }else{
     this.addMenuOptionInnerPrueba('VOLVER A JUGAR', function () {
 
@@ -247,14 +247,16 @@ console.log("entra 2");
   },
 
   render: function () {
-      if (timer.running) {
-          tiempo.setText(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)));
+	if (timer.running) {
+          this.tiempo.setText(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)));
     }
   },
 
   endTimer: function() {
       timer.stop();
-      self.MainMenu();
+      //self.MainMenu();
+	  self.btnRevancha.visible=false;
+	  self.tiempo.visible=false;
   },
 
   formatTime: function(s) {

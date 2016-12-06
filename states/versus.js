@@ -6,6 +6,7 @@ Versus.prototype = {
 
     self = this;
     this.modo;
+	console.log(this.modo);
 
     this.createBackground(true);
     this.createSoundGraphics();
@@ -117,8 +118,10 @@ Versus.prototype = {
       graphics.addChild(confirmacion);
 
       cancelar=self.createButton('CANCELAR', function () {
-        console.log(modo);
-        modo==1?game.state.start('Selectsala'):game.state.start('SelectsalaPrivada');
+        console.log(self.modo);
+		Emit("dequeue",{modo:self.modo});
+        //modo==1?game.state.start('Selectsala'):game.state.start('SelectsalaPrivada');
+        modo==game.state.start('GameMenu');
 
       });
 

@@ -196,6 +196,14 @@ io.on('connection', function(socket){
 		
 	});
 	
+	socket.on("dequeue",function(msg){
+		var ops= JSON.parse(msg);
+		
+		online[socket.id].estado="conectado";
+			
+		delete listaEspera[ops.msg.modo-1][socket.id];
+	});
+	
 	socket.on('ready', function(msg){
 		console.log(msg);
 		var ops= JSON.parse(msg);
