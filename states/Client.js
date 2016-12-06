@@ -3,6 +3,8 @@ var socket;
 var testLocal =true;
 var oponente={};
 
+var urlConnect="";
+
 var resultadoPartida="";
 
 if(serverEnabled){
@@ -160,4 +162,16 @@ function Pause(msg){
 }
 function Resume(msg){
 	Emit("resume",msg);
+}
+
+
+function requestSoap(code,params,callback){
+	console.log("envia params");
+	console.log(params);
+	 //$.post (urlConnect+code, function (response) {
+	 $.post (urlConnect+code,params, function (response) {
+		console.log("entra response");
+		console.log(response);
+		CheckEvent(callback,response);
+	});
 }

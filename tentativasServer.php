@@ -45,6 +45,9 @@ if(isset($_GET)){
 		$data= json_decode($_POST["data"]);
 		Search($data->toSearch);
 	}
+	if(isset($_GET['code'])&&$_GET["code"]=="connectSession"){
+		connectSession();
+	}
 }else{
 	$data= $_POST["data"];
 }
@@ -344,5 +347,12 @@ function GetTendencia(){
 		
 }
 
+function connectSession(){
+	
+	$datos= array();
+	
+	$datos["token"]= 23232;
+	echo json_encode($datos);
+}
 
 ?>

@@ -281,9 +281,14 @@ var Splash = function () {};
 			clearInterval(interval);
 			console.log("entra login");
 			// console.log(session);
-
-
-			Emit("login"," ","loginConfirmed","getStats",context);
+			
+			if(modoMultiplayer){
+				SuscribeServerEvent("connectSession","logInServer",context,false);
+				requestSoap("?code=connectSession"," ","connectSession");
+			}else{
+				Emit("login"," ","loginConfirmed","getStats",context);
+			}
+			
 		}
 	},1000);
      /* while (!done) {
@@ -294,6 +299,7 @@ var Splash = function () {};
 
 
    });
+   
 
    function onMyCoolFontLoaded (fontname){
      cargado++;
@@ -328,6 +334,11 @@ var Splash = function () {};
 
   test:function(){
 	  console.log("test entra");
+  },
+  
+  logInServer:function(msg){
+	  console.log("entraaaa");
+	  Emit("login",msg,"loginConfirmed","getStats",this);
   },
 
   getStats:function(msg){

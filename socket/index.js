@@ -18,11 +18,13 @@ var pause=false;
 
 var request = require('request');
 
+
+
+var winston = require('winston');
+
 process.on('uncaughtException', function (err) {
   winston.log("error",'Caught exception: ' + err);
 });
-
-var winston = require('winston');
 
 winston.level = 'debug';
 
@@ -246,6 +248,18 @@ io.on('connection', function(socket){
 		auxPartida.tick();
 		
 	});
+	
+	socket.on('revancha', function(msg,session){
+		//console.log(msg);
+		console.log("entra socket revancha");
+		var ops= JSON.parse(msg);
+		//console.log(ops);
+		//console.log("----------------------------------");
+		online[socket.id].estado="revancha";
+		var auxPartida= partidas[online[socket.id].partida];
+		auxPartida.checkRevancha();
+		
+	});
 
 });
 
@@ -291,7 +305,7 @@ function requestSoap(code,params,callback,session){
 	//console.log("-------------------------------------------------");
 	 
 	 request.post(urlConnect+code,params, function (error, response, body) {
-		
+		winston.log("infio",body);
 		//console.log(callback);
 		//console.log(session);
 		//console.log("-------------------------------------------------");
@@ -301,6 +315,7 @@ function requestSoap(code,params,callback,session){
 
 
 global.loginConfirmed= function(msg,session){
+	winston.log(msg);
 	var connectedUser= JSON.parse(msg);
 	console.log(msg);
 	console.log(session);
@@ -557,6 +572,22 @@ function Partida (tipo) {
 		console.log(this.visitante.jugadas);
 		
 		this.GetResultado();
+	},
+	
+	this.checkRevancha=function(){
+		console.log("entra revancha!");
+		if(this.local.partida!=this.id){
+			//emit visitante error
+		}
+		if(this.visitante.partida!=this.id){
+			//emit local error
+		}
+		if(this.local.estado=='revancha'&&this.visitante.estado=='revancha'){
+			console.log("sale revancha!!");
+			this.local.partida="";
+			this.visitante.partida="";
+			CreateMatch([this.visitante.socket.id,this.local.socket.id],this.tipo,0);
+		}
 	},
 		
 	this.oponente=function(player){

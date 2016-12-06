@@ -104,7 +104,8 @@ GameOver.prototype = {
 
   if(modoMultiplayer){
     this.btnRevancha=this.addMenuOptionInnerPrueba('REVANCHA    ', function () {
-
+		Emit("revancha",{msg:1});
+		 this.game.state.start("Versus");
        console.log("Quiero revancha");
 
      },270,70, 1);
