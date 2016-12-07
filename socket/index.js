@@ -70,9 +70,9 @@ io.on('connection', function(socket){
 		console.log(msg);
 		console.log("-----------------------------------");
 		if(testLocal){
-			requestSoap("?code=getSession"," ","loginConfirmed",socket.id);
+			requestSoap("?code=getSession",{form:{id:msg.msg.id}},"loginConfirmed",socket.id);
 		}else{
-			requestSoap("/getSession",msg.msg.id,"loginConfirmed",socket.id);
+		requestSoap("/getSession",{form:{id:msg.msg.id}},"loginConfirmed",socket.id);
 		}
 	});
 	
@@ -303,9 +303,10 @@ function requestSoap(code,params,callback,session){
 	//console.log(session);
 	
 	//console.log("-------------------------------------------------");
-	 
+	 console.log(params);
 	 request.post(urlConnect+code,params, function (error, response, body) {
-		winston.log("infio",body);
+		 console.log("entra?");
+		winston.log(body);
 		//console.log(callback);
 		//console.log(session);
 		//console.log("-------------------------------------------------");

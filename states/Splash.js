@@ -283,8 +283,8 @@ var Splash = function () {};
 			// console.log(session);
 			
 			if(modoMultiplayer){
-				SuscribeServerEvent("connectSession","logInServer",context,false);
-				requestSoap("?code=connectSession"," ","connectSession");
+				SuscribeServerEvent("getToken","logInServer",context,false);
+				requestSoap("?code=getToken"," ","getToken");
 			}else{
 				Emit("login"," ","loginConfirmed","getStats",context);
 			}
@@ -338,7 +338,7 @@ var Splash = function () {};
   
   logInServer:function(msg){
 	  console.log("entraaaa");
-	  Emit("login",msg,"loginConfirmed","getStats",this);
+	  Emit("login",{id:msg.token},"loginConfirmed","getStats",this);
   },
 
   getStats:function(msg){

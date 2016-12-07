@@ -4,7 +4,8 @@
 if(isset($_GET)){
 	
 	if(isset($_GET['code'])&&$_GET["code"]=="getSession"){
-		getSession();
+		
+		getSession($_POST["id"]);
 	}
 	if(isset($_GET['code'])&&$_GET["code"]=="getStats"){
 		if(isset($_GET["tendencia"])){
@@ -45,8 +46,8 @@ if(isset($_GET)){
 		$data= json_decode($_POST["data"]);
 		Search($data->toSearch);
 	}
-	if(isset($_GET['code'])&&$_GET["code"]=="connectSession"){
-		connectSession();
+	if(isset($_GET['code'])&&$_GET["code"]=="getToken"){
+		getToken();
 	}
 }else{
 	$data= $_POST["data"];
@@ -55,7 +56,7 @@ if(isset($_GET)){
 
 //UpdateStats(1,1,1,[6,1,2,3,4,1,6,1,1,1,1,1],[6,1,1,1,1,1,6,1,1,1,1,1]);
 
-function getSession(){
+function getSession($token){
 	
 	$datos= array();
 	$datos["id"]=2;
@@ -347,7 +348,7 @@ function GetTendencia(){
 		
 }
 
-function connectSession(){
+function getToken(){
 	
 	$datos= array();
 	
