@@ -72,7 +72,7 @@ io.on('connection', function(socket){
 		if(testLocal){
 			requestSoap("?code=getSession",{form:{id:msg.msg.id}},"loginConfirmed",socket.id);
 		}else{
-		requestSoap("/getSession",{form:{id:msg.msg.id}},"loginConfirmed",socket.id);
+			requestSoap("/getSession",{form:{id:msg.msg.id}},"loginConfirmed",socket.id);
 		}
 	});
 	
@@ -304,9 +304,13 @@ function requestSoap(code,params,callback,session){
 	
 	//console.log("-------------------------------------------------");
 	 console.log(params);
+	 winston.log(urlConnect+code);
 	 request.post(urlConnect+code,params, function (error, response, body) {
-		 console.log("entra?");
+		console.log("entra?");
 		winston.log(body);
+		winston.log(response);
+		winston.log(error);
+		return;
 		//console.log(callback);
 		//console.log(session);
 		//console.log("-------------------------------------------------");
