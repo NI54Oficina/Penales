@@ -20,7 +20,7 @@ Selectsala.prototype = {
       self.createGeneralTitle("SALAS", true);
 
       //valor que me deberia devolver el servidor para saber el nivel de la sala
-      levelSala=[3,2,2,1];
+      levelSala=[1,1,1,1];
 
 
 

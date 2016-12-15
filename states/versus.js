@@ -53,7 +53,7 @@ Versus.prototype = {
 
     var bmd = game.make.bitmapData(367, 482);
 
-  	bmd.alphaMask(usuario["avatar"], 'player');
+  	bmd.alphaMask(usuario["avatar"], 'player2');
 
   	leftPlayer= game.add.image(-50, 180, bmd);
 
@@ -191,7 +191,7 @@ empezarConteo: function(msg){
 
 	oponente["avatar"]= "avatarOponente";
 
-    bmd.alphaMask('avatarOponente', 'player');
+    bmd.alphaMask('avatarOponente', 'player2');
 
     rightPlayer= game.add.image(this.game.width/2 + 120, 180, bmd);
 

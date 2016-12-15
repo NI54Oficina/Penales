@@ -120,6 +120,7 @@ var Splash = function () {};
 
     game.load.image('line', urlBase+'assets/general/images/titulo_linea.png');
     game.load.image('player', urlBase+'assets/general/images/bt_anon.png');
+    game.load.image('player2', urlBase+'assets/general/images/bt_anon2.png');
 
     game.load.image('musica-on', urlBase+'assets/general/images/musica-on.png');
     game.load.image('musica-off', urlBase+'assets/general/images/musica-off.png');

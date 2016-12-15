@@ -306,11 +306,7 @@ function requestSoap(code,params,callback,session){
 	 console.log(params);
 	 winston.log(urlConnect+code);
 	 request.post(urlConnect+code,params, function (error, response, body) {
-		console.log("entra?");
-		winston.log(body);
-		winston.log(response);
-		winston.log(error);
-		return;
+		
 		//console.log(callback);
 		//console.log(session);
 		//console.log("-------------------------------------------------");
@@ -706,14 +702,14 @@ function CreateMatch(users,tipo,privada){
 	
 	//aca habría que hacer el soap para pedir el id de partida al server
 	var code="";
-	var auxParam={modo:tipo,usuarios:users};
+	var auxParam={modo:tipo,tokenLocal:auxPartida.local.token,tokenVisita:auxPartida.visitante.token};
 	console.log(auxParam);
 	if(testLocal){
 		code="?code=createMatch";
 	}else{
 		code="/createMatch";
 	}
-	request.post(urlConnect+code,{form:{data:JSON.stringify(auxParam)}}, function (error, response, body) {
+	request.post(urlConnect+code,{form:{json:JSON.stringify(auxParam)}}, function (error, response, body) {
 		console.log("---------------------------");
 		console.log(body);
 		console.log("---------------------------");
