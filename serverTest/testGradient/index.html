@@ -18,9 +18,10 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create });
 
 function preload() {
+
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-    game.load.image('sky', 'sky.png');
-		game.load.spritesheet('button', 'boton.png', 300, 300);
+    game.load.image('sky', 'demo.svg');
+		game.load.spritesheet('button', 'svg.png', 300, 300);
 
 }
 
@@ -41,20 +42,21 @@ function create() {
     var  grd=myBitmap.context.createLinearGradient(500,0,0,0);
 
 
-      grd.addColorStop(0,"red");
-		 grd.addColorStop(.10,"orange");
-     grd.addColorStop(.50,"green");
-		 grd.addColorStop(.90,"orange");
-			grd.addColorStop(1,"red");
+    grd.addColorStop(0,"red");
+		grd.addColorStop(.10,"orange");
+	  grd.addColorStop(.50,"green");
+		grd.addColorStop(.90,"orange");
+		grd.addColorStop(1,"red");
 
     myBitmap.context.fillStyle=grd;
+
     myBitmap.context.fillRect(0,0,this.game.height,this.game.width);
 
 
-			arrayGradient =[[[0, "red"],[0.15,"orange"],[0.50,"green"],[0.85,"orange"],[1,"red"]],
-											[[0, "red"],[0.25,"orange"],[0.50,"green"],[0.75,"orange"],[1,"red"]],
-											[[0, "red"],[0.35,"orange"],[0.50,"green"],[0.65,"orange"],[1,"red"]],
-											[[0, "red"],[0.40,"orange"],[0.50,"green"],[0.60,"orange"],[1,"red"]]
+		arrayGradient =[[[0, "red"],[0.15,"orange"],[0.50,"green"],[0.85,"orange"],[1,"red"]],
+										[[0, "red"],[0.25,"orange"],[0.50,"green"],[0.75,"orange"],[1,"red"]],
+										[[0, "red"],[0.35,"orange"],[0.50,"green"],[0.65,"orange"],[1,"red"]],
+										[[0, "red"],[0.40,"orange"],[0.50,"green"],[0.60,"orange"],[1,"red"]]
 										];
 
 
